@@ -1,4 +1,4 @@
-# ▲ / next-ship
+# next-ship
 
 **Modernized Next.js monorepo with Drizzle, Base UI, Polar.sh, and PostHog.**
 
