@@ -17,7 +17,7 @@ type PresenceAvatarProps = {
 };
 
 const PresenceAvatar = ({ info }: PresenceAvatarProps) => (
-  <Tooltip delayDuration={0}>
+  <Tooltip>
     <TooltipTrigger>
       <Avatar className="h-7 w-7 bg-secondary ring-1 ring-background">
         <AvatarImage alt={info?.name} src={info?.avatar} />
@@ -26,7 +26,7 @@ const PresenceAvatar = ({ info }: PresenceAvatarProps) => (
         </AvatarFallback>
       </Avatar>
     </TooltipTrigger>
-    <TooltipContent collisionPadding={4}>
+    <TooltipContent>
       <p>{info?.name ?? "Unknown"}</p>
     </TooltipContent>
   </Tooltip>

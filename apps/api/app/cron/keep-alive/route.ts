@@ -1,17 +1,14 @@
-import { database } from "@repo/database";
+import { database, pages } from "@repo/database";
+import { eq } from "drizzle-orm";
 
 export const GET = async () => {
-  const newPage = await database.page.create({
-    data: {
-      name: "cron-temp",
-    },
-  });
+  // Insert a test page
+  const [newPage] = await database.insert(pages).values({
+    name: "cron-temp",
+  }).returning();
 
-  await database.page.delete({
-    where: {
-      id: newPage.id,
-    },
-  });
+  // Delete the test page
+  await database.delete(pages).where(eq(pages.id, newPage.id));
 
   return new Response("OK", { status: 200 });
 };

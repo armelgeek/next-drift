@@ -1,3 +1,3 @@
-import { initializeSentry } from "@repo/observability/edge";
+import { initializeEdgeObservability } from "@repo/observability/edge";
 
-initializeSentry();
+initializeEdgeObservability();

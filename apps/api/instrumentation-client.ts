@@ -1,5 +1,5 @@
 import { initializeAnalytics } from "@repo/analytics/instrumentation-client";
-import { initializeSentry } from "@repo/observability/client";
+import { initializeClientObservability } from "@repo/observability/client";
 
-initializeSentry();
+initializeClientObservability();
 initializeAnalytics();

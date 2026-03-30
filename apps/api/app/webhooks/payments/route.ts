@@ -1,34 +1,55 @@
 import { analytics } from "@repo/analytics/server";
 import { clerkClient } from "@repo/auth/server";
 import { parseError } from "@repo/observability/error";
-import { log } from "@repo/observability/log";
-import type { Stripe } from "@repo/payments";
-import { stripe } from "@repo/payments";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { env } from "@/env";
+import { createHmac } from "node:crypto";
+
+// Verify Polar webhook signature
+const verifyWebhook = (payload: string, signature: string, secret: string): boolean => {
+  const expected = createHmac("sha256", secret).update(payload).digest("hex");
+  return signature === expected;
+};
 
 const getUserFromCustomerId = async (customerId: string) => {
   const clerk = await clerkClient();
   const users = await clerk.users.getUserList();
 
   const user = users.data.find(
-    (currentUser) => currentUser.privateMetadata.stripeCustomerId === customerId
+    (currentUser: { id: string; privateMetadata: { polarCustomerId?: string } }) => 
+      currentUser.privateMetadata.polarCustomerId === customerId
   );
 
   return user;
 };
 
-const handleCheckoutSessionCompleted = async (
-  data: Stripe.Checkout.Session
-) => {
-  if (!data.customer) {
+const handleOrderCreated = async (data: { customerId?: string; productName?: string }) => {
+  if (!data.customerId) {
     return;
   }
 
-  const customerId =
-    typeof data.customer === "string" ? data.customer : data.customer.id;
-  const user = await getUserFromCustomerId(customerId);
+  const user = await getUserFromCustomerId(data.customerId);
+
+  if (!user) {
+    return;
+  }
+
+  analytics.capture({
+    event: "User Purchased",
+    distinctId: user.id,
+    properties: {
+      product: data.productName,
+    },
+  });
+};
+
+const handleSubscriptionCreated = async (data: { customerId?: string; productName?: string }) => {
+  if (!data.customerId) {
+    return;
+  }
+
+  const user = await getUserFromCustomerId(data.customerId);
 
   if (!user) {
     return;
@@ -37,19 +58,18 @@ const handleCheckoutSessionCompleted = async (
   analytics.capture({
     event: "User Subscribed",
     distinctId: user.id,
+    properties: {
+      product: data.productName,
+    },
   });
 };
 
-const handleSubscriptionScheduleCanceled = async (
-  data: Stripe.SubscriptionSchedule
-) => {
-  if (!data.customer) {
+const handleSubscriptionCanceled = async (data: { customerId?: string; productName?: string }) => {
+  if (!data.customerId) {
     return;
   }
 
-  const customerId =
-    typeof data.customer === "string" ? data.customer : data.customer.id;
-  const user = await getUserFromCustomerId(customerId);
+  const user = await getUserFromCustomerId(data.customerId);
 
   if (!user) {
     return;
@@ -58,40 +78,48 @@ const handleSubscriptionScheduleCanceled = async (
   analytics.capture({
     event: "User Unsubscribed",
     distinctId: user.id,
+    properties: {
+      product: data.productName,
+    },
   });
 };
 
 export const POST = async (request: Request): Promise<Response> => {
-  if (!env.STRIPE_WEBHOOK_SECRET) {
+  if (!env.POLAR_WEBHOOK_SECRET) {
     return NextResponse.json({ message: "Not configured", ok: false });
   }
 
   try {
     const body = await request.text();
     const headerPayload = await headers();
-    const signature = headerPayload.get("stripe-signature");
+    const signature = headerPayload.get("polar-webhook-signature");
 
     if (!signature) {
-      throw new Error("missing stripe-signature header");
+      throw new Error("missing polar-webhook-signature header");
     }
 
-    const event = stripe.webhooks.constructEvent(
-      body,
-      signature,
-      env.STRIPE_WEBHOOK_SECRET
-    );
+    // Verify webhook signature
+    if (!verifyWebhook(body, signature, env.POLAR_WEBHOOK_SECRET)) {
+      throw new Error("invalid webhook signature");
+    }
+
+    const event = JSON.parse(body);
 
     switch (event.type) {
-      case "checkout.session.completed": {
-        await handleCheckoutSessionCompleted(event.data.object);
+      case "order.created": {
+        await handleOrderCreated(event.data);
         break;
       }
-      case "subscription_schedule.canceled": {
-        await handleSubscriptionScheduleCanceled(event.data.object);
+      case "subscription.created": {
+        await handleSubscriptionCreated(event.data);
+        break;
+      }
+      case "subscription.canceled": {
+        await handleSubscriptionCanceled(event.data);
         break;
       }
       default: {
-        log.warn(`Unhandled event type ${event.type}`);
+        console.warn(`Unhandled event type ${event.type}`);
       }
     }
 
@@ -101,7 +129,7 @@ export const POST = async (request: Request): Promise<Response> => {
   } catch (error) {
     const message = parseError(error);
 
-    log.error(message);
+    console.error(message);
 
     return NextResponse.json(
       {

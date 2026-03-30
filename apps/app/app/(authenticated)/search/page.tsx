@@ -1,5 +1,5 @@
 import { auth } from "@repo/auth/server";
-import { database } from "@repo/database";
+import { database, ilike, pages } from "@repo/database";
 import { notFound, redirect } from "next/navigation";
 import { Header } from "../components/header";
 
@@ -22,13 +22,10 @@ export const generateMetadata = async ({
 
 const SearchPage = async ({ searchParams }: SearchPageProperties) => {
   const { q } = await searchParams;
-  const pages = await database.page.findMany({
-    where: {
-      name: {
-        contains: q,
-      },
-    },
-  });
+  const pagesData = await database
+    .select()
+    .from(pages)
+    .where(ilike(pages.name, `%${q}%`));
   const { orgId } = await auth();
 
   if (!orgId) {
@@ -44,7 +41,7 @@ const SearchPage = async ({ searchParams }: SearchPageProperties) => {
       <Header page="Search" pages={["Building Your Application"]} />
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          {pages.map((page) => (
+          {pagesData.map((page) => (
             <div className="aspect-video rounded-xl bg-muted/50" key={page.id}>
               {page.name}
             </div>

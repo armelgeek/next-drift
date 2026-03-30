@@ -1,11 +1,7 @@
-export const initializeSentry = async () => {
-  if (process.env.NEXT_RUNTIME === "nodejs") {
-    const { initializeSentry: initServer } = await import("./server");
-    initServer();
-  }
+// Instrumentation for Next.js
+// Sentry has been removed - using PostHog instead
 
-  if (process.env.NEXT_RUNTIME === "edge") {
-    const { initializeSentry: initEdge } = await import("./edge");
-    initEdge();
-  }
+export const initializeObservability = async () => {
+  // No-op - observability is handled by PostHog
+  console.log("Observability instrumentation initialized (PostHog mode)");
 };

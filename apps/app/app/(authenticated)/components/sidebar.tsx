@@ -219,12 +219,11 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
             <SidebarMenu>
               {data.navMain.map((item) => (
                 <Collapsible
-                  asChild
                   defaultOpen={item.isActive}
                   key={item.title}
                 >
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild tooltip={item.title}>
+                    <SidebarMenuButton tooltip={item.title}>
                       <Link href={item.url}>
                         <item.icon />
                         <span>{item.title}</span>
@@ -232,7 +231,7 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
                     </SidebarMenuButton>
                     {item.items?.length ? (
                       <>
-                        <CollapsibleTrigger asChild>
+                        <CollapsibleTrigger>
                           <SidebarMenuAction className="data-[state=open]:rotate-90">
                             <ChevronRightIcon />
                             <span className="sr-only">Toggle</span>
@@ -242,7 +241,7 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
                           <SidebarMenuSub>
                             {item.items?.map((subItem) => (
                               <SidebarMenuSubItem key={subItem.title}>
-                                <SidebarMenuSubButton asChild>
+                                <SidebarMenuSubButton>
                                   <Link href={subItem.url}>
                                     <span>{subItem.title}</span>
                                   </Link>
@@ -263,14 +262,14 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
             <SidebarMenu>
               {data.projects.map((item) => (
                 <SidebarMenuItem key={item.name}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton>
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.name}</span>
                     </Link>
                   </SidebarMenuButton>
                   <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
+                    <DropdownMenuTrigger>
                       <SidebarMenuAction showOnHover>
                         <MoreHorizontalIcon />
                         <span className="sr-only">More</span>
@@ -311,7 +310,7 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
               <SidebarMenu>
                 {data.navSecondary.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton>
                       <Link href={item.url}>
                         <item.icon />
                         <span>{item.title}</span>
@@ -336,19 +335,18 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
                 }}
                 showName
               />
-              <div className="flex shrink-0 items-center gap-px">
-                <ModeToggle />
-                <Button
-                  asChild
-                  className="shrink-0"
-                  size="icon"
-                  variant="ghost"
-                >
-                  <div className="h-4 w-4">
-                    <NotificationsTrigger />
-                  </div>
-                </Button>
-              </div>
+                <div className="flex shrink-0 items-center gap-px">
+                  <ModeToggle />
+                  <Button
+                    className="shrink-0"
+                    size="icon"
+                    variant="ghost"
+                  >
+                    <div className="h-4 w-4">
+                      <NotificationsTrigger />
+                    </div>
+                  </Button>
+                </div>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarFooter>

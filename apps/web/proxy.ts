@@ -1,5 +1,4 @@
 import { authMiddleware } from "@repo/auth/proxy";
-import { internationalizationMiddleware } from "@repo/internationalization/proxy";
 import { parseError } from "@repo/observability/error";
 import { secure } from "@repo/security";
 import {
@@ -43,11 +42,11 @@ const arcjetMiddleware = async (request: NextRequest) => {
   }
 };
 
-// Compose non-Clerk middleware with Nemo
+// Compose middleware with Nemo (security only, no i18n)
 const composedMiddleware = createNEMO(
   {},
   {
-    before: [internationalizationMiddleware, arcjetMiddleware],
+    before: [arcjetMiddleware],
   }
 );
 
@@ -56,7 +55,7 @@ export default authMiddleware(async (_auth, request, event) => {
   // Run security headers first
   const headersResponse = securityHeaders();
 
-  // Then run composed middleware (i18n + arcjet)
+  // Then run composed middleware (arcjet only)
   const middlewareResponse = await composedMiddleware(
     request as unknown as NextRequest,
     event

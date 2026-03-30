@@ -6,7 +6,6 @@ import type {
   UserJSON,
   WebhookEvent,
 } from "@repo/auth/server";
-import { log } from "@repo/observability/log";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { Webhook } from "svix";
@@ -179,7 +178,7 @@ export const POST = async (request: Request): Promise<Response> => {
       "svix-signature": svixSignature,
     }) as WebhookEvent;
   } catch (error) {
-    log.error("Error verifying webhook:", { error });
+    console.error("Error verifying webhook:", error);
     return new Response("Error occured", {
       status: 400,
     });
@@ -189,7 +188,7 @@ export const POST = async (request: Request): Promise<Response> => {
   const { id } = event.data;
   const eventType = event.type;
 
-  log.info("Webhook", { id, eventType, body });
+  console.log("Webhook", { id, eventType, body });
 
   let response: Response = new Response("", { status: 201 });
 
