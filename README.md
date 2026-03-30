@@ -11,7 +11,7 @@ Most Next.js starters are either too basic or too complex. next-ship hits the sw
 - **Modern stack** — Latest stable tools that work well together
 - **Simplified** — Removed enterprise features you don't need as a solo founder
 - **Fast to ship** — Pre-configured auth, payments, database, and analytics
-- **Easy to maintain** — Single language, consolidated tooling, flat URLs
+- **Easy to maintain** — Consolidated tooling, flat URLs
 - **Production-ready** — Type-safe, secure, and scalable
 
 ## Stack
@@ -145,9 +145,9 @@ packages/
 
 ## Key Decisions
 
-### Single Language
+### Flat URLs
 
-No internationalization complexity. Flat URLs like `/contact` instead of `/en/contact`. Simpler codebase, faster iteration. If you need multiple languages later, you can add them incrementally.
+Clean URL structure without locale prefixes. `/contact` instead of `/en/contact`. Simpler routing, faster builds, no configuration needed.
 
 ### Consolidated Observability
 
@@ -285,11 +285,11 @@ Each app needs specific environment variables:
 ## Inspired By
 
 Built on lessons learned from next-forge, with simplifications for solo founders:
-- Removed enterprise i18n complexity
+- Removed complex routing patterns
 - Consolidated observability tools
 - Updated to latest stack (Drizzle, Base UI, Polar.sh)
 - Flattened URL structure
-- Simplified to single language
+- Simplified codebase
 
 ## License
 
