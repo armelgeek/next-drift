@@ -1,140 +1,229 @@
-# ▲ / next-forge
+# ▲ / next-ship
 
-**Production-grade Turborepo template for Next.js apps.**
+**Modernized Next.js monorepo with Drizzle, Base UI, Polar.sh, and PostHog.**
 
-<div>
-  <img src="https://img.shields.io/npm/dy/next-forge" alt="" />
-  <img src="https://img.shields.io/npm/v/next-forge" alt="" />
-  <img src="https://img.shields.io/github/license/vercel/next-forge" alt="" />
-</div>
+A fork of [next-forge](https://github.com/vercel/next-forge) optimized for solo founders building for English-speaking markets.
 
-## Overview
+## What's Different?
 
-[next-forge](https://github.com/vercel/next-forge) is a production-grade [Turborepo](https://turborepo.com) template for [Next.js](https://nextjs.org/) apps. It's designed to be a comprehensive starting point for building SaaS applications, providing a solid, opinionated foundation with minimal configuration required.
+This is a **modernized, simplified version** of next-forge with several key upgrades:
 
-Built on a decade of experience building web applications, next-forge balances speed and quality to help you ship thoroughly-built products faster.
+### Stack Changes
 
-### Philosophy
+| Original | Modernized |
+|----------|------------|
+| Prisma ORM | **Drizzle ORM** - Better performance, SQL-like syntax |
+| Radix UI | **Base UI** - shadcn's next-gen component library |
+| Stripe | **Polar.sh** - Modern payment infrastructure |
+| Sentry + Logtail | **PostHog only** - Consolidated observability |
+| i18n (Multi-language) | **English-only** - Flat URLs, simpler code |
+| Next.js 16.0 | **Next.js 16.2** - Latest features |
 
-next-forge is built around five core principles:
+### Key Benefits
 
-- **Fast** — Quick to build, run, deploy, and iterate on
-- **Cheap** — Free to start with services that scale with you
-- **Opinionated** — Integrated tooling designed to work together
-- **Modern** — Latest stable features with healthy community support
-- **Safe** — End-to-end type safety and robust security posture
+- **Cleaner URLs** — `/contact` instead of `/en/contact`
+- **Simpler codebase** — No i18n complexity, no multiple observability tools
+- **Better performance** — Drizzle is faster than Prisma
+- **Modern components** — Base UI is the future of shadcn
+- **Unified observability** — One tool (PostHog) for analytics + errors
+- **Easier payments** — Polar.sh has better DX than Stripe
 
-## Demo
+## Stack Overview
 
-Experience next-forge in action:
+### Framework
+- **Next.js 16.2** with React 19
+- **TypeScript 5.9** with strict mode
+- **Turborepo** + **pnpm workspaces**
+- **Tailwind CSS 4** with v4 syntax
 
-- [Web](https://demo.next-forge.com) — Marketing website
-- [App](https://app.demo.next-forge.com) — Main application
-- [Storybook](https://storybook.demo.next-forge.com) — Component library
-- [API](https://api.demo.next-forge.com/health) — API health check
-
-## Features
-
-next-forge comes with batteries included:
+### Core Infrastructure
+- **Authentication** — [Clerk](https://clerk.com)
+- **Database** — [Drizzle ORM](https://orm.drizzle.team) + [Neon PostgreSQL](https://neon.tech)
+- **Payments** — [Polar.sh](https://polar.sh)
+- **Email** — [Resend](https://resend.com) + React Email
+- **Analytics** — [PostHog](https://posthog.com) (product analytics + error tracking)
+- **Security** — [Arcjet](https://arcjet.com) (rate limiting, bot protection)
+- **CMS** — [BaseHub](https://basehub.com)
+- **Components** — [Base UI](https://base-ui.com) + shadcn/ui
 
 ### Apps
 
-- **Web** — Marketing site built with Tailwind CSS and TWBlocks
-- **App** — Main application with authentication and database integration
-- **API** — RESTful API with health checks and monitoring
-- **Docs** — Documentation site powered by Mintlify
-- **Email** — Email templates with React Email
-- **Storybook** — Component development environment
+- **Web** — Marketing site with flat URLs (port 3001)
+- **App** — Main application with auth (port 3000)
+- **API** — RESTful API with webhooks (port 3002)
+- **Docs** — Documentation site
+- **Email** — Email preview server
+- **Storybook** — Component library
 
 ### Packages
 
-- **Authentication** — Powered by [Clerk](https://clerk.com)
-- **Database** — Type-safe ORM with migrations
-- **Design System** — Comprehensive component library with dark mode
-- **Payments** — Subscription management via [Stripe](https://stripe.com)
-- **Email** — Transactional emails via [Resend](https://resend.com)
-- **Analytics** — Web ([Google Analytics](https://developers.google.com/analytics)) and product ([Posthog](https://posthog.com))
-- **Observability** — Error tracking ([Sentry](https://sentry.io)), logging, and uptime monitoring ([BetterStack](https://betterstack.com))
-- **Security** — Application security ([Arcjet](https://arcjet.com)), rate limiting, and secure headers
-- **CMS** — Type-safe content management for blogs and documentation
-- **SEO** — Metadata management, sitemaps, and JSON-LD
-- **AI** — AI integration utilities
-- **Webhooks** — Inbound and outbound webhook handling
-- **Collaboration** — Real-time features with avatars and live cursors
-- **Feature Flags** — Feature flag management
-- **Cron** — Scheduled job management
-- **Storage** — File upload and management
-- **Internationalization** — Multi-language support
-- **Notifications** — In-app notification system
+- `@repo/auth` — Clerk authentication
+- `@repo/database` — Drizzle ORM with migrations
+- `@repo/design-system` — Base UI components
+- `@repo/payments` — Polar.sh integration
+- `@repo/analytics` — PostHog client/server
+- `@repo/observability` — Error handling (PostHog mode)
+- `@repo/security` — Arcjet security
+- `@repo/cms` — BaseHub integration
+- `@repo/email` — React Email templates
+- `@repo/ai` — Vercel AI SDK
 
-## Getting Started
+## Quick Start
 
 ### Prerequisites
 
 - Node.js 20+
-- [pnpm](https://pnpm.io) (or npm/yarn/bun)
-- [Stripe CLI](https://docs.stripe.com/stripe-cli) for local webhook testing
+- [pnpm](https://pnpm.io)
+- Environment variables (see `.env.example` files)
 
 ### Installation
 
-Create a new next-forge project:
+```bash
+# Clone the repository
+git clone https://github.com/oscardobsonbrown/next-ship.git
+cd next-ship
 
-```sh
-npx next-forge@latest init
+# Install dependencies
+pnpm install
+
+# Set up environment variables
+# Copy .env.example files to .env and fill in your values
+
+# Run database migrations
+pnpm --filter @repo/database db:push
+
+# Start development
+pnpm dev
 ```
 
-### Setup
+### Environment Setup
 
-1. Configure your environment variables
-2. Set up required service accounts (Clerk, Stripe, Resend, etc.)
-3. Run the development server
+Required environment variables:
 
-For detailed setup instructions, read the [documentation](https://www.next-forge.com/docs).
+- `DATABASE_URL` — Neon PostgreSQL connection string
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` — Clerk public key
+- `CLERK_SECRET_KEY` — Clerk secret key
+- `POLAR_ACCESS_TOKEN` — Polar.sh access token
+- `NEXT_PUBLIC_POSTHOG_KEY` — PostHog API key
+- `RESEND_TOKEN` — Resend API key
+- `ARCJET_KEY` — Arcjet API key
 
-## Structure
+See individual package `.env.example` files for complete lists.
 
-next-forge uses a monorepo structure managed by Turborepo:
+## Architecture
 
+### URL Structure
+
+Flat URLs (no locale prefixes):
+- `/` — Home
+- `/contact` — Contact page
+- `/pricing` — Pricing page
+- `/blog` — Blog listing
+- `/blog/[slug]` — Blog post
+- `/legal/[slug]` — Legal pages
+
+### Database
+
+Uses Drizzle ORM with Neon PostgreSQL:
+
+```typescript
+// packages/database/src/schema.ts
+import { pgTable, serial, varchar } from "drizzle-orm/pg-core";
+
+export const pages = pgTable("pages", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+});
 ```
-next-forge/
-├── apps/           # Deployable applications
-│   ├── web/        # Marketing website (port 3001)
-│   ├── app/        # Main application (port 3000)
-│   ├── api/        # API server
-│   ├── docs/       # Documentation
-│   ├── email/      # Email templates
-│   └── storybook/  # Component library
-└── packages/       # Shared packages
-    ├── design-system/
-    ├── database/
-    ├── auth/
-    └── ...
+
+Run migrations:
+```bash
+pnpm --filter @repo/database db:generate
+pnpm --filter @repo-database db:push
 ```
 
-Each app is self-contained and independently deployable. Packages are shared across apps for consistency and maintainability.
+### Payments
 
-## Documentation
+Polar.sh integration with webhook handling:
 
-Full documentation is available at [next-forge.com/docs](https://www.next-forge.com/docs), including:
+```typescript
+// Webhook events: order.created, subscription.created, etc.
+// Automatic customer tracking via PostHog
+```
 
-- Detailed setup guides
-- Package documentation
-- Migration guides for swapping providers
-- Deployment instructions
-- Examples and recipes
+### Components
 
-## Contributing
+Base UI components (shadcn next-gen):
 
-We welcome contributions! See the [contributing guide](https://github.com/vercel/next-forge/blob/main/.github/CONTRIBUTING.md) for details.
+```typescript
+import { Button } from "@repo/design-system/components/ui/button";
+import { Dialog } from "@repo/design-system/components/ui/dialog";
+```
 
-## Contributors
+No `asChild` prop — use composition instead:
+```tsx
+// ✅ Correct
+<Link href="/contact"><Button>Contact</Button></Link>
 
-<a href="https://github.com/vercel/next-forge/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=vercel/next-forge" />
-</a>
+// ❌ Old way (removed)
+<Button asChild><Link href="/contact">Contact</Link></Button>
+```
 
-Made with [contrib.rocks](https://contrib.rocks).
+## Migration from next-forge
+
+If you're coming from next-forge:
+
+1. **Database** — Prisma schema → Drizzle schema (similar structure)
+2. **UI Components** — Radix props → Base UI props (check component files)
+3. **Payments** — Stripe SDK → Polar SDK (webhook events differ)
+4. **URLs** — Add locale middleware or flatten structure
+5. **Observability** — Remove Sentry, use PostHog only
+
+See `/plans/modernization-migration.md` for detailed migration guide.
+
+## Development
+
+### Commands
+
+```bash
+# Type check all packages
+pnpm typecheck
+
+# Run tests
+pnpm test
+
+# Build all apps
+pnpm build
+
+# Lint and format
+pnpm check
+pnpm fix
+
+# Update dependencies
+pnpm bump-deps
+```
+
+### Adding Components
+
+Use shadcn CLI with Base UI:
+
+```bash
+npx shadcn@latest add button -c packages/design-system
+```
+
+## Why This Stack?
+
+Built for **solo founders** who:
+- Target English-speaking markets
+- Want simple, maintainable code
+- Prefer consolidated tooling
+- Need modern, performant foundations
+- Don't want to manage multiple observability vendors
+
+## Original Template
+
+This is a fork of [next-forge](https://github.com/vercel/next-forge) by Vercel. The original is great for enterprise/multi-language use cases. This version is optimized for simplicity and speed.
 
 ## License
 
-MIT
+MIT (same as next-forge)
