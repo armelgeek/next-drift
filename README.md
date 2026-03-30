@@ -1,80 +1,49 @@
 # next-ship
 
-**Modernized Next.js monorepo with Drizzle, Base UI, Polar.sh, and PostHog.**
+**Production-grade Next.js starter for modern SaaS applications.**
 
-A fork of [next-forge](https://github.com/vercel/next-forge) optimized for solo founders building for English-speaking markets.
+Built for solo founders and small teams who want a fast, maintainable foundation without the enterprise complexity. Optimized for shipping quickly to English-speaking markets.
 
-## What's Different?
+## Why next-ship?
 
-This is a **modernized, simplified version** of next-forge with several key upgrades:
+Most Next.js starters are either too basic or too complex. next-ship hits the sweet spot:
 
-### Stack Changes
+- **Modern stack** — Latest stable tools that work well together
+- **Simplified** — Removed enterprise features you don't need as a solo founder
+- **Fast to ship** — Pre-configured auth, payments, database, and analytics
+- **Easy to maintain** — English-only, consolidated tooling, flat URLs
+- **Production-ready** — Type-safe, secure, and scalable
 
-| Original | Modernized |
-|----------|------------|
-| Prisma ORM | **Drizzle ORM** - Better performance, SQL-like syntax |
-| Radix UI | **Base UI** - shadcn's next-gen component library |
-| Stripe | **Polar.sh** - Modern payment infrastructure |
-| Sentry + Logtail | **PostHog only** - Consolidated observability |
-| i18n (Multi-language) | **English-only** - Flat URLs, simpler code |
-| Next.js 16.0 | **Next.js 16.2** - Latest features |
-
-### Key Benefits
-
-- **Cleaner URLs** — `/contact` instead of `/en/contact`
-- **Simpler codebase** — No i18n complexity, no multiple observability tools
-- **Better performance** — Drizzle is faster than Prisma
-- **Modern components** — Base UI is the future of shadcn
-- **Unified observability** — One tool (PostHog) for analytics + errors
-- **Easier payments** — Polar.sh has better DX than Stripe
-
-## Stack Overview
+## Stack
 
 ### Framework
-- **Next.js 16.2** with React 19
-- **TypeScript 5.9** with strict mode
-- **Turborepo** + **pnpm workspaces**
-- **Tailwind CSS 4** with v4 syntax
+- **Next.js 16.2** — React 19, latest features
+- **TypeScript 5.9** — Strict mode, end-to-end type safety
+- **Turborepo** + **pnpm** — Monorepo with fast, disk-space efficient installs
+- **Tailwind CSS 4** — Latest syntax, no configuration needed
 
-### Core Infrastructure
-- **Authentication** — [Clerk](https://clerk.com)
-- **Database** — [Drizzle ORM](https://orm.drizzle.team) + [Neon PostgreSQL](https://neon.tech)
-- **Payments** — [Polar.sh](https://polar.sh)
-- **Email** — [Resend](https://resend.com) + React Email
-- **Analytics** — [PostHog](https://posthog.com) (product analytics + error tracking)
-- **Security** — [Arcjet](https://arcjet.com) (rate limiting, bot protection)
-- **CMS** — [BaseHub](https://basehub.com)
-- **Components** — [Base UI](https://base-ui.com) + shadcn/ui
+### Core Services
+| Service | Purpose |
+|---------|---------|
+| **Clerk** | Authentication — simple, secure, works out of the box |
+| **Drizzle ORM** | Database — type-safe, SQL-like, better performance than Prisma |
+| **Neon PostgreSQL** | Database hosting — serverless, scales with you |
+| **Polar.sh** | Payments — modern Stripe alternative with better DX |
+| **PostHog** | Analytics + Error tracking — one tool instead of three |
+| **Resend** | Transactional email — simple API, great deliverability |
+| **BaseHub** | CMS — type-safe content management |
+| **Arcjet** | Security — rate limiting, bot protection |
 
-### Apps
-
-- **Web** — Marketing site with flat URLs (port 3001)
-- **App** — Main application with auth (port 3000)
-- **API** — RESTful API with webhooks (port 3002)
-- **Docs** — Documentation site
-- **Email** — Email preview server
-- **Storybook** — Component library
-
-### Packages
-
-- `@repo/auth` — Clerk authentication
-- `@repo/database` — Drizzle ORM with migrations
-- `@repo/design-system` — Base UI components
-- `@repo/payments` — Polar.sh integration
-- `@repo/analytics` — PostHog client/server
-- `@repo/observability` — Error handling (PostHog mode)
-- `@repo/security` — Arcjet security
-- `@repo/cms` — BaseHub integration
-- `@repo/email` — React Email templates
-- `@repo/ai` — Vercel AI SDK
+### UI Components
+- **Base UI** — shadcn's next-generation component library (replacement for Radix)
+- **Tailwind CSS v4** — Latest features, no config
+- **Geist font** — Modern, readable typography
 
 ## Quick Start
 
 ### Prerequisites
-
 - Node.js 20+
 - [pnpm](https://pnpm.io)
-- Environment variables (see `.env.example` files)
 
 ### Installation
 
@@ -87,7 +56,7 @@ cd next-ship
 pnpm install
 
 # Set up environment variables
-# Copy .env.example files to .env and fill in your values
+# Copy .env.example files to .env in each app/package and fill in your API keys
 
 # Run database migrations
 pnpm --filter @repo/database db:push
@@ -96,35 +65,124 @@ pnpm --filter @repo/database db:push
 pnpm dev
 ```
 
-### Environment Setup
+### Required Environment Variables
 
-Required environment variables:
+Create `.env` files in each app directory:
 
-- `DATABASE_URL` — Neon PostgreSQL connection string
-- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` — Clerk public key
-- `CLERK_SECRET_KEY` — Clerk secret key
-- `POLAR_ACCESS_TOKEN` — Polar.sh access token
-- `NEXT_PUBLIC_POSTHOG_KEY` — PostHog API key
-- `RESEND_TOKEN` — Resend API key
-- `ARCJET_KEY` — Arcjet API key
+**apps/web/.env:**
+```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_WEB_URL=http://localhost:3001
+NEXT_PUBLIC_POSTHOG_KEY=phc_...
+```
 
-See individual package `.env.example` files for complete lists.
+**apps/app/.env:**
+```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+CLERK_SECRET_KEY=sk_test_...
+CLERK_WEBHOOK_SECRET=whsec_...
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_POSTHOG_KEY=phc_...
+```
+
+**apps/api/.env:**
+```
+DATABASE_URL=postgresql://...
+CLERK_SECRET_KEY=sk_test_...
+CLERK_WEBHOOK_SECRET=whsec_...
+POLAR_ACCESS_TOKEN=polar_...
+POLAR_WEBHOOK_SECRET=whsec_...
+RESEND_TOKEN=re_...
+ARCJET_KEY=ajkey_...
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_WEB_URL=http://localhost:3001
+```
+
+See individual `.env.example` files for complete lists.
 
 ## Architecture
 
-### URL Structure
+### Apps
 
-Flat URLs (no locale prefixes):
-- `/` — Home
-- `/contact` — Contact page
-- `/pricing` — Pricing page
-- `/blog` — Blog listing
-- `/blog/[slug]` — Blog post
-- `/legal/[slug]` — Legal pages
+```
+apps/
+├── web/           # Marketing site (port 3001)
+│   ├── /          # Homepage
+│   ├── /contact   # Contact form
+│   ├── /pricing   # Pricing page
+│   └── /blog      # Blog with CMS integration
+├── app/           # Main application (port 3000)
+│   ├── /sign-in   # Authentication
+│   ├── /sign-up
+│   └── /dashboard # Main app dashboard
+├── api/           # API server (port 3002)
+│   └── /webhooks  # Payment webhooks, auth callbacks
+├── docs/          # Documentation site
+├── email/         # Email preview server
+└── storybook/     # Component library
+```
 
-### Database
+All apps are independently deployable.
 
-Uses Drizzle ORM with Neon PostgreSQL:
+### Packages
+
+```
+packages/
+├── auth/           # Clerk configuration
+├── database/       # Drizzle ORM, schema, migrations
+├── design-system/  # Base UI components, Tailwind config
+├── payments/       # Polar.sh integration
+├── analytics/      # PostHog client/server
+├── observability/  # Error handling, logging
+├── security/       # Arcjet configuration
+├── cms/            # BaseHub integration
+├── email/          # React Email templates
+├── ai/             # Vercel AI SDK utilities
+├── seo/            # Metadata, sitemaps, JSON-LD
+└── typescript-config/  # Shared TypeScript settings
+```
+
+## Key Decisions
+
+### English Only
+
+No internationalization complexity. Flat URLs like `/contact` instead of `/en/contact`. If you need multiple languages later, you can add them incrementally.
+
+### Consolidated Observability
+
+One tool instead of three:
+- **PostHog** for analytics, session replay, and error tracking
+- No Sentry (replaced by PostHog error tracking)
+- No Logtail (Vercel logs + PostHog capture are sufficient)
+
+### Modern Database Layer
+
+Drizzle ORM instead of Prisma:
+- Better query performance
+- SQL-like syntax (you write actual SQL)
+- Smaller bundle size
+- Edge runtime compatible
+
+### Modern Payments
+
+Polar.sh instead of Stripe:
+- Better developer experience
+- Modern TypeScript SDK
+- Webhook handling included
+- Perfect for SaaS subscriptions
+
+### Modern UI
+
+Base UI instead of Radix:
+- shadcn's next-generation component library
+- Better accessibility
+- No `asChild` prop complexity
+- Cleaner composition patterns
+
+## Database
+
+Drizzle ORM with Neon PostgreSQL:
 
 ```typescript
 // packages/database/src/schema.ts
@@ -138,48 +196,35 @@ export const pages = pgTable("pages", {
 
 Run migrations:
 ```bash
-pnpm --filter @repo/database db:generate
-pnpm --filter @repo-database db:push
+pnpm --filter @repo/database db:generate  # Generate migration files
+pnpm --filter @repo/database db:push     # Push to database
+pnpm --filter @repo/database db:studio     # Open Drizzle Studio
 ```
 
-### Payments
+## Components
 
-Polar.sh integration with webhook handling:
+Base UI components via shadcn CLI:
 
-```typescript
-// Webhook events: order.created, subscription.created, etc.
-// Automatic customer tracking via PostHog
-```
+```bash
+# Add a component
+npx shadcn@latest add button -c packages/design-system
 
-### Components
-
-Base UI components (shadcn next-gen):
-
-```typescript
+# Use in your app
 import { Button } from "@repo/design-system/components/ui/button";
-import { Dialog } from "@repo/design-system/components/ui/dialog";
 ```
 
-No `asChild` prop — use composition instead:
+Composition pattern (no `asChild`):
 ```tsx
 // ✅ Correct
-<Link href="/contact"><Button>Contact</Button></Link>
+<Link href="/contact">
+  <Button>Contact</Button>
+</Link>
 
-// ❌ Old way (removed)
-<Button asChild><Link href="/contact">Contact</Link></Button>
+// ❌ Old pattern (doesn't work with Base UI)
+<Button asChild>
+  <Link href="/contact">Contact</Link>
+</Button>
 ```
-
-## Migration from next-forge
-
-If you're coming from next-forge:
-
-1. **Database** — Prisma schema → Drizzle schema (similar structure)
-2. **UI Components** — Radix props → Base UI props (check component files)
-3. **Payments** — Stripe SDK → Polar SDK (webhook events differ)
-4. **URLs** — Add locale middleware or flatten structure
-5. **Observability** — Remove Sentry, use PostHog only
-
-See `/plans/modernization-migration.md` for detailed migration guide.
 
 ## Development
 
@@ -201,29 +246,51 @@ pnpm fix
 
 # Update dependencies
 pnpm bump-deps
+
+# Update all shadcn components
+pnpm bump-ui
 ```
 
-### Adding Components
+### Database Changes
 
-Use shadcn CLI with Base UI:
+After modifying schema:
+1. Edit `packages/database/src/schema.ts`
+2. Run `pnpm --filter @repo/database db:generate`
+3. Run `pnpm --filter @repo/database db:push`
 
-```bash
-npx shadcn@latest add button -c packages/design-system
-```
+### Adding a New App
 
-## Why This Stack?
+1. Create directory in `apps/`
+2. Add `package.json` with dependencies
+3. Create `next.config.ts`
+4. Add to `turbo.json` pipeline if needed
 
-Built for **solo founders** who:
-- Target English-speaking markets
-- Want simple, maintainable code
-- Prefer consolidated tooling
-- Need modern, performant foundations
-- Don't want to manage multiple observability vendors
+## Deployment
 
-## Original Template
+### Vercel (Recommended)
 
-This is a fork of [next-forge](https://github.com/vercel/next-forge) by Vercel. The original is great for enterprise/multi-language use cases. This version is optimized for simplicity and speed.
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy
+
+The monorepo is configured to deploy all apps independently via Turborepo.
+
+### Environment Variables by App
+
+Each app needs specific environment variables:
+- **Web**: `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `NEXT_PUBLIC_POSTHOG_KEY`, etc.
+- **App**: All Clerk variables, PostHog key
+- **API**: Database URL, all service API keys (Polar, Resend, Arcjet, etc.)
+
+## Inspired By
+
+Built on lessons learned from next-forge, with simplifications for solo founders:
+- Removed enterprise i18n complexity
+- Consolidated observability tools
+- Updated to latest stack (Drizzle, Base UI, Polar.sh)
+- Flattened URL structure
+- Focused on English-speaking markets
 
 ## License
 
-MIT (same as next-forge)
+MIT
