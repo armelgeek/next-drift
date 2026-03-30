@@ -2,7 +2,7 @@
 
 **Production-grade Next.js starter for modern SaaS applications.**
 
-Built for solo founders and small teams who want a fast, maintainable foundation without the enterprise complexity. Optimized for shipping quickly to English-speaking markets.
+Built for solo founders and small teams who want a fast, maintainable foundation without the enterprise complexity.
 
 ## Why next-ship?
 
@@ -11,7 +11,7 @@ Most Next.js starters are either too basic or too complex. next-ship hits the sw
 - **Modern stack** — Latest stable tools that work well together
 - **Simplified** — Removed enterprise features you don't need as a solo founder
 - **Fast to ship** — Pre-configured auth, payments, database, and analytics
-- **Easy to maintain** — English-only, consolidated tooling, flat URLs
+- **Easy to maintain** — Single language, consolidated tooling, flat URLs
 - **Production-ready** — Type-safe, secure, and scalable
 
 ## Stack
@@ -145,9 +145,9 @@ packages/
 
 ## Key Decisions
 
-### English Only
+### Single Language
 
-No internationalization complexity. Flat URLs like `/contact` instead of `/en/contact`. If you need multiple languages later, you can add them incrementally.
+No internationalization complexity. Flat URLs like `/contact` instead of `/en/contact`. Simpler codebase, faster iteration. If you need multiple languages later, you can add them incrementally.
 
 ### Consolidated Observability
 
@@ -289,7 +289,7 @@ Built on lessons learned from next-forge, with simplifications for solo founders
 - Consolidated observability tools
 - Updated to latest stack (Drizzle, Base UI, Polar.sh)
 - Flattened URL structure
-- Focused on English-speaking markets
+- Simplified to single language
 
 ## License
 
