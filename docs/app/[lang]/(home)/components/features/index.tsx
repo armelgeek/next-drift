@@ -2,7 +2,6 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import Arcjet from "./arcjet.svg";
 import BaseHub from "./basehub.svg";
-import BetterStack from "./better-stack.svg";
 import Clerk from "./clerk.svg";
 import Cmdk from "./cmdk.svg";
 import GoogleAnalytics from "./google-analytics.svg";
@@ -28,11 +27,6 @@ import Zod from "./zod.svg";
 const rows = [
   {
     row: [
-      {
-        label: "BetterStack",
-        src: BetterStack,
-        className: "[animation-delay:-26s] [animation-duration:30s]",
-      },
       {
         label: "Clerk",
         src: Clerk,

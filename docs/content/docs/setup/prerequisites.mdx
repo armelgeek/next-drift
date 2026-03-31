@@ -20,17 +20,7 @@ We're aware of issues on [non-Ubuntu Linux distributions](https://github.com/ver
 
 ## Package Manager
 
-next-forge defaults to using [pnpm](https://pnpm.io/) as a package manager, but you can use [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/) or [bun](https://bun.sh/) instead by passing a flag during the [installation](/docs/setup/installation) step.
-
-## Stripe CLI
-
-We use the [Stripe CLI](https://docs.stripe.com/stripe-cli) to forward [payments webhooks](/packages/payments#webhooks) to your local machine.
-
-Once installed, you can login to authenticate with your Stripe account.
-
-```sh title="Terminal"
-stripe login
-```
+next-ship defaults to using [pnpm](https://pnpm.io/) as a package manager.
 
 ## Mintlify CLI
 
@@ -38,13 +28,11 @@ We use the [Mintlify CLI](https://mintlify.com/docs/development) to preview the 
 
 ## Accounts
 
-next-forge relies on various SaaS products. You will need to create accounts with the following services then set the API keys in your [environment variables](/docs/setup/env):
+next-ship relies on various SaaS products. You will need to create accounts with the following services then set the API keys in your [environment variables](/docs/setup/env):
 
 - [Arcjet](https://arcjet.com), for [application security](/packages/security/application).
-- [BetterStack](https://betterstack.com), for [logging](/packages/observability/logging) and [uptime monitoring](/packages/observability/uptime).
 - [Clerk](https://clerk.com), for [authentication](/packages/authentication).
 - [Google Analytics](https://developers.google.com/analytics), for [web analytics](/packages/analytics/web).
-- [Posthog](https://posthog.com), for [product analytics](/packages/analytics/product).
+- [Polar](https://polar.sh), for [payments](/packages/payments).
+- [Posthog](https://posthog.com), for [product analytics and error tracking](/packages/analytics).
 - [Resend](https://resend.com), for [transactional emails](/packages/email).
-- [Sentry](https://sentry.io), for [error tracking](/packages/observability/error-capture).
-- [Stripe](https://stripe.com), for [payments](/packages/payments).

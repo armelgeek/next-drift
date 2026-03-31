@@ -19,7 +19,6 @@ This document provides a comprehensive reference for all API keys and services n
 **Optional services:**
 - [ ] Arcjet (Security/Rate Limiting)
 - [ ] Knock (Notifications)
-- [ ] Better Stack (Observability)
 - [ ] Svix (Webhooks)
 - [ ] Upstash Redis (Rate Limiting)
 - [ ] OpenAI (AI Features)
@@ -313,26 +312,7 @@ NEXT_PUBLIC_KNOCK_FEED_CHANNEL_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
 ## Observability & Monitoring
 
-### Better Stack
-
-**Purpose:** Uptime monitoring and logging
-
-**Status:** Optional
-
-**Where to get it:** https://betterstack.com
-
-**Environment Variables:**
-
-| Variable | Type | Format | Description |
-|----------|------|--------|-------------|
-| `BETTERSTACK_API_KEY` | Server | String | Better Stack API key |
-| `BETTERSTACK_URL` | Server | URL | Better Stack endpoint URL |
-
-**Example values:**
-```env
-BETTERSTACK_API_KEY="xxxxxxxxxxxxxxxx"
-BETTERSTACK_URL="https://in.logs.betterstack.com"
-```
+All observability is handled by **PostHog** (see Analytics section above). We intentionally consolidated on a single tool for simplicity.
 
 ---
 
@@ -456,8 +436,6 @@ DATABASE_URL="postgresql://..."
 RESEND_TOKEN="re_..."
 POLAR_ACCESS_TOKEN="polar_test_..."
 POLAR_WEBHOOK_SECRET="whsec_..."
-BETTERSTACK_API_KEY="..."
-BETTERSTACK_URL="https://..."
 FLAGS_SECRET="..."
 ARCJET_KEY="ajkey_..."
 SVIX_TOKEN="sk_..."
@@ -495,8 +473,6 @@ DATABASE_URL="postgresql://..."
 RESEND_TOKEN="re_..."
 POLAR_ACCESS_TOKEN="polar_test_..."
 POLAR_WEBHOOK_SECRET="whsec_..."
-BETTERSTACK_API_KEY="..."
-BETTERSTACK_URL="https://..."
 FLAGS_SECRET="..."
 ARCJET_KEY="ajkey_..."
 SVIX_TOKEN="sk_..."
@@ -537,8 +513,6 @@ DATABASE_URL="postgresql://..."
 RESEND_TOKEN="re_..."
 POLAR_ACCESS_TOKEN="polar_test_..."
 POLAR_WEBHOOK_SECRET="whsec_..."
-BETTERSTACK_API_KEY="..."
-BETTERSTACK_URL="https://..."
 FLAGS_SECRET="..."
 ARCJET_KEY="ajkey_..."
 SVIX_TOKEN="sk_..."
