@@ -21,7 +21,6 @@ This document provides a comprehensive reference for all API keys and services n
 - [ ] Knock (Notifications)
 - [ ] Better Stack (Observability)
 - [ ] Svix (Webhooks)
-- [ ] Liveblocks (Collaboration)
 - [ ] Upstash Redis (Rate Limiting)
 - [ ] OpenAI (AI Features)
 - [ ] Google Analytics
@@ -385,29 +384,6 @@ UPSTASH_REDIS_REST_TOKEN="xxxxxxxxxxxxxxxx"
 
 ---
 
-## Collaboration
-
-### Liveblocks
-
-**Purpose:** Real-time collaboration features
-
-**Status:** Optional
-
-**Where to get it:** https://liveblocks.io
-
-**Environment Variables:**
-
-| Variable | Type | Format | Description |
-|----------|------|--------|-------------|
-| `LIVEBLOCKS_SECRET` | Server | `sk_...` | Liveblocks secret key |
-
-**Example values:**
-```env
-LIVEBLOCKS_SECRET="sk_xxxxxxxxxxxxxxxx"
-```
-
----
-
 ## AI/ML
 
 ### OpenAI
@@ -485,7 +461,6 @@ BETTERSTACK_URL="https://..."
 FLAGS_SECRET="..."
 ARCJET_KEY="ajkey_..."
 SVIX_TOKEN="sk_..."
-LIVEBLOCKS_SECRET="sk_..."
 BASEHUB_TOKEN="bshb_pk_..."
 VERCEL_PROJECT_PRODUCTION_URL="http://localhost:3001"
 KNOCK_API_KEY="sk_test_..."
@@ -525,7 +500,6 @@ BETTERSTACK_URL="https://..."
 FLAGS_SECRET="..."
 ARCJET_KEY="ajkey_..."
 SVIX_TOKEN="sk_..."
-LIVEBLOCKS_SECRET="sk_..."
 BASEHUB_TOKEN="bshb_pk_..."
 VERCEL_PROJECT_PRODUCTION_URL="http://localhost:3000"
 KNOCK_API_KEY="sk_test_..."
@@ -568,7 +542,6 @@ BETTERSTACK_URL="https://..."
 FLAGS_SECRET="..."
 ARCJET_KEY="ajkey_..."
 SVIX_TOKEN="sk_..."
-LIVEBLOCKS_SECRET="sk_..."
 BASEHUB_TOKEN="bshb_pk_..."
 VERCEL_PROJECT_PRODUCTION_URL="http://localhost:3002"
 KNOCK_API_KEY="sk_test_..."
