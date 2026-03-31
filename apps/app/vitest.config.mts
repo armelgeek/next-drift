@@ -1,16 +1,8 @@
 import path from "node:path";
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vitest/config";
+import { createNextAppConfig } from "@repo/testing/vitest/react";
+import { fileURLToPath } from "node:url";
 
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    environment: "jsdom",
-  },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./"),
-      "@repo": path.resolve(__dirname, "../../packages"),
-    },
-  },
-});
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(__dirname, "../..");
+
+export default createNextAppConfig(__dirname, repoRoot);
