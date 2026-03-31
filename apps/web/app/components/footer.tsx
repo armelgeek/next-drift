@@ -1,6 +1,5 @@
 import { legal } from "@repo/cms";
 import { Feed } from "@repo/cms/components/feed";
-import { Status } from "@repo/observability/status";
 import Link from "next/link";
 import { env } from "@/env";
 
@@ -56,7 +55,6 @@ export const Footer = () => (
                       This is the start of something new.
                     </p>
                   </div>
-                  <Status />
                 </div>
                 <div className="grid items-start gap-10 lg:grid-cols-3">
                   {navigationItems.map((item) => (
