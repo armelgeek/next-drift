@@ -1,0 +1,45 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    "apps/*": {
+      "entry": [
+        "app/**/page.tsx",
+        "app/**/layout.tsx",
+        "app/**/route.ts",
+        "app/**/route.tsx"
+      ],
+      "project": [
+        "**/*.{ts,tsx}"
+      ]
+    },
+    "packages/*": {
+      "entry": [
+        "index.ts",
+        "server.ts",
+        "client.ts"
+      ],
+      "project": [
+        "**/*.{ts,tsx}"
+      ]
+    }
+  },
+  "ignore": [
+    "**/node_modules/**",
+    "**/.turbo/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/*.d.ts"
+  ],
+  "ignoreDependencies": [
+    "@types/node",
+    "typescript",
+    "vitest",
+    "@testing-library/react",
+    "@testing-library/dom",
+    "jsdom",
+    "tailwindcss",
+    "postcss",
+    "@tailwindcss/postcss",
+    "ultracite"
+  ]
+}
