@@ -57,36 +57,9 @@ Stripe Radar supports more [advanced anti-fraud features](https://docs.stripe.co
   <Step title="Add script to the website">
     Add the same script to the website in `apps/web/app/layout.tsx`.
   </Step>
-  <Step title="Prevent common fraud patterns with Arcjet">
-    Prevent common fraud patterns by using [Arcjet](/packages/security/application) [IP address analysis](https://docs.arcjet.com/reference/nextjs#ip-analysis) to [block requests from VPNs and proxies](https://docs.arcjet.com/blueprints/vpn-proxy-detection). These are commonly used by fraudsters to hide their location, but have legitimate uses as well so are not blocked by default. You could simply block these users, or you could adjust the checkout process to require approval before processing their payment. 
+  <Step title="Implement additional fraud detection">
+    Consider implementing fraud detection using IP analysis to block requests from VPNs and proxies. These are commonly used by fraudsters to hide their location, but have legitimate uses as well. You could block these users or adjust the checkout process to require approval before processing their payment.
   </Step>
 </Steps>
 
-For example, in `apps/app/app/(authenticated)/layout.tsx` you could add this after the call to `aj.protect()`:
-
-```ts
-import { redirect } from 'next/navigation';
-// ...
-
-if (
-  decision.ip.isHosting() ||
-  decision.ip.isVpn() ||
-  decision.ip.isProxy() ||
-  decision.ip.isRelay()
-) {
-  // The IP is from a hosting provider, VPN, or proxy. We can check the name
-  // of the service and customize the response
-  if (decision.ip.hasService()) {
-    if (decision.ip.service !== 'Apple Private Relay') {
-      // We trust Apple Private Relay because it requires an active iCloud
-      // subscription, so deny all other VPNs
-      redirect('/vpn-blocked');
-    }
-  } else {
-    // The service name is not available, but we still think it's a VPN
-    redirect('/vpn-blocked');
-  }
-}
-```
-
-In this case we are providing a friendly redirect to a page that explains why the user is being blocked (which you would need to create). You could also return a more generic error message. [See the Arcjet documentation](https://docs.arcjet.com/blueprints/payment-form#additional-checks) for more advanced examples.
+Consider using a service like IPInfo or similar to detect VPNs and proxies in your payment flows. Implement appropriate checks in your payment handlers based on your risk tolerance.
