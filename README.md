@@ -32,7 +32,7 @@ Most Next.js starters are either too basic or too complex. next-ship hits the sw
 | **PostHog** | Analytics + Error tracking — one tool instead of three |
 | **Resend** | Transactional email — simple API, great deliverability |
 | **BaseHub** | CMS — type-safe content management |
-| **Arcjet** | Security — rate limiting, bot protection |
+| **Nosecone** | Security headers |
 
 ### UI Components
 - **Base UI** — shadcn's next-generation component library (replacement for Radix)
@@ -94,7 +94,7 @@ CLERK_WEBHOOK_SECRET=whsec_...
 POLAR_ACCESS_TOKEN=polar_...
 POLAR_WEBHOOK_SECRET=whsec_...
 RESEND_TOKEN=re_...
-ARCJET_KEY=ajkey_...
+
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 NEXT_PUBLIC_WEB_URL=http://localhost:3001
 ```
@@ -135,7 +135,7 @@ packages/
 ├── payments/       # Polar.sh integration
 ├── analytics/      # PostHog client/server
 ├── observability/  # Error handling, logging
-├── security/       # Arcjet configuration
+├── security/       # Security headers configuration
 ├── cms/            # BaseHub integration
 ├── email/          # React Email templates
 ├── ai/             # Vercel AI SDK utilities
@@ -280,7 +280,7 @@ The monorepo is configured to deploy all apps independently via Turborepo.
 Each app needs specific environment variables:
 - **Web**: `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `NEXT_PUBLIC_POSTHOG_KEY`, etc.
 - **App**: All Clerk variables, PostHog key
-- **API**: Database URL, all service API keys (Polar, Resend, Arcjet, etc.)
+- **API**: Database URL, all service API keys (Polar, Resend, etc.)
 
 ## Inspired By
 

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import Arcjet from "./arcjet.svg";
 import BaseHub from "./basehub.svg";
 import Clerk from "./clerk.svg";
 import Cmdk from "./cmdk.svg";
@@ -81,13 +80,13 @@ const rows = [
         className: "[animation-delay:-32s] [animation-duration:40s]",
       },
       {
-        label: "Arcjet",
-        src: Arcjet,
+        label: "Liveblocks",
+        src: Liveblocks,
         className: "[animation-delay:-22s] [animation-duration:40s]",
       },
       {
-        label: "Liveblocks",
-        src: Liveblocks,
+        label: "Base UI",
+        src: Radix,
         className: "[animation-delay:-28s] [animation-duration:40s]",
       },
     ],

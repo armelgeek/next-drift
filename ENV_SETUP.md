@@ -17,7 +17,6 @@ This document provides a comprehensive reference for all API keys and services n
 - [ ] Vercel Feature Flags
 
 **Optional services:**
-- [ ] Arcjet (Security/Rate Limiting)
 - [ ] Knock (Notifications)
 - [ ] Svix (Webhooks)
 - [ ] Upstash Redis (Rate Limiting)
@@ -210,29 +209,6 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID="G-XXXXXXXXXX"
 **Example values:**
 ```env
 BASEHUB_TOKEN="bshb_pk_xxxxxxxxxxxxxxxx"
-```
-
----
-
-## Security
-
-### Arcjet
-
-**Purpose:** Bot protection and security
-
-**Status:** Optional
-
-**Where to get it:** https://arcjet.com
-
-**Environment Variables:**
-
-| Variable | Type | Format | Description |
-|----------|------|--------|-------------|
-| `ARCJET_KEY` | Server | `ajkey_...` | Arcjet API key |
-
-**Example values:**
-```env
-ARCJET_KEY="ajkey_01xxxxxxxxxxxxxxxx"
 ```
 
 ---
@@ -437,7 +413,6 @@ RESEND_TOKEN="re_..."
 POLAR_ACCESS_TOKEN="polar_test_..."
 POLAR_WEBHOOK_SECRET="whsec_..."
 FLAGS_SECRET="..."
-ARCJET_KEY="ajkey_..."
 SVIX_TOKEN="sk_..."
 BASEHUB_TOKEN="bshb_pk_..."
 VERCEL_PROJECT_PRODUCTION_URL="http://localhost:3001"
@@ -474,7 +449,6 @@ RESEND_TOKEN="re_..."
 POLAR_ACCESS_TOKEN="polar_test_..."
 POLAR_WEBHOOK_SECRET="whsec_..."
 FLAGS_SECRET="..."
-ARCJET_KEY="ajkey_..."
 SVIX_TOKEN="sk_..."
 BASEHUB_TOKEN="bshb_pk_..."
 VERCEL_PROJECT_PRODUCTION_URL="http://localhost:3000"
@@ -514,7 +488,6 @@ RESEND_TOKEN="re_..."
 POLAR_ACCESS_TOKEN="polar_test_..."
 POLAR_WEBHOOK_SECRET="whsec_..."
 FLAGS_SECRET="..."
-ARCJET_KEY="ajkey_..."
 SVIX_TOKEN="sk_..."
 BASEHUB_TOKEN="bshb_pk_..."
 VERCEL_PROJECT_PRODUCTION_URL="http://localhost:3002"
