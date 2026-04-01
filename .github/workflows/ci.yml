@@ -54,15 +54,20 @@ jobs:
 
       - name: Check line count per file
         run: |
-          # Check for files with more than 500 lines
+          # Check for files with more than 500 lines (same threshold as pre-commit)
           MAX_LINES=500
-          LARGE_FILES=$(find . -type f \( -name "*.ts" -o -name "*.tsx" -o -o -name "*.js" -o -name "*.jsx" \) -not -path "*/node_modules/*" -not -path "*/.next/*" -not -path "*/dist/*" -not -path "*/__tests__/*" -exec wc -l {} \; 2>/dev/null | awk -v max="$MAX_LINES" '$1 > max {print $1, $2}' | head -20)
+          LARGE_FILES=$(find . -type f \( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \) \
+            -not -path "*/node_modules/*" \
+            -not -path "*/.next/*" \
+            -not -path "*/dist/*" \
+            -not -path "*/__tests__/*" \
+            -exec wc -l {} \; 2>/dev/null | \
+            awk -v max="$MAX_LINES" '$1 > max {printf "  - %s (%d lines)\n", $2, $1}' | \
+            head -20)
           
           if [ ! -z "$LARGE_FILES" ]; then
             echo "⚠️  Warning: Found large files (>$MAX_LINES lines):"
-            echo "$LARGE_FILES" | while read -r lines file; do
-              echo "  - $file ($lines lines)"
-            done
+            echo "$LARGE_FILES"
             echo ""
             echo "Consider breaking these files into smaller modules."
           else
