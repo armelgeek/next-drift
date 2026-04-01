@@ -1,0 +1,8 @@
+{
+  "*.{js,ts,tsx,jsx,mjs,cjs}": [
+    "npx ultracite@latest check"
+  ],
+  "*.{json,md,yml,yaml,css,scss}": [
+    "npx ultracite@latest check"
+  ]
+}
