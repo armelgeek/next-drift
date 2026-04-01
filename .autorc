@@ -1,7 +1,7 @@
 {
   "plugins": ["npm", "first-time-contributor", "released"],
-  "owner": "vercel",
-  "repo": "next-forge",
-  "name": "Hayden Bleasel",
-  "email": "hello@haydenbleasel.com"
+  "owner": "oscardobsonbrown",
+  "repo": "next-ship",
+  "name": "Oscar Dobson-Brown",
+  "email": "git@oscardb.xyz"
 }
