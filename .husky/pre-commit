@@ -1,16 +1,37 @@
 npx lint-staged
 
-# Check for large files in staged changes
-LARGE_FILES=$(git diff --cached --numstat | awk -v size="10000" '$1 > size || $2 > size {print $3}' | head -20)
-if [ ! -z "$LARGE_FILES" ]; then
-  echo "⚠️  Warning: Large files detected (>10,000 lines changed):"
-  echo "$LARGE_FILES"
+# Check for files >500 lines in staged changes (same threshold as CI)
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx|js|jsx)$' | grep -v node_modules | grep -v '\.next' | grep -v dist || true)
+
+if [ ! -z "$STAGED_FILES" ]; then
+  LARGE_FILES=""
+  for file in $STAGED_FILES; do
+    if [ -f "$file" ]; then
+      lines=$(wc -l < "$file")
+      if [ "$lines" -gt 500 ]; then
+        LARGE_FILES="$LARGE_FILES\n  - $file ($lines lines)"
+      fi
+    fi
+  done
+  
+  if [ ! -z "$LARGE_FILES" ]; then
+    echo "⚠️  Warning: Large files detected (>500 lines):$LARGE_FILES"
+    echo "Consider breaking these into smaller modules."
+  fi
 fi
 
-# Check for files >10MB in staged changes  
-STAGED_LARGE=$(git diff --cached --name-only | xargs -I {} sh -c 'test -f "{}" && stat -f%z "{}" 2>/dev/null || stat -c%s "{}" 2>/dev/null' | awk -v size="10485760" '$1 > size {print FILENAME}' 2>/dev/null | head -5)
+# Block commits with files >10MB
+STAGED_LARGE=$(git diff --cached --name-only --diff-filter=ACM | while read -r file; do
+  if [ -f "$file" ]; then
+    size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null)
+    if [ "$size" -gt 10485760 ]; then
+      echo "$file ($(echo "scale=2; $size / 1048576" | bc) MB)"
+    fi
+  fi
+done)
+
 if [ ! -z "$STAGED_LARGE" ]; then
-  echo "❌ Error: Staged files >10MB detected:"
+  echo "❌ Error: Cannot commit files larger than 10MB:"
   echo "$STAGED_LARGE"
   exit 1
 fi
