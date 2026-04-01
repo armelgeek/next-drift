@@ -1,1 +1,16 @@
 npx lint-staged
+
+# Check for large files in staged changes
+LARGE_FILES=$(git diff --cached --numstat | awk -v size="10000" '$1 > size || $2 > size {print $3}' | head -20)
+if [ ! -z "$LARGE_FILES" ]; then
+  echo "⚠️  Warning: Large files detected (>10,000 lines changed):"
+  echo "$LARGE_FILES"
+fi
+
+# Check for files >10MB in staged changes  
+STAGED_LARGE=$(git diff --cached --name-only | xargs -I {} sh -c 'test -f "{}" && stat -f%z "{}" 2>/dev/null || stat -c%s "{}" 2>/dev/null' | awk -v size="10485760" '$1 > size {print FILENAME}' 2>/dev/null | head -5)
+if [ ! -z "$STAGED_LARGE" ]; then
+  echo "❌ Error: Staged files >10MB detected:"
+  echo "$STAGED_LARGE"
+  exit 1
+fi
