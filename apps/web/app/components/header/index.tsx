@@ -10,12 +10,11 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@repo/design-system/components/ui/navigation-menu";
-import type { Dictionary } from "@/lib/dictionary";
-import { CommandIcon, Menu, MoveRight, X } from "lucide-react";
-import Image from "next/image";
+import { Menu, MoveRight, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { env } from "@/env";
+import type { Dictionary } from "@/lib/dictionary";
 import { LanguageSwitcher } from "./language-switcher";
 
 type HeaderProps = {
@@ -88,11 +87,11 @@ export const Header = ({ dictionary }: HeaderProps) => {
                             </Link>
                           </div>
                           <div className="flex h-full flex-col justify-end text-sm">
-                            {item.items?.map((subItem, idx) => (
+                            {item.items?.map((subItem) => (
                               <NavigationMenuLink
                                 className="flex flex-row items-center justify-between rounded px-4 py-2 hover:bg-muted"
                                 href={subItem.href}
-                                key={idx}
+                                key={subItem.href}
                               >
                                 <span>{subItem.title}</span>
                                 <MoveRight className="h-4 w-4 text-muted-foreground" />
@@ -122,7 +121,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
               fill="currentColor"
             />
           </svg>
-          <p className="whitespace-nowrap font-semibold">next-forge</p>
+          <p className="whitespace-nowrap font-semibold">next-ship</p>
         </div>
         <div className="flex w-full justify-end gap-4">
           <Link href="/contact">
@@ -143,16 +142,14 @@ export const Header = ({ dictionary }: HeaderProps) => {
             </Button>
           </Link>
           <Link href={`${env.NEXT_PUBLIC_APP_URL}/sign-up`}>
-            <Button>
-              {dictionary.web.header.signUp}
-            </Button>
+            <Button>{dictionary.web.header.signUp}</Button>
           </Link>
         </div>
         <div className="flex w-12 shrink items-end justify-end lg:hidden">
           <Button onClick={() => setOpen(!isOpen)} variant="ghost">
             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
-          {isOpen && (
+          {isOpen ? (
             <div className="container absolute top-20 right-0 flex w-full flex-col gap-8 border-t bg-background py-4 shadow-lg">
               {navigationItems.map((item) => (
                 <div key={item.title}>
@@ -164,11 +161,9 @@ export const Header = ({ dictionary }: HeaderProps) => {
                         rel={
                           item.href.startsWith("http")
                             ? "noopener noreferrer"
-                            : undefined
+                            : null
                         }
-                        target={
-                          item.href.startsWith("http") ? "_blank" : undefined
-                        }
+                        target={item.href.startsWith("http") ? "_blank" : null}
                       >
                         <span className="text-lg">{item.title}</span>
                         <MoveRight className="h-4 w-4 stroke-1 text-muted-foreground" />
@@ -192,7 +187,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                 </div>
               ))}
             </div>
-          )}
+          ) : null}
         </div>
       </div>
     </header>

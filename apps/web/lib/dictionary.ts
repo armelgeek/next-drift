@@ -6,36 +6,41 @@ export const dictionary = {
   web: {
     home: {
       meta: {
-        title: "next-forge",
-        description: "A comprehensive Next.js starter kit for modern web applications",
+        title: "next-ship",
+        description:
+          "A comprehensive Next.js starter kit for modern web applications",
       },
       hero: {
         announcement: "Latest updates and announcements",
       },
       cta: {
         title: "Ready to get started?",
-        description: "Join thousands of developers building with next-forge",
+        description: "Join thousands of developers building with next-ship",
       },
       faq: {
         title: "Frequently Asked Questions",
-        description: "Everything you need to know about next-forge",
+        description: "Everything you need to know about next-ship",
         cta: "Contact us",
         items: [
           {
-            question: "What is next-forge?",
-            answer: "next-forge is a comprehensive Next.js starter kit for modern web applications.",
+            question: "What is next-ship?",
+            answer:
+              "next-ship is a comprehensive Next.js starter kit for modern web applications.",
           },
           {
             question: "How do I get started?",
-            answer: "Simply clone the repository and follow the setup instructions in the documentation.",
+            answer:
+              "Simply clone the repository and follow the setup instructions in the documentation.",
           },
           {
             question: "Is it free to use?",
-            answer: "Yes, next-forge is open source and free to use for personal and commercial projects.",
+            answer:
+              "Yes, next-ship is open source and free to use for personal and commercial projects.",
           },
           {
             question: "What technologies are included?",
-            answer: "Next.js, TypeScript, Tailwind CSS, and many more modern tools.",
+            answer:
+              "Next.js, TypeScript, Tailwind CSS, and many more modern tools.",
           },
         ],
       },
@@ -77,7 +82,8 @@ export const dictionary = {
         items: [
           {
             title: "Game changer for our business",
-            description: "next-forge helped us launch our product in record time with enterprise-grade quality.",
+            description:
+              "next-ship helped us launch our product in record time with enterprise-grade quality.",
             author: {
               name: "Sarah Johnson",
               image: "https://api.dicebear.com/7.x/avataaars/svg?seed=sarah",
@@ -85,7 +91,8 @@ export const dictionary = {
           },
           {
             title: "Best development experience",
-            description: "The tooling and setup is incredibly well thought out. Saved us months of work.",
+            description:
+              "The tooling and setup is incredibly well thought out. Saved us months of work.",
             author: {
               name: "Mike Chen",
               image: "https://api.dicebear.com/7.x/avataaars/svg?seed=mike",
@@ -93,7 +100,8 @@ export const dictionary = {
           },
           {
             title: "Highly recommended",
-            description: "We've tried many starter kits, but next-forge is by far the most complete and polished.",
+            description:
+              "We've tried many starter kits, but next-ship is by far the most complete and polished.",
             author: {
               name: "Emily Davis",
               image: "https://api.dicebear.com/7.x/avataaars/svg?seed=emily",
@@ -101,7 +109,8 @@ export const dictionary = {
           },
           {
             title: "Exceptional quality",
-            description: "The attention to detail in the codebase is impressive. Everything just works.",
+            description:
+              "The attention to detail in the codebase is impressive. Everything just works.",
             author: {
               name: "Alex Rodriguez",
               image: "https://api.dicebear.com/7.x/avataaars/svg?seed=alex",
@@ -115,7 +124,8 @@ export const dictionary = {
         items: [
           {
             title: "Next.js 14",
-            description: "Built on the latest Next.js with App Router for optimal performance",
+            description:
+              "Built on the latest Next.js with App Router for optimal performance",
           },
           {
             title: "TypeScript",
@@ -191,6 +201,5 @@ export const dictionary = {
 export type Dictionary = typeof dictionary;
 
 // Simple getter function for compatibility
-export const getDictionary = async (_locale?: string): Promise<Dictionary> => {
-  return dictionary;
-};
+export const getDictionary = async (_locale?: string): Promise<Dictionary> =>
+  dictionary;

@@ -18,5 +18,17 @@
       "!apps/email/.react-email",
       "!packages/cms/basehub-types.d.ts"
     ]
+  },
+  "linter": {
+    "rules": {
+      "complexity": {
+        "noExcessiveCognitiveComplexity": {
+          "level": "error",
+          "options": {
+            "maxAllowedComplexity": 15
+          }
+        }
+      }
+    }
   }
 }
