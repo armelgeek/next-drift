@@ -172,8 +172,8 @@ const getName = async () => {
   const value = await text({
     message: "What is your project named?",
     placeholder: "my-app",
-    validate(value: string) {
-      if (value.length === 0) {
+    validate(inputValue: string) {
+      if (inputValue.length === 0) {
         return "Please enter a project name.";
       }
     },
@@ -211,7 +211,7 @@ export const initialize = async (options: {
   disableGit?: boolean;
 }) => {
   try {
-    intro("Let's start a next-forge project!");
+    intro("Let's start a next-ship project!");
 
     const cwd = process.cwd();
     const name = options.name || (await getName());
@@ -225,7 +225,7 @@ export const initialize = async (options: {
     const s = spinner();
     const projectDir = join(cwd, name);
 
-    s.start("Cloning next-forge...");
+    s.start("Cloning next-ship...");
     await cloneNextForge(name, packageManager);
 
     s.message("Moving into repository...");

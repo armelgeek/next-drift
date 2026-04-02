@@ -1,20 +1,37 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignoreWorkspaces": ["apps/app", "apps/api"],
+  "vitest": false,
   "workspaces": {
     ".": {
       "entry": ["*.ts", "*.js"],
       "project": ["*.{ts,js,json}"]
     },
     "apps/app": {
-      "entry": ["app/**/page.tsx", "app/**/layout.tsx", "app/**/route.ts", "app/**/route.tsx", "app/**/actions/**/*.ts"],
+      "entry": [
+        "app/**/page.tsx",
+        "app/**/layout.tsx",
+        "app/**/route.ts",
+        "app/**/route.tsx",
+        "app/**/actions/**/*.ts"
+      ],
       "project": ["**/*.{ts,tsx}"]
     },
     "apps/web": {
-      "entry": ["app/**/page.tsx", "app/**/layout.tsx", "app/**/route.ts", "app/**/route.tsx"],
+      "entry": [
+        "app/**/page.tsx",
+        "app/**/layout.tsx",
+        "app/**/route.ts",
+        "app/**/route.tsx"
+      ],
       "project": ["**/*.{ts,tsx}"]
     },
     "apps/api": {
-      "entry": ["app/**/route.ts", "app/**/layout.tsx", "app/**/global-error.tsx"],
+      "entry": [
+        "app/**/route.ts",
+        "app/**/layout.tsx",
+        "app/**/global-error.tsx"
+      ],
       "project": ["**/*.{ts,tsx}"]
     },
     "apps/storybook": {

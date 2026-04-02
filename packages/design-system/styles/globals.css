@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 @source "../**/*.{ts,tsx}";
 
-@plugin '@tailwindcss/typography';
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -152,7 +152,7 @@
   }
 }
 
-/* This layer is by next-forge */
+/* This layer is by next-ship */
 @layer base {
   ::after,
   ::before,

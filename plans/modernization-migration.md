@@ -2,7 +2,7 @@
 
 ## Overview
 
-This plan covers five major migrations to modernize the next-forge stack:
+This plan covers five major migrations to modernize the next-ship stack:
 1. **Prisma → Drizzle ORM** (type-safe, SQL-like, edge-compatible)
 2. **Radix UI → Base UI** (shadcn's next-gen component primitives)
 3. **Next.js 16.0.10 → 16.2** (latest features and improvements)

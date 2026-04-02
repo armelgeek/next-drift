@@ -284,7 +284,7 @@ Each app needs specific environment variables:
 
 ## Inspired By
 
-Built on lessons learned from next-forge, with simplifications for solo founders:
+Built on lessons learned from next-ship, with simplifications for solo founders:
 - Removed complex routing patterns
 - Consolidated observability tools
 - Updated to latest stack (Drizzle, Base UI, Polar.sh)

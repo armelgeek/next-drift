@@ -1,8 +1,8 @@
 {
-  "name": "next-forge",
+  "name": "next-ship",
   "version": "5.3.2",
   "bin": {
-    "next-forge": "dist/index.js"
+    "next-ship": "dist/index.js"
   },
   "files": [
     "dist/index.js"
@@ -11,19 +11,20 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "check": "npx ultracite@latest check",
+    "dead-code": "pnpm --filter @repo/testing build && knip --no-exit-code",
+    "duplicate-code": "jscpd --min-lines 20 --min-tokens 80 --threshold 100 --reporters console --ignore \"**/node_modules/**,**/.next/**,**/coverage/**,**/dist/**,**/__tests__/**\" \"apps\" \"packages\"",
     "fix": "npx ultracite@latest fix",
-    "test": "turbo test",
+    "format": "biome format --write .",
+    "lint": "biome lint --write .",
+    "biome:check": "biome check --write .",
+    "biome:ci": "biome ci .",
+    "test": "pnpm --filter @repo/testing build && turbo test",
     "analyze": "turbo analyze",
     "translate": "turbo translate",
     "boundaries": "turbo boundaries",
-    "knip": "knip",
-    "knip:fix": "knip --fix",
-    "db:migrate": "cd packages/database && npx drizzle-kit migrate",
-    "db:generate": "cd packages/database && npx drizzle-kit generate",
-    "db:push": "cd packages/database && npx drizzle-kit push",
-    "db:studio": "cd packages/database && npx drizzle-kit studio",
     "bump-deps": "npx npm-check-updates --deep -u -x recharts && pnpm install",
     "bump-ui": "npx shadcn@latest add --all --overwrite -c packages/design-system",
+    "migrate": "cd packages/database && npx prisma format && npx prisma generate && npx prisma db push",
     "clean": "git clean -xdf node_modules"
   },
   "devDependencies": {
@@ -32,12 +33,23 @@
     "@repo/typescript-config": "workspace:*",
     "@turbo/gen": "^2.6.3",
     "@types/node": "^24.10.1",
-    "knip": "^6.1.1",
+    "husky": "^9.1.7",
+    "jscpd": "^4.0.5",
+    "lint-staged": "^15.5.0",
+    "knip": "^5.64.1",
     "tsup": "^8.5.1",
     "turbo": "^2.6.3",
     "typescript": "^5.9.3",
     "ultracite": "6.3.9",
     "vitest": "^4.0.15"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,jsonc,css,md,mdx}": [
+      "biome format --write --no-errors-on-unmatched"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "biome lint --write --no-errors-on-unmatched"
+    ]
   },
   "engines": {
     "node": ">=18"
@@ -50,12 +62,7 @@
   "pnpm": {
     "overrides": {
       "parse5": "^7.2.1",
-      "next": "16.2.1",
-      "@emnapi/core": "^1.7.1",
-      "@emnapi/runtime": "^1.7.1"
-    },
-    "patchedDependencies": {
-      "next@16.2.1": "patches/next@16.2.1.patch"
+      "next": "16.2.1"
     }
   },
   "type": "module"

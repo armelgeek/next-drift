@@ -1,8 +1,8 @@
 "use client";
 
+import { captureError } from "@repo/analytics";
 import { Button } from "@repo/design-system/components/ui/button";
 import { fonts } from "@repo/design-system/lib/fonts";
-import { posthog } from "@repo/analytics";
 import type NextError from "next/error";
 import { useEffect } from "react";
 
@@ -13,7 +13,11 @@ type GlobalErrorProperties = {
 
 const GlobalError = ({ error, reset }: GlobalErrorProperties) => {
   useEffect(() => {
-    posthog.captureException(error);
+    captureError(error, {
+      digest: error.digest,
+      location:
+        typeof window !== "undefined" ? window.location.href : undefined,
+    });
   }, [error]);
 
   return (

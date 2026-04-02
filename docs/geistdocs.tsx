@@ -1,10 +1,10 @@
 export const Logo = () => (
-  <p className="font-semibold text-xl tracking-tight">next-forge</p>
+  <p className="font-semibold text-xl tracking-tight">next-ship</p>
 );
 
 export const github = {
   owner: "vercel",
-  repo: "next-forge",
+  repo: "next-ship",
 };
 
 export const nav = [
@@ -19,16 +19,16 @@ export const nav = [
 ];
 
 export const suggestions = [
-  "What is next-forge?",
-  "What can I build with next-forge?",
+  "What is next-ship?",
+  "What can I build with next-ship?",
   "How do packages and apps work?",
   "What is a monorepo?",
 ];
 
-export const title = "next-forge Documentation";
+export const title = "next-ship Documentation";
 
 export const prompt =
-  "You are a helpful assistant specializing in answering questions about next-forge, a production-grade Turborepo template for Next.js apps";
+  "You are a helpful assistant specializing in answering questions about next-ship, a production-grade Turborepo template for Next.js apps";
 
 export const translations = {
   en: {

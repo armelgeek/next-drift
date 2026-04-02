@@ -1,0 +1,48 @@
+name: Code Quality Metrics
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  code-quality-metrics:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck API
+        run: pnpm --filter api typecheck
+
+      - name: Build shared test utilities
+        run: pnpm --filter @repo/testing build
+
+      - name: Dead code detection (Knip)
+        run: pnpm dead-code
+
+      - name: Duplicate code detection (jscpd)
+        run: pnpm duplicate-code
+
+      - name: Run tests with coverage
+        run: NODE_ENV=test npx -y node@22 ./node_modules/vitest/vitest.mjs run --root apps/api --config vitest.config.mts --coverage.enabled true --coverage.provider v8 --coverage.reportsDirectory coverage
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-coverage
+          path: apps/api/coverage
