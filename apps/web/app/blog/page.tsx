@@ -2,16 +2,15 @@ import { blog } from "@repo/cms";
 import { Feed } from "@repo/cms/components/feed";
 import { Image } from "@repo/cms/components/image";
 import { cn } from "@repo/design-system/lib/utils";
-import { dictionary } from "@/lib/dictionary";
 import type { Blog, WithContext } from "@repo/seo/json-ld";
 import { JsonLd } from "@repo/seo/json-ld";
 import { createMetadata } from "@repo/seo/metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { dictionary } from "@/lib/dictionary";
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  return createMetadata(dictionary.web.blog.meta);
-};
+export const generateMetadata = async (): Promise<Metadata> =>
+  createMetadata(dictionary.web.blog.meta);
 
 const BlogIndex = async () => {
   const jsonLd: WithContext<Blog> = {

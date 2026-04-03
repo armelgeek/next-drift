@@ -1,5 +1,5 @@
-import type { Dictionary } from "@/lib/dictionary";
 import { User } from "lucide-react";
+import type { Dictionary } from "@/lib/dictionary";
 
 type FeaturesProps = {
   dictionary: Dictionary;

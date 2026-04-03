@@ -1,0 +1,221 @@
+# Privacy & Data Handling Policy
+
+## Overview
+
+Next-ship is committed to protecting user privacy and handling data responsibly. This document outlines our data handling practices, user rights, and compliance measures.
+
+Last Updated: April 2026
+
+## Data We Collect
+
+### User Data
+
+We collect the following types of user data:
+
+**Authentication Data:**
+- Email address (via Clerk)
+- User ID
+- Organization ID (if applicable)
+- Session tokens
+
+**Usage Data:**
+- Page views and navigation
+- Feature usage analytics (via PostHog)
+- Error logs and performance metrics
+- IP addresses (for security and analytics)
+
+**User-Generated Content:**
+- Data stored in your account
+- Content you create within the application
+
+### Technical Data
+
+**Automatically Collected:**
+- Browser type and version
+- Device information
+- Operating system
+- Referrer URLs
+- Timestamps
+
+**Cookies and Local Storage:**
+- Session cookies (authentication)
+- Preference cookies (theme, language)
+- Analytics cookies (PostHog)
+
+## How We Use Data
+
+### Primary Purposes
+
+1. **Service Provision**: Authentication, authorization, and core functionality
+2. **Analytics**: Understanding user behavior to improve the product
+3. **Error Tracking**: Debugging and fixing issues (PostHog)
+4. **Security**: Detecting and preventing abuse or attacks
+5. **Communication**: Sending transactional emails and updates
+
+### Data Retention
+
+| Data Type | Retention Period | Reason |
+|-----------|-----------------|--------|
+| User accounts | Until deletion | Service provision |
+| Analytics data | 90 days | Product improvement |
+| Error logs | 30 days | Debugging |
+| Session tokens | 7 days | Security |
+| Backup data | 30 days | Disaster recovery |
+
+## Data Storage & Security
+
+### Storage Locations
+
+- **Primary**: Vercel (Edge Network) - for application hosting
+- **Database**: PostgreSQL (managed service) - user data
+- **Analytics**: PostHog Cloud - usage analytics
+- **Authentication**: Clerk - identity management
+- **Error Tracking**: PostHog - error monitoring
+
+### Security Measures
+
+- **Encryption**: All data encrypted in transit (TLS 1.3) and at rest
+- **Access Control**: Role-based access, least privilege principle
+- **Monitoring**: Continuous security monitoring and alerting
+- **Backups**: Encrypted, geographically distributed backups
+- **Audit Logs**: All access logged for security review
+
+## User Rights (GDPR & CCPA)
+
+### Your Rights
+
+As a user, you have the following rights:
+
+1. **Right to Access**: Request a copy of your data
+2. **Right to Rectification**: Correct inaccurate data
+3. **Right to Erasure ("Right to be Forgotten")**: Delete your account and data
+4. **Right to Restrict Processing**: Limit how we use your data
+5. **Right to Data Portability**: Export your data in standard format
+6. **Right to Object**: Opt-out of certain data uses
+7. **Right to Withdraw Consent**: Revoke previously given consent
+
+### How to Exercise Your Rights
+
+**Request Data Export:**
+- Email: privacy@next-ship.dev
+- Subject: "Data Export Request"
+- Include: Your registered email address
+
+**Delete Account:**
+- Settings → Account → Delete Account
+- Or email: privacy@next-ship.dev with "Account Deletion Request"
+
+**Update Information:**
+- Most data can be updated in Settings → Profile
+- For other changes, contact: privacy@next-ship.dev
+
+**Opt-out of Analytics:**
+- We respect Do Not Track (DNT) headers
+- You can also disable analytics in Settings → Privacy
+
+## Cookies & Tracking
+
+### Types of Cookies We Use
+
+**Essential (Required):**
+- Authentication session
+- Security tokens
+- Cannot be disabled
+
+**Functional:**
+- Theme preferences (dark/light mode)
+- Language settings
+- UI state
+
+**Analytics:**
+- PostHog for usage analytics
+- Helps us improve the product
+- Can be disabled in settings
+
+### Managing Cookies
+
+You can manage cookies through:
+- **Browser settings**: Block or delete cookies
+- **Our settings**: Settings → Privacy → Cookie Preferences
+- **Third-party tools**: Privacy-focused browsers or extensions
+
+## Third-Party Services
+
+We use the following third-party services:
+
+| Service | Purpose | Data Shared | Privacy Policy |
+|---------|---------|-------------|----------------|
+| Clerk | Authentication | Email, user ID | [clerk.com/privacy](https://clerk.com/privacy) |
+| PostHog | Analytics | Usage patterns, errors | [posthog.com/privacy](https://posthog.com/privacy) |
+| Vercel | Hosting | IP, user agent | [vercel.com/privacy](https://vercel.com/privacy) |
+| PostgreSQL | Database | User data | Provider-specific |
+
+### Data Processing Agreements
+
+We have Data Processing Agreements (DPAs) with all third-party services to ensure they handle data according to our privacy standards and GDPR requirements.
+
+## International Data Transfers
+
+### GDPR Compliance
+
+For users in the European Economic Area (EEA):
+
+- **Legal Basis**: Contract performance (Art. 6(1)(b)) and legitimate interests (Art. 6(1)(f))
+- **Transfer Mechanism**: Standard Contractual Clauses (SCCs)
+- **Data Residency**: Primary storage in US, with CDN edge locations globally
+
+### Other Jurisdictions
+
+- **UK**: GDPR-equivalent UK Data Protection Act compliance
+- **California (CCPA)**: Privacy rights respected as outlined above
+- **Australia**: Australian Privacy Principles compliance
+- **Other**: Local privacy laws respected where applicable
+
+## Children's Privacy
+
+Our services are not intended for children under 16. We do not knowingly collect data from children under 16. If you believe we have collected data from a child, please contact us immediately.
+
+## Breach Notification
+
+In the event of a data breach:
+
+1. **Discovery**: We will discover and assess within 72 hours
+2. **Containment**: Immediate steps to stop the breach
+3. **Notification**: 
+   - Authorities: Within 72 hours (GDPR requirement)
+   - Affected users: Without undue delay
+4. **Remediation**: Fix vulnerabilities and improve security
+
+## Changes to This Policy
+
+We may update this policy periodically. We will:
+- Post the new policy on this page
+- Update the "Last Updated" date
+- Notify users of significant changes via email
+- Provide 30 days notice for material changes
+
+## Contact Us
+
+For privacy-related questions or concerns:
+
+**Email**: privacy@next-ship.dev
+**Response Time**: Within 48 hours
+**DPO Contact**: privacy@next-ship.dev (if applicable)
+
+## Compliance Certifications
+
+We are working towards:
+- SOC 2 Type II certification
+- ISO 27001 compliance
+- GDPR full compliance audit
+
+## Additional Resources
+
+- [Terms of Service](./terms-of-service.md)
+- [Cookie Policy](./cookie-policy.md)
+- [Data Processing Agreement](./dpa.md) (for enterprise customers)
+- [Security Whitepaper](./security.md)
+
+---
+
+*This privacy policy is a living document and will be updated as our practices evolve.*

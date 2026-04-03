@@ -5,9 +5,9 @@ import {
   AccordionTrigger,
 } from "@repo/design-system/components/ui/accordion";
 import { Button } from "@repo/design-system/components/ui/button";
-import type { Dictionary } from "@/lib/dictionary";
 import { PhoneCall } from "lucide-react";
 import Link from "next/link";
+import type { Dictionary } from "@/lib/dictionary";
 
 type FAQProps = {
   dictionary: Dictionary;

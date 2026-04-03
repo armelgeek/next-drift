@@ -1,8 +1,8 @@
 import { Button } from "@repo/design-system/components/ui/button";
-import type { Dictionary } from "@/lib/dictionary";
 import { MoveRight, PhoneCall } from "lucide-react";
 import Link from "next/link";
 import { env } from "@/env";
+import type { Dictionary } from "@/lib/dictionary";
 
 type CTAProps = {
   dictionary: Dictionary;

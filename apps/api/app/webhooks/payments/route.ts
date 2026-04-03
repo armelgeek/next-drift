@@ -1,10 +1,10 @@
+import { createHmac } from "node:crypto";
 import { analytics } from "@repo/analytics/server";
 import { clerkClient } from "@repo/auth/server";
 import { parseError } from "@repo/observability/error";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { env } from "@/env";
-import { createHmac } from "node:crypto";
 
 // Verify Polar webhook signature
 const verifyWebhook = (

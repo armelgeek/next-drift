@@ -1,0 +1,253 @@
+# GDPR Compliance Guide
+
+## Overview
+
+This guide outlines our GDPR compliance measures and how we handle personal data in accordance with EU regulations.
+
+## Data Controller
+
+**Controller**: Next-ship Team
+**Contact**: privacy@next-ship.dev
+**DPO**: privacy@next-ship.dev (acting as DPO for now)
+
+## Legal Basis for Processing
+
+We process personal data under the following legal bases (Article 6 GDPR):
+
+1. **Contract Performance** (Art. 6(1)(b)): Processing necessary to provide our service
+2. **Legitimate Interests** (Art. 6(1)(f)): Analytics, security, fraud prevention
+3. **Consent** (Art. 6(1)(a)): Marketing communications, optional features
+4. **Legal Obligation** (Art. 6(1)(c)): Tax records, compliance requirements
+
+## Data Minimization
+
+We follow the principle of data minimization:
+
+- **Collect only what's needed**: We don't collect data without purpose
+- **Retention limits**: Data deleted when no longer needed (see retention schedule)
+- **Anonymization**: Where possible, we use anonymized or pseudonymized data
+
+## User Rights Implementation
+
+### Right to Access (Art. 15)
+
+Users can request:
+- What data we hold about them
+- How we process it
+- Who we share it with
+- How long we keep it
+
+**Request process:**
+1. Email privacy@next-ship.dev with subject "GDPR Access Request"
+2. Provide account email for verification
+3. Receive data within 30 days
+4. Free of charge (reasonable frequency)
+
+### Right to Rectification (Art. 16)
+
+Users can correct inaccurate data:
+- Via Settings → Profile (most data)
+- Email privacy@next-ship.dev for other corrections
+- We will correct within 30 days
+
+### Right to Erasure ("Right to be Forgotten") (Art. 17)
+
+Users can request complete deletion:
+- Self-service: Settings → Account → Delete Account
+- Email: privacy@next-ship.dev with "GDPR Deletion Request"
+
+**What gets deleted:**
+- User account and profile
+- All user-generated content
+- Authentication data
+- Analytics data linked to user
+
+**Exceptions (legal obligations):**
+- Transaction records (tax purposes, 7 years)
+- Security logs (fraud prevention, 1 year)
+
+### Right to Restrict Processing (Art. 18)
+
+Users can limit processing while:
+- Contesting data accuracy
+- Objecting to processing
+- Legal claims are pending
+
+**Implementation:**
+- Account suspended but data retained
+- No processing except storage
+- User notified before restriction lifted
+
+### Right to Data Portability (Art. 20)
+
+Users can receive data in structured format:
+- Format: JSON or CSV
+- Method: Email request to privacy@next-ship.dev
+- Timeline: 30 days
+- Cost: Free
+
+### Right to Object (Art. 21)
+
+Users can object to:
+- Direct marketing (immediate opt-out)
+- Legitimate interests processing (we stop unless compelling grounds)
+- Profiling (if applicable)
+
+## International Transfers
+
+### Transfer Mechanism
+
+For transfers outside EEA:
+- **Standard Contractual Clauses (SCCs)**: With all third-party processors
+- **Adequacy Decisions**: Where available (e.g., UK post-Brexit)
+- **Additional Safeguards**: Encryption, access controls
+
+### Subprocessors
+
+See [Privacy Policy](./privacy-policy.mdx) for full list. Key subprocessors:
+
+| Subprocessor | Location | Safeguards |
+|---------------|----------|------------|
+| Vercel | USA | SCCs, encryption |
+| PostHog | USA | SCCs, data residency |
+| Clerk | USA | SCCs, encryption |
+
+## Data Protection Measures
+
+### Technical Measures
+
+- **Encryption**: AES-256 at rest, TLS 1.3 in transit
+- **Access Control**: Role-based, 2FA enforced
+- **Pseudonymization**: User IDs used instead of emails where possible
+- **Backups**: Encrypted, geographically distributed
+- **Monitoring**: Continuous security monitoring
+
+### Organizational Measures
+
+- **DPO**: Privacy contact point (privacy@next-ship.dev)
+- **Training**: Team privacy awareness training
+- **Policies**: This and other privacy policies
+- **Audits**: Regular privacy impact assessments
+- **Breach Response**: 72-hour notification protocol
+
+## Privacy by Design
+
+We implement privacy by design principles:
+
+1. **Proactive not Reactive**: Privacy built in from start
+2. **Privacy as Default**: Most private settings by default
+3. **Privacy Embedded**: Part of architecture, not add-on
+4. **Full Functionality**: Privacy doesn't reduce functionality
+5. **End-to-End**: From collection to deletion
+6. **Visibility & Transparency**: Clear privacy communications
+7. **Respect for User**: User-centric approach
+
+## Data Breach Response
+
+### Detection & Assessment (Hours 0-24)
+
+1. **Discovery**: Automated alerts and monitoring
+2. **Initial Assessment**: Scope and severity
+3. **Containment**: Stop the breach
+4. **Documentation**: Record all details
+
+### Notification (Hours 24-72)
+
+**To Supervisory Authority (if required):**
+- Within 72 hours of discovery
+- Include: nature, categories, likely consequences, measures taken
+- Submit via authority's breach notification form
+
+**To Affected Users (if high risk):**
+- Without undue delay
+- Clear language about breach
+- Steps taken and mitigation
+- Contact for questions
+
+### Recovery & Lessons Learned
+
+1. **Root Cause Analysis**: How did it happen?
+2. **Remediation**: Fix vulnerabilities
+3. **Monitoring**: Enhanced monitoring
+4. **Policy Update**: Update policies if needed
+5. **Training**: Additional training if human error
+
+## DPIA (Data Protection Impact Assessment)
+
+We conduct DPIAs for:
+- New features involving personal data
+- Changes to processing activities
+- High-risk processing
+
+**DPIA Template includes:**
+- Description of processing
+- Necessity and proportionality
+- Risks to rights and freedoms
+- Measures to mitigate risks
+
+## Record of Processing Activities
+
+**Controller Records:**
+- Name and contact details
+- Processing purposes
+- Categories of data subjects and data
+- Categories of recipients
+- International transfers
+- Retention schedules
+- Security measures
+
+**Available upon request** from supervisory authority.
+
+## Cookie Consent (ePrivacy)
+
+### Consent Requirements
+
+Under ePrivacy Directive:
+- **Essential cookies**: No consent required
+- **Non-essential cookies**: Consent required
+
+### Our Implementation
+
+- **Cookie Banner**: Shown on first visit (if non-essential cookies used)
+- **Granular Control**: Users can choose which cookies to accept
+- **Easy Withdrawal**: Can change preferences anytime in Settings
+- **Proof of Consent**: Timestamp and preferences logged
+
+## GDPR Checklist
+
+### For Development
+
+- [ ] Privacy impact assessment for new features
+- [ ] Data minimization (collect only needed data)
+- [ ] Privacy settings are defaults
+- [ ] User consent obtained where required
+- [ ] Data subject rights are implementable
+- [ ] Security measures appropriate to risk
+- [ ] Documentation maintained
+
+### For Operations
+
+- [ ] Subprocessor agreements in place
+- [ ] Data retention schedules followed
+- [ ] Breach response plan tested
+- [ ] Staff trained on privacy
+- [ ] DPO accessible and responsive
+- [ ] Records of processing maintained
+- [ ] Regular privacy audits conducted
+
+## Contact & Resources
+
+**Privacy Contact**: privacy@next-ship.dev
+
+**Supervisory Authority** (for complaints):
+- EU: Your local data protection authority
+- UK: Information Commissioner's Office (ICO)
+
+**Useful Links:**
+- [GDPR Text](https://gdpr.eu/)
+- [EU Data Protection](https://edpb.europa.eu/)
+- [ICO Guide](https://ico.org.uk/for-organisations/guide-to-data-protection/)
+
+---
+
+*Last updated: April 2026*

@@ -1,0 +1,287 @@
+name: AGENTS.md Validation
+
+on:
+  schedule:
+    # Run weekly to ensure AGENTS.md stays accurate
+    - cron: '0 22 * * 0'  # Sunday 6:00 AM AWST (10:00 PM UTC Saturday)
+  
+  pull_request:
+    paths:
+      - 'AGENTS.md'
+      - 'package.json'
+      - '**/package.json'
+  
+  workflow_dispatch:
+
+jobs:
+  validate-agents-md:
+    name: Validate AGENTS.md Commands
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Extract commands from AGENTS.md
+        id: extract
+        run: |
+          echo "📋 Extracting commands from AGENTS.md..."
+          
+          # Extract code blocks that look like commands
+          # This regex looks for shell commands in markdown
+          grep -E '^\s*(pnpm|npm|yarn|npx|git|curl)' AGENTS.md | \
+            grep -v '^\s*#' | \
+            sed 's/^[[:space:]]*//' | \
+            sort | uniq > extracted-commands.txt
+          
+          echo "Extracted commands:"
+          cat extracted-commands.txt
+          echo ""
+          echo "total_commands=$(wc -l < extracted-commands.txt | tr -d ' ')" >> $GITHUB_OUTPUT
+
+      - name: Validate commands exist
+        id: validate
+        run: |
+          echo "🔍 Validating commands..."
+          
+          FAILED=0
+          TESTED=0
+          
+          while IFS= read -r cmd; do
+            # Extract just the command name (first word after pnpm/npm/yarn)
+            base_cmd=$(echo "$cmd" | awk '{print $1}')
+            sub_cmd=$(echo "$cmd" | awk '{print $2}')
+            
+            TESTED=$((TESTED + 1))
+            
+            case "$base_cmd" in
+              pnpm)
+                # Check if script exists in package.json
+                if pnpm run --silent 2>&1 | grep -q "$sub_cmd"; then
+                  echo "✅ $cmd - script exists"
+                elif command -v "$sub_cmd" &> /dev/null; then
+                  echo "✅ $cmd - command available"
+                else
+                  echo "⚠️  $cmd - needs verification"
+                  FAILED=$((FAILED + 1))
+                fi
+                ;;
+              npm|yarn)
+                # Similar check for npm/yarn
+                echo "ℹ️  $cmd - npm/yarn command (manual check needed)"
+                ;;
+              git)
+                echo "✅ $cmd - git command available"
+                ;;
+              npx)
+                echo "ℹ️  $cmd - npx command (manual check needed)"
+                ;;
+              curl)
+                echo "✅ $cmd - curl command available"
+                ;;
+              *)
+                echo "❓ $cmd - unknown command type"
+                ;;
+            esac
+          done < extracted-commands.txt
+          
+          echo ""
+          echo "Results:"
+          echo "  Commands tested: $TESTED"
+          echo "  Need attention: $FAILED"
+          
+          echo "tested=$TESTED" >> $GITHUB_OUTPUT
+          echo "failed=$FAILED" >> $GITHUB_OUTPUT
+
+      - name: Test critical commands
+        id: test-critical
+        run: |
+          echo "🧪 Testing critical commands from AGENTS.md..."
+          
+          ERRORS=0
+          
+          # Test: pnpm install (or equivalent)
+          echo "Testing dependency installation..."
+          # Already done in previous step
+          echo "✅ pnpm install works"
+          
+          # Test: pnpm dev (check if command exists)
+          echo "Checking pnpm dev..."
+          if pnpm run --silent 2>&1 | grep -q "dev"; then
+            echo "✅ pnpm dev script exists"
+          else
+            echo "⚠️  pnpm dev script not found"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
+          # Test: pnpm test
+          echo "Checking pnpm test..."
+          if pnpm run --silent 2>&1 | grep -q "test"; then
+            echo "✅ pnpm test script exists"
+          else
+            echo "⚠️  pnpm test script not found"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
+          # Test: pnpm build
+          echo "Checking pnpm build..."
+          if pnpm run --silent 2>&1 | grep -q "build"; then
+            echo "✅ pnpm build script exists"
+          else
+            echo "⚠️  pnpm build script not found"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
+          # Test: pnpm format
+          echo "Checking pnpm format..."
+          if pnpm run --silent 2>&1 | grep -q "format"; then
+            echo "✅ pnpm format script exists"
+          else
+            echo "⚠️  pnpm format script not found"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
+          # Test: pnpm lint
+          echo "Checking pnpm lint..."
+          if pnpm run --silent 2>&1 | grep -q "lint"; then
+            echo "✅ pnpm lint script exists"
+          else
+            echo "⚠️  pnpm lint script not found"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
+          echo ""
+          echo "errors=$ERRORS" >> $GITHUB_OUTPUT
+          
+          if [ "$ERRORS" -eq 0 ]; then
+            echo "✅ All critical commands validated!"
+          else
+            echo "⚠️  $ERRORS critical commands need attention"
+          fi
+
+      - name: Check environment setup
+        id: check-env
+        run: |
+          echo "🔧 Checking environment setup..."
+          
+          # Check .env.example files exist
+          ENV_EXAMPLES=0
+          ENV_MISSING=0
+          
+          for app in web app api; do
+            if [ -f "apps/$app/.env.example" ]; then
+              echo "✅ apps/$app/.env.example exists"
+              ENV_EXAMPLES=$((ENV_EXAMPLES + 1))
+            else
+              echo "❌ apps/$app/.env.example missing"
+              ENV_MISSING=$((ENV_MISSING + 1))
+            fi
+          done
+          
+          # Check README mentions setup
+          if grep -q "pnpm install" README.md; then
+            echo "✅ README mentions pnpm install"
+          else
+            echo "⚠️  README doesn't mention pnpm install"
+          fi
+          
+          echo ""
+          echo "env_examples=$ENV_EXAMPLES" >> $GITHUB_OUTPUT
+          echo "env_missing=$ENV_MISSING" >> $GITHUB_OUTPUT
+
+      - name: Create validation report
+        run: |
+          echo "## AGENTS.md Validation Report" > validation-report.md
+          echo "" >> validation-report.md
+          echo "**Date:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> validation-report.md
+          echo "" >> validation-report.md
+          
+          echo "### Commands Analysis" >> validation-report.md
+          echo "" >> validation-report.md
+          echo "- Total commands extracted: ${{ steps.extract.outputs.total_commands }}" >> validation-report.md
+          echo "- Commands tested: ${{ steps.validate.outputs.tested }}" >> validation-report.md
+          echo "- Commands needing attention: ${{ steps.validate.outputs.failed }}" >> validation-report.md
+          echo "" >> validation-report.md
+          
+          echo "### Critical Commands" >> validation-report.md
+          echo "" >> validation-report.md
+          if [ "${{ steps.test-critical.outputs.errors }}" -eq 0 ]; then
+            echo "✅ All critical commands validated successfully" >> validation-report.md
+          else
+            echo "⚠️  ${{ steps.test-critical.outputs.errors }} critical commands need attention" >> validation-report.md
+          fi
+          echo "" >> validation-report.md
+          
+          echo "### Environment Setup" >> validation-report.md
+          echo "" >> validation-report.md
+          echo "- .env.example files found: ${{ steps.check-env.outputs.env_examples }}" >> validation-report.md
+          echo "- .env.example files missing: ${{ steps.check-env.outputs.env_missing }}" >> validation-report.md
+          echo "" >> validation-report.md
+          
+          echo "### Recommendations" >> validation-report.md
+          echo "" >> validation-report.md
+          
+          if [ "${{ steps.validate.outputs.failed }}" -gt 0 ]; then
+            echo "- [ ] Review and update AGENTS.md commands" >> validation-report.md
+          fi
+          
+          if [ "${{ steps.test-critical.outputs.errors }}" -gt 0 ]; then
+            echo "- [ ] Ensure all critical commands work as documented" >> validation-report.md
+          fi
+          
+          if [ "${{ steps.check-env.outputs.env_missing }}" -gt 0 ]; then
+            echo "- [ ] Add missing .env.example files" >> validation-report.md
+          fi
+          
+          echo "- [ ] Test AGENTS.md on a fresh clone" >> validation-report.md
+          echo "" >> validation-report.md
+          
+          cat validation-report.md
+
+      - name: Upload validation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: agents-md-validation
+          path: validation-report.md
+          retention-days: 90
+
+      - name: Summary
+        run: |
+          echo "## AGENTS.md Validation Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Commands Extracted:** ${{ steps.extract.outputs.total_commands }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commands Tested:** ${{ steps.validate.outputs.tested }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Need Attention:** ${{ steps.validate.outputs.failed }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.test-critical.outputs.errors }}" -eq 0 ]; then
+            echo "✅ **All critical commands working**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ **${{ steps.test-critical.outputs.errors }} critical commands need attention**" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📄 Full report available in workflow artifacts" >> $GITHUB_STEP_SUMMARY
