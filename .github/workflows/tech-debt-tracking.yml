@@ -1,5 +1,12 @@
 name: Tech Debt Tracking
 
+# TECH_DEBT_TRACKING_ENABLED: true
+# This workflow scans for technical debt indicators including:
+# - TODO/FIXME comments
+# - Large files
+# - Duplicate code
+# - Outdated dependencies
+
 on:
   schedule:
     # Run weekly on Mondays at 3:00 AM AWST (7:00 PM UTC Sunday)
