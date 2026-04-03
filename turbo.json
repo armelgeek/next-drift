@@ -3,6 +3,54 @@
   "globalDependencies": ["**/.env.*local"],
   "ui": "tui",
   "envMode": "loose",
+  "boundaries": {
+    "tags": {
+      "config": {
+        "dependencies": {
+          "allow": ["config"]
+        }
+      },
+      "tooling": {
+        "dependencies": {
+          "allow": ["config", "tooling"]
+        }
+      },
+      "infra": {
+        "dependencies": {
+          "allow": ["config", "tooling", "infra"]
+        }
+      },
+      "observability": {
+        "dependencies": {
+          "allow": ["config", "tooling", "infra", "observability"]
+        }
+      },
+      "ui": {
+        "dependencies": {
+          "allow": [
+            "config",
+            "tooling",
+            "infra",
+            "observability",
+            "ui",
+            "feature"
+          ]
+        }
+      },
+      "feature": {
+        "dependencies": {
+          "allow": [
+            "config",
+            "tooling",
+            "infra",
+            "observability",
+            "ui",
+            "feature"
+          ]
+        }
+      }
+    }
+  },
   "tasks": {
     "build": {
       "dependsOn": ["^build", "test"],
