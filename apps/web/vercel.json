@@ -1,4 +1,15 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "ignoreCommand": "node scripts/skip-ci.js"
+  "version": 2,
+  "ignoreCommand": "node scripts/skip-ci.js",
+  "buildCommand": "next build",
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "crons": [
+    {
+      "path": "/api/health",
+      "schedule": "0 */6 * * *"
+    }
+  ]
 }
