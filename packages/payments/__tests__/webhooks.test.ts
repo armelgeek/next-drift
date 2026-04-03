@@ -9,7 +9,11 @@ import {
 } from "./fixtures/polar-events";
 
 // Simple webhook verification utility for testing
-function verifyWebhookSignature(payload: string, signature: string, secret: string): boolean {
+function verifyWebhookSignature(
+  payload: string,
+  signature: string,
+  secret: string
+): boolean {
   // Mock implementation - in production this would verify HMAC
   const hasSecret = secret !== "";
   const hasSignature = signature !== "";
@@ -26,7 +30,7 @@ function verifyWebhookSignature(payload: string, signature: string, secret: stri
 function parseWebhookEvent(payload: string) {
   try {
     const event = JSON.parse(payload);
-    
+
     // Validate required fields
     const hasType = Boolean(event.type);
     const hasData = Boolean(event.data);
@@ -150,19 +154,25 @@ describe("Webhook Handling", () => {
     it("should throw error for invalid JSON", () => {
       const invalidPayload = "not valid json";
 
-      expect(() => parseWebhookEvent(invalidPayload)).toThrow("Failed to parse webhook payload");
+      expect(() => parseWebhookEvent(invalidPayload)).toThrow(
+        "Failed to parse webhook payload"
+      );
     });
 
     it("should throw error for missing type", () => {
       const invalidPayload = JSON.stringify({ data: {} });
 
-      expect(() => parseWebhookEvent(invalidPayload)).toThrow("Invalid webhook payload");
+      expect(() => parseWebhookEvent(invalidPayload)).toThrow(
+        "Invalid webhook payload"
+      );
     });
 
     it("should throw error for missing data", () => {
       const invalidPayload = JSON.stringify({ type: "test" });
 
-      expect(() => parseWebhookEvent(invalidPayload)).toThrow("Invalid webhook payload");
+      expect(() => parseWebhookEvent(invalidPayload)).toThrow(
+        "Invalid webhook payload"
+      );
     });
   });
 
@@ -170,7 +180,7 @@ describe("Webhook Handling", () => {
     it("should recognize all valid event types", () => {
       const validTypes = [
         "checkout.created",
-        "checkout.updated", 
+        "checkout.updated",
         "subscription.created",
         "subscription.updated",
         "subscription.cancelled",
@@ -188,11 +198,11 @@ describe("Webhook Handling", () => {
         type: "unknown.event",
         data: { id: "test" },
       };
-      
+
       const payload = JSON.stringify(unknownEvent);
       // Should not throw, just parse
       const event = parseWebhookEvent(payload);
-      
+
       expect(event.type).toBe("unknown.event");
     });
   });

@@ -1,0 +1,223 @@
+name: Bundle Size Tracking
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly on Sundays at 4:00 AM AWST (8:00 PM UTC Saturday)
+    - cron: '0 20 * * 6'
+
+  workflow_dispatch:
+
+jobs:
+  analyze-bundle:
+    name: Analyze Bundle Size
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build web app with analysis
+        run: |
+          cd apps/web
+          ANALYZE=true pnpm build 2>&1 | tee build-output.txt
+        env:
+          ANALYZE: "true"
+
+      - name: Extract bundle metrics
+        id: metrics
+        run: |
+          echo "🔍 Extracting bundle size metrics..."
+          
+          # Check if .next/analyze directory exists
+          if [ -d "apps/web/.next/analyze" ]; then
+            echo "Bundle analysis directory found"
+            ls -la apps/web/.next/analyze/
+          fi
+          
+          # Extract First Load JS size from build output
+          FIRST_LOAD_JS=$(grep -oP 'First Load JS shared by all \K[0-9.]+' apps/web/build-output.txt || echo "unknown")
+          echo "first_load_js=${FIRST_LOAD_JS} kB" >> $GITHUB_OUTPUT
+          
+          # Count total JS chunks
+          JS_CHUNKS=$(find apps/web/.next/static/chunks -name "*.js" 2>/dev/null | wc -l | tr -d ' ')
+          echo "js_chunks=${JS_CHUNKS}" >> $GITHUB_OUTPUT
+          
+          # Calculate total bundle size
+          TOTAL_SIZE=$(du -sh apps/web/.next/static 2>/dev/null | cut -f1 || echo "unknown")
+          echo "total_size=${TOTAL_SIZE}" >> $GITHUB_OUTPUT
+          
+          # Check for oversized chunks (>250KB)
+          OVERSIZED=$(find apps/web/.next/static/chunks -name "*.js" -size +250k 2>/dev/null)
+          if [ -n "$OVERSIZED" ]; then
+            echo "oversized=true" >> $GITHUB_OUTPUT
+            echo "⚠️ Found oversized chunks (>250KB):" >> bundle-report.md
+            echo "\`\`\`" >> bundle-report.md
+            echo "$OVERSIZED" >> bundle-report.md
+            echo "\`\`\`" >> bundle-report.md
+          else
+            echo "oversized=false" >> $GITHUB_OUTPUT
+          fi
+          
+          # Generate report
+          echo "## Bundle Size Report" > bundle-report.md
+          echo "" >> bundle-report.md
+          echo "**App:** web (Next.js)" >> bundle-report.md
+          echo "" >> bundle-report.md
+          echo "### Metrics" >> bundle-report.md
+          echo "" >> bundle-report.md
+          echo "| Metric | Value |" >> bundle-report.md
+          echo "|--------|-------|" >> bundle-report.md
+          echo "| First Load JS | ${FIRST_LOAD_JS} kB |" >> bundle-report.md
+          echo "| JS Chunks | ${JS_CHUNKS} |" >> bundle-report.md
+          echo "| Total Static Size | ${TOTAL_SIZE} |" >> bundle-report.md
+          echo "" >> bundle-report.md
+          
+          # Add recommendations
+          echo "### Recommendations" >> bundle-report.md
+          echo "" >> bundle-report.md
+          
+          if [ "$JS_CHUNKS" -gt 50 ]; then
+            echo "⚠️ **High chunk count** - Consider code splitting optimization" >> bundle-report.md
+          fi
+          
+          if [ -n "$OVERSIZED" ]; then
+            echo "⚠️ **Oversized chunks detected** - Some chunks exceed 250KB" >> bundle-report.md
+            echo "" >> bundle-report.md
+            echo "Consider:" >> bundle-report.md
+            echo "- Dynamic imports for large components" >> bundle-report.md
+            echo "- Code splitting strategies" >> bundle-report.md
+            echo "- Lazy loading for non-critical features" >> bundle-report.md
+          fi
+          
+          echo "" >> bundle-report.md
+          echo "---" >> bundle-report.md
+          echo "" >> bundle-report.md
+          echo "*Generated: $(date -u +"%Y-%m-%d %H:%M:%S UTC")*" >> bundle-report.md
+          
+          cat bundle-report.md
+
+      - name: Upload bundle analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-analysis-${{ github.run_id }}
+          path: |
+            apps/web/.next/analyze/
+            bundle-report.md
+          retention-days: 90
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('bundle-report.md', 'utf8');
+            
+            // Check if we already commented
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+            
+            const botComment = comments.find(c => c.user.login === 'github-actions[bot]' && c.body.includes('Bundle Size Report'));
+            
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: `📦 **Bundle Size Report**\n\n${report}\n\n[View detailed analysis](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `📦 **Bundle Size Report**\n\n${report}\n\n[View detailed analysis](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`
+              });
+            }
+
+      - name: Check bundle size limits
+        run: |
+          # Set reasonable limits
+          MAX_FIRST_LOAD_JS=200  # 200KB
+          MAX_CHUNKS=100
+          
+          FIRST_LOAD_JS="${{ steps.metrics.outputs.first_load_js }}"
+          JS_CHUNKS="${{ steps.metrics.outputs.js_chunks }}"
+          
+          # Extract numeric value
+          FIRST_LOAD_NUM=$(echo "$FIRST_LOAD_JS" | grep -oP '^[0-9.]+' || echo "0")
+          
+          echo "Checking bundle size limits..."
+          echo "First Load JS: ${FIRST_LOAD_JS} (limit: ${MAX_FIRST_LOAD_JS}KB)"
+          echo "JS Chunks: ${JS_CHUNKS} (limit: ${MAX_CHUNKS})"
+          
+          VIOLATIONS=0
+          
+          if (( $(echo "$FIRST_LOAD_NUM > $MAX_FIRST_LOAD_JS" | bc -l) )); then
+            echo "❌ First Load JS exceeds ${MAX_FIRST_LOAD_JS}KB limit"
+            VIOLATIONS=$((VIOLATIONS + 1))
+          fi
+          
+          if [ "$JS_CHUNKS" -gt "$MAX_CHUNKS" ]; then
+            echo "❌ Too many JS chunks (>${MAX_CHUNKS})"
+            VIOLATIONS=$((VIOLATIONS + 1))
+          fi
+          
+          if [ "$VIOLATIONS" -gt 0 ]; then
+            echo ""
+            echo "⚠️ Bundle size violations detected!"
+            echo "Consider optimizing bundle size before merging."
+            # Don't fail the build, just warn
+          else
+            echo "✅ Bundle size within acceptable limits"
+          fi
+        continue-on-error: true
+
+      - name: Summary
+        run: |
+          echo "## Bundle Size Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Metrics:**" >> $GITHUB_STEP_SUMMARY
+          echo "- First Load JS: ${{ steps.metrics.outputs.first_load_js }}" >> $GITHUB_STEP_SUMMARY
+          echo "- JS Chunks: ${{ steps.metrics.outputs.js_chunks }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Total Size: ${{ steps.metrics.outputs.total_size }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.metrics.outputs.oversized }}" == "true" ]; then
+            echo "⚠️ **Warning:** Oversized chunks detected" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📊 [View detailed analysis](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY

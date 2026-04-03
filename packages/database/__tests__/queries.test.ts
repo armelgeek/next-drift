@@ -3,7 +3,8 @@ import { createTestDatabase, cleanupTestData } from "../src/test-utils";
 import { pages } from "../src/schema";
 import { eq } from "drizzle-orm";
 
-const TEST_DATABASE_URL = process.env.TEST_DATABASE_URL || process.env.DATABASE_URL;
+const TEST_DATABASE_URL =
+  process.env.TEST_DATABASE_URL || process.env.DATABASE_URL;
 
 // Skip all tests if no database URL is provided
 const describeOrSkip = TEST_DATABASE_URL ? describe : describe.skip;
@@ -43,7 +44,7 @@ describeOrSkip("Database Queries", () => {
       await db.insert(pages).values([{ name: "Page A" }, { name: "Page B" }]);
 
       const allPages = await db.select().from(pages);
-      
+
       expect(allPages.length).toBeGreaterThanOrEqual(2);
       expect(allPages.some((p) => p.name === "Page A")).toBe(true);
       expect(allPages.some((p) => p.name === "Page B")).toBe(true);

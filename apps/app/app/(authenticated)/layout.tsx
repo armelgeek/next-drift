@@ -10,7 +10,6 @@ type AppLayoutProperties = {
 };
 
 const AppLayout = async ({ children }: AppLayoutProperties) => {
-
   const user = await currentUser();
   const { redirectToSignIn } = await auth();
   const betaFeature = await showBetaFeature();

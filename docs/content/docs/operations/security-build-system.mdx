@@ -1,0 +1,235 @@
+# Security & Build System Configuration
+
+This document outlines the automated security scanning and build system monitoring configured for the next-ship repository.
+
+## 🔐 Security Scanning
+
+### CodeQL Analysis
+
+**Workflow**: `.github/workflows/codeql.yml`
+
+GitHub's CodeQL is configured to perform static security analysis on every push to main, pull request, and weekly on Mondays.
+
+**Languages Scanned**:
+- JavaScript/TypeScript
+- Python
+
+**Scan Types**:
+- Security extended queries (comprehensive security coverage)
+- Security and quality queries (includes code quality issues)
+
+**Accessing Results**:
+1. Go to **Settings** → **Code security and analysis** in your GitHub repository
+2. View alerts in the **Security** tab → **Code scanning alerts**
+3. Review and dismiss alerts as needed
+
+**Running Locally**:
+CodeQL requires the GitHub CLI and can be run manually if needed:
+```bash
+# Install GitHub CLI (gh) and CodeQL CLI first
+codeql database create --language=javascript --source-root=. codeql-db
+codeql analyze codeql-db javascript-security-extended --format=sarif-latest --output=results.sarif
+```
+
+**What It Detects**:
+- SQL injection vulnerabilities
+- XSS (cross-site scripting)
+- Path traversal
+- Unsafe deserialization
+- Insecure randomness
+- Hardcoded credentials
+- And more...
+
+## 🔧 Build System Checks
+
+### Workflow: `.github/workflows/build-system-checks.yml`
+
+This workflow runs comprehensive build system health checks to detect potential issues early.
+
+#### 1. Version Drift Detection
+
+**Purpose**: Ensures workspace package versions remain consistent and use proper workspace protocol.
+
+**Checks**:
+- All internal dependencies use `workspace:*` protocol
+- App versions align with root package version
+- No version inconsistencies across the monorepo
+
+**Run Locally**:
+```bash
+pnpm check:versions
+# or
+bash scripts/check-version-drift.sh
+```
+
+**Common Issues**:
+- Apps using different version numbers (should align with root)
+- Dependencies using specific versions instead of `workspace:*`
+- Outdated dependencies in some packages
+
+**Fixing Issues**:
+```bash
+# Update all dependencies to latest versions
+pnpm bump-deps
+
+# Ensure all internal deps use workspace:*
+# Edit package.json files to use "workspace:*" for @repo/* packages
+```
+
+#### 2. Dead Feature Flag Detection
+
+**Purpose**: Identifies feature flags that may be unused or stale, helping keep the codebase clean.
+
+**How It Works**:
+- Scans `packages/feature-flags/index.ts` for all exported flags
+- Searches codebase for references to each flag
+- Reports flags with zero usage outside the feature-flags package
+
+**Run Locally**:
+```bash
+pnpm check:flags
+# or
+bash scripts/check-feature-flags.sh
+```
+
+**Understanding Results**:
+- **Flag appears unused**: Found no references outside the feature-flags package
+  - May indicate dead code that should be removed
+  - Could be a flag waiting for implementation
+  - Might be intentionally kept for rollback capability
+- **Flag is used**: Healthy flag with active references
+
+**Action Items**:
+1. Review flagged features to confirm they're truly unused
+2. Remove flag definitions from `packages/feature-flags/index.ts`
+3. Clean up conditional code using these flags
+4. Archive flags in PostHog or Vercel Toolbar
+
+#### 3. Unused Dependencies Check
+
+**Purpose**: Detects unused dependencies and exports using `knip`.
+
+**Run Locally**:
+```bash
+pnpm dead-code
+```
+
+**What It Finds**:
+- Dependencies not imported anywhere
+- Exported symbols not used by other files
+- Unused TypeScript types and interfaces
+- Files with no imports or exports
+
+#### 4. Bundle Size Tracking
+
+**Purpose**: Monitors web app bundle size to catch performance regressions.
+
+**Checks**:
+- First Load JS metrics
+- Large chunk detection
+- Build output analysis
+
+**Next.js Bundle Analysis**:
+After building, check `.next/analyze/client.html` for detailed bundle analysis.
+
+## 🚀 Running All System Checks
+
+To run all build system and security checks locally:
+
+```bash
+# Run all checks (flags + versions + dead code)
+pnpm system-checks
+
+# Or run individual checks
+pnpm check:flags      # Feature flag analysis
+pnpm check:versions   # Version drift detection
+pnpm dead-code        # Unused dependencies
+```
+
+## 📊 GitHub Security Tab Integration
+
+All security workflows integrate with GitHub's Security tab:
+
+1. **Code scanning alerts** - CodeQL findings
+2. **Dependabot alerts** - Vulnerable dependencies
+3. **Secret scanning** - Committed secrets (if enabled)
+
+**Enabling Additional Security Features**:
+
+1. Go to **Settings** → **Code security and analysis**
+2. Enable:
+   - Dependabot alerts
+   - Dependabot security updates
+   - Secret scanning (if on GitHub Team/Enterprise)
+   - Private vulnerability reporting
+
+## 🔄 CI/CD Integration
+
+These workflows run automatically:
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| `codeql.yml` | Push/PR to main, weekly | Security scanning |
+| `build-system-checks.yml` | Push/PR to main, weekly | Build health |
+| `ci.yml` | Push/PR to main | Lint, typecheck, test |
+
+## 📝 Maintenance
+
+### Adding New CodeQL Languages
+
+To add Go or other languages to CodeQL:
+
+1. Edit `.github/workflows/codeql.yml`
+2. Add language to the matrix:
+   ```yaml
+   matrix:
+     language: ['javascript-typescript', 'python', 'go']
+   ```
+
+### Customizing Feature Flag Detection
+
+The script at `scripts/check-feature-flags.sh` can be extended:
+
+1. Add exclusion patterns for intentionally-unused flags
+2. Check flag age (via git history)
+3. Integrate with PostHog API to check flag activity
+
+### Customizing Version Drift Detection
+
+The script at `scripts/check-version-drift.sh` can be extended:
+
+1. Add allowed version variance thresholds
+2. Check specific packages vs. all packages
+3. Add version bump suggestions
+
+## 🛠️ Troubleshooting
+
+### CodeQL Taking Too Long
+
+- The scan runs on every PR; for faster feedback, it uses autobuild
+- For large PRs, consider running manually first
+- Weekly scheduled runs catch issues that slip through
+
+### False Positives in Feature Flags
+
+Some flags may legitimately have zero usage:
+- New flags waiting for implementation
+- Experiment flags for A/B tests
+- Kill switches for rollback capability
+
+Review the list and dismiss intentionally kept flags.
+
+### Version Drift in Apps
+
+If apps have different versions intentionally:
+1. Document the reason in each app's README
+2. Consider if they should be versioned independently
+3. Update the script to exclude specific apps if needed
+
+## 📚 Additional Resources
+
+- [CodeQL Documentation](https://docs.github.com/en/code-security/code-scanning)
+- [GitHub Security Features](https://docs.github.com/en/code-security)
+- [Feature Flags with PostHog](https://posthog.com/docs/feature-flags)
+- [Vercel Flags SDK](https://vercel.com/docs/workflow-collaboration/feature-flags)
+- [Turborepo Monorepo](https://turbo.build/repo/docs)

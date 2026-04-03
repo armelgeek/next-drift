@@ -51,7 +51,7 @@ describe("Payment Webhook Handler", () => {
 
   it("should handle missing webhook secret", async () => {
     mockWebhookSecret = "";
-    
+
     const { POST } = await import("../../app/webhooks/payments/route");
     const request = new Request("http://localhost:3002/webhooks/payments", {
       method: "POST",

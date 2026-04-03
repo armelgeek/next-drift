@@ -1,7 +1,9 @@
 import { defineConfig } from "vitest/config";
 import path from "node:path";
 
-export function createNodeConfig(options: { alias?: Record<string, string> } = {}) {
+export function createNodeConfig(
+  options: { alias?: Record<string, string> } = {}
+) {
   return defineConfig({
     test: {
       environment: "node",

@@ -1,0 +1,239 @@
+name: Tech Debt Tracking
+
+on:
+  schedule:
+    # Run weekly on Mondays at 3:00 AM AWST (7:00 PM UTC Sunday)
+    - cron: '0 19 * * 0'
+  
+  workflow_dispatch:
+    inputs:
+      scan_type:
+        description: 'Type of tech debt scan'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - high-complexity
+          - large-files
+          - deprecated-deps
+          - TODOs
+
+jobs:
+  scan-tech-debt:
+    name: Scan for Technical Debt
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Analyze tech debt
+        id: analyze
+        run: |
+          echo "🔍 Scanning for technical debt..."
+          echo ""
+          
+          # Initialize counters
+          HIGH_COMPLEXITY=0
+          LARGE_FILES=0
+          DEPRECATED_DEPS=0
+          TODOS=0
+          
+          # 1. Check for high cyclomatic complexity
+          echo "## High Complexity Files" >> tech-debt-report.md
+          echo "" >> tech-debt-report.md
+          
+          # Use jscpd to find duplicate code (indicates tech debt)
+          echo "Checking for duplicate code..."
+          pnpm duplicate-code 2>&1 | tee duplicate-code-output.txt || true
+          
+          if grep -q "Found.*duplicates" duplicate-code-output.txt 2>/dev/null; then
+            echo "⚠️ Duplicate code detected" >> tech-debt-report.md
+            echo "" >> tech-debt-report.md
+            grep -A 5 "Found.*duplicates" duplicate-code-output.txt | head -20 >> tech-debt-report.md
+            echo "" >> tech-debt-report.md
+          fi
+          
+          # 2. Check for large files
+          echo "## Large Files (>500 lines)" >> tech-debt-report.md
+          echo "" >> tech-debt-report.md
+          
+          find . -type f \( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \) \
+            -not -path "*/node_modules/*" \
+            -not -path "*/.next/*" \
+            -not -path "*/dist/*" \
+            -not -path "*/__tests__/*" \
+            -exec wc -l {} \; 2>/dev/null | \
+            awk '$1 > 500 {printf "- %s (%d lines)\n", $2, $1}' | \
+            head -20 >> tech-debt-report.md
+          
+          LARGE_FILES=$(find . -type f \( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \) \
+            -not -path "*/node_modules/*" \
+            -not -path "*/.next/*" \
+            -not -path "*/dist/*" \
+            -not -path "*/__tests__/*" \
+            -exec wc -l {} \; 2>/dev/null | \
+            awk '$1 > 500 {count++} END {print count+0}')
+          
+          echo "" >> tech-debt-report.md
+          echo "**Total large files: $LARGE_FILES**" >> tech-debt-report.md
+          echo "" >> tech-debt-report.md
+          
+          # 3. Check for TODO/FIXME/XXX comments
+          echo "## TODO/FIXME/XXX Comments" >> tech-debt-report.md
+          echo "" >> tech-debt-report.md
+          
+          TODO_LIST=$(grep -r -n "TODO\|FIXME\|XXX" \
+            --include="*.ts" \
+            --include="*.tsx" \
+            --include="*.js" \
+            --include="*.jsx" \
+            --exclude-dir=node_modules \
+            --exclude-dir=.next \
+            --exclude-dir=dist \
+            . 2>/dev/null | \
+            grep -v "node_modules" | \
+            head -30)
+          
+          if [ -n "$TODO_LIST" ]; then
+            echo "$TODO_LIST" | while read -r line; do
+              echo "- \`$line\`" >> tech-debt-report.md
+            done
+          else
+            echo "No TODO/FIXME/XXX comments found" >> tech-debt-report.md
+          fi
+          
+          TODOS=$(grep -r "TODO\|FIXME\|XXX" \
+            --include="*.ts" \
+            --include="*.tsx" \
+            --include="*.js" \
+            --include="*.jsx" \
+            --exclude-dir=node_modules \
+            . 2>/dev/null | wc -l | tr -d ' ')
+          
+          echo "" >> tech-debt-report.md
+          echo "**Total TODO/FIXME/XXX comments: $TODOS**" >> tech-debt-report.md
+          echo "" >> tech-debt-report.md
+          
+          # 4. Check for deprecated dependencies
+          echo "## Dependency Health" >> tech-debt-report.md
+          echo "" >> tech-debt-report.md
+          
+          # Check for deprecated packages in lockfile
+          DEPRECATED=$(pnpm outdated --json 2>/dev/null | jq -r 'keys | length' || echo "0")
+          echo "**Outdated packages: $DEPRECATED**" >> tech-debt-report.md
+          echo "" >> tech-debt-report.md
+          
+          # Summary
+          echo "## Summary" >> tech-debt-report.md
+          echo "" >> tech-debt-report.md
+          echo "| Metric | Count |" >> tech-debt-report.md
+          echo "|--------|-------|" >> tech-debt-report.md
+          echo "| Large Files (>500 lines) | $LARGE_FILES |" >> tech-debt-report.md
+          echo "| TODO/FIXME/XXX Comments | $TODOS |" >> tech-debt-report.md
+          echo "| Outdated Dependencies | $DEPRECATED |" >> tech-debt-report.md
+          echo "" >> tech-debt-report.md
+          
+          # Calculate total tech debt score
+          TOTAL_DEBT=$((LARGE_FILES + TODOS))
+          
+          echo "total_debt=$TOTAL_DEBT" >> $GITHUB_OUTPUT
+          echo "large_files=$LARGE_FILES" >> $GITHUB_OUTPUT
+          echo "todos=$TODOS" >> $GITHUB_OUTPUT
+          
+          cat tech-debt-report.md
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: tech-debt-report
+          path: tech-debt-report.md
+          retention-days: 90
+
+      - name: Create or update tracking issue
+        if: github.event_name == 'schedule'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('tech-debt-report.md', 'utf8');
+            
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'tech-debt',
+              state: 'open'
+            });
+            
+            const issueBody = `## Weekly Tech Debt Scan
+
+${report}
+
+---
+
+*This issue is automatically updated weekly. Last updated: ${new Date().toISOString()}*
+
+**Next Steps:**
+1. Review high-complexity files for refactoring opportunities
+2. Address TODO/FIXME comments
+3. Update outdated dependencies
+4. Consider breaking down large files
+
+[View full report in workflow artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
+            
+            if (issues.length > 0) {
+              // Update existing issue
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issues[0].number,
+                body: issueBody
+              });
+              console.log(`Updated existing tech debt issue #${issues[0].number}`);
+            } else {
+              // Create new issue
+              const { data: issue } = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '📊 Technical Debt Tracking',
+                body: issueBody,
+                labels: ['tech-debt', 'maintenance']
+              });
+              console.log(`Created new tech debt issue #${issue.number}`);
+            }
+
+      - name: Summary
+        run: |
+          echo "## Tech Debt Scan Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Metrics:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Large Files: ${{ steps.analyze.outputs.large_files }}" >> $GITHUB_STEP_SUMMARY
+          echo "- TODO/FIXME Comments: ${{ steps.analyze.outputs.todos }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📄 Full report uploaded as artifact" >> $GITHUB_STEP_SUMMARY

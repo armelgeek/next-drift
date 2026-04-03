@@ -19,7 +19,7 @@ export async function withTestDatabase(
   testFn: (db: TestDatabase) => Promise<void>
 ): Promise<void> {
   const db = createTestDatabase(connectionString);
-  
+
   try {
     await testFn(db);
   } finally {

@@ -17,12 +17,18 @@ vi.mock("@polar-sh/sdk", () => ({
         }),
       },
       customers: {
-        create: vi.fn().mockResolvedValue({ id: "cus_test", email: "test@example.com" }),
-        get: vi.fn().mockResolvedValue({ id: "cus_test", email: "test@example.com" }),
+        create: vi
+          .fn()
+          .mockResolvedValue({ id: "cus_test", email: "test@example.com" }),
+        get: vi
+          .fn()
+          .mockResolvedValue({ id: "cus_test", email: "test@example.com" }),
       },
       subscriptions: {
         create: vi.fn().mockResolvedValue({ id: "sub_test", status: "active" }),
-        update: vi.fn().mockResolvedValue({ id: "sub_test", status: "cancelled" }),
+        update: vi
+          .fn()
+          .mockResolvedValue({ id: "sub_test", status: "cancelled" }),
       },
     };
   }),
