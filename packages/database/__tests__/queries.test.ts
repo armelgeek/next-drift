@@ -6,9 +6,8 @@ import { cleanupTestData, createTestDatabase } from "../src/test-utils";
 const TEST_DATABASE_URL =
   process.env.TEST_DATABASE_URL || process.env.DATABASE_URL;
 
-// Skip all tests if no database URL is provided or if in CI (no test DB available)
-const isCI = process.env.CI || process.env.VERCEL;
-const describeOrSkip = TEST_DATABASE_URL && !isCI ? describe : describe.skip;
+// Skip all tests if no database URL is provided
+const describeOrSkip = TEST_DATABASE_URL ? describe : describe.skip;
 
 describeOrSkip("Database Queries", () => {
   const db = createTestDatabase(TEST_DATABASE_URL || "");
