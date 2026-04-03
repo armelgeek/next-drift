@@ -11,9 +11,9 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@repo/design-system/components/ui/carousel";
-import type { Dictionary } from "@/lib/dictionary";
 import { User } from "lucide-react";
 import { useEffect, useState } from "react";
+import type { Dictionary } from "@/lib/dictionary";
 
 type TestimonialsProps = {
   dictionary: Dictionary;

@@ -1,8 +1,8 @@
 "use client";
 
+import { posthog } from "@repo/analytics";
 import { Button } from "@repo/design-system/components/ui/button";
 import { fonts } from "@repo/design-system/lib/fonts";
-import { posthog } from "@repo/analytics";
 import type NextError from "next/error";
 import { useEffect } from "react";
 

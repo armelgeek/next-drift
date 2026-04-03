@@ -7,6 +7,18 @@ import { env } from "@/env";
 
 let nextConfig: NextConfig = withObservability(withToolbar(config));
 
+// Enable React profiling in production for performance monitoring
+// This allows React DevTools Profiler to work in production builds
+if (process.env.ENABLE_PROFILING === "true") {
+  nextConfig = {
+    ...nextConfig,
+    experimental: {
+      ...nextConfig.experimental,
+      reactProductionProfiling: true,
+    } as any,
+  };
+}
+
 nextConfig.images?.remotePatterns?.push({
   protocol: "https",
   hostname: "assets.basehub.com",

@@ -1,7 +1,7 @@
 import { showBetaFeature } from "@repo/feature-flags";
-import { dictionary } from "@/lib/dictionary";
 import { createMetadata } from "@repo/seo/metadata";
 import type { Metadata } from "next";
+import { dictionary } from "@/lib/dictionary";
 import { Cases } from "./components/cases";
 import { CTA } from "./components/cta";
 import { FAQ } from "./components/faq";
@@ -10,9 +10,8 @@ import { Hero } from "./components/hero";
 import { Stats } from "./components/stats";
 import { Testimonials } from "./components/testimonials";
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  return createMetadata(dictionary.web.home.meta);
-};
+export const generateMetadata = async (): Promise<Metadata> =>
+  createMetadata(dictionary.web.home.meta);
 
 const Home = async () => {
   const betaFeature = await showBetaFeature();

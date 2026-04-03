@@ -1,0 +1,259 @@
+# Next.js Profiling Guide
+
+## Overview
+
+Next.js includes experimental support for React Production Profiling, which allows you to use React DevTools Profiler in production builds to analyze component performance.
+
+## Enabling Profiling
+
+### Local Development
+
+Profiling is automatically available in development mode. Open React DevTools and use the Profiler tab.
+
+### Production Builds
+
+To enable profiling in production:
+
+```bash
+# Build with profiling enabled
+ENABLE_PROFILING=true pnpm build
+
+# Or for specific app
+cd apps/web
+ENABLE_PROFILING=true pnpm build
+```
+
+### Configuration
+
+The profiling is configured in `apps/web/next.config.ts`:
+
+```typescript
+if (process.env.ENABLE_PROFILING === "true") {
+  nextConfig = {
+    ...nextConfig,
+    experimental: {
+      ...nextConfig.experimental,
+      reactProductionProfiling: true,
+    } as any,
+  };
+}
+```
+
+**Note**: This is an experimental feature from Next.js. The `as any` type cast is used because the type definitions may not include this experimental option.
+
+## Using the Profiler
+
+### 1. Install React DevTools
+
+Install the React Developer Tools browser extension:
+- [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
+
+### 2. Record a Profile
+
+1. Open your app in the browser
+2. Open DevTools → React DevTools → Profiler tab
+3. Click the blue "Record" button (circle)
+4. Perform actions you want to analyze
+5. Click "Stop" to end recording
+
+### 3. Analyze Results
+
+**Key Metrics:**
+
+- **Render Duration**: How long components took to render
+- **Commit Duration**: Time spent updating the DOM
+- **Interactions**: User interactions that triggered updates
+
+**What to Look For:**
+
+- Components with long render times (>16ms)
+- Unnecessary re-renders
+- Deep component trees
+- Expensive computations in render
+
+## Performance Optimization Tips
+
+### 1. Identify Slow Components
+
+Look for components with:
+- High render duration
+- Frequent re-renders
+- Large subtrees
+
+### 2. Common Optimizations
+
+**Memoization:**
+```tsx
+import { memo, useMemo } from 'react';
+
+// Memoize expensive component
+const ExpensiveComponent = memo(function ExpensiveComponent({ data }) {
+  return <div>{/* expensive rendering */}</div>;
+});
+
+// Memoize expensive calculations
+const processedData = useMemo(() => {
+  return data.map(item => expensiveTransform(item));
+}, [data]);
+```
+
+**Code Splitting:**
+```tsx
+import dynamic from 'next/dynamic';
+
+// Lazy load heavy components
+const HeavyChart = dynamic(() => import('./HeavyChart'), {
+  loading: () => <Skeleton />,
+});
+```
+
+**Virtualization:**
+For long lists, use virtualization:
+```tsx
+// Instead of rendering all items
+// Use react-window or similar
+import { FixedSizeList } from 'react-window';
+```
+
+### 3. Use React DevTools Features
+
+**Highlight Updates:**
+- Settings → Highlight updates when components render
+- Visual indicator for unnecessary re-renders
+
+**Why Did You Render:**
+- Install `why-did-you-render` package for dev
+- Identifies why components re-rendered
+
+## Profiling in CI/CD
+
+### Automated Performance Tests
+
+```yaml
+# .github/workflows/performance.yml
+- name: Build with profiling
+  run: ENABLE_PROFILING=true pnpm build
+  
+- name: Run Lighthouse CI
+  run: |
+    npm install -g @lhci/cli
+    lhci autorun
+```
+
+### Bundle Analysis
+
+Use the built-in bundle analyzer alongside profiling:
+
+```bash
+# Analyze bundle size
+pnpm analyze:bundle
+
+# Build with profiling
+ENABLE_PROFILING=true pnpm build
+```
+
+## Vercel Analytics
+
+Vercel provides built-in performance analytics:
+
+### Setup
+
+1. Go to Vercel Dashboard → Your Project
+2. Navigate to "Analytics" tab
+3. Enable "Web Vitals"
+4. Add tracking script (usually automatic with Next.js)
+
+### Metrics Tracked
+
+- **LCP** (Largest Contentful Paint): < 2.5s (good)
+- **FID** (First Input Delay): < 100ms (good)
+- **CLS** (Cumulative Layout Shift): < 0.1 (good)
+- **TTFB** (Time to First Byte): < 600ms (good)
+- **FCP** (First Contentful Paint): < 1.8s (good)
+- **INP** (Interaction to Next Paint): < 200ms (good)
+
+### Core Web Vitals
+
+Google uses Core Web Vitals for search ranking. Monitor these in Vercel Analytics:
+
+1. Go to Vercel Dashboard → Analytics
+2. View Core Web Vitals scores
+3. Identify pages needing optimization
+4. Use profiler to find bottlenecks
+
+## Best Practices
+
+### 1. Profile Before Optimizing
+
+Don't guess - profile first:
+```
+"Premature optimization is the root of all evil" - Donald Knuth
+```
+
+### 2. Focus on User Experience
+
+Optimize what users see and interact with:
+- Above-the-fold content
+- Interactive elements
+- Critical user paths
+
+### 3. Measure After Optimizing
+
+Always verify improvements:
+- Profile before changes
+- Make optimization
+- Profile after changes
+- Compare results
+
+### 4. Production vs Development
+
+- Development: React DevTools, detailed warnings
+- Production: Vercel Analytics, Core Web Vitals
+- Staging: Enable profiling for detailed analysis
+
+## Troubleshooting
+
+### Profiler Not Showing in Production
+
+1. Ensure `ENABLE_PROFILING=true` is set
+2. Check build completed successfully
+3. Verify React DevTools extension is installed
+4. Try clearing browser cache
+
+### Large Bundle Size Impact
+
+Profiling adds ~10KB to bundle. If size is critical:
+- Only enable for specific builds
+- Use profiling in staging, not production
+- Consider code splitting more aggressively
+
+### Performance Degradation
+
+Profiling has minimal overhead (<1%). If you see issues:
+- Check for other performance problems
+- Verify profiler is the cause
+- Consider using sampling profiler (less overhead)
+
+## Resources
+
+- [React DevTools Profiler](https://react.dev/reference/react/Profiler)
+- [Next.js Analytics](https://nextjs.org/docs/app/building-your-application/optimizing/analytics)
+- [Web Vitals](https://web.dev/vitals/)
+- [React Performance Optimization](https://react.dev/learn/render-and-commit)
+
+## Commands Reference
+
+```bash
+# Build with profiling
+ENABLE_PROFILING=true pnpm build
+
+# Build with bundle analysis
+pnpm analyze:bundle
+
+# Build with both
+ENABLE_PROFILING=true ANALYZE=true pnpm build
+
+# Development (profiling always available)
+pnpm dev
+```

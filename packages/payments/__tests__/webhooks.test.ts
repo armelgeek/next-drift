@@ -1,11 +1,11 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   checkoutCreatedEvent,
-  subscriptionCreatedEvent,
-  subscriptionCancelledEvent,
-  paymentSucceededEvent,
-  paymentFailedEvent,
   createMockSignature,
+  paymentFailedEvent,
+  paymentSucceededEvent,
+  subscriptionCancelledEvent,
+  subscriptionCreatedEvent,
 } from "./fixtures/polar-events";
 
 // Simple webhook verification utility for testing

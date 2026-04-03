@@ -1,0 +1,343 @@
+# Error to Insight Pipeline
+
+## Overview
+
+The error-to-insight pipeline automatically converts production errors into actionable GitHub issues, ensuring no error goes unnoticed and creating a systematic approach to bug fixing.
+
+## How It Works
+
+### Pipeline Flow
+
+1. **Collection**: PostHog captures errors from production
+2. **Aggregation**: Workflow runs daily, fetching last 24 hours of errors
+3. **Analysis**: Groups and deduplicates similar errors
+4. **Threshold**: Only errors occurring >5 times trigger issues
+5. **Creation**: GitHub issues created with context and next steps
+6. **Tracking**: Issues labeled for monitoring and management
+
+### Workflow Schedule
+
+- **Runs**: Daily at 5:00 AM AWST (9:00 PM UTC)
+- **Manual**: Can be triggered via `workflow_dispatch`
+- **Source**: PostHog error tracking ($exception events)
+
+## Configuration
+
+### Required Secrets
+
+Add these to GitHub Repository Settings → Secrets:
+
+```
+POSTHOG_API_KEY          # Your PostHog API key
+POSTHOG_PROJECT_ID       # Your PostHog project ID
+GITHUB_TOKEN             # Provided automatically
+```
+
+### PostHog Setup
+
+1. **Ensure error tracking is active**:
+   ```typescript
+   // In your error handling
+   import { captureError } from '@repo/analytics';
+   
+   captureError(error, {
+     location: window.location.href,
+     userAgent: navigator.userAgent,
+   });
+   ```
+
+2. **Verify error events are being sent**:
+   - Go to PostHog Dashboard → Events
+   - Filter by `$exception` event
+   - Check that errors are appearing
+
+## Issue Format
+
+### Automatically Created Issues
+
+Each issue includes:
+
+```markdown
+## Automated Error Report
+
+**Error Message:**
+```
+[Error message from PostHog]
+```
+
+**Occurrences:** X times in last 24 hours
+
+**Source:** PostHog error tracking
+
+### Recommended Actions:
+1. [ ] Investigate root cause
+2. [ ] Check related logs in PostHog
+3. [ ] Determine if user-facing or internal
+4. [ ] Assign priority based on impact
+5. [ ] Fix and monitor
+
+**Resources:**
+- [PostHog Dashboard](link)
+- [View similar errors](link)
+
+*This issue was automatically created by the error-to-insight pipeline.*
+```
+
+### Labels Applied
+
+- `error-insight` - Indicates automated creation
+- `automated` - Flag for automation
+- `needs-investigation` - Initial triage status
+
+## Manual Trigger
+
+You can run the pipeline manually:
+
+1. Go to GitHub Actions → "Error to Insight Pipeline"
+2. Click "Run workflow"
+3. Select options (if any)
+4. Click "Run workflow"
+
+## Error Thresholds
+
+### Current Thresholds
+
+- **Minimum occurrences**: 5 times in 24 hours
+- **Deduplication**: Similar errors grouped
+- **Max issues per run**: 5 (prevent spam)
+
+### Adjusting Thresholds
+
+Edit `.github/workflows/error-to-insight.yml`:
+
+```yaml
+# In the "Analyze and deduplicate errors" step
+if [ "$count" -gt 5 ]; then  # Change this number
+  echo "error: $message" >> errors-to-process.txt
+```
+
+## Deduplication Logic
+
+### How It Works
+
+1. Fetch all errors from last 24 hours
+2. Group by error message (exact match)
+3. Count occurrences of each unique error
+4. Check if similar issue already exists
+5. Create issue only if new and high-frequency
+
+### Similar Issue Detection
+
+Issues are considered duplicates if:
+- Same error message (first 50 chars)
+- Same error type
+- Open issue already exists
+
+## Best Practices
+
+### 1. Review Created Issues Promptly
+
+Assign a team member to review automated issues daily:
+- Triaged within 24 hours
+- Priority assigned (P0-P3)
+- Assigned to team member
+
+### 2. Update Labels
+
+After triage:
+- Remove `needs-investigation`
+- Add appropriate labels (`bug`, `critical`, `frontend`, etc.)
+- Assign milestone/sprint
+
+### 3. Link Fixes
+
+When fixing:
+- Reference the issue in PR: "Fixes #123"
+- Update issue with findings
+- Close after deployment
+- Monitor for 24 hours post-fix
+
+### 4. Ignore False Positives
+
+Some errors may be noise:
+- Browser extensions
+- Bot traffic
+- Third-party script failures
+
+Close these with label `wontfix` and document why.
+
+### 5. Monitor Pipeline Health
+
+Check workflow runs regularly:
+- Go to Actions → Error to Insight Pipeline
+- Ensure it's running daily
+- Check for failures
+- Verify issues are being created
+
+## Troubleshooting
+
+### No Issues Being Created
+
+**Check 1: PostHog Credentials**
+```bash
+# Verify secrets are set
+curl -H "Authorization: Bearer $POSTHOG_API_KEY" \
+  https://us.posthog.com/api/projects/$POSTHOG_PROJECT_ID/events
+```
+
+**Check 2: Error Events in PostHog**
+- Dashboard → Events → Filter by `$exception`
+- Verify errors are being captured
+
+**Check 3: Workflow Logs**
+- Actions → Error to Insight Pipeline → Latest run
+- Check "Fetch errors from PostHog" step
+- Look for API errors
+
+### Too Many Issues
+
+If creating too many issues:
+
+1. **Increase threshold**:
+   ```yaml
+   if [ "$count" -gt 20 ]; then  # Was 5
+   ```
+
+2. **Add exclusion patterns**:
+   ```bash
+   # Skip certain error types
+   | grep -v "KnownThirdPartyError" \
+   ```
+
+3. **Rate limiting**: Add delay between issue creation
+
+### Duplicate Issues
+
+If similar errors create multiple issues:
+
+1. **Improve deduplication**:
+   - Use error fingerprints
+   - Group by stack trace similarity
+   - Normalize error messages
+
+2. **Close duplicates**:
+   - Mark with label `duplicate`
+   - Reference original issue
+   - Document reason
+
+## Integration with Other Tools
+
+### Slack/Discord Notifications
+
+Add to workflow:
+```yaml
+- name: Notify Slack
+  if: steps.analyze.outputs.errors_to_process == 'true'
+  uses: slackapi/slack-github-action@v1
+  with:
+    payload: |
+      {
+        "text": "New errors detected and converted to GitHub issues"
+      }
+  env:
+    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+```
+
+### PagerDuty for Critical Errors
+
+Route critical errors to on-call:
+```yaml
+- name: Critical error alert
+  if: contains(steps.fetch-errors.outputs.error_types, 'Critical')
+  run: |
+    curl -X POST \
+      -H "Authorization: Token token=${{ secrets.PAGERDUTY_KEY }}" \
+      -H "Content-Type: application/json" \
+      -d '{"incident":{"type":"incident","title":"Critical Production Error"}}' \
+      https://api.pagerduty.com/incidents
+```
+
+### Jira Integration
+
+Sync with Jira for enterprise workflow:
+```yaml
+- name: Create Jira ticket
+  uses: atlassian/gajira-create@v3
+  with:
+    project: PROJ
+    issuetype: Bug
+    summary: "Production Error: ${{ steps.analyze.outputs.error_summary }}"
+```
+
+## Metrics & KPIs
+
+### Track Pipeline Effectiveness
+
+Monitor these metrics:
+
+- **Issues created per day**: Should correlate with error volume
+- **Time to resolution**: From issue creation to close
+- **False positive rate**: Issues closed as "not a bug"
+- **Coverage**: % of errors that become issues
+
+### Dashboard
+
+Add to your analytics:
+```typescript
+// Track in PostHog
+track('Error Insight Pipeline', {
+  issues_created: 5,
+  errors_processed: 25,
+  date: new Date().toISOString(),
+});
+```
+
+## Privacy & Compliance
+
+### Data Handling
+
+- **Error messages**: May contain sensitive data
+- **Sanitization**: PostHog should strip PII
+- **Retention**: GitHub issues persist until deleted
+- **Access**: Limit who can view error details
+
+### GDPR Considerations
+
+- Error tracking is legitimate interest (security)
+- No user-identifying data in issue titles
+- Detailed data in PostHog (retained per policy)
+- Documented in privacy policy
+
+## Future Enhancements
+
+### Planned Improvements
+
+1. **Error fingerprinting**: Better deduplication
+2. **Smart grouping**: ML-based error clustering
+3. **Auto-prioritization**: Based on user impact
+4. **Trend analysis**: Detect emerging issues
+5. **Correlation**: Link errors to deployments
+
+### Community Ideas
+
+- Integration with other error tracking (Sentry, Rollbar)
+- Automatic error classification
+- Root cause analysis suggestions
+- Impact estimation (affected users)
+
+## Resources
+
+- [PostHog API Docs](https://posthog.com/docs/api)
+- [GitHub Issues API](https://docs.github.com/en/rest/issues)
+- [Error Tracking Best Practices](https://posthog.com/tutorials/error-tracking)
+
+## Commands Reference
+
+```bash
+# Manual trigger
+curl -X POST \
+  -H "Authorization: token $GITHUB_TOKEN" \
+  -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/repos/next-ship/next-ship/actions/workflows/error-to-insight.yml/dispatches \
+  -d '{"ref":"main"}'
+```

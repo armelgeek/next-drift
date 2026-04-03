@@ -1,5 +1,5 @@
-import type { Dictionary } from "@/lib/dictionary";
 import { MoveDownLeft, MoveUpRight } from "lucide-react";
+import type { Dictionary } from "@/lib/dictionary";
 
 type StatsProps = {
   dictionary: Dictionary;
