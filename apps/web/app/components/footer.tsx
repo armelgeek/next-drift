@@ -71,10 +71,10 @@ export const Footer = () => (
                             rel={
                               item.href.includes("http")
                                 ? "noopener noreferrer"
-                                : null
+                                : undefined
                             }
                             target={
-                              item.href.includes("http") ? "_blank" : null
+                              item.href.includes("http") ? "_blank" : undefined
                             }
                           >
                             <span className="text-xl">{item.title}</span>
@@ -90,10 +90,12 @@ export const Footer = () => (
                             rel={
                               subItem.href.includes("http")
                                 ? "noopener noreferrer"
-                                : null
+                                : undefined
                             }
                             target={
-                              subItem.href.includes("http") ? "_blank" : null
+                              subItem.href.includes("http")
+                                ? "_blank"
+                                : undefined
                             }
                           >
                             <span className="text-foreground/75">

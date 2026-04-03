@@ -1,0 +1,166 @@
+# Tech Debt Tracking
+
+This document describes the technical debt tracking system for the next-ship repository.
+
+## Overview
+
+Technical debt accumulates naturally during development. This system helps identify, track, and manage tech debt proactively through automated scanning and GitHub issue integration.
+
+## How It Works
+
+### Automated Weekly Scans
+
+Every **Monday at 3:00 AM AWST**, the `tech-debt-tracking.yml` workflow runs and scans for:
+
+1. **Large files** (>500 lines) - Indicators of code that needs modularization
+2. **TODO/FIXME/XXX comments** - Unfinished work that should be tracked
+3. **Duplicate code** - Detected via jscpd
+4. **Outdated dependencies** - Packages needing updates
+5. **Console statements** - Debug code that should be removed
+
+### GitHub Integration
+
+The workflow creates or updates a **"📊 Technical Debt Tracking"** issue with:
+- Current metrics
+- Lists of problematic files
+- Actionable next steps
+- Links to detailed reports
+
+## Labels
+
+We use a structured label system for tech debt:
+
+- `tech-debt` - General tech debt issues
+- `tech-debt::refactoring` - Code needs restructuring
+- `tech-debt::dependencies` - Outdated dependencies
+- `tech-debt::performance` - Performance improvements needed
+- `tech-debt::documentation` - Missing/outdated docs
+- `tech-debt::tests` - Missing test coverage
+
+## Local Commands
+
+### Scan Tech Debt
+
+```bash
+# Run local tech debt scan
+pnpm tech-debt:scan
+```
+
+This checks:
+- Large files
+- TODO/FIXME comments
+- Console statements
+- Outdated dependencies
+
+### View Results
+
+```bash
+# Check the current status
+pnpm tech-debt:scan | grep -A 10 "Summary"
+```
+
+## Manual Tech Debt Issues
+
+When you identify tech debt manually:
+
+1. **Create an issue** with the `tech-debt` label
+2. **Add a subtype label** (e.g., `tech-debt::refactoring`)
+3. **Add to sprint** if addressing soon, or leave for weekly review
+4. **Reference in code** with TODO/FIXME comments
+
+Example:
+```typescript
+// TODO: Refactor this component - it's getting too large
+// Issue: #123
+// See: https://github.com/next-ship/next-ship/issues/123
+```
+
+## Weekly Reports
+
+The automated workflow generates a report with:
+
+- Summary metrics
+- Detailed lists of issues
+- Trending (if run weekly)
+- Recommendations
+
+Reports are stored as artifacts for 90 days.
+
+## Addressing Tech Debt
+
+### Priority Order
+
+1. **Security-related** - Fix immediately
+2. **Blocking** - Fix before next release
+3. **Performance** - Address in current sprint
+4. **Code quality** - Schedule for upcoming sprints
+5. **Nice to have** - Track and address opportunistically
+
+### Process
+
+1. **Identify**: Use automated scan or manual review
+2. **Track**: Create GitHub issue with appropriate labels
+3. **Prioritize**: Add to sprint based on impact
+4. **Fix**: Address the root cause
+5. **Verify**: Run scan again to confirm resolution
+
+## Configuration
+
+### Scan Thresholds
+
+Edit `.github/workflows/tech-debt-tracking.yml` to adjust:
+
+- **Large file threshold**: Currently 500 lines
+- **TODO/FIXME limit**: Shows top 30 comments
+- **Dependency age**: Uses `pnpm outdated`
+
+### Labels
+
+Labels are defined in `.github/labels/tech-debt.json`.
+
+To sync labels to GitHub:
+```bash
+# Requires GitHub CLI
+github-label-sync --labels .github/labels/tech-debt.json next-ship/next-ship
+```
+
+## Metrics
+
+We track these metrics over time:
+
+| Metric | Target | Current |
+|--------|--------|---------|
+| Large Files | <10 | TBD |
+| TODO/FIXME | <50 | TBD |
+| Outdated Deps | <5 | TBD |
+| Duplicate Code | <5% | TBD |
+
+Check the weekly tracking issue for current values.
+
+## CI Integration
+
+The tech debt scan runs:
+- **Weekly**: Every Monday 3:00 AM AWST
+- **On demand**: Via `workflow_dispatch`
+- **Does not block**: PRs or merges
+
+## Resources
+
+- [Workflow file](../.github/workflows/tech-debt-tracking.yml)
+- [Scan script](../scripts/tech-debt-scan.sh)
+- [Label config](../.github/labels/tech-debt.json)
+- [Example tracking issue](https://github.com/next-ship/next-ship/issues) (search for "Technical Debt Tracking")
+
+## FAQ
+
+**Q: Should I fix tech debt immediately?**
+A: Not necessarily. Balance with feature work. Use the priority system.
+
+**Q: Who is responsible for addressing tech debt?**
+A: The whole team. Anyone can pick up tech debt issues during sprint planning.
+
+**Q: What if we have too much tech debt?**
+A: Dedicate a "tech debt sprint" every few months to catch up.
+
+**Q: Can I add my own tech debt items?**
+A: Yes! Create issues manually and use the `tech-debt` label.

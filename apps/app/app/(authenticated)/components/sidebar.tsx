@@ -218,10 +218,7 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
             <SidebarGroupLabel>Platform</SidebarGroupLabel>
             <SidebarMenu>
               {data.navMain.map((item) => (
-                <Collapsible
-                  defaultOpen={item.isActive}
-                  key={item.title}
-                >
+                <Collapsible defaultOpen={item.isActive} key={item.title}>
                   <SidebarMenuItem>
                     <SidebarMenuButton tooltip={item.title}>
                       <Link href={item.url}>
@@ -335,18 +332,14 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
                 }}
                 showName
               />
-                <div className="flex shrink-0 items-center gap-px">
-                  <ModeToggle />
-                  <Button
-                    className="shrink-0"
-                    size="icon"
-                    variant="ghost"
-                  >
-                    <div className="h-4 w-4">
-                      <NotificationsTrigger />
-                    </div>
-                  </Button>
-                </div>
+              <div className="flex shrink-0 items-center gap-px">
+                <ModeToggle />
+                <Button className="shrink-0" size="icon" variant="ghost">
+                  <div className="h-4 w-4">
+                    <NotificationsTrigger />
+                  </div>
+                </Button>
+              </div>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarFooter>

@@ -7,7 +7,11 @@ import { env } from "@/env";
 import { createHmac } from "node:crypto";
 
 // Verify Polar webhook signature
-const verifyWebhook = (payload: string, signature: string, secret: string): boolean => {
+const verifyWebhook = (
+  payload: string,
+  signature: string,
+  secret: string
+): boolean => {
   const expected = createHmac("sha256", secret).update(payload).digest("hex");
   return signature === expected;
 };
@@ -17,14 +21,19 @@ const getUserFromCustomerId = async (customerId: string) => {
   const users = await clerk.users.getUserList();
 
   const user = users.data.find(
-    (currentUser: { id: string; privateMetadata: { polarCustomerId?: string } }) => 
-      currentUser.privateMetadata.polarCustomerId === customerId
+    (currentUser: {
+      id: string;
+      privateMetadata: { polarCustomerId?: string };
+    }) => currentUser.privateMetadata.polarCustomerId === customerId
   );
 
   return user;
 };
 
-const handleOrderCreated = async (data: { customerId?: string; productName?: string }) => {
+const handleOrderCreated = async (data: {
+  customerId?: string;
+  productName?: string;
+}) => {
   if (!data.customerId) {
     return;
   }
@@ -44,7 +53,10 @@ const handleOrderCreated = async (data: { customerId?: string; productName?: str
   });
 };
 
-const handleSubscriptionCreated = async (data: { customerId?: string; productName?: string }) => {
+const handleSubscriptionCreated = async (data: {
+  customerId?: string;
+  productName?: string;
+}) => {
   if (!data.customerId) {
     return;
   }
@@ -64,7 +76,10 @@ const handleSubscriptionCreated = async (data: { customerId?: string; productNam
   });
 };
 
-const handleSubscriptionCanceled = async (data: { customerId?: string; productName?: string }) => {
+const handleSubscriptionCanceled = async (data: {
+  customerId?: string;
+  productName?: string;
+}) => {
   if (!data.customerId) {
     return;
   }

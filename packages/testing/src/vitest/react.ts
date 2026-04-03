@@ -2,10 +2,9 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
 
-export function createReactConfig(options: { 
-  alias?: Record<string, string>;
-  testInclude?: string[];
-} = {}) {
+export function createReactConfig(
+  options: { alias?: Record<string, string>; testInclude?: string[] } = {}
+) {
   return defineConfig({
     plugins: [react()],
     test: {

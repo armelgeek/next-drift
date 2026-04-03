@@ -1,0 +1,299 @@
+name: Build System Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 10 * * 1'  # Run weekly on Mondays at 10 AM
+
+jobs:
+  version-drift-detection:
+    name: Version Drift Detection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Check workspace package versions
+        id: version-check
+        run: |
+          echo "🔍 Checking for version drift in workspace packages..."
+          
+          # Get all workspace packages and their versions
+          PACKAGES=$(pnpm list -r --json 2>/dev/null | jq -r '.[] | select(.private != true) | "\(.name):\(.version)"' | sort)
+          
+          if [ -z "$PACKAGES" ]; then
+            echo "⚠️ No public packages found in workspace"
+            exit 0
+          fi
+          
+          echo "📦 Workspace packages:"
+          echo "$PACKAGES"
+          echo ""
+          
+          # Check for inconsistent versions across apps using same package
+          DRIFT_FOUND=0
+          
+          # Get all package.json files in apps/ and packages/
+          find apps packages -name "package.json" -not -path "*/node_modules/*" | while read -r pkg_file; do
+            if [ -f "$pkg_file" ]; then
+              dir=$(dirname "$pkg_file")
+              # Check dependencies for workspace protocol mismatches
+              deps=$(cat "$pkg_file" | jq -r '.dependencies // {} | to_entries[] | select(.value | startswith("workspace:")) | "\(.key):\(.value)"' 2>/dev/null)
+              peer_deps=$(cat "$pkg_file" | jq -r '.peerDependencies // {} | to_entries[] | select(.value | startswith("workspace:")) | "\(.key):\(.value)"' 2>/dev/null)
+              dev_deps=$(cat "$pkg_file" | jq -r '.devDependencies // {} | to_entries[] | select(.value | startswith("workspace:")) | "\(.key):\(.value)"' 2>/dev/null)
+              
+              all_deps="$deps $peer_deps $dev_deps"
+              
+              if [ -n "$all_deps" ]; then
+                for dep in $all_deps; do
+                  # Check if version specifier is inconsistent
+                  dep_name=$(echo "$dep" | cut -d: -f1)
+                  dep_version=$(echo "$dep" | cut -d: -f2-)
+                  
+                  # Flag if using anything other than workspace:*
+                  if [[ "$dep_version" != "workspace:*" ]]; then
+                    echo "⚠️  $dir uses non-standard workspace version for $dep_name: $dep_version"
+                    DRIFT_FOUND=1
+                  fi
+                done
+              fi
+            fi
+          done
+          
+          # Check root package.json version against workspace packages
+          ROOT_VERSION=$(cat package.json | jq -r '.version // "0.0.0"')
+          echo ""
+          echo "📋 Root version: $ROOT_VERSION"
+          
+          # Alert if apps have different versions
+          APP_VERSIONS=$(find apps -name "package.json" -not -path "*/node_modules/*" -exec cat {} \; | jq -s '[.[] | {name: .name, version: .version}]' | jq -r '.[] | "\(.name):\(.version)"' | sort | uniq)
+          
+          echo ""
+          echo "🏗️  App versions:"
+          echo "$APP_VERSIONS"
+          
+          UNIQUE_VERSIONS=$(echo "$APP_VERSIONS" | cut -d: -f2 | sort | uniq | wc -l)
+          if [ "$UNIQUE_VERSIONS" -gt 1 ]; then
+            echo ""
+            echo "⚠️  WARNING: Apps have different version numbers!"
+            echo "Consider aligning versions for consistency."
+            DRIFT_FOUND=1
+          fi
+          
+          if [ "$DRIFT_FOUND" -eq 1 ]; then
+            echo ""
+            echo "❌ Version drift detected!"
+            exit 1
+          else
+            echo ""
+            echo "✅ No version drift detected"
+          fi
+
+  dead-feature-flag-detection:
+    name: Dead Feature Flag Detection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for dead feature flags
+        id: flag-check
+        run: |
+          echo "🔍 Analyzing feature flags for stale usage..."
+          
+          FLAGS_FILE="packages/feature-flags/index.ts"
+          
+          if [ ! -f "$FLAGS_FILE" ]; then
+            echo "⚠️ Feature flags index file not found"
+            exit 0
+          fi
+          
+          # Extract all exported flag names
+          FLAGS=$(grep -oE 'export const [a-zA-Z0-9_]+' "$FLAGS_FILE" | sed 's/export const //')
+          
+          if [ -z "$FLAGS" ]; then
+            echo "⚠️ No feature flags found in $FLAGS_FILE"
+            exit 0
+          fi
+          
+          echo "📋 Defined feature flags:"
+          echo "$FLAGS"
+          echo ""
+          
+          DEAD_FLAGS=""
+          TOTAL_FLAGS=0
+          UNUSED_COUNT=0
+          
+          for flag in $FLAGS; do
+            TOTAL_FLAGS=$((TOTAL_FLAGS + 1))
+            
+            # Search for usage across the codebase (excluding node_modules, .next, etc.)
+            USAGE_COUNT=$(grep -r "${flag}" \
+              --include="*.ts" \
+              --include="*.tsx" \
+              --include="*.js" \
+              --include="*.jsx" \
+              --exclude-dir=node_modules \
+              --exclude-dir=.next \
+              --exclude-dir=dist \
+              --exclude="packages/feature-flags/*" \
+              . 2>/dev/null | wc -l)
+            
+            if [ "$USAGE_COUNT" -eq 0 ]; then
+              echo "⚠️  Flag '$flag' appears unused (0 references outside feature-flags package)"
+              DEAD_FLAGS="${DEAD_FLAGS}${flag},"
+              UNUSED_COUNT=$((UNUSED_COUNT + 1))
+            else
+              echo "✅ Flag '$flag' is used ($USAGE_COUNT references)"
+            fi
+          done
+          
+          echo ""
+          echo "📊 Summary:"
+          echo "  Total flags: $TOTAL_FLAGS"
+          echo "  Potentially dead flags: $UNUSED_COUNT"
+          
+          if [ -n "$DEAD_FLAGS" ]; then
+            echo ""
+            echo "⚠️  Dead feature flags detected:"
+            echo "$DEAD_FLAGS" | tr ',' '\n' | while read -r flag; do
+              if [ -n "$flag" ]; then
+                echo "  - $flag"
+              fi
+            done
+            echo ""
+            echo "💡 Recommendations:"
+            echo "   1. Review flagged features to confirm they're truly unused"
+            echo "   2. Remove flag definitions from packages/feature-flags/index.ts"
+            echo "   3. Clean up any remaining conditional code using these flags"
+            echo "   4. Archive flags in PostHog/Vercel Toolbar if applicable"
+            echo ""
+            echo "ℹ️  This check looks for flags with zero usage. Some flags may be:"
+            echo "   - New flags waiting to be implemented"
+            echo "   - Experiment flags used only in specific branches"
+            echo "   - Intentionally kept for rollback capability"
+            echo ""
+            echo "Review the list and manually verify before removal."
+            
+            # Don't fail the build, just warn
+            exit 0
+          else
+            echo ""
+            echo "✅ All feature flags appear to be in use!"
+          fi
+
+  unused-dependencies:
+    name: Unused Dependencies Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run knip to detect unused dependencies
+        run: |
+          echo "🔍 Checking for unused dependencies and exports..."
+          pnpm dead-code || true
+          echo ""
+          echo "💡 Review the knip output above for unused dependencies"
+          echo "   Run 'pnpm dead-code' locally to see full details"
+
+  bundle-size-tracking:
+    name: Bundle Size Tracking
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build web app
+        run: |
+          cd apps/web
+          pnpm build 2>&1 | tee build.log || true
+          
+          # Extract bundle sizes from build output
+          if [ -f ".next/analyze/client.html" ]; then
+            echo "📊 Web app bundle analysis available at:"
+            echo "   .next/analyze/client.html"
+          fi
+          
+          # Check for large chunks in build output
+          if grep -q "First Load JS" build.log 2>/dev/null; then
+            echo ""
+            echo "📦 First Load JS metrics:"
+            grep -A 5 "First Load JS" build.log || true
+          fi
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request' && failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '⚠️ **Build System Check Failed**\n\nOne or more checks detected issues:\n- Version drift\n- Dead feature flags\n- Unused dependencies\n\nPlease review the workflow logs for details.'
+            })

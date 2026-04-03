@@ -1,0 +1,215 @@
+# Bundle Size Tracking
+
+This document describes the bundle size monitoring system for the next-ship repository.
+
+## Overview
+
+Bundle size directly impacts user experience through load times and data usage. This system monitors bundle size automatically and alerts when limits are exceeded.
+
+## How It Works
+
+### Automatic Monitoring
+
+The `bundle-size-tracking.yml` workflow runs on:
+- **Every push to main**
+- **Every pull request**
+- **Weekly on Sundays at 4:00 AM AWST** (8:00 PM UTC Saturday)
+
+### What Gets Measured
+
+1. **First Load JS** - Critical JavaScript for initial page load
+2. **Total JS Chunks** - Number of code-split chunks
+3. **Chunk Sizes** - Individual chunk file sizes
+4. **Static Assets** - Total size of all static files
+
+### Thresholds
+
+Current limits (warning only, not blocking):
+
+| Metric | Limit | Status |
+|--------|-------|--------|
+| First Load JS | 200 KB | Warning if exceeded |
+| JS Chunks | 100 | Warning if exceeded |
+| Individual Chunk | 250 KB | Warning if exceeded |
+
+## Viewing Bundle Analysis
+
+### Local Development
+
+```bash
+# Build with bundle analysis
+pnpm analyze:bundle
+
+# View the report
+cd apps/web/.next/analyze
+open client.html  # Opens interactive bundle viewer
+```
+
+The interactive viewer shows:
+- Module breakdown by size
+- Dependencies visualization
+- Entry point analysis
+
+### CI Artifacts
+
+After each CI run:
+1. Go to **Actions** → **Bundle Size Tracking** → Latest run
+2. Download `bundle-analysis-{run-id}` artifact
+3. Extract and open `client.html` for detailed analysis
+
+### PR Comments
+
+On pull requests, a bot comments with:
+- Bundle size metrics
+- Warnings for oversized chunks
+- Comparison to main branch (future)
+
+## Optimizing Bundle Size
+
+### Strategies
+
+1. **Code Splitting**
+   ```typescript
+   // Use dynamic imports for large components
+   const HeavyComponent = dynamic(() => import('./HeavyComponent'));
+   ```
+
+2. **Tree Shaking**
+   - Ensure proper ESM imports
+   - Avoid importing entire libraries
+   ```typescript
+   // Good
+   import { specificFunction } from 'library';
+   
+   // Bad
+   import * as library from 'library';
+   ```
+
+3. **Dependency Analysis**
+   ```bash
+   # Check bundle composition
+   cd apps/web
+   ANALYZE=true pnpm build
+   ```
+
+4. **Lazy Loading**
+   - Load non-critical components on demand
+   - Use intersection observer for below-fold content
+
+### Common Issues
+
+**Large vendor bundle:**
+- Solution: Check for duplicate dependencies across packages
+- Use `pnpm why <package>` to find duplicates
+
+**Unused imports:**
+- Solution: Run `pnpm dead-code` to find unused exports
+
+**Large images/assets:**
+- Solution: Use Next.js Image component with proper sizing
+
+## Configuration
+
+### Next.js Config
+
+Bundle analysis is enabled via environment variable:
+
+```typescript
+// apps/web/next.config.ts
+if (env.ANALYZE === "true") {
+  nextConfig = withAnalyzer(nextConfig);
+}
+```
+
+### Workflow Thresholds
+
+Edit `.github/workflows/bundle-size-tracking.yml` to adjust:
+
+```yaml
+MAX_FIRST_LOAD_JS=200  # 200KB
+MAX_CHUNKS=100
+```
+
+## Metrics History
+
+Bundle metrics are tracked in:
+- **GitHub Actions Artifacts** - 90 day retention
+- **PR Comments** - Shows current vs previous
+
+Future: Store in database for trend analysis
+
+## CI Integration
+
+### Pull Requests
+
+Bundle size is calculated and commented on every PR:
+- ✅ Within limits: Silent pass
+- ⚠️ Warnings: Comment with recommendations
+
+### Main Branch
+
+Weekly reports help track trends over time:
+- Growing bundle size
+- New large chunks
+- Opportunities for optimization
+
+## Monitoring
+
+### Dashboard
+
+Check the bundle size tracking issue for:
+- Current metrics
+- Historical trends
+- Action items
+
+### Alerts
+
+Currently warnings only. Future: Slack/Discord notifications for:
+- >20% increase in bundle size
+- New oversized chunks
+- First Load JS >250KB
+
+## Commands
+
+```bash
+# Local bundle analysis
+pnpm analyze:bundle
+
+# Check bundle composition
+cd apps/web/.next/analyze && ls -la
+
+# View specific chunk
+du -h apps/web/.next/static/chunks/*.js | sort -h | tail -10
+```
+
+## Best Practices
+
+1. **Check on every PR**: Review bundle size changes before merging
+2. **Lazy load**: Use dynamic imports for non-critical features
+3. **Tree shake**: Ensure proper imports for optimal dead code elimination
+4. **Monitor dependencies**: Regularly audit for unused/bloated packages
+5. **Split wisely**: Code split at route boundaries, not arbitrarily
+
+## Resources
+
+- [Next.js Bundle Analyzer](https://www.npmjs.com/package/@next/bundle-analyzer)
+- [Webpack Bundle Analysis](https://webpack.js.org/guides/code-splitting/)
+- [Bundle Size Budgets](https://web.dev/performance-budgets-101/)
+- [Workflow file](../.github/workflows/bundle-size-tracking.yml)
+
+## FAQ
+
+**Q: Does this block PRs if bundle is too large?**
+A: No, currently warnings only. We may add blocking limits for extreme cases.
+
+**Q: Can I ignore the warnings?**
+A: Yes, but please document why in the PR description if the increase is intentional.
+
+**Q: How do I reduce bundle size?**
+A: Start with the bundle analyzer to identify the largest modules, then:
+1. Replace with lighter alternatives
+2. Use dynamic imports
+3. Remove unused code
+
+**Q: What's a good First Load JS target?**
+A: Under 200KB is ideal. Under 300KB is acceptable. Over 500KB needs attention.

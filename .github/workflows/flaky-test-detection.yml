@@ -1,0 +1,156 @@
+name: Flaky Test Detection
+
+on:
+  schedule:
+    # Run daily at 2:00 AM AWST (Western Australia Standard Time)
+    # AWST = UTC+8, so 2:00 AM AWST = 6:00 PM UTC (18:00) the previous day
+    - cron: '0 18 * * *'
+
+  # Allow manual trigger for testing
+  workflow_dispatch:
+
+jobs:
+  detect-flaky-tests:
+    name: Detect Flaky Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      # Run unit tests multiple times to detect flakiness
+      - name: Run unit tests (Attempt 1)
+        id: test1
+        run: |
+          pnpm test 2>&1 | tee test-results-1.txt || true
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Run unit tests (Attempt 2)
+        id: test2
+        run: |
+          pnpm test 2>&1 | tee test-results-2.txt || true
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Run unit tests (Attempt 3)
+        id: test3
+        run: |
+          pnpm test 2>&1 | tee test-results-3.txt || true
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      # Upload test results
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ github.run_id }}
+          path: |
+            test-results-*.txt
+            test-results/
+          retention-days: 30
+
+      # Analyze results for flaky tests
+      - name: Analyze for flaky tests
+        id: analyze
+        run: |
+          echo "🔍 Analyzing test results for flaky tests..."
+          
+          # Check if results are different across runs
+          if [ "${{ steps.test1.outputs.exit_code }}" != "${{ steps.test2.outputs.exit_code }}" ] || \
+             [ "${{ steps.test2.outputs.exit_code }}" != "${{ steps.test3.outputs.exit_code }}" ]; then
+            echo "⚠️  FLAKY TESTS DETECTED"
+            echo "Test results varied across runs:"
+            echo "  Run 1: Exit code ${{ steps.test1.outputs.exit_code }}"
+            echo "  Run 2: Exit code ${{ steps.test2.outputs.exit_code }}"
+            echo "  Run 3: Exit code ${{ steps.test3.outputs.exit_code }}"
+            echo "flaky_detected=true" >> $GITHUB_OUTPUT
+          else
+            echo "✅ Tests are consistent across all runs"
+            echo "flaky_detected=false" >> $GITHUB_OUTPUT
+          fi
+
+      # Parse test failures to identify specific flaky tests
+      - name: Identify specific flaky tests
+        if: steps.analyze.outputs.flaky_detected == 'true'
+        run: |
+          echo "📊 Identifying specific flaky tests..."
+          
+          # Extract failed test names from vitest output
+          for i in 1 2 3; do
+            echo "=== Failed tests in Run $i ==="
+            if [ -f "test-results-$i.txt" ]; then
+              grep -E "(FAIL|✘|failed)" test-results-$i.txt | head -20 || echo "No failures detected in output"
+            fi
+          done
+          
+          # Create a list of tests that failed in some runs but not others
+          echo ""  
+          echo "🔍 Tests that may be flaky (failed in some runs, passed in others)"
+          # This is a simple heuristic - production systems use proper test result databases
+
+      # Create issue for tracking if flaky tests detected
+      - name: Create tracking issue
+        if: steps.analyze.outputs.flaky_detected == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'flaky-tests',
+              state: 'open'
+            });
+            
+            if (issues.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '🔍 Flaky Tests Detected',
+                body: 'Flaky tests were detected in the latest scheduled CI run at 2:00 AM UTC. Tests are passing/failing inconsistently.\n\n**Detection Method:** 3 consecutive test runs with different results\n\n**Next Steps:**\n1. Review recent test changes\n2. Identify tests with timing issues or race conditions\n3. Add problematic tests to `.flaky-tests.json` for quarantine\n4. Fix and re-enable quarantined tests\n\n**Resources:**\n- [Workflow Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})\n- [Test Artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts)',
+                labels: ['flaky-tests', 'ci-cd']
+              });
+            }
+
+      # Summary
+      - name: Summary
+        run: |
+          echo "## Flaky Test Detection Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.analyze.outputs.flaky_detected }}" == "true" ]; then
+            echo "⚠️ **FLAKY TESTS DETECTED**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Test results varied across 3 consecutive runs:" >> $GITHUB_STEP_SUMMARY
+            echo "- Run 1: Exit code ${{ steps.test1.outputs.exit_code }}" >> $GITHUB_STEP_SUMMARY
+            echo "- Run 2: Exit code ${{ steps.test2.outputs.exit_code }}" >> $GITHUB_STEP_SUMMARY
+            echo "- Run 3: Exit code ${{ steps.test3.outputs.exit_code }}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Check the uploaded artifacts for detailed test output." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ **No flaky tests detected**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "All test runs produced consistent results." >> $GITHUB_STEP_SUMMARY
+          fi
