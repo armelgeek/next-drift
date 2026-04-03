@@ -38,8 +38,7 @@
     "quarantine:add": "bash scripts/flaky-tests.sh quarantine",
     "quarantine:remove": "bash scripts/flaky-tests.sh unquarantine",
     "analyze:bundle": "cd apps/web && ANALYZE=true pnpm build",
-    "tech-debt:scan": "bash scripts/tech-debt-scan.sh",
-    "setup:vercel": "bash scripts/setup-vercel-tracking.sh"
+    "tech-debt:scan": "bash scripts/tech-debt-scan.sh"
   },
   "devDependencies": {
     "@auto-it/first-time-contributor": "^11.3.6",
