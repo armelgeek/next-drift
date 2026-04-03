@@ -1,0 +1,106 @@
+name: Vercel Deployment Tracking
+
+on:
+  push:
+    branches: [main]
+  
+  workflow_dispatch:
+
+env:
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
+jobs:
+  track-deployments:
+    name: Track Vercel Deployments
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Wait for deployments
+        run: |
+          echo "⏳ Waiting for Vercel deployments to start..."
+          sleep 30  # Give Vercel time to detect push
+
+      - name: Fetch deployment status
+        id: deployments
+        run: |
+          echo "🔍 Fetching deployment status from Vercel..."
+          
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ]; then
+            echo "⚠️ Vercel credentials not configured"
+            echo "deployments_found=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Get recent deployments for each app
+          APPS=("web" "app" "api" "storybook")
+          DEPLOYMENT_DATA=""
+          
+          for app in "${APPS[@]}"; do
+            echo "Checking deployments for apps/$app..."
+            
+            # Get deployments for this app
+            # Note: This requires mapping the app to a Vercel project ID
+            # You'll need to add VERCEL_PROJECT_ID_WEB, etc. to secrets
+            PROJECT_ID_VAR="VERCEL_PROJECT_ID_${app^^}"
+            PROJECT_ID=$(printenv "$PROJECT_ID_VAR" 2>/dev/null || echo "")
+            
+            if [ -n "$PROJECT_ID" ]; then
+              RESPONSE=$(curl -s -X GET \
+                "https://api.vercel.com/v6/deployments?projectId=$PROJECT_ID&limit=5" \
+                -H "Authorization: Bearer $VERCEL_TOKEN" \
+                -H "Content-Type: application/json" 2>/dev/null || echo "{}")
+              
+              DEPLOYMENTS=$(echo "$RESPONSE" | jq -r '.deployments | length' 2>/dev/null || echo "0")
+              
+              if [ "$DEPLOYMENTS" -gt 0 ]; then
+                echo "Found $DEPLOYMENTS deployments for $app"
+                echo "### $app" >> deployment-report.md
+                echo "" >> deployment-report.md
+                
+                # Extract deployment info
+                echo "$RESPONSE" | jq -r '.deployments[] | "- **\(.name)**: \(.state) (\(.createdAt))"' >> deployment-report.md
+                echo "" >> deployment-report.md
+                
+                # Check for failed deployments
+                FAILED=$(echo "$RESPONSE" | jq -r '[.deployments[] | select(.state == "ERROR")] | length' 2>/dev/null || echo "0")
+                if [ "$FAILED" -gt 0 ]; then
+                  echo "⚠️  Found $FAILED failed deployments for $app!"
+                  echo "⚠️  Failed deployments detected for $app" >> deployment-report.md
+                fi
+              fi
+            else
+              echo "⚠️  VERCEL_PROJECT_ID_${app^^} not set, skipping $app"
+            fi
+          done
+          
+          if [ -f "deployment-report.md" ]; then
+            echo "deployments_found=true" >> $GITHUB_OUTPUT
+            cat deployment-report.md
+          else
+            echo "deployments_found=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create deployment summary
+        if: steps.deployments.outputs.deployments_found == 'true'
+        run: |
+          echo "## Vercel Deployment Status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          cat deployment-report.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request' && steps.deployments.outputs.deployments_found == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('deployment-report.md', 'utf8');
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 **Vercel Deployment Status**\n\n${report}`
+            });

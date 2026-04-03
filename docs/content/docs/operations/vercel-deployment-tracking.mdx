@@ -1,0 +1,269 @@
+# Vercel Deployment Tracking & Alerts
+
+## Overview
+
+Vercel provides built-in deployment tracking and alerting capabilities. This guide covers how to set up and use these features for production monitoring.
+
+## Vercel Dashboard
+
+### Accessing Deployment Analytics
+
+1. Go to [vercel.com/dashboard](https://vercel.com/dashboard)
+2. Select your project (e.g., `next-ship-web`)
+3. Navigate to the **"Deployments"** tab
+
+### Deployment Information
+
+Each deployment shows:
+- **Status**: Ready, Building, Error, Canceled
+- **Branch**: Which git branch was deployed
+- **Commit**: Hash and message
+- **Author**: Who triggered the deployment
+- **Duration**: Build time
+- **Domain**: Preview or production URL
+
+### Deployment Markers in Observability
+
+Vercel integrates deployment markers with:
+- **Web Analytics**: See traffic changes per deployment
+- **Speed Insights**: Performance metrics per deployment
+- **Runtime Logs**: Logs filtered by deployment
+
+To view:
+1. Go to your project dashboard
+2. Click **"Analytics"** tab
+3. Select time range
+4. Deployment markers appear as vertical lines on graphs
+
+## Setting Up Alerts
+
+### Method 1: Vercel Native Alerts (Recommended)
+
+Vercel doesn't have native alerting, but you can integrate with:
+
+#### Slack Integration
+
+1. Go to Project Settings → Integrations
+2. Find **Slack** and click "Add"
+3. Connect your Slack workspace
+4. Select channel for notifications
+5. Choose events:
+   - ✅ Deployment succeeded
+   - ✅ Deployment failed
+   - ✅ Deployment canceled
+
+#### Discord Integration
+
+1. In Discord, create a webhook:
+   - Server Settings → Integrations → Webhooks
+   - Copy webhook URL
+
+2. In Vercel:
+   - Go to Project Settings → Git
+   - Under "Deploy Hooks"
+   - Create a hook that calls your Discord webhook
+
+### Method 2: GitHub Actions (Implemented)
+
+We've set up `.github/workflows/vercel-deployment-tracking.yml` that:
+- Runs on every push to main
+- Fetches deployment status from Vercel API
+- Comments on PRs with deployment status
+- Creates summary in GitHub Actions
+
+**Setup Required:**
+```bash
+# Add these GitHub Secrets in your repo settings:
+VERCEL_TOKEN          # From vercel.com/account/tokens
+VERCEL_ORG_ID         # From your Vercel team/org URL
+VERCEL_PROJECT_ID_WEB # From web project settings
+VERCEL_PROJECT_ID_APP # From app project settings
+VERCEL_PROJECT_ID_API # From api project settings
+```
+
+### Method 3: Third-Party Monitoring
+
+#### Using Datadog/New Relic
+
+1. Install Vercel integration in your APM tool
+2. Deploys will automatically appear as events
+3. Set up alerts based on:
+   - Deployment failures
+   - Increased error rates post-deploy
+   - Performance degradation
+
+#### Using Checkly
+
+```javascript
+// checkly.config.js
+module.exports = {
+  checks: [
+    {
+      name: 'Homepage',
+      url: 'https://your-domain.com',
+      frequency: 5, // minutes
+      locations: ['us-east-1', 'eu-west-1'],
+      alertChannels: ['slack']
+    }
+  ]
+}
+```
+
+## Git Integration
+
+### Deployment Notifications
+
+Vercel automatically:
+- Comments on PRs with preview URLs
+- Updates commit status (✅ or ❌)
+- Links to deployment logs
+
+### Enable in GitHub
+
+1. Go to your GitHub repo → Settings → Webhooks
+2. Ensure Vercel webhook is active
+3. Check "Pull requests" events
+
+## Deployment Protection
+
+### Require Approval
+
+1. Go to Project Settings → Git
+2. Under "Deployment Protection"
+3. Enable **"Require approval for all deploys"** (optional)
+
+### Branch Protection
+
+In GitHub:
+1. Settings → Branches
+2. Add rule for `main`
+3. Enable:
+   - ✅ Require status checks to pass
+   - ✅ Require deployments to succeed
+
+## Rollback Strategy
+
+### Vercel Rollback
+
+1. Go to Deployments tab
+2. Find last working deployment
+3. Click "Promote to Production"
+4. Confirm rollback
+
+**Time to rollback**: < 30 seconds
+
+### Automated Rollback
+
+Consider adding to CI:
+```yaml
+- name: Health check after deploy
+  run: |
+    sleep 60  # Wait for deploy
+    curl -sf https://your-domain.com/api/health || {
+      echo "Deployment failed health check"
+      # Trigger rollback via Vercel API
+      exit 1
+    }
+```
+
+## Monitoring Checklist
+
+### Per-Deployment Metrics
+
+Track these for each deployment:
+- [ ] Build success/failure
+- [ ] Build duration
+- [ ] First meaningful paint
+- [ ] Time to interactive
+- [ ] Error rate change
+- [ ] Traffic pattern change
+
+### Alert Thresholds
+
+Recommended alerts:
+- **Build fails**: Immediate (Slack/Discord)
+- **Deploy takes >10 min**: Warning
+- **Error rate >5%**: Critical (page on-call)
+- **Performance degradation >20%**: Warning
+
+## Setting Up in Your Project
+
+### Step 1: Get Vercel API Token
+
+1. Go to [vercel.com/account/tokens](https://vercel.com/account/tokens)
+2. Click "Create Token"
+3. Name: `GitHub Actions Deployment Tracking`
+4. Scope: Select your team/org
+5. Copy the token
+
+### Step 2: Get Project IDs
+
+For each app:
+1. Go to Project Settings → General
+2. Copy "Project ID"
+3. Format: `VERCEL_PROJECT_ID_{APP}`
+
+Example:
+- Web app → `VERCEL_PROJECT_ID_WEB`
+- App → `VERCEL_PROJECT_ID_APP`
+- API → `VERCEL_PROJECT_ID_API`
+
+### Step 3: Add GitHub Secrets
+
+In your repo:
+1. Settings → Secrets and variables → Actions
+2. Click "New repository secret"
+3. Add each secret:
+   - `VERCEL_TOKEN`
+   - `VERCEL_ORG_ID` (from team URL: vercel.com/teams/{org-id})
+   - `VERCEL_PROJECT_ID_WEB`
+   - `VERCEL_PROJECT_ID_APP`
+   - `VERCEL_PROJECT_ID_API`
+
+### Step 4: Test
+
+Push to main and check:
+1. Actions tab for workflow run
+2. Deployment tracking summary
+3. Any alerts/notifications
+
+## Cost Considerations
+
+**Vercel Analytics**: Included in Pro plan ($20/month)
+**Vercel API**: Free tier includes 5,000 requests/day
+**Third-party tools**: Check pricing (Datadog, New Relic, etc.)
+
+## Troubleshooting
+
+### Alerts Not Working
+
+1. Check GitHub Secrets are set
+2. Verify Vercel token has correct permissions
+3. Check workflow logs in Actions tab
+4. Ensure project IDs match exactly
+
+### Missing Deployment Data
+
+- Deployment might still be in progress (workflow runs immediately after push)
+- Increase the `sleep` time in workflow if needed
+- Check Vercel dashboard directly
+
+### Too Many Notifications
+
+- Add filters in Slack/Discord
+- Use different channels for different environments
+- Consider summary notifications instead of per-deployment
+
+## Next Steps
+
+After setting up deployment tracking:
+1. ✅ Set up error tracking (PostHog - done)
+2. ✅ Set up performance monitoring (Vercel Analytics)
+3. Set up uptime monitoring (Checkly/Pingdom)
+4. Configure on-call rotation (PagerDuty/Opsgenie)
+
+## Resources
+
+- [Vercel Deployments API](https://vercel.com/docs/rest-api#endpoints/deployments)
+- [Vercel Analytics](https://vercel.com/docs/concepts/analytics)
+- [GitHub Actions with Vercel](https://vercel.com/guides/how-can-i-use-github-actions-with-vercel)
