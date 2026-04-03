@@ -64,7 +64,21 @@
       ]
     },
     "test": {
-      "dependsOn": ["^build", "^test"]
+      "dependsOn": ["^build", "^test"],
+      "env": ["TEST_DATABASE_URL", "DATABASE_URL"]
+    },
+    "//#test": {
+      "dependsOn": ["^build", "^test"],
+      "env": ["TEST_DATABASE_URL", "DATABASE_URL"]
+    },
+    "db:push": {
+      "cache": false,
+      "env": ["DATABASE_URL"]
+    },
+    "test:ephemeral": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "env": ["NEON_API_KEY", "NEON_PROJECT_ID"]
     },
     "analyze": {
       "dependsOn": ["^analyze"]
