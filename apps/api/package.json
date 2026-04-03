@@ -15,6 +15,7 @@
     "@opentelemetry/sdk-metrics": "^2.6.1",
     "@repo/analytics": "workspace:*",
     "@repo/auth": "workspace:*",
+    "@repo/circuit-breaker": "workspace:*",
     "@repo/database": "workspace:*",
     "@repo/design-system": "workspace:*",
     "@repo/next-config": "workspace:*",
