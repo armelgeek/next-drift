@@ -1,4 +1,5 @@
 import { blog } from "@repo/cms";
+import type { Query } from "@repo/cms/basehub-types";
 import { Feed } from "@repo/cms/components/feed";
 import { Button } from "@repo/design-system/components/ui/button";
 import { MoveRight, PhoneCall } from "lucide-react";
@@ -20,8 +21,10 @@ export const Hero = async ({ dictionary }: HeroProps) => (
             {async ([data]) => {
               "use server";
 
+              const typedData = data as Query;
+
               return (
-                <Link href={`/blog/${data.blog.posts.item?._slug}`}>
+                <Link href={`/blog/${typedData.blog.posts.item?._slug}`}>
                   <Button className="gap-4" size="sm" variant="secondary">
                     {dictionary.web.home.hero.announcement}{" "}
                     <MoveRight className="h-4 w-4" />
