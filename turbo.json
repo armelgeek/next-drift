@@ -3,6 +3,9 @@
   "globalDependencies": ["**/.env.*local"],
   "ui": "tui",
   "envMode": "loose",
+  "experimental": {
+    "boundaries": true
+  },
   "tasks": {
     "build": {
       "dependsOn": ["^build", "test"],
@@ -32,6 +35,9 @@
       "cache": false
     },
     "//#clean": {
+      "cache": false
+    },
+    "boundaries": {
       "cache": false
     }
   }

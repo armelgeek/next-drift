@@ -1,0 +1,350 @@
+# Code Modularization & Module Boundaries
+
+## Overview
+
+The monorepo uses **Turborepo Boundaries** to enforce architectural constraints between packages. This ensures proper separation of concerns and prevents circular dependencies.
+
+## Architecture Layers
+
+The codebase is organized into 5 architectural layers:
+
+```
+┌─────────────────────────────────────────┐
+│  Apps (app, api, web, storybook)       │  ← Application Layer
+├─────────────────────────────────────────┤
+│  UI Components (@repo/design-system)   │  ← Presentation Layer
+├─────────────────────────────────────────┤
+│  Core Business Logic                   │  ← Business Layer
+│  (@repo/auth, @repo/cms, etc.)         │
+├─────────────────────────────────────────┤
+│  Infrastructure                        │  ← Infrastructure Layer
+│  (@repo/database, @repo/observability) │
+└─────────────────────────────────────────┘
+```
+
+### Dependency Rules
+
+**✅ Allowed:**
+- Apps can import from any layer
+- UI can import from Core and Infra
+- Core can import from Infra
+- Infra cannot import from other layers (bottom layer)
+
+**❌ Forbidden:**
+- Circular dependencies
+- Lower layers importing from higher layers
+- Cross-cutting concerns in wrong layers
+
+## Turborepo Boundaries Configuration
+
+### Setup
+
+Boundaries are configured in:
+- `.turbo/boundaries.json` - Rules definition
+- `turbo.json` - Enable boundaries feature
+
+### Tag System
+
+Each package is assigned a tag:
+
+| Tag | Packages | Description |
+|-----|----------|-------------|
+| `app` | apps/* | Applications |
+| `ui` | @repo/design-system | UI components |
+| `core` | @repo/auth, @repo/cms, etc. | Business logic |
+| `infra` | @repo/database, @repo/observability | Infrastructure |
+
+### Enforcing Rules
+
+Run boundary checks:
+
+```bash
+# Check all boundaries
+pnpm boundaries
+
+# Check specific package
+pnpm boundaries --filter @repo/auth
+```
+
+## Package Responsibilities
+
+### Infrastructure Layer (infra)
+
+**Database (@repo/database)**
+- Schema definitions
+- Database connections
+- Migration utilities
+- Query builders
+
+**Observability (@repo/observability)**
+- Logging
+- Error tracking
+- Metrics collection
+- Tracing
+
+**Security (@repo/security)**
+- Rate limiting
+- Input validation
+- Security headers
+
+### Core Layer (core)
+
+**Authentication (@repo/auth)**
+- User sessions
+- Clerk integration
+- Auth middleware
+
+**CMS (@repo/cms)**
+- Content management
+- BaseHub integration
+- Feed components
+
+**Payments (@repo/payments)**
+- Payment processing
+- Billing logic
+- Webhooks
+
+**Notifications (@repo/notifications)**
+- Email templates
+- Push notifications
+- Message queues
+
+### UI Layer (ui)
+
+**Design System (@repo/design-system)**
+- React components
+- Styling (Tailwind)
+- Theme management
+- Accessibility
+
+## CI/CD Integration
+
+### Pre-commit Checks
+
+```bash
+# .husky/pre-commit
+pnpm boundaries || exit 1
+```
+
+### GitHub Actions
+
+```yaml
+- name: Check module boundaries
+  run: pnpm boundaries
+```
+
+### PR Comments
+
+When boundary violations are detected:
+- Bot comments on PR
+- Lists violating imports
+- Suggests correct import paths
+
+## Common Patterns
+
+### ✅ Correct: App imports from all layers
+
+```typescript
+// apps/app/app/page.tsx
+import { Button } from "@repo/design-system";           // ✓ UI layer
+import { auth } from "@repo/auth/server";               // ✓ Core layer
+import { database } from "@repo/database";              // ✓ Infra layer
+```
+
+### ❌ Wrong: Infrastructure importing Core
+
+```typescript
+// packages/database/src/query.ts
+import { auth } from "@repo/auth/server";               // ✗ VIOLATION!
+```
+
+### ✅ Correct: Core using Infra
+
+```typescript
+// packages/auth/src/session.ts
+import { database } from "@repo/database";              // ✓ Correct direction
+```
+
+### ❌ Wrong: UI importing App code
+
+```typescript
+// packages/design-system/src/button.tsx
+import { useAuth } from "apps/app/hooks/useAuth";       // ✗ VIOLATION!
+```
+
+## Migration Guide
+
+### Moving Code Between Packages
+
+1. **Identify the correct layer**
+   - Is it infrastructure? → `@repo/*` infra package
+   - Is it business logic? → `@repo/*` core package
+   - Is it presentation? → `@repo/design-system`
+
+2. **Move the code**
+   ```bash
+   # Move from apps/app/utils/db.ts
+   # To: packages/database/src/utils.ts
+   ```
+
+3. **Update imports**
+   ```typescript
+   // Old
+   import { queryDb } from "@/utils/db";
+   
+   // New
+   import { queryDb } from "@repo/database";
+   ```
+
+4. **Export from package**
+   ```typescript
+   // packages/database/index.ts
+   export { queryDb } from "./src/utils";
+   ```
+
+5. **Verify boundaries**
+   ```bash
+   pnpm boundaries
+   ```
+
+## Circular Dependencies
+
+### Detection
+
+The boundary system prevents circular dependencies:
+
+```
+❌ Circular: A → B → C → A
+```
+
+### Resolution
+
+**Option 1: Extract shared code**
+```
+Before: A → B → C → A
+After:  A → Shared ← B → C
+```
+
+**Option 2: Use dependency injection**
+```typescript
+// Pass dependencies as parameters
+function createService(deps: { db: Database }) {
+  return {
+    async getData() {
+      return deps.db.query();
+    }
+  };
+}
+```
+
+## Best Practices
+
+### 1. Keep Packages Focused
+
+**✅ Good:**
+```
+@repo/database
+├── Schema
+├── Queries
+├── Migrations
+└── Connection
+```
+
+**❌ Bad:**
+```
+@repo/database
+├── Schema
+├── Queries
+├── Business logic   ← Should be in @repo/core
+├── UI components    ← Should be in @repo/design-system
+└── Auth logic       ← Should be in @repo/auth
+```
+
+### 2. Use Barrel Exports
+
+```typescript
+// packages/database/index.ts
+export * from "./src/schema";
+export * from "./src/queries";
+export { connection } from "./src/connection";
+```
+
+### 3. Document Public API
+
+```typescript
+/**
+ * @public
+ * Query users from the database
+ */
+export async function getUsers() { ... }
+
+/**
+ * @internal
+ * Used only within this package
+ */
+function internalHelper() { ... }
+```
+
+## Troubleshooting
+
+### Boundary Violation Errors
+
+**Error:** `cannot import package X because it is not a dependency`
+
+**Solution:**
+1. Check if import should be allowed (review architecture)
+2. If valid, update `.turbo/boundaries.json`
+3. If invalid, refactor code to correct layer
+
+### Missing Package Tags
+
+**Error:** Package has no tag assigned
+
+**Solution:**
+Add to `turbo.json` or `.turbo/boundaries.json`:
+```json
+{
+  "constraints": {
+    "@repo/new-package": { "tag": "core" }
+  }
+}
+```
+
+### Build Failures After Changes
+
+After restructuring:
+```bash
+# Clean and rebuild
+pnpm clean
+pnpm install
+pnpm build
+```
+
+## Metrics
+
+Track boundary health:
+- **Violations per week**: Target < 5
+- **Refactoring time**: Average time to fix violations
+- **Circular dependencies**: Target 0
+
+## Resources
+
+- [Turborepo Boundaries](https://turbo.build/docs/core-constraints)
+- [Monorepo Architecture](https://nx.dev/concepts/mental-model)
+- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+
+## Commands Reference
+
+```bash
+# Check boundaries
+pnpm boundaries
+
+# Check with details
+pnpm boundaries --verbose
+
+# Fix auto-fixable issues
+pnpm fix:boundaries
+
+# Show dependency graph
+pnpm turbo run build --graph
+```

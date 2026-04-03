@@ -1,0 +1,281 @@
+# N+1 Query Detection
+
+## Overview
+
+N+1 queries are a common performance anti-pattern where an application makes N database queries to fetch related data, instead of a single query with a JOIN. This causes significant performance degradation as data volume grows.
+
+## The Problem
+
+### Example N+1 Scenario
+
+```typescript
+// ❌ BAD: N+1 queries
+const users = await db.select().from(users);
+
+for (const user of users) {
+  // This runs N times (once per user)
+  const orders = await db.select().from(orders).where(eq(orders.userId, user.id));
+  user.orders = orders;
+}
+// Total queries: 1 + N (where N = number of users)
+```
+
+```typescript
+// ✅ GOOD: Single query with join
+const usersWithOrders = await db
+  .select()
+  .from(users)
+  .leftJoin(orders, eq(users.id, orders.userId));
+// Total queries: 1
+```
+
+## Detection System
+
+### Automated Scanning
+
+The N+1 query detection workflow runs:
+- **Weekly**: Tuesdays at 3:00 AM AWST (7:00 PM UTC Monday)
+- **On PRs**: When database or app code changes
+
+### Detection Patterns
+
+The scanner checks for:
+
+1. **Database queries inside loops** (`.map()`, `for...of`)
+2. **Sequential awaits in iterations**
+3. **Multiple single-record queries** (instead of batch)
+4. **Missing eager loading** (relations not included)
+5. **Multiple queries per component**
+
+### Risk Levels
+
+| Level | Description | Action Required |
+|-------|---------------|-----------------|
+| 🔴 **High** | Likely N+1 pattern detected | **Must fix** before merge |
+| 🟡 **Medium** | Suspicious pattern, review needed | Review recommended |
+| 🟢 **Low** | Potential optimization | Consider when convenient |
+
+## Local Usage
+
+### Run Detection Locally
+
+```bash
+# Run N+1 query scanner
+pnpm check:n-plus-one
+
+# Or directly
+bash scripts/check-n-plus-one.sh
+```
+
+### Understanding Results
+
+The scanner outputs:
+- Specific files and line numbers
+- The problematic pattern found
+- Risk assessment
+- Recommendations
+
+## Prevention Strategies
+
+### 1. Use DataLoader Pattern
+
+```typescript
+// utils/dataLoader.ts
+import DataLoader from 'dataloader';
+
+const userLoader = new DataLoader(async (userIds: number[]) => {
+  // Single batched query
+  const users = await db
+    .select()
+    .from(users)
+    .where(inArray(users.id, userIds));
+  
+  return userIds.map(id => users.find(u => u.id === id));
+});
+
+// Usage
+const user1 = await userLoader.load(1);
+const user2 = await userLoader.load(2);
+// Only 1 query executed
+```
+
+### 2. Use JOINs for Related Data
+
+```typescript
+// Single query with all data
+const postsWithAuthors = await db
+  .select({
+    post: posts,
+    author: users,
+  })
+  .from(posts)
+  .innerJoin(users, eq(posts.authorId, users.id));
+```
+
+### 3. Use Promise.all() for Parallel Queries
+
+```typescript
+// ❌ BAD: Sequential
+const user = await getUser(id);
+const orders = await getOrders(id);
+const profile = await getProfile(id);
+
+// ✅ GOOD: Parallel
+const [user, orders, profile] = await Promise.all([
+  getUser(id),
+  getOrders(id),
+  getProfile(id),
+]);
+```
+
+### 4. Use Includes/Eager Loading
+
+```typescript
+// ❌ BAD: Separate queries
+const user = await db.select().from(users).where(eq(users.id, id));
+const orders = await db.select().from(orders).where(eq(orders.userId, id));
+
+// ✅ GOOD: Single query with relations
+const userWithOrders = await db.query.users.findFirst({
+  where: eq(users.id, id),
+  with: {
+    orders: true,
+  },
+});
+```
+
+### 5. Query Result Caching
+
+```typescript
+// Cache expensive queries
+import { cache } from 'react';
+
+const getCachedUser = cache(async (id: number) => {
+  return await db.select().from(users).where(eq(users.id, id));
+});
+
+// Same query in same render won't execute twice
+```
+
+## Code Review Checklist
+
+When reviewing database code:
+
+- [ ] No database queries inside `.map()` or loops
+- [ ] No `await` inside `for...of` loops
+- [ ] Related data fetched with JOINs or includes
+- [ ] Parallel queries use `Promise.all()`
+- [ ] Expensive queries are cached when appropriate
+- [ ] Query results are batched when possible
+
+## CI Integration
+
+### GitHub Actions
+
+The workflow (`n-plus-one-detection.yml`) will:
+
+1. **Scan on PRs**: Checks changed files for N+1 patterns
+2. **Comment on PRs**: Alerts if high-risk patterns found
+3. **Weekly reports**: Full scan every Tuesday
+4. **Fail CI**: Blocks merge for high-risk patterns (optional)
+
+### PR Comments
+
+When N+1 patterns are detected:
+- Bot comments on the PR
+- Links to detailed report
+- Suggests specific solutions
+
+## Testing N+1 Prevention
+
+### Unit Tests
+
+```typescript
+// Test that queries are batched
+it('should batch user queries', async () => {
+  const querySpy = jest.spyOn(db, 'select');
+  
+  const userIds = [1, 2, 3];
+  await Promise.all(userIds.map(id => userLoader.load(id)));
+  
+  expect(querySpy).toHaveBeenCalledTimes(1); // Only 1 query
+});
+```
+
+### Integration Tests
+
+```typescript
+// Test with query logging
+it('should not make N+1 queries', async () => {
+  const queries: string[] = [];
+  
+  db.$on('query', (e) => queries.push(e.query));
+  
+  await getUsersWithOrders(); // Your function
+  
+  // Should be 2 queries max (1 for users, 1 for orders)
+  expect(queries.length).toBeLessThanOrEqual(2);
+});
+```
+
+## Performance Impact
+
+### N+1 Query Cost
+
+| Users | Orders/User | N+1 Queries | Optimized Queries | Time Impact |
+|-------|-------------|-------------|-------------------|-------------|
+| 10    | 5           | 51          | 2                 | ~10x slower |
+| 100   | 5           | 501         | 2                 | ~100x slower |
+| 1000  | 5           | 5001        | 2                 | ~1000x slower |
+
+### Real-World Impact
+
+- **API response time**: 200ms → 2000ms+
+- **Database load**: Linear growth vs constant
+- **User experience**: Page freezes, timeouts
+
+## Resources
+
+- [DataLoader](https://github.com/graphql/dataloader) - Batching and caching
+- [GraphQL N+1 Problem](https://medium.com/@__hugobrend__/the-n-1-problem-in-graphql-5e5d5a2f59ad)
+- [Drizzle Relations](https://orm.drizzle.team/docs/rqb) - ORM eager loading
+- [Postgres Query Planning](https://www.postgresql.org/docs/current/planner-optimizer.html)
+
+## Troubleshooting
+
+### Scanner False Positives
+
+The scanner may flag patterns that aren't actually N+1:
+
+**Example 1: Already batched**
+```typescript
+// This is fine - data already loaded
+users.map(u => u.orders.length); // No DB call here
+```
+
+**Example 2: Different data sources**
+```typescript
+// External APIs, not database
+users.map(u => fetchExternalAPI(u.id));
+```
+
+### When to Ignore
+
+Add a comment to suppress if certain:
+```typescript
+// biome-ignore lint/performance/nPlusOne: Data already loaded from previous query
+users.map(u => process(u.orders));
+```
+
+## Commands Reference
+
+```bash
+# Run N+1 scan locally
+pnpm check:n-plus-one
+
+# Check specific file
+bash scripts/check-n-plus-one.sh apps/app/app/page.tsx
+
+# Full scan with verbose output
+DEBUG=1 bash scripts/check-n-plus-one.sh
+```
