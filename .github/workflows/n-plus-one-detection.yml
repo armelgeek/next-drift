@@ -1,0 +1,71 @@
+name: N+1 Query Detection
+
+on:
+  schedule:
+    # Run weekly on Tuesdays at 3:00 AM AWST (7:00 PM UTC Monday)
+    - cron: '0 19 * * 1'
+  
+  pull_request:
+    paths:
+      - 'apps/**'
+      - 'packages/database/**'
+  
+  workflow_dispatch:
+
+jobs:
+  detect-n-plus-one:
+    name: Detect N+1 Query Patterns
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run N+1 query detection
+        id: detect
+        run: |
+          echo "🔍 Running N+1 query detection scan..."
+          bash scripts/check-n-plus-one.sh 2>&1 | tee n-plus-one-report.txt
+          
+          # Capture exit code
+          EXIT_CODE=$?
+          
+          # Check if high risk issues found
+          if [ $EXIT_CODE -eq 1 ]; then
+            echo "high_risk=true" >> $GITHUB_OUTPUT
+          else
+            echo "high_risk=false" >> $GITHUB_OUTPUT
+          fi
+          
+          exit 0
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: n-plus-one-scan-report
+          path: n-plus-one-report.txt
+          retention-days: 30
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request' && steps.detect.outputs.high_risk == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '⚠️ **N+1 Query Patterns Detected**\n\nThe scanner found potential N+1 query patterns in your changes. These can cause performance issues.\n\n**Please review:**\n- Database queries inside loops (.map, for/of)\n- Sequential awaits in iteration\n- Multiple single-record queries\n\n[View full report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})\n\n**Solutions:**\n1. Use DataLoader pattern for batching\n2. Use JOINs/includes for related data\n3. Use Promise.all() for parallel queries'
+            })
+
+      - name: Summary
+        run: |
+          echo "## N+1 Query Detection Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.detect.outputs.high_risk }}" == "true" ]; then
+            echo "⚠️ **High risk N+1 patterns detected**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Review the uploaded report for details." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ **No high-risk N+1 patterns detected**" >> $GITHUB_STEP_SUMMARY
+          fi
