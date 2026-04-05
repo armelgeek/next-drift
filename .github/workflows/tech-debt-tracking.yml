@@ -198,21 +198,7 @@ jobs:
               state: 'open'
             });
             
-            const issueBody = `## Weekly Tech Debt Scan
-
-${report}
-
----
-
-*This issue is automatically updated weekly. Last updated: ${new Date().toISOString()}*
-
-**Next Steps:**
-1. Review high-complexity files for refactoring opportunities
-2. Address TODO/FIXME comments
-3. Update outdated dependencies
-4. Consider breaking down large files
-
-[View full report in workflow artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
+            const issueBody = '## Weekly Tech Debt Scan\n\n' + report + '\n\n---\n\n*This issue is automatically updated weekly. Last updated: ' + new Date().toISOString() + '*\n\n**Next Steps:**\n1. Review high-complexity files for refactoring opportunities\n2. Address TODO/FIXME comments\n3. Update outdated dependencies\n4. Consider breaking down large files\n\n[View full report in workflow artifacts](https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId + ')';
             
             if (issues.length > 0) {
               // Update existing issue

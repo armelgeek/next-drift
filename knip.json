@@ -51,7 +51,7 @@
       "project": ["**/*.{ts,tsx}"]
     }
   },
-  "ignore": ["**/*.d.ts"],
+  "ignore": ["**/*.d.ts", ".github/workflows/**/*"],
   "ignoreDependencies": [
     "@types/node",
     "typescript",
