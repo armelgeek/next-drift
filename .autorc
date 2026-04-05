@@ -6,5 +6,10 @@
   "email": "git@oscardb.xyz",
   "noChangelog": true,
   "onlyPublishWithReleaseLabel": false,
-  "skipReleaseLabels": ["skip-release"]
+  "skipReleaseLabels": ["skip-release"],
+  "baseBranch": "main",
+  "prereleaseBranches": [],
+  "shipit": {
+    "prerelease": false
+  }
 }
