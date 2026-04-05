@@ -1,7 +1,10 @@
 {
-  "plugins": ["npm", "first-time-contributor", "released"],
+  "plugins": ["npm", "first-time-contributor"],
   "owner": "oscardobsonbrown",
   "repo": "next-ship",
   "name": "Oscar Dobson-Brown",
-  "email": "git@oscardb.xyz"
+  "email": "git@oscardb.xyz",
+  "noChangelog": true,
+  "onlyPublishWithReleaseLabel": false,
+  "skipReleaseLabels": ["skip-release"]
 }
