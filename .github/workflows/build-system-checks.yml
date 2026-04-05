@@ -271,9 +271,17 @@ jobs:
         run: pnpm install
 
       - name: Build web app
+        env:
+          # Required for build - using placeholder values for CI
+          NEXT_PUBLIC_APP_URL: https://app.example.com
+          NEXT_PUBLIC_WEB_URL: https://example.com
+          BASEHUB_TOKEN: bshb_pk_ci_placeholder_token_for_build_only_ci_ci_ci
+          # Optional but set for completeness
+          NEXT_PUBLIC_API_URL: https://api.example.com
+          NEXT_PUBLIC_DOCS_URL: https://docs.example.com
         run: |
           cd apps/web
-          pnpm build 2>&1 | tee build.log || true
+          pnpm build 2>&1 | tee build.log
           
           # Extract bundle sizes from build output
           if [ -f ".next/analyze/client.html" ]; then
