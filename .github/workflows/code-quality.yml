@@ -1,4 +1,4 @@
-name: Code Quality Metrics
+name: Code Quality
 
 on:
   pull_request:
