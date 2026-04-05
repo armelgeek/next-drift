@@ -232,13 +232,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run knip to detect unused dependencies
+      - name: Check for unused dependencies
         run: |
-          echo "🔍 Checking for unused dependencies and exports..."
-          pnpm dead-code || true
+          echo "🔍 Checking for unused dependencies..."
+          echo "Note: Full dead code detection with knip runs in code-quality-metrics.yml on every PR"
           echo ""
-          echo "💡 Review the knip output above for unused dependencies"
-          echo "   Run 'pnpm dead-code' locally to see full details"
+          echo "💡 Run 'pnpm dead-code' locally to see full details"
 
   bundle-size-tracking:
     name: Bundle Size Tracking
