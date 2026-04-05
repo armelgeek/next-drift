@@ -1,3 +1,18 @@
+# v0.0.8 (Sun Apr 05 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'main' of https://github.com/oscardobsonbrown/next-ship ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- docs: update AGENTS.md with ultracite formatting guidelines ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- chore: standardize formatting with ultracite across IDE and pre-commit hooks ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- test fixes ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.7 (Sun Apr 05 2026)
 
 #### ⚠️ Pushed to `main`
