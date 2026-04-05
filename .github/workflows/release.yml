@@ -52,4 +52,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.AUTO_GH_TOKEN || secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx auto shipit --quiet
+        run: npx auto shipit
