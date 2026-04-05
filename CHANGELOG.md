@@ -1,3 +1,15 @@
+# v0.0.2 (Sun Apr 05 2026)
+
+#### ⚠️ Pushed to `main`
+
+- fix: resolve Build System Checks workflow issues ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.1 (Sun Apr 05 2026)
 
 #### 🐛 Bug Fix
