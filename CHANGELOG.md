@@ -1,3 +1,15 @@
+# v0.0.9 (Sun Apr 05 2026)
+
+#### ⚠️ Pushed to `main`
+
+- fix: resolve CodeQL duplicate upload error and update to v4 ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.8 (Sun Apr 05 2026)
 
 #### ⚠️ Pushed to `main`
