@@ -55,7 +55,17 @@
     "quarantine:remove": "bash scripts/flaky-tests.sh unquarantine",
     "analyze:bundle": "cd apps/web && ANALYZE=true pnpm build",
     "tech-debt:scan": "bash scripts/tech-debt-scan.sh",
-    "check:n-plus-one": "bash scripts/check-n-plus-one.sh"
+    "check:n-plus-one": "bash scripts/check-n-plus-one.sh",
+    "act:list": "act -l 2>&1 | grep -v 'error-to-insight.yml' || true",
+    "act:ci": "act pull_request --workflows .github/workflows/ci.yml",
+    "act:e2e": "act pull_request --workflows .github/workflows/e2e.yml --timeout 30m",
+    "act:build-checks": "act schedule --workflows .github/workflows/build-system-checks.yml",
+    "act:release:dry": "act push --workflows .github/workflows/release.yml -n",
+    "act:error-insight": "echo '⚠️ error-to-insight.yml has YAML parsing issues with Act (works on GitHub). See ACT-README.md for details.'",
+    "act:agents-md": "act pull_request --workflows .github/workflows/agents-md-validation.yml",
+    "act:codeql": "act schedule --workflows .github/workflows/codeql.yml -n",
+    "act:release-notes": "act push --workflows .github/workflows/release-notes.yml -n",
+    "act:all": "echo 'Running all workflows except error-to-insight.yml (has Act parsing issues)...' && for wf in .github/workflows/*.yml; do [ \"$(basename $wf)\" = 'error-to-insight.yml' ] && continue; echo \"Running: $wf\"; act pull_request --workflows \"$wf\" || true; done"
   },
   "dependencies": {
     "@clack/prompts": "^0.11.0",

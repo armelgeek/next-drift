@@ -121,46 +121,46 @@ jobs:
               
               if (!similarIssue) {
                 // Create new issue
+                const titlePrefix = '🐛 Error Insight: ';
+                const titleSuffix = errorMessage.length > 80 ? '...' : '';
+                const title = titlePrefix + errorMessage.substring(0, 80) + titleSuffix;
+                
+                const occurrencesLine = '**Occurrences** ' + count + ' times in last 24 hours';
+                const dashboardUrl = 'https://us.posthog.com/project/' + process.env.POSTHOG_PROJECT_ID + '/events';
+                const errorSearchUrl = 'https://us.posthog.com/project/' + process.env.POSTHOG_PROJECT_ID + '/events?event=$exception&properties.$exception_message=' + encodeURIComponent(errorMessage);
+                
+                // Build body content using string concatenation to avoid YAML parsing issues
+                let bodyContent = '## Automated Error Report\n\n';
+                bodyContent += '**Error Message**\n<pre><code>' + errorMessage + '</code></pre>\n\n';
+                bodyContent += occurrencesLine + '\n\n';
+                bodyContent += '**Source** PostHog error tracking\n\n';
+                bodyContent += '### Recommended Actions:\n';
+                bodyContent += '1. [ ] Investigate root cause\n';
+                bodyContent += '2. [ ] Check related logs in PostHog\n';
+                bodyContent += '3. [ ] Determine if user-facing or internal\n';
+                bodyContent += '4. [ ] Assign priority based on impact\n';
+                bodyContent += '5. [ ] Fix and monitor\n\n';
+                bodyContent += '**Resources**\n';
+                bodyContent += '- [PostHog Dashboard](' + dashboardUrl + ')\n';
+                bodyContent += '- [View similar errors](' + errorSearchUrl + ')\n\n';
+                bodyContent += '*This issue was automatically created by the error-to-insight pipeline.*\n\n';
+                bodyContent += '---\n\n';
+                bodyContent += '**Next Steps**\n';
+                bodyContent += '- Add additional context as you investigate\n';
+                bodyContent += '- Update labels (bug, critical, etc.)\n';
+                bodyContent += '- Link to any PRs that fix this issue';
+                
                 await github.rest.issues.create({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  title: `🐛 Error Insight: ${errorMessage.substring(0, 80)}${errorMessage.length > 80 ? '...' : ''}`,
-                  body: `## Automated Error Report
-
-**Error Message:**
-\`\`\`
-${errorMessage}
-\`\`\`
-
-**Occurrences:** ${count} times in last 24 hours
-
-**Source:** PostHog error tracking
-
-### Recommended Actions:
-1. [ ] Investigate root cause
-2. [ ] Check related logs in PostHog
-3. [ ] Determine if user-facing or internal
-4. [ ] Assign priority based on impact
-5. [ ] Fix and monitor
-
-**Resources:**
-- [PostHog Dashboard](https://us.posthog.com/project/${process.env.POSTHOG_PROJECT_ID}/events)
-- [View similar errors](https://us.posthog.com/project/${process.env.POSTHOG_PROJECT_ID}/events?event=$exception&properties.$exception_message=${encodeURIComponent(errorMessage)})
-
-*This issue was automatically created by the error-to-insight pipeline.*
-
----
-
-**Next Steps:**
-- Add additional context as you investigate
-- Update labels (bug, critical, etc.)
-- Link to any PRs that fix this issue`,
+                  title: title,
+                  body: bodyContent,
                   labels: ['error-insight', 'automated', 'needs-investigation']
                 });
                 
-                console.log(`Created issue for error: ${errorMessage.substring(0, 50)}...`);
+                console.log('Created issue for error: ' + errorMessage.substring(0, 50) + '...');
               } else {
-                console.log(`Issue already exists for: ${errorMessage.substring(0, 50)}...`);
+                console.log('Issue already exists for: ' + errorMessage.substring(0, 50) + '...');
               }
             }
 
@@ -170,7 +170,7 @@ ${errorMessage}
           echo "" >> $GITHUB_STEP_SUMMARY
           
           if [ "${{ steps.fetch-errors.outputs.errors_found }}" == "true" ]; then
-            echo "**Total errors found:** ${{ steps.fetch-errors.outputs.error_count }}" >> $GITHUB_STEP_SUMMARY
+            echo "__Total errors found:__ ${{ steps.fetch-errors.outputs.error_count }}" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
             
             if [ "${{ steps.analyze.outputs.errors_to_process }}" == "true" ]; then

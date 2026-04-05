@@ -283,3 +283,15 @@ packages/database/generated
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Act - Local GitHub Actions Runner
+# https://github.com/nektos/act
+.actrc
+.env.act
+/tmp/act-artifacts/
+.act-event.json
+
+# Local Act cache and state
+~/.cache/act/
+~/.config/act/
+
