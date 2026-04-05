@@ -1,3 +1,15 @@
+# v0.0.6 (Sun Apr 05 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Split code-quality-metrics into independent jobs for better visibility ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.5 (Sun Apr 05 2026)
 
 #### ⚠️ Pushed to `main`
