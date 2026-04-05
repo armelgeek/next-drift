@@ -30,8 +30,8 @@
     "dead-code": "knip --no-exit-code",
     "duplicate-code": "jscpd --min-lines 20 --min-tokens 80 --threshold 100 --reporters console --ignore \"**/node_modules/**,**/.next/**,**/coverage/**,**/dist/**,**/__tests__/**\" \"apps\" \"packages\"",
     "fix": "npx ultracite@latest fix",
-    "format": "biome format --write .",
-    "lint": "biome lint --write .",
+    "format": "npx ultracite@latest fix",
+    "lint": "npx ultracite@latest check",
     "biome:check": "biome check --write .",
     "biome:ci": "biome ci .",
     "test": "pnpm --filter @repo/testing build && turbo test",
@@ -93,10 +93,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,jsonc,css,md,mdx}": [
-      "biome format --write --no-errors-on-unmatched"
-    ],
-    "*.{js,jsx,ts,tsx}": [
-      "biome lint --write --no-errors-on-unmatched"
+      "npx ultracite@latest fix"
     ]
   },
   "packageManager": "pnpm@10.24.0",
