@@ -8,7 +8,8 @@ This is **next-ship**, a production-grade Turborepo template for Next.js applica
 
 ### Code Style
 - Use TypeScript with strict typing
-- Follow Biome formatting rules (enforced via pre-commit hooks)
+- Follow **ultracite** formatting rules (Biome preset, enforced via pre-commit hooks)
+- IDE auto-save uses Biome extension which reads `biome.jsonc` (ultracite configuration)
 - Prefer descriptive variable names with auxiliary verbs
 - Write modular, reusable code
 
@@ -20,12 +21,15 @@ This is **next-ship**, a production-grade Turborepo template for Next.js applica
 ### Common Commands
 - `pnpm dev` — Start development servers
 - `pnpm build` — Build all apps and packages
-- `pnpm format` — Format with Biome
-- `pnpm lint` — Lint with Biome
-- `pnpm check` — Run Biome check (format + lint)
+- `pnpm format` — Format with ultracite (runs `ultracite fix`)
+- `pnpm lint` — Lint with ultracite (runs `ultracite check`)
+- `pnpm check` — Run ultracite check (format + lint)
+- `pnpm fix` — Run ultracite fix (format + lint with auto-fix)
 - `pnpm test` — Run tests
 - `pnpm migrate` — Run Prisma migrations
 - `pnpm boundaries` — Check monorepo boundaries
+- `pnpm biome:check` — Direct Biome check (if needed)
+- `pnpm biome:ci` — Direct Biome CI check (if needed)
 
 ### Environment Variables
 - Copy `.env.example` to `.env` in each app/package
@@ -52,8 +56,15 @@ This is **next-ship**, a production-grade Turborepo template for Next.js applica
 
 ### Pre-commit Hooks
 - Husky runs on every commit
-- Biome format/lint on staged files
+- **ultracite fix** runs on staged files (via lint-staged)
 - Large file detection (>1MB blocks commit)
+
+### IDE Configuration
+- **VSCode**: Install "Biome" extension (`biomejs.biome`)
+- **Zed**: Install "Biome" extension
+- **Cursor**: Install "Biome" extension (`biomejs.biome`)
+- All IDEs are configured to use Biome formatter which reads `biome.jsonc`
+- The Biome configuration extends `ultracite` presets, ensuring IDE and pre-commit formatting are identical
 
 ### Security
 - CODEOWNERS configured for review requirements
