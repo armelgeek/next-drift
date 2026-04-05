@@ -76,18 +76,8 @@ jobs:
           echo "## High Complexity Files" >> tech-debt-report.md
           echo "" >> tech-debt-report.md
           
-          # Use jscpd to find duplicate code (indicates tech debt)
-          echo "Checking for duplicate code..."
-          pnpm duplicate-code 2>&1 | tee duplicate-code-output.txt || true
+          # Note: Duplicate code detection now runs in code-quality-metrics.yml on every PR
           
-          if grep -q "Found.*duplicates" duplicate-code-output.txt 2>/dev/null; then
-            echo "⚠️ Duplicate code detected" >> tech-debt-report.md
-            echo "" >> tech-debt-report.md
-            grep -A 5 "Found.*duplicates" duplicate-code-output.txt | head -20 >> tech-debt-report.md
-            echo "" >> tech-debt-report.md
-          fi
-          
-          # 2. Check for large files
           echo "## Large Files (>500 lines)" >> tech-debt-report.md
           echo "" >> tech-debt-report.md
           
