@@ -49,6 +49,53 @@ jobs:
           ANALYZE=true pnpm build 2>&1 | tee build-output.txt
         env:
           ANALYZE: "true"
+          # Required environment variables for build - using dummy values for bundle analysis
+          BASEHUB_TOKEN: "${{ secrets.BASEHUB_TOKEN || 'dummy-token-for-build' }}"
+          CLERK_SECRET_KEY: "${{ secrets.CLERK_SECRET_KEY || 'sk_test_dummy' }}"
+          CLERK_WEBHOOK_SECRET: "${{ secrets.CLERK_WEBHOOK_SECRET || 'whsec_dummy' }}"
+          DATABASE_URL: "${{ secrets.DATABASE_URL || 'postgresql://dummy:dummy@localhost:5432/dummy' }}"
+          RESEND_TOKEN: "${{ secrets.RESEND_TOKEN || 're_dummy' }}"
+          POLAR_ACCESS_TOKEN: "${{ secrets.POLAR_ACCESS_TOKEN || 'polar_dummy' }}"
+          FLAGS_SECRET: "${{ secrets.FLAGS_SECRET || 'flags_dummy' }}"
+          # Client-side env vars
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || 'pk_test_dummy' }}"
+          NEXT_PUBLIC_CLERK_SIGN_IN_URL: "/sign-in"
+          NEXT_PUBLIC_CLERK_SIGN_UP_URL: "/sign-up"
+          NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: "/"
+          NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: "/"
+          NEXT_PUBLIC_APP_URL: "http://localhost:3000"
+          NEXT_PUBLIC_WEB_URL: "http://localhost:3001"
+          NEXT_PUBLIC_API_URL: "http://localhost:3002"
+
+      - name: Debug secrets
+        env:
+          BASEHUB_TOKEN: "${{ secrets.BASEHUB_TOKEN }}"
+          CLERK_SECRET_KEY: "${{ secrets.CLERK_SECRET_KEY }}"
+          DATABASE_URL: "${{ secrets.DATABASE_URL }}"
+        run: |
+          echo "🔍 Checking secret availability..."
+          if [ -n "$BASEHUB_TOKEN" ]; then
+            echo "✅ BASEHUB_TOKEN is available"
+          else
+            echo "❌ BASEHUB_TOKEN is NOT available (will use fallback)"
+          fi
+          
+          if [ -n "$CLERK_SECRET_KEY" ]; then
+            echo "✅ CLERK_SECRET_KEY is available"
+          else
+            echo "❌ CLERK_SECRET_KEY is NOT available (will use fallback)"
+          fi
+          
+          if [ -n "$DATABASE_URL" ]; then
+            echo "✅ DATABASE_URL is available"
+          else
+            echo "❌ DATABASE_URL is NOT available (will use fallback)"
+          fi
+          
+          # Check what env vars are actually set (masked)
+          echo ""
+          echo "Environment variables passed to build:"
+          env | grep -E "^(BASEHUB|CLERK|DATABASE|RESEND|POLAR|FLAGS)" | sed 's/=.*/=***REDACTED***/' | sort
 
       - name: Extract bundle metrics
         id: metrics
