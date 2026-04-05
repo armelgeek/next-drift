@@ -1,3 +1,16 @@
+# v0.0.4 (Sun Apr 05 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'main' of https://github.com/oscardobsonbrown/next-ship ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- fix: Add all required environment variables to E2E workflow ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.3 (Sun Apr 05 2026)
 
 #### ⚠️ Pushed to `main`
