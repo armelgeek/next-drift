@@ -1,9 +1,9 @@
 {
-  "plugins": ["npm", "first-time-contributor"],
+  "plugins": ["npm"],
   "owner": "oscardobsonbrown",
   "repo": "next-ship",
   "name": "Oscar Dobson-Brown",
-  "email": "git@oscardb.xyz",
+  "email": "git@oscardobsonbrown.xyz",
   "noChangelog": true,
   "onlyPublishWithReleaseLabel": false,
   "skipReleaseLabels": ["skip-release"],
@@ -12,4 +12,5 @@
   "shipit": {
     "prerelease": false
   }
+}
 }
