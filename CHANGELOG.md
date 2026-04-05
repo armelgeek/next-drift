@@ -1,3 +1,15 @@
+# v0.0.7 (Sun Apr 05 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Rename code-quality-metrics.yml to code-quality.yml ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.6 (Sun Apr 05 2026)
 
 #### ⚠️ Pushed to `main`
