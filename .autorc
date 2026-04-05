@@ -4,13 +4,12 @@
   "repo": "next-ship",
   "name": "Oscar Dobson-Brown",
   "email": "git@oscardb.xyz",
-  "noChangelog": true,
   "onlyPublishWithReleaseLabel": false,
   "labels": [
     {
       "name": "skip-release",
       "description": "Skip creating a release",
-      "type": "skip"
+      "releaseType": "skip"
     }
   ],
   "baseBranch": "main",
