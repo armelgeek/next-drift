@@ -1,8 +1,24 @@
 {
   "name": "next-ship",
-  "version": "5.3.2",
+  "version": "0.4.1",
+  "description": "a lightweight, production-ready turborepo template",
+  "homepage": "https://github.com/oscardobsonbrown/next-ship#readme",
+  "bugs": {
+    "url": "https://github.com/oscardobsonbrown/next-ship/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oscardobsonbrown/next-ship.git"
+  },
+  "license": "MIT",
+  "author": "Oscar Dobson-Brown",
+  "type": "module",
+  "main": "index.js",
   "bin": {
     "next-ship": "dist/index.js"
+  },
+  "directories": {
+    "doc": "docs"
   },
   "files": [
     "dist/index.js"
@@ -41,6 +57,10 @@
     "tech-debt:scan": "bash scripts/tech-debt-scan.sh",
     "check:n-plus-one": "bash scripts/check-n-plus-one.sh"
   },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "commander": "^14.0.2"
+  },
   "devDependencies": {
     "@auto-it/first-time-contributor": "^11.3.6",
     "@biomejs/biome": "2.3.8",
@@ -58,6 +78,9 @@
     "ultracite": "6.3.9",
     "vitest": "^4.0.15"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,jsonc,css,md,mdx}": [
       "biome format --write --no-errors-on-unmatched"
@@ -66,19 +89,11 @@
       "biome lint --write --no-errors-on-unmatched"
     ]
   },
-  "engines": {
-    "node": ">=18"
-  },
   "packageManager": "pnpm@10.24.0",
-  "dependencies": {
-    "@clack/prompts": "^0.11.0",
-    "commander": "^14.0.2"
-  },
   "pnpm": {
     "overrides": {
       "parse5": "^7.2.1",
       "next": "16.2.1"
     }
-  },
-  "type": "module"
+  }
 }

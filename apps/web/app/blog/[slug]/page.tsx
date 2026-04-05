@@ -1,5 +1,5 @@
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import { blog } from "@repo/cms";
+import { blog, type RichTextNode } from "@repo/cms";
 import { Body } from "@repo/cms/components/body";
 import { CodeBlock } from "@repo/cms/components/code-block";
 import { Feed } from "@repo/cms/components/feed";
@@ -18,17 +18,53 @@ const protocol = env.VERCEL_PROJECT_PRODUCTION_URL?.startsWith("https")
   : "http";
 const url = new URL(`${protocol}://${env.VERCEL_PROJECT_PRODUCTION_URL}`);
 
+type BlogPost = {
+  _title: string;
+  _slug: string;
+  description: string;
+  date: string;
+  image?: {
+    url: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+  };
+  authors: Array<{
+    _title: string;
+    avatar?: {
+      url: string;
+    };
+    xUrl?: string;
+  }>;
+  body: {
+    plainText: string;
+    json: {
+      content: unknown;
+      toc: unknown;
+    };
+    readingTime: number;
+  };
+};
+
 type BlogPostProperties = {
   readonly params: Promise<{
     slug: string;
   }>;
 };
 
+type FeedData = {
+  blog: {
+    posts: {
+      item: BlogPost | null;
+    };
+  };
+};
+
 export const generateMetadata = async ({
   params,
 }: BlogPostProperties): Promise<Metadata> => {
   const { slug } = await params;
-  const post = await blog.getPost(slug);
+  const post = (await blog.getPost(slug)) as BlogPost | null;
 
   if (!post) {
     return {};
@@ -37,7 +73,7 @@ export const generateMetadata = async ({
   return createMetadata({
     title: post._title,
     description: post.description,
-    image: post.image.url,
+    image: post.image?.url,
   });
 };
 
@@ -52,11 +88,10 @@ const BlogPost = async ({ params }: BlogPostProperties) => {
 
   return (
     <Feed queries={[blog.postQuery(slug)]}>
-      {/* biome-ignore lint/suspicious/useAwait: "Server Actions must be async" */}
       {async ([data]) => {
         "use server";
 
-        const page = data.blog.posts.item;
+        const page = (data as FeedData).blog.posts.item;
 
         if (!page) {
           notFound();
@@ -75,7 +110,7 @@ const BlogPost = async ({ params }: BlogPostProperties) => {
                   "@id": new URL(`/blog/${page._slug}`, url).toString(),
                 },
                 headline: page._title,
-                image: page.image.url,
+                image: page.image?.url,
                 dateModified: page.date,
                 author: page.authors.at(0)?._title,
                 isAccessibleForFree: true,
@@ -107,7 +142,7 @@ const BlogPost = async ({ params }: BlogPostProperties) => {
                         src={page.image.url}
                         width={page.image.width}
                       />
-                    ) : undefined}
+                    ) : null}
                     <div className="mx-auto max-w-prose">
                       <Body
                         components={{
@@ -118,7 +153,7 @@ const BlogPost = async ({ params }: BlogPostProperties) => {
                             />
                           ),
                         }}
-                        content={page.body.json.content}
+                        content={page.body.json.content as RichTextNode[]}
                       />
                     </div>
                   </div>

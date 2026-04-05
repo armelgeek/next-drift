@@ -3,11 +3,32 @@ import { Feed } from "@repo/cms/components/feed";
 import Link from "next/link";
 import { env } from "@/env";
 
+// Local types to work around basehub fragmentOn.infer type inference bug
+// that causes exported types to resolve to 'never'
+type LegalPost = {
+  _slug: string;
+  _title: string;
+  description?: string;
+  _sys: {
+    id: string;
+    slug: string;
+    title: string;
+  };
+};
+
+type LegalPagesData = {
+  legalPages: {
+    items: LegalPost[];
+  };
+};
+
 export const Footer = () => (
   <Feed queries={[legal.postsQuery]}>
     {/* biome-ignore lint/suspicious/useAwait: Server Actions must be async */}
     {async ([data]) => {
       "use server";
+
+      const typedData = data as LegalPagesData;
 
       const navigationItems = [
         {
@@ -28,10 +49,11 @@ export const Footer = () => (
         {
           title: "Legal",
           description: "We stay on top of the latest legal requirements.",
-          items: data.legalPages.items.map((post) => ({
-            title: post._title,
-            href: `/legal/${post._slug}`,
-          })),
+          items:
+            typedData.legalPages?.items?.map((post) => ({
+              title: post._title,
+              href: `/legal/${post._slug}`,
+            })) ?? [],
         },
       ];
 
@@ -71,11 +93,9 @@ export const Footer = () => (
                             rel={
                               item.href.includes("http")
                                 ? "noopener noreferrer"
-                                : undefined
+                                : ""
                             }
-                            target={
-                              item.href.includes("http") ? "_blank" : undefined
-                            }
+                            target={item.href.includes("http") ? "_blank" : ""}
                           >
                             <span className="text-xl">{item.title}</span>
                           </Link>
@@ -90,12 +110,10 @@ export const Footer = () => (
                             rel={
                               subItem.href.includes("http")
                                 ? "noopener noreferrer"
-                                : undefined
+                                : ""
                             }
                             target={
-                              subItem.href.includes("http")
-                                ? "_blank"
-                                : undefined
+                              subItem.href.includes("http") ? "_blank" : ""
                             }
                           >
                             <span className="text-foreground/75">

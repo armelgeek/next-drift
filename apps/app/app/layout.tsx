@@ -4,6 +4,7 @@ import { AnalyticsProvider } from "@repo/analytics/provider";
 import { DesignSystemProvider } from "@repo/design-system";
 import { fonts } from "@repo/design-system/lib/fonts";
 import { Toolbar } from "@repo/feature-flags/components/toolbar";
+import { Agentation } from "agentation";
 import type { ReactNode } from "react";
 
 type RootLayoutProperties = {
@@ -26,6 +27,9 @@ const RootLayout = ({ children }: RootLayoutProperties) => (
         </DesignSystemProvider>
       </AnalyticsProvider>
       <Toolbar />
+      {process.env.NODE_ENV === "development" && (
+        <Agentation endpoint="http://localhost:4747" />
+      )}
     </body>
   </html>
 );

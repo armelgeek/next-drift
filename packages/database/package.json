@@ -11,10 +11,11 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx src/seed.ts",
-    "clean": "git clean -xdf .cache .turbo dist node_modules drizzle",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:ephemeral": "tsx scripts/ephemeral-test.ts",
+    "clean": "git clean -xdf .cache .turbo dist node_modules drizzle",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
