@@ -6,9 +6,9 @@ on:
     branches: [main]
 
 jobs:
-  code-quality-metrics:
+  typecheck-api:
+    name: TypeCheck API
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,14 +29,98 @@ jobs:
       - name: Typecheck API
         run: pnpm --filter api typecheck
 
+  build-test-utilities:
+    name: Build Shared Test Utilities
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Build shared test utilities
         run: pnpm --filter @repo/testing build
+
+  dead-code-detection:
+    name: Dead Code Detection (Knip)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Dead code detection (Knip)
         run: pnpm dead-code
 
+  duplicate-code-detection:
+    name: Duplicate Code Detection (jscpd)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Duplicate code detection (jscpd)
         run: pnpm duplicate-code
+
+  test-coverage:
+    name: Test Coverage
+    runs-on: ubuntu-latest
+    needs: build-test-utilities
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build shared test utilities
+        run: pnpm --filter @repo/testing build
 
       - name: Run tests with coverage
         run: NODE_ENV=test npx -y node@22 ./node_modules/vitest/vitest.mjs run --root apps/api --config vitest.config.mts --coverage.enabled true --coverage.provider v8 --coverage.reportsDirectory coverage
