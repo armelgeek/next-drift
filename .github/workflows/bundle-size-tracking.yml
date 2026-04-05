@@ -61,14 +61,41 @@ jobs:
             exit 1
           fi
           
+          # Show first 100 lines of build output for debugging
+          echo "=== Build Output (first 100 lines) ==="
+          head -100 apps/web/build-output.txt
+          echo "======================================="
+          
           # Check if .next/analyze directory exists
           if [ -d "apps/web/.next/analyze" ]; then
             echo "Bundle analysis directory found"
             ls -la apps/web/.next/analyze/
           fi
           
+          # Check .next directory structure
+          echo "=== .next directory structure ==="
+          ls -la apps/web/.next/ 2>/dev/null || echo ".next directory not found"
+          
           # Extract First Load JS size from build output
-          FIRST_LOAD_JS=$(grep -oP 'First Load JS shared by all \K[0-9.]+' apps/web/build-output.txt || echo "unknown")
+          # Try Pages Router format first
+          FIRST_LOAD_JS=$(grep -oP 'First Load JS shared by all\s+\K[0-9.]+' apps/web/build-output.txt 2>/dev/null || echo "")
+          
+          # If not found, try App Router format (look for First Load JS column)
+          if [ -z "$FIRST_LOAD_JS" ]; then
+            FIRST_LOAD_JS=$(grep -oP 'First Load JS\s+[0-9.]+' apps/web/build-output.txt 2>/dev/null | head -1 | grep -oP '[0-9.]+$' || echo "")
+          fi
+          
+          # If still not found, look for any line with kB near routes
+          if [ -z "$FIRST_LOAD_JS" ]; then
+            FIRST_LOAD_JS=$(grep -oP '\d+\.?\d*\s*kB' apps/web/build-output.txt 2>/dev/null | head -1 | grep -oP '\d+\.?\d*' || echo "unknown")
+          fi
+          
+          # Ensure we have a value
+          if [ -z "$FIRST_LOAD_JS" ]; then
+            FIRST_LOAD_JS="unknown"
+          fi
+          
+          echo "Extracted First Load JS: ${FIRST_LOAD_JS}"
           echo "first_load_js=${FIRST_LOAD_JS} kB" >> $GITHUB_OUTPUT
           
           # Count total JS chunks (handle case when directory doesn't exist)
@@ -76,18 +103,31 @@ jobs:
             JS_CHUNKS=$(find apps/web/.next/static/chunks -name "*.js" 2>/dev/null | wc -l | tr -d ' ')
           else
             JS_CHUNKS=0
+            echo "Note: .next/static/chunks directory not found"
           fi
+          echo "JS Chunks count: ${JS_CHUNKS}"
           echo "js_chunks=${JS_CHUNKS}" >> $GITHUB_OUTPUT
           
           # Calculate total bundle size
-          TOTAL_SIZE=$(du -sh apps/web/.next/static 2>/dev/null | cut -f1 || echo "unknown")
+          if [ -d "apps/web/.next/static" ]; then
+            TOTAL_SIZE=$(du -sh apps/web/.next/static 2>/dev/null | cut -f1 || echo "unknown")
+          else
+            TOTAL_SIZE="unknown"
+            echo "Note: .next/static directory not found"
+          fi
+          echo "Total size: ${TOTAL_SIZE}"
           echo "total_size=${TOTAL_SIZE}" >> $GITHUB_OUTPUT
           
           # Check for oversized chunks (>250KB)
           if [ -d "apps/web/.next/static/chunks" ]; then
+            echo "Checking for oversized chunks..."
             OVERSIZED=$(find apps/web/.next/static/chunks -name "*.js" -size +250k 2>/dev/null)
+            if [ -n "$OVERSIZED" ]; then
+              echo "Found $(echo "$OVERSIZED" | wc -l) oversized chunks"
+            fi
           else
             OVERSIZED=""
+            echo "No chunks directory to check for oversized files"
           fi
           if [ -n "$OVERSIZED" ]; then
             echo "oversized=true" >> $GITHUB_OUTPUT
