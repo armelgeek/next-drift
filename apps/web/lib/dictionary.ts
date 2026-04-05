@@ -1,205 +1,159 @@
-// Local dictionary for English-only content
-// This replaces the @repo/internationalization package for solo founders targeting English-speaking markets
-// Easy to extend for i18n later if needed
-
-export const dictionary = {
-  web: {
-    home: {
-      meta: {
-        title: "next-ship",
-        description:
-          "A comprehensive Next.js starter kit for modern web applications",
-      },
-      hero: {
-        announcement: "Latest updates and announcements",
-      },
-      cta: {
-        title: "Ready to get started?",
-        description: "Join thousands of developers building with next-ship",
-      },
-      faq: {
-        title: "Frequently Asked Questions",
-        description: "Everything you need to know about next-ship",
-        cta: "Contact us",
-        items: [
-          {
-            question: "What is next-ship?",
-            answer:
-              "next-ship is a comprehensive Next.js starter kit for modern web applications.",
-          },
-          {
-            question: "How do I get started?",
-            answer:
-              "Simply clone the repository and follow the setup instructions in the documentation.",
-          },
-          {
-            question: "Is it free to use?",
-            answer:
-              "Yes, next-ship is open source and free to use for personal and commercial projects.",
-          },
-          {
-            question: "What technologies are included?",
-            answer:
-              "Next.js, TypeScript, Tailwind CSS, and many more modern tools.",
-          },
-        ],
-      },
-      cases: {
-        title: "Trusted by leading companies",
-      },
-      stats: {
-        title: "Our impact in numbers",
-        description: "See how we've helped businesses grow and succeed",
-        items: [
-          {
-            metric: "10000",
-            delta: "25",
-            type: "number",
-            title: "Active users",
-          },
-          {
-            metric: "500000",
-            delta: "12",
-            type: "currency",
-            title: "Revenue generated",
-          },
-          {
-            metric: "99.9",
-            delta: "5",
-            type: "percentage",
-            title: "Uptime guarantee",
-          },
-          {
-            metric: "4.8",
-            delta: "8",
-            type: "rating",
-            title: "Customer rating",
-          },
-        ],
-      },
-      testimonials: {
-        title: "What our customers say",
-        items: [
-          {
-            title: "Game changer for our business",
-            description:
-              "next-ship helped us launch our product in record time with enterprise-grade quality.",
-            author: {
-              name: "Sarah Johnson",
-              image: "https://api.dicebear.com/7.x/avataaars/svg?seed=sarah",
-            },
-          },
-          {
-            title: "Best development experience",
-            description:
-              "The tooling and setup is incredibly well thought out. Saved us months of work.",
-            author: {
-              name: "Mike Chen",
-              image: "https://api.dicebear.com/7.x/avataaars/svg?seed=mike",
-            },
-          },
-          {
-            title: "Highly recommended",
-            description:
-              "We've tried many starter kits, but next-ship is by far the most complete and polished.",
-            author: {
-              name: "Emily Davis",
-              image: "https://api.dicebear.com/7.x/avataaars/svg?seed=emily",
-            },
-          },
-          {
-            title: "Exceptional quality",
-            description:
-              "The attention to detail in the codebase is impressive. Everything just works.",
-            author: {
-              name: "Alex Rodriguez",
-              image: "https://api.dicebear.com/7.x/avataaars/svg?seed=alex",
-            },
-          },
-        ],
-      },
-      features: {
-        title: "Everything you need to build faster",
-        description: "A complete toolkit for modern web development",
-        items: [
-          {
-            title: "Next.js 14",
-            description:
-              "Built on the latest Next.js with App Router for optimal performance",
-          },
-          {
-            title: "TypeScript",
-            description: "Full TypeScript support with strict type checking",
-          },
-          {
-            title: "Tailwind CSS",
-            description: "Beautiful, responsive designs with utility-first CSS",
-          },
-          {
-            title: "Authentication",
-            description: "Secure authentication with multiple providers",
-          },
-        ],
-      },
+export const en = {
+  metadata: {
+    title: "next-ship - A done-for-you Next.js template that just works",
+    description:
+      "Zero-config auth, payments, database, and analytics. Built for solo founders who want to ship fast, not configure webpack.",
+  },
+  header: {
+    logo: "Next-Ship",
+    docs: "Docs",
+    source: "Source",
+    copyAgentPrompt: "Copy agent prompt",
+  },
+  hero: {
+    title: "A done-for-you Next.js template that just works",
+    subtitle:
+      "Zero-config auth, payments, database, and analytics. Built for solo founders who want to ship fast, not configure webpack.",
+    installCommand: "npx next-ship@latest init",
+    copyCommand: "Copy Install Command",
+    agentPrompt: "Agent prompt",
+  },
+  contact: {
+    meta: {
+      title: "Get in touch",
+      description:
+        "We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.",
     },
-    header: {
-      home: "Home",
-      product: {
-        title: "Product",
-        description: "Explore our features and pricing",
-        pricing: "Pricing",
-      },
-      blog: "Blog",
-      docs: "Documentation",
-      contact: "Contact",
-      signIn: "Sign In",
-      signUp: "Sign Up",
-    },
-    global: {
-      primaryCta: "Get Started",
-      secondaryCta: "Learn More",
-    },
-    contact: {
-      meta: {
-        title: "Contact Us",
-        description: "Get in touch with our team",
-      },
-      hero: {
-        benefits: [
-          {
-            title: "Fast Response",
-            description: "We typically respond within 24 hours",
-          },
-          {
-            title: "Expert Support",
-            description: "Get help from our experienced team",
-          },
-          {
-            title: "Custom Solutions",
-            description: "We can tailor our product to your needs",
-          },
-        ],
-        form: {
-          title: "Send us a message",
-          date: "Preferred date",
-          firstName: "First name",
-          lastName: "Last name",
-          resume: "Resume/CV",
-          cta: "Send message",
+    hero: {
+      benefits: [
+        {
+          title: "Fast response time",
+          description:
+            "We typically respond within 24 hours during business days.",
         },
+        {
+          title: "Expert support",
+          description:
+            "Our team has deep expertise in Next.js and modern web development.",
+        },
+        {
+          title: "Custom solutions",
+          description:
+            "We can help tailor the template to your specific needs.",
+        },
+      ],
+      form: {
+        title: "Schedule a call",
+        date: "Preferred date",
+        firstName: "First name",
+        lastName: "Last name",
+        resume: "Upload resume",
+        cta: "Schedule call",
       },
     },
-    blog: {
-      meta: {
-        title: "Blog",
-        description: "Latest news, updates, and insights from our team",
+  },
+  features: {
+    editors: {
+      title: "Works with every AI editor",
+      description:
+        "Whether you're using Cursor, Copilot, or Claude Code, our template provides complete context files for seamless AI-assisted development.",
+    },
+    agents: {
+      title: "Built for AI agents",
+      description:
+        "Comprehensive context files and documentation designed specifically for AI agents to understand and work with your codebase.",
+    },
+  },
+  zeroConfig: {
+    title: "Zero-config by design",
+    description:
+      "Everything you need is pre-configured and ready to go. Start building features instead of wrestling with configs.",
+    tabs: {
+      lint: "Lint",
+      auth: "Auth",
+      email: "Email",
+      analytics: "Analytics",
+      payments: "Payments",
+      security: "Security",
+    },
+  },
+  designedFor: {
+    title: "Designed for humans and AI",
+    description:
+      "Clear structure, comprehensive docs, and intelligent defaults that work seamlessly for both human developers and AI assistants.",
+  },
+  cta: {
+    title: "Get started in minutes.",
+    subtitle: "Stop configuring. Start shipping.",
+    installCommand: "npx next-ship@latest init",
+    copyCommand: "Copy Install Command",
+  },
+  footer: {
+    madeWith: "Made with",
+    and: "and",
+    by: "by",
+    follow: "Follow me on",
+    columns: {
+      general: {
+        title: "General",
+        home: "Home",
+        docs: "Docs",
+      },
+      legal: {
+        title: "Legal",
+        privacy: "Privacy Policy",
+        terms: "Terms",
+        data: "Data policy",
+      },
+      editors: {
+        title: "Editors",
+        cursor: "Cursor",
+        copilot: "GitHub Copilot",
+        claude: "Claude Code",
+        zed: "Zed",
+        windsurf: "Windsurf",
+        codeium: "Codeium",
+        tabnine: "Tabnine",
+        continue: "Continue",
+        aider: "Aider",
+      },
+      agents: {
+        title: "Agents",
+        cursorComposer: "Cursor Composer",
+        amazonQ: "Amazon Q",
+        codium: "Codium",
+        codewhisperer: "CodeWhisperer",
+        sourcegraph: "Sourcegraph Cody",
+        jetbrainsAi: "JetBrains AI",
+        replit: "Replit Ghostwriter",
+        poolside: "Poolside",
+        supermaven: "Supermaven",
+        lovable: "Lovable",
+        v0: "v0",
+        bolt: "Bolt",
+        tempCode: "Temp code",
+        blackbox: "Blackbox AI",
+        codegeeX: "CodeGeeX",
+        figmaCode: "Figma to Code",
+        mintlify: "Mintlify",
+        staggered: "Staggered",
+        stepsize: "Stepsize",
+        servicenow: "ServiceNow Now Assist",
+        codeiumWindsurf: "Codeium Windsurf",
+        pearAi: "Pear AI",
+        openaiCodex: "OpenAI Codex",
+        geminiCodeAssist: "Gemini Code Assist",
+        devin: "Devin",
+        o1Assistant: "o1 Assistant",
+        chatgpt: "ChatGPT",
+        youcom: "You.com",
+        phind: "Phind",
+        perplexity: "Perplexity",
       },
     },
   },
 };
 
-export type Dictionary = typeof dictionary;
+export type Dictionary = typeof en;
 
-// Simple getter function for compatibility
-export const getDictionary = async (_locale?: string): Promise<Dictionary> =>
-  dictionary;
+export const dictionary = en;

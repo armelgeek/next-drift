@@ -30,17 +30,17 @@ export const ContactForm = ({ dictionary }: ContactFormProps) => {
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
                 <h4 className="max-w-xl text-left font-regular text-3xl tracking-tighter md:text-5xl">
-                  {dictionary.web.contact.meta.title}
+                  {dictionary.contact.meta.title}
                 </h4>
                 <p className="max-w-sm text-left text-lg text-muted-foreground leading-relaxed tracking-tight">
-                  {dictionary.web.contact.meta.description}
+                  {dictionary.contact.meta.description}
                 </p>
               </div>
             </div>
-            {dictionary.web.contact.hero.benefits.map((benefit, index) => (
+            {dictionary.contact.hero.benefits.map((benefit) => (
               <div
                 className="flex flex-row items-start gap-6 text-left"
-                key={index}
+                key={benefit.title}
               >
                 <Check className="mt-2 h-4 w-4 text-primary" />
                 <div className="flex flex-col gap-1">
@@ -55,10 +55,10 @@ export const ContactForm = ({ dictionary }: ContactFormProps) => {
 
           <div className="flex items-center justify-center">
             <div className="flex max-w-sm flex-col gap-4 rounded-md border p-8">
-              <p>{dictionary.web.contact.hero.form.title}</p>
+              <p>{dictionary.contact.hero.form.title}</p>
               <div className="grid w-full max-w-sm items-center gap-1">
                 <Label htmlFor="picture">
-                  {dictionary.web.contact.hero.form.date}
+                  {dictionary.contact.hero.form.date}
                 </Label>
                 <Popover>
                   <PopoverTrigger>
@@ -73,7 +73,7 @@ export const ContactForm = ({ dictionary }: ContactFormProps) => {
                       {date ? (
                         format(date, "PPP")
                       ) : (
-                        <span>{dictionary.web.contact.hero.form.date}</span>
+                        <span>{dictionary.contact.hero.form.date}</span>
                       )}
                     </Button>
                   </PopoverTrigger>
@@ -89,25 +89,25 @@ export const ContactForm = ({ dictionary }: ContactFormProps) => {
               </div>
               <div className="grid w-full max-w-sm items-center gap-1">
                 <Label htmlFor="firstname">
-                  {dictionary.web.contact.hero.form.firstName}
+                  {dictionary.contact.hero.form.firstName}
                 </Label>
                 <Input id="firstname" type="text" />
               </div>
               <div className="grid w-full max-w-sm items-center gap-1">
                 <Label htmlFor="lastname">
-                  {dictionary.web.contact.hero.form.lastName}
+                  {dictionary.contact.hero.form.lastName}
                 </Label>
                 <Input id="lastname" type="text" />
               </div>
               <div className="grid w-full max-w-sm items-center gap-1">
                 <Label htmlFor="picture">
-                  {dictionary.web.contact.hero.form.resume}
+                  {dictionary.contact.hero.form.resume}
                 </Label>
                 <Input id="picture" type="file" />
               </div>
 
               <Button className="w-full gap-4">
-                {dictionary.web.contact.hero.form.cta}{" "}
+                {dictionary.contact.hero.form.cta}{" "}
                 <MoveRight className="h-4 w-4" />
               </Button>
             </div>

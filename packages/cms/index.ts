@@ -1,10 +1,74 @@
-import { basehub as basehubClient, fragmentOn } from "basehub";
+import {
+  basehub as basehubClient,
+  fragmentOn as basehubFragmentOn,
+} from "basehub";
 import { keys } from "./keys";
 import "./basehub.config";
+
+// Re-export RichTextNode for use in consuming packages
+export type { RichTextNode } from "basehub/react-rich-text";
+
+// Workaround for basehub v9.5.3 broken type signature - runtime works fine
+type FragmentResult = Record<string, unknown>;
+type FragmentOn = (typeName: string, selection: object) => FragmentResult;
+const fragmentOn: FragmentOn = basehubFragmentOn as unknown as FragmentOn;
 
 const basehub = basehubClient({
   token: keys().BASEHUB_TOKEN,
 });
+
+/* -------------------------------------------------------------------------------------------------
+ * Explicit Type Definitions (workaround for basehub v9.5.3 type inference bug)
+ * -----------------------------------------------------------------------------------------------*/
+
+type ImageFragment = {
+  url: string;
+  width: number;
+  height: number;
+  alt: string;
+  blurDataURL: string;
+};
+
+type PostMeta = {
+  _slug: string;
+  _title: string;
+  authors: {
+    _title: string;
+    avatar: ImageFragment;
+    xUrl: string;
+  };
+  categories: {
+    _title: string;
+  };
+  date: string;
+  description: string;
+  image: ImageFragment;
+};
+
+type PostBody = {
+  plainText: string;
+  json: {
+    content: unknown;
+    toc: unknown;
+  };
+  readingTime: number;
+};
+
+type Post = PostMeta & {
+  body: PostBody;
+};
+
+type LegalPostMeta = {
+  _slug: string;
+  _title: string;
+  description: string;
+};
+
+type LegalPost = LegalPostMeta & {
+  body: PostBody;
+};
+
+export type { PostMeta, Post, LegalPostMeta, LegalPost };
 
 /* -------------------------------------------------------------------------------------------------
  * Common Fragments
@@ -50,9 +114,6 @@ const postFragment = fragmentOn("PostsItem", {
   },
 });
 
-export type PostMeta = fragmentOn.infer<typeof postMetaFragment>;
-export type Post = fragmentOn.infer<typeof postFragment>;
-
 export const blog = {
   postsQuery: fragmentOn("Query", {
     blog: {
@@ -73,36 +134,40 @@ export const blog = {
     },
   }),
 
-  postQuery: (slug: string) => ({
-    blog: {
-      posts: {
-        __args: {
-          filter: {
-            _sys_slug: { eq: slug },
+  postQuery: (slug: string) =>
+    fragmentOn("Query", {
+      blog: {
+        posts: {
+          __args: {
+            filter: {
+              _sys_slug: { eq: slug },
+            },
           },
+          item: postFragment,
         },
-        item: postFragment,
       },
-    },
-  }),
+    }),
 
   getPosts: async (): Promise<PostMeta[]> => {
     const data = await basehub.query(blog.postsQuery);
 
-    return data.blog.posts.items;
+    return (data as unknown as { blog: { posts: { items: unknown } } }).blog
+      .posts.items as unknown as PostMeta[];
   },
 
   getLatestPost: async (): Promise<Post | null> => {
     const data = await basehub.query(blog.latestPostQuery);
 
-    return data.blog.posts.item;
+    return (data as unknown as { blog: { posts: { item: unknown } } }).blog
+      .posts.item as unknown as Post | null;
   },
 
   getPost: async (slug: string): Promise<Post | null> => {
     const query = blog.postQuery(slug);
     const data = await basehub.query(query);
 
-    return data.blog.posts.item;
+    return (data as unknown as { blog: { posts: { item: unknown } } }).blog
+      .posts.item as unknown as Post | null;
   },
 };
 
@@ -127,9 +192,6 @@ const legalPostFragment = fragmentOn("LegalPagesItem", {
     readingTime: true,
   },
 });
-
-export type LegalPostMeta = fragmentOn.infer<typeof legalPostMetaFragment>;
-export type LegalPost = fragmentOn.infer<typeof legalPostFragment>;
 
 export const legal = {
   postsQuery: fragmentOn("Query", {
@@ -162,19 +224,22 @@ export const legal = {
   getPosts: async (): Promise<LegalPost[]> => {
     const data = await basehub.query(legal.postsQuery);
 
-    return data.legalPages.items;
+    return (data as unknown as { legalPages: { items: unknown } }).legalPages
+      .items as unknown as LegalPost[];
   },
 
   getLatestPost: async (): Promise<LegalPost | null> => {
     const data = await basehub.query(legal.latestPostQuery);
 
-    return data.legalPages.item;
+    return (data as unknown as { legalPages: { item: unknown } }).legalPages
+      .item as unknown as LegalPost | null;
   },
 
   getPost: async (slug: string): Promise<LegalPost | null> => {
     const query = legal.postQuery(slug);
     const data = await basehub.query(query);
 
-    return data.legalPages.item;
+    return (data as unknown as { legalPages: { item: unknown } }).legalPages
+      .item as unknown as LegalPost | null;
   },
 };

@@ -1,37 +1,33 @@
-import { showBetaFeature } from "@repo/feature-flags";
 import { createMetadata } from "@repo/seo/metadata";
 import type { Metadata } from "next";
 import { dictionary } from "@/lib/dictionary";
-import { Cases } from "./components/cases";
-import { CTA } from "./components/cta";
-import { FAQ } from "./components/faq";
+import { AIAgents } from "./components/ai-agents";
+import { AIEditors } from "./components/ai-editors";
+import { Cta } from "./components/cta";
+import { DesignedFor } from "./components/designed-for";
 import { Features } from "./components/features";
+import { Footer } from "./components/footer";
 import { Hero } from "./components/hero";
-import { Stats } from "./components/stats";
-import { Testimonials } from "./components/testimonials";
+import { ZeroConfig } from "./components/zero-config";
 
 export const generateMetadata = async (): Promise<Metadata> =>
-  createMetadata(dictionary.web.home.meta);
+  createMetadata({
+    title: dictionary.hero.title,
+    description: dictionary.hero.subtitle,
+  });
 
-const Home = async () => {
-  const betaFeature = await showBetaFeature();
-
-  return (
-    <>
-      {betaFeature && (
-        <div className="w-full bg-black py-2 text-center text-white">
-          Beta feature now available
-        </div>
-      )}
-      <Hero dictionary={dictionary} />
-      <Cases dictionary={dictionary} />
-      <Features dictionary={dictionary} />
-      <Stats dictionary={dictionary} />
-      <Testimonials dictionary={dictionary} />
-      <FAQ dictionary={dictionary} />
-      <CTA dictionary={dictionary} />
-    </>
-  );
-};
+const Home = async () => (
+  <>
+    <Hero dictionary={dictionary} />
+    <ZeroConfig dictionary={dictionary} />
+    <DesignedFor dictionary={dictionary} />
+    <Features>
+      <AIEditors dictionary={dictionary} />
+      <AIAgents dictionary={dictionary} />
+    </Features>
+    <Cta dictionary={dictionary} />
+    <Footer dictionary={dictionary} />
+  </>
+);
 
 export default Home;

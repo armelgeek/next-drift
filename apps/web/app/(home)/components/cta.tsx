@@ -1,40 +1,72 @@
-import { Button } from "@repo/design-system/components/ui/button";
-import { MoveRight, PhoneCall } from "lucide-react";
-import Link from "next/link";
-import { env } from "@/env";
-import type { Dictionary } from "@/lib/dictionary";
+"use client";
 
-type CTAProps = {
-  dictionary: Dictionary;
+import { cn } from "@repo/design-system/lib/utils";
+import { Check, Copy } from "lucide-react";
+import { useState } from "react";
+
+type CtaProps = {
+  dictionary: {
+    cta: {
+      title: string;
+      subtitle: string;
+      installCommand: string;
+      copyCommand: string;
+    };
+  };
 };
 
-export const CTA = ({ dictionary }: CTAProps) => (
-  <div className="w-full py-20 lg:py-40">
-    <div className="container mx-auto">
-      <div className="flex flex-col items-center gap-8 rounded-md bg-muted p-4 text-center lg:p-14">
-        <div className="flex flex-col gap-2">
-          <h3 className="max-w-xl font-regular text-3xl tracking-tighter md:text-5xl">
-            {dictionary.web.home.cta.title}
-          </h3>
-          <p className="max-w-xl text-lg text-muted-foreground leading-relaxed tracking-tight">
-            {dictionary.web.home.cta.description}
-          </p>
-        </div>
-        <div className="flex flex-row gap-4">
-          <Link href="/contact">
-            <Button className="gap-4" variant="outline">
-              {dictionary.web.global.primaryCta}{" "}
-              <PhoneCall className="h-4 w-4" />
-            </Button>
-          </Link>
-          <Link href={env.NEXT_PUBLIC_APP_URL}>
-            <Button className="gap-4">
-              {dictionary.web.global.secondaryCta}{" "}
-              <MoveRight className="h-4 w-4" />
-            </Button>
-          </Link>
+export function Cta({ dictionary }: CtaProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(dictionary.cta.installCommand);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Silently fail if clipboard API is not available
+    }
+  };
+
+  return (
+    <section className="px-4 py-[100px] sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1056px]">
+        <div className="rounded-[29px] bg-[#F2F2F2] px-[71px] py-[100px] text-center">
+          {/* Title */}
+          <h2 className="mb-6 font-bold text-[42px] text-black">
+            {dictionary.cta.title}
+          </h2>
+
+          {/* Install command pill */}
+          <button
+            className={cn(
+              "mb-4 inline-flex cursor-pointer items-center gap-3 rounded-full px-5 py-3 transition-colors",
+              "bg-[#0F0F0F] hover:bg-[#2A2A2A]"
+            )}
+            onClick={handleCopy}
+            type="button"
+          >
+            <span className="font-medium text-[#666] text-[14px]">$</span>
+            <code className="font-medium text-[14px] text-white">
+              {dictionary.cta.installCommand}
+            </code>
+            {copied ? (
+              <Check className="h-4 w-4 text-green-400" />
+            ) : (
+              <Copy className="h-4 w-4 text-[#666]" />
+            )}
+          </button>
+
+          {/* Copy command link */}
+          <button
+            className="text-[#666] text-[14px] underline underline-offset-4 transition-colors hover:text-black"
+            onClick={handleCopy}
+            type="button"
+          >
+            {dictionary.cta.copyCommand}
+          </button>
         </div>
       </div>
-    </div>
-  </div>
-);
+    </section>
+  );
+}
