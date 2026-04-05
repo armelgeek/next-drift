@@ -1,3 +1,15 @@
+# v0.0.10 (Sun Apr 05 2026)
+
+#### ⚠️ Pushed to `main`
+
+- fix: remove || true mask and add required env vars for web build in CI ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.9 (Sun Apr 05 2026)
 
 #### ⚠️ Pushed to `main`
