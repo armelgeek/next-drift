@@ -1,5 +1,4 @@
 {
-  "plugins": ["npm"],
   "owner": "oscardobsonbrown",
   "repo": "next-ship",
   "name": "Oscar Dobson-Brown",
@@ -16,5 +15,9 @@
   "prereleaseBranches": [],
   "shipit": {
     "prerelease": false
+  },
+  "git": {
+    "commitChangelog": false,
+    "skipCheckPrerelease": true
   }
 }
