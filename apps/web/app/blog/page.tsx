@@ -8,6 +8,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { dictionary } from "@/lib/dictionary";
 
+// Local type definitions to work around basehub fragmentOn.infer bug
+// where exported types resolve to `never`
+type BlogPost = {
+  _title: string;
+  _slug: string;
+  description: string;
+  date: string;
+  image: {
+    url: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+  };
+};
+
 type DictionaryMeta = {
   title: string;
   description: string;

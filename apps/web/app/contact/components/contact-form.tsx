@@ -37,10 +37,10 @@ export const ContactForm = ({ dictionary }: ContactFormProps) => {
                 </p>
               </div>
             </div>
-            {dictionary.contact.hero.benefits.map((benefit) => (
+            {dictionary.contact.hero.benefits.map((benefit, index) => (
               <div
                 className="flex flex-row items-start gap-6 text-left"
-                key={benefit.title}
+                key={index}
               >
                 <Check className="mt-2 h-4 w-4 text-primary" />
                 <div className="flex flex-col gap-1">
