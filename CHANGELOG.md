@@ -1,3 +1,15 @@
+# v0.0.3 (Sun Apr 05 2026)
+
+#### ⚠️ Pushed to `main`
+
+- chore: bump all versions to 0.4.2 ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.2 (Sun Apr 05 2026)
 
 #### ⚠️ Pushed to `main`
