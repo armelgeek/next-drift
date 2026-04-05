@@ -88,6 +88,7 @@ const BlogPost = async ({ params }: BlogPostProperties) => {
 
   return (
     <Feed queries={[blog.postQuery(slug)]}>
+      {/* biome-ignore lint/suspicious/useAwait: "Server Actions must be async" */}
       {async ([data]) => {
         "use server";
 
@@ -142,7 +143,7 @@ const BlogPost = async ({ params }: BlogPostProperties) => {
                         src={page.image.url}
                         width={page.image.width}
                       />
-                    ) : null}
+                    ) : undefined}
                     <div className="mx-auto max-w-prose">
                       <Body
                         components={{

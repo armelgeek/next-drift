@@ -3,9 +3,9 @@ import { Feed } from "@repo/cms/components/feed";
 import Link from "next/link";
 import { env } from "@/env";
 
-// Local types to work around basehub fragmentOn.infer type inference bug
+// Local interfaces to work around basehub fragmentOn.infer type inference bug
 // that causes exported types to resolve to 'never'
-type LegalPost = {
+interface LegalPost {
   _slug: string;
   _title: string;
   description?: string;
@@ -14,13 +14,13 @@ type LegalPost = {
     slug: string;
     title: string;
   };
-};
+}
 
-type LegalPagesData = {
+interface LegalPagesData {
   legalPages: {
     items: LegalPost[];
   };
-};
+}
 
 export const Footer = () => (
   <Feed queries={[legal.postsQuery]}>
@@ -93,9 +93,11 @@ export const Footer = () => (
                             rel={
                               item.href.includes("http")
                                 ? "noopener noreferrer"
-                                : ""
+                                : undefined
                             }
-                            target={item.href.includes("http") ? "_blank" : ""}
+                            target={
+                              item.href.includes("http") ? "_blank" : undefined
+                            }
                           >
                             <span className="text-xl">{item.title}</span>
                           </Link>
@@ -110,10 +112,12 @@ export const Footer = () => (
                             rel={
                               subItem.href.includes("http")
                                 ? "noopener noreferrer"
-                                : ""
+                                : undefined
                             }
                             target={
-                              subItem.href.includes("http") ? "_blank" : ""
+                              subItem.href.includes("http")
+                                ? "_blank"
+                                : undefined
                             }
                           >
                             <span className="text-foreground/75">
