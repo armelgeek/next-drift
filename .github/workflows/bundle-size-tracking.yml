@@ -55,6 +55,12 @@ jobs:
         run: |
           echo "🔍 Extracting bundle size metrics..."
           
+          # Check if build output exists
+          if [ ! -f "apps/web/build-output.txt" ]; then
+            echo "❌ Build output not found. Build may have failed."
+            exit 1
+          fi
+          
           # Check if .next/analyze directory exists
           if [ -d "apps/web/.next/analyze" ]; then
             echo "Bundle analysis directory found"
@@ -65,8 +71,12 @@ jobs:
           FIRST_LOAD_JS=$(grep -oP 'First Load JS shared by all \K[0-9.]+' apps/web/build-output.txt || echo "unknown")
           echo "first_load_js=${FIRST_LOAD_JS} kB" >> $GITHUB_OUTPUT
           
-          # Count total JS chunks
-          JS_CHUNKS=$(find apps/web/.next/static/chunks -name "*.js" 2>/dev/null | wc -l | tr -d ' ')
+          # Count total JS chunks (handle case when directory doesn't exist)
+          if [ -d "apps/web/.next/static/chunks" ]; then
+            JS_CHUNKS=$(find apps/web/.next/static/chunks -name "*.js" 2>/dev/null | wc -l | tr -d ' ')
+          else
+            JS_CHUNKS=0
+          fi
           echo "js_chunks=${JS_CHUNKS}" >> $GITHUB_OUTPUT
           
           # Calculate total bundle size
@@ -74,7 +84,11 @@ jobs:
           echo "total_size=${TOTAL_SIZE}" >> $GITHUB_OUTPUT
           
           # Check for oversized chunks (>250KB)
-          OVERSIZED=$(find apps/web/.next/static/chunks -name "*.js" -size +250k 2>/dev/null)
+          if [ -d "apps/web/.next/static/chunks" ]; then
+            OVERSIZED=$(find apps/web/.next/static/chunks -name "*.js" -size +250k 2>/dev/null)
+          else
+            OVERSIZED=""
+          fi
           if [ -n "$OVERSIZED" ]; then
             echo "oversized=true" >> $GITHUB_OUTPUT
             echo "⚠️ Found oversized chunks (>250KB):" >> bundle-report.md
@@ -176,7 +190,7 @@ jobs:
           FIRST_LOAD_JS="${{ steps.metrics.outputs.first_load_js }}"
           JS_CHUNKS="${{ steps.metrics.outputs.js_chunks }}"
           
-          # Extract numeric value
+          # Extract numeric value (handle "unknown" case)
           FIRST_LOAD_NUM=$(echo "$FIRST_LOAD_JS" | grep -oP '^[0-9.]+' || echo "0")
           
           echo "Checking bundle size limits..."
@@ -185,9 +199,12 @@ jobs:
           
           VIOLATIONS=0
           
-          if (( $(echo "$FIRST_LOAD_NUM > $MAX_FIRST_LOAD_JS" | bc -l) )); then
-            echo "❌ First Load JS exceeds ${MAX_FIRST_LOAD_JS}KB limit"
-            VIOLATIONS=$((VIOLATIONS + 1))
+          # Use awk for floating point comparison instead of bc
+          if [ "$FIRST_LOAD_NUM" != "0" ] && [ "$FIRST_LOAD_NUM" != "unknown" ]; then
+            if awk "BEGIN {exit !($FIRST_LOAD_NUM > $MAX_FIRST_LOAD_JS)}"; then
+              echo "❌ First Load JS exceeds ${MAX_FIRST_LOAD_JS}KB limit"
+              VIOLATIONS=$((VIOLATIONS + 1))
+            fi
           fi
           
           if [ "$JS_CHUNKS" -gt "$MAX_CHUNKS" ]; then
