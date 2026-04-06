@@ -1,33 +1,18 @@
-import { createMetadata } from "@repo/seo/metadata";
 import type { Metadata } from "next";
-import { dictionary } from "@/lib/dictionary";
-import { AIAgents } from "./components/ai-agents";
-import { AIEditors } from "./components/ai-editors";
-import { Cta } from "./components/cta";
-import { DesignedFor } from "./components/designed-for";
-import { Features } from "./components/features";
-import { Footer } from "./components/footer";
-import { Hero } from "./components/hero";
-import { ZeroConfig } from "./components/zero-config";
 
 export const generateMetadata = async (): Promise<Metadata> =>
-  createMetadata({
-    title: dictionary.hero.title,
-    description: dictionary.hero.subtitle,
+  ({
+    title: "next-ship",
+    description: "A basic Next.js starter page.",
   });
 
 const Home = async () => (
-  <>
-    <Hero dictionary={dictionary} />
-    <ZeroConfig dictionary={dictionary} />
-    <DesignedFor dictionary={dictionary} />
-    <Features>
-      <AIEditors dictionary={dictionary} />
-      <AIAgents dictionary={dictionary} />
-    </Features>
-    <Cta dictionary={dictionary} />
-    <Footer dictionary={dictionary} />
-  </>
+  <main className="mx-auto max-w-3xl px-6 py-16">
+    <h1 className="font-semibold text-3xl">next-ship web</h1>
+    <p className="mt-4 text-muted-foreground">
+      This page is intentionally minimal for now. We can expand it later.
+    </p>
+  </main>
 );
 
 export default Home;

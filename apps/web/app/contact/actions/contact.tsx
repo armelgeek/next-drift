@@ -15,6 +15,8 @@ export const contact = async (
   error?: string;
 }> => {
   try {
+    const resendFrom = env.RESEND_FROM ?? "noreply@example.com";
+
     if (env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN) {
       const rateLimiter = createRateLimiter({
         limiter: slidingWindow(1, "1d"),
@@ -32,8 +34,8 @@ export const contact = async (
     }
 
     await resend.emails.send({
-      from: env.RESEND_FROM,
-      to: env.RESEND_FROM,
+      from: resendFrom,
+      to: resendFrom,
       subject: "Contact form submission",
       replyTo: email,
       react: <ContactTemplate email={email} message={message} name={name} />,
