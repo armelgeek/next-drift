@@ -9,8 +9,5 @@ export const parseError = (error: unknown): string => {
     message = String(error);
   }
 
-  // biome-ignore lint/suspicious/noConsole: Need console here
-  console.error("Error:", message, error);
-
   return message;
 };
