@@ -1,11 +1,18 @@
-import { createMetadata } from "@repo/seo/metadata";
 import type { Metadata } from "next";
-import { dictionary } from "@/lib/dictionary";
-import { ContactForm } from "./components/contact-form";
 
 export const generateMetadata = async (): Promise<Metadata> =>
-  createMetadata(dictionary.contact.meta);
+  ({
+    title: "Contact",
+    description: "Contact page coming soon.",
+  });
 
-const Contact = async () => <ContactForm dictionary={dictionary} />;
+const Contact = async () => (
+  <main className="mx-auto max-w-3xl px-6 py-16">
+    <h1 className="font-semibold text-3xl">Contact</h1>
+    <p className="mt-4 text-muted-foreground">
+      Contact form is temporarily simplified while we stabilize the web app.
+    </p>
+  </main>
+);
 
 export default Contact;
