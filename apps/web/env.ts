@@ -13,6 +13,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_API_URL: z.string().optional(),
     NEXT_PUBLIC_DOCS_URL: z.string().optional(),
+    NEXT_PUBLIC_WEB_URL: z.url(),
   },
   runtimeEnv: {
     ANALYZE: process.env.ANALYZE,
@@ -23,5 +24,6 @@ export const env = createEnv({
     UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_DOCS_URL: process.env.NEXT_PUBLIC_DOCS_URL,
+    NEXT_PUBLIC_WEB_URL: process.env.NEXT_PUBLIC_WEB_URL,
   },
 });
