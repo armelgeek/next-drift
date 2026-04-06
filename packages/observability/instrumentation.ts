@@ -3,5 +3,4 @@
 
 export const initializeObservability = async () => {
   // No-op - observability is handled by PostHog
-  console.log("Observability instrumentation initialized (PostHog mode)");
 };

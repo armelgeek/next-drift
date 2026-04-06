@@ -3,5 +3,4 @@
 
 export const initializeEdgeObservability = (): void => {
   // No-op - observability is handled by PostHog
-  console.log("Edge observability initialized (PostHog mode)");
 };
