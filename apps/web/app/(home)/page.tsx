@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 
-export const generateMetadata = async (): Promise<Metadata> =>
-  ({
-    title: "next-ship",
-    description: "A basic Next.js starter page.",
-  });
+export const generateMetadata = async (): Promise<Metadata> => ({
+  title: "next-ship",
+  description: "A basic Next.js starter page.",
+});
 
 const Home = async () => (
   <main className="mx-auto max-w-3xl px-6 py-16">

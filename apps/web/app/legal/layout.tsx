@@ -4,8 +4,6 @@ type LegalLayoutProps = {
   children: ReactNode;
 };
 
-const LegalLayout = ({ children }: LegalLayoutProps) => (
-  <>{children}</>
-);
+const LegalLayout = ({ children }: LegalLayoutProps) => <>{children}</>;
 
 export default LegalLayout;
