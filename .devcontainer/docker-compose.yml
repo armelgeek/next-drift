@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: mcr.microsoft.com/devcontainers/typescript-node:22
+    image: mcr.microsoft.com/devcontainers/typescript-node:24
     volumes:
       - ..:/workspaces/next-ship:cached
       - next-ship-node-modules:/workspaces/next-ship/node_modules

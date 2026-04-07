@@ -13,7 +13,7 @@
       "upgradePackages": true
     }
   },
-  "forwardPorts": [3000, 3001, 5555, 5432, 6379],
+  "forwardPorts": [3000, 3001, 3002, 5555, 5432, 6379],
   "portsAttributes": {
     "3000": {
       "label": "Web App",
@@ -21,6 +21,10 @@
     },
     "3001": {
       "label": "API",
+      "onAutoForward": "silent"
+    },
+    "3002": {
+      "label": "API 2",
       "onAutoForward": "silent"
     },
     "5555": {
@@ -38,6 +42,14 @@
   },
   "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
   "remoteUser": "node",
+  "remoteEnv": {
+    "DOPPLER_TOKEN_FILE": "/run/secrets/doppler/token",
+    "DOPPLER_PROJECT": "next-ship",
+    "DOPPLER_CONFIG_SHARED": "dev_shared",
+    "DOPPLER_CONFIG_APP": "dev_app",
+    "DOPPLER_CONFIG_WEB": "dev_web",
+    "DOPPLER_CONFIG_API": "dev_api"
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -54,6 +66,7 @@
     }
   },
   "mounts": [
-    "source=next-ship-pnpm-cache,target=/home/node/.local/share/pnpm/store,type=volume"
+    "source=next-ship-pnpm-cache,target=/home/node/.local/share/pnpm/store,type=volume",
+    "source=${localEnv:DOPPLER_TOKEN_HOST_PATH},target=/run/secrets/doppler/token,type=bind,readonly"
   ]
 }
