@@ -8,6 +8,11 @@ echo "📦 Setting up pnpm..."
 corepack enable
 corepack prepare pnpm@10.24.0 --activate
 
+if ! command -v doppler >/dev/null 2>&1; then
+  echo "🔐 Installing Doppler CLI..."
+  curl -Ls https://cli.doppler.com/install.sh | sh
+fi
+
 # Setup environment files
 echo "🔧 Setting up environment files..."
 setup_env() {
