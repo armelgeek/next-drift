@@ -1,3 +1,15 @@
+# v0.0.11 (Tue Apr 07 2026)
+
+#### ⚠️ Pushed to `main`
+
+- feat: add Doppler dev-container secret injection and standardize on Node 24 ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.10 (Sun Apr 05 2026)
 
 #### ⚠️ Pushed to `main`
