@@ -1,37 +1,4 @@
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import { legal, type RichTextNode } from "@repo/cms";
-import { Body } from "@repo/cms/components/body";
-import { Feed } from "@repo/cms/components/feed";
-import { TableOfContents } from "@repo/cms/components/toc";
-import { createMetadata } from "@repo/seo/metadata";
 import type { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { Sidebar } from "@/components/sidebar";
-
-// Local type definitions to work around basehub fragmentOn.infer bug
-export type LegalPost = {
-  _title: string;
-  _slug: string;
-  description: string;
-  body: {
-    json: {
-      content: RichTextNode[];
-      toc: Array<{
-        id: string;
-        text: string;
-        depth: number;
-      }>;
-    };
-    readingTime: number;
-  };
-};
-
-type LegalPagesData = {
-  legalPages: {
-    item: LegalPost | null;
-  };
-};
 
 type LegalPageProperties = {
   readonly params: Promise<{
@@ -43,73 +10,24 @@ export const generateMetadata = async ({
   params,
 }: LegalPageProperties): Promise<Metadata> => {
   const { slug } = await params;
-  const post = (await legal.getPost(slug)) as LegalPost | null;
-
-  if (!post) {
-    return {};
-  }
-
-  return createMetadata({
-    title: post._title,
-    description: post.description,
-  });
+  return {
+    title: `Legal: ${slug}`,
+    description: "Legal page placeholder.",
+  };
 };
 
-export const generateStaticParams = async (): Promise<{ slug: string }[]> => {
-  const posts = await legal.getPosts();
-
-  return posts.map(({ _slug }) => ({ slug: _slug }));
-};
+export const generateStaticParams = async (): Promise<{ slug: string }[]> => [];
 
 const LegalPage = async ({ params }: LegalPageProperties) => {
   const { slug } = await params;
 
   return (
-    <Feed queries={[legal.postQuery(slug)]}>
-      {/* biome-ignore lint/suspicious/useAwait: "Server Actions must be async" */}
-      {async (dataArray) => {
-        "use server";
-
-        const data = dataArray as unknown as LegalPagesData;
-        const page = data.legalPages.item;
-
-        if (!page) {
-          notFound();
-        }
-
-        return (
-          <div className="container max-w-5xl py-16">
-            <Link
-              className="mb-4 inline-flex items-center gap-1 text-muted-foreground text-sm focus:underline focus:outline-none"
-              href="/"
-            >
-              <ArrowLeftIcon className="h-4 w-4" />
-              Back to Home
-            </Link>
-            <h1 className="scroll-m-20 text-balance font-extrabold text-4xl tracking-tight lg:text-5xl">
-              {page._title}
-            </h1>
-            <p className="text-balance leading-7 [&:not(:first-child)]:mt-6">
-              {page.description}
-            </p>
-            <div className="mt-16 flex flex-col items-start gap-8 sm:flex-row">
-              <div className="sm:flex-1">
-                <div className="prose prose-neutral dark:prose-invert">
-                  <Body content={page.body.json.content} />
-                </div>
-              </div>
-              <div className="sticky top-24 hidden shrink-0 md:block">
-                <Sidebar
-                  date={new Date()}
-                  readingTime={`${page.body.readingTime} min read`}
-                  toc={<TableOfContents data={page.body.json.toc} />}
-                />
-              </div>
-            </div>
-          </div>
-        );
-      }}
-    </Feed>
+    <main className="mx-auto max-w-3xl px-6 py-16">
+      <h1 className="font-semibold text-3xl">Legal</h1>
+      <p className="mt-4 text-muted-foreground">
+        Placeholder page for <code>{slug}</code>.
+      </p>
+    </main>
   );
 };
 

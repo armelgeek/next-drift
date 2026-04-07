@@ -2,6 +2,7 @@ import { createHmac } from "node:crypto";
 import { analytics } from "@repo/analytics/server";
 import { clerkClient } from "@repo/auth/server";
 import { parseError } from "@repo/observability/error";
+import { logger } from "@repo/observability/logger.server";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { env } from "@/env";
@@ -134,7 +135,7 @@ export const POST = async (request: Request): Promise<Response> => {
         break;
       }
       default: {
-        console.warn(`Unhandled event type ${event.type}`);
+        logger.warn({ eventType: event.type }, "Unhandled webhook event type");
       }
     }
 
@@ -144,7 +145,7 @@ export const POST = async (request: Request): Promise<Response> => {
   } catch (error) {
     const message = parseError(error);
 
-    console.error(message);
+    logger.error({ err: error, message }, "Polar webhook processing failed");
 
     return NextResponse.json(
       {
