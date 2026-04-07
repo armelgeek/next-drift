@@ -1,3 +1,15 @@
+# v0.0.12 (Tue Apr 07 2026)
+
+#### 🐛 Bug Fix
+
+- feat(observability): add structured logging wrapper [#4](https://github.com/oscardobsonbrown/next-ship/pull/4) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.11 (Tue Apr 07 2026)
 
 #### ⚠️ Pushed to `main`
