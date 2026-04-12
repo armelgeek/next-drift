@@ -65,11 +65,11 @@
     },
     "test": {
       "dependsOn": ["^build", "^test"],
-      "env": ["TEST_DATABASE_URL", "DATABASE_URL"]
+      "env": ["DATABASE_URL"]
     },
     "//#test": {
       "dependsOn": ["^build", "^test"],
-      "env": ["TEST_DATABASE_URL", "DATABASE_URL"]
+      "env": ["DATABASE_URL"]
     },
     "db:push": {
       "cache": false,

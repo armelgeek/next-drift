@@ -174,9 +174,7 @@
 - fix: disable Auto 'released' plugin to prevent GitHub API rate limit errors ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - fix: resolve basehub type inference issues and lint warnings ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - feat: add documentation, homepage redesign, and npm package metadata ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: update drizzle config to support TEST_DATABASE_URL ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - fix: ensure database schema is pushed before tests run ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: enable database tests when TEST_DATABASE_URL is available ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - chore: add tsx dependency lock file ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - feat: add database seed script ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - fix: add dist/** to build outputs for Turborepo caching ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
@@ -213,7 +211,7 @@
 - refactor: remove BetterStack observability service ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - refactor: remove Liveblocks collaboration features ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - docs: add comprehensive environment variables setup guide ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- config: replace all Stripe references with Polar.sh in .env.example files ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- config: replace all previous payment provider references with Polar.sh in .env.example files ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - docs: remove all language references from README ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - docs: remove English-speaking markets emphasis ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - docs: rewrite README as primary product, not a fork ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
@@ -298,7 +296,7 @@
 - Update edgedb.mdx ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update social.tsx ([@haydenbleasel](https://github.com/haydenbleasel))
 - Resolves #378 ([@haydenbleasel](https://github.com/haydenbleasel))
-- Update Stripe API version ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update previous payment provider API version ([@haydenbleasel](https://github.com/haydenbleasel))
 - Use keys for DSN ([@haydenbleasel](https://github.com/haydenbleasel))
 - Fix vitest command ([@haydenbleasel](https://github.com/haydenbleasel))
 - Build out stub doc files, update images ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -488,7 +486,7 @@
 - Replace Loops with Resend Audiences ([@haydenbleasel](https://github.com/haydenbleasel))
 - Add update command ([@haydenbleasel](https://github.com/haydenbleasel))
 - Bump deps, update shadcn/ui ([@haydenbleasel](https://github.com/haydenbleasel))
-- Add local Stripe webhook forwarding ([@haydenbleasel](https://github.com/haydenbleasel))
+- Add local previous payment provider webhook forwarding ([@haydenbleasel](https://github.com/haydenbleasel))
 - Add custom proxy for Segment client ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update next.config.mjs ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update data-security.mdx ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -522,7 +520,7 @@
 - Move providers to new folder ([@haydenbleasel](https://github.com/haydenbleasel))
 - Add Segment env vars ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update README, add graphic ([@haydenbleasel](https://github.com/haydenbleasel))
-- Scaffold Stripe webhooks ([@haydenbleasel](https://github.com/haydenbleasel))
+- Scaffold previous payment provider webhooks ([@haydenbleasel](https://github.com/haydenbleasel))
 - Start working on Clerk webhooks ([@haydenbleasel](https://github.com/haydenbleasel))
 - Add Segment packages ([@haydenbleasel](https://github.com/haydenbleasel))
 - Fix casing ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -2176,7 +2174,7 @@ Thank you, Aleksandra ([@beerose](https://github.com/beerose)), for all your wor
 
 #### ⚠️ Pushed to `main`
 
-- Update Stripe API version ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update previous payment provider API version ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 

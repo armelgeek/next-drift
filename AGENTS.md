@@ -33,7 +33,7 @@ This is **next-ship**, a production-grade Turborepo template for Next.js applica
 
 ### Environment Variables
 - Copy `.env.example` to `.env` in each app/package
-- Key variables: DATABASE_URL, POSTHOG_API_KEY, STRIPE_SECRET_KEY, etc.
+- Key variables: DATABASE_URL, POSTHOG_API_KEY, POLAR_ACCESS_TOKEN, etc.
 
 ### Database
 - Uses Prisma with PostgreSQL

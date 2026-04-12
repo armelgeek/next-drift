@@ -67,21 +67,17 @@ if (typeof window !== "undefined") {
 }`,
   },
   payments: {
-    title: "Stripe",
-    code: `// lib/stripe.ts
-import Stripe from "stripe";
+    title: "Polar.sh",
+    code: `// lib/polar.ts
+import { Polar } from "@polar-sh/sdk";
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
+export const polar = new Polar({
+  accessToken: process.env.POLAR_ACCESS_TOKEN!,
+  server: process.env.POLAR_SERVER ?? "sandbox",
 });
 
-export async function createCheckoutSession(priceId: string) {
-  return stripe.checkout.sessions.create({
-    mode: "subscription",
-    line_items: [{ price: priceId, quantity: 1 }],
-    success_url: "\${process.env.NEXT_PUBLIC_APP_URL}/success",
-    cancel_url: "\${process.env.NEXT_PUBLIC_APP_URL}/cancel",
-  });
+export async function listProducts() {
+  return polar.products.list();
 }`,
   },
   security: {

@@ -274,13 +274,13 @@ const fullOrganization = await auth.api.getFullOrganization({
 });
 ```
 
-```tsx title="webhooks/stripe/route.ts"
+```tsx title="webhooks/payments/route.ts"
 import { clerkClient } from '@repo/auth/server';
 
 const clerk = await clerkClient();
 const users = await clerk.users.getUserList();
 const user = users.data.find(
-  (user) => user.privateMetadata.stripeCustomerId === customerId
+  (user) => user.privateMetadata.polarCustomerId === customerId
 );
 
 // to
@@ -290,7 +290,7 @@ import { database } from '@repo/database';
 const user = await database.user.findFirst({
   where: {
     privateMetadata: {
-      contains: { stripeCustomerId: customerId },
+      contains: { polarCustomerId: customerId },
     },
   },
 });

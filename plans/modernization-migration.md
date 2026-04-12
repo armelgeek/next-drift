@@ -6,7 +6,7 @@ This plan covers five major migrations to modernize the next-ship stack:
 1. **Prisma → Drizzle ORM** (type-safe, SQL-like, edge-compatible)
 2. **Radix UI → Base UI** (shadcn's next-gen component primitives)
 3. **Next.js 16.0.10 → 16.2** (latest features and improvements)
-4. **Stripe → Polar.sh** (modern payment infrastructure)
+4. **Polar.sh integration** (modern payment infrastructure)
 5. **Observability consolidation** (unify on PostHog, remove Logtail)
 
 ---
@@ -161,9 +161,9 @@ Update each component in `packages/design-system/components/ui/`:
 
 ---
 
-## Phase 4: Stripe → Polar.sh Migration
+## Phase 4: Polar.sh integration
 
-**Goal**: Replace Stripe payment infrastructure with Polar.sh
+**Goal**: Finalize the Polar payment integration
 
 ### What to build
 
@@ -175,28 +175,28 @@ Update each component in `packages/design-system/components/ui/`:
 
 **Package Updates**:
 - Update `packages/payments/package.json`
-- Remove `stripe` and `@stripe/agent-toolkit` dependencies
+- Remove obsolete payment provider dependencies
 - Add `@polar-sh/sdk` (or appropriate Polar SDK)
 
 **Code Migration**:
 
 Update `packages/payments/index.ts`:
-- Replace Stripe client initialization with Polar client
-- Update all Stripe type exports to Polar equivalents
-- Migrate API methods from Stripe SDK to Polar SDK
+- Initialize the Polar client
+- Export the Polar types needed by consumers
+- Migrate API methods to the Polar SDK
 
 Update webhook handling:
-- Replace Stripe webhook signature verification with Polar's
+- Use Polar webhook signature verification
 - Update webhook event types and handlers
-- Map Stripe events to Polar equivalents:
-  - `checkout.session.completed` → Polar checkout event
+- Map payment events:
+  - `checkout.created` → Polar checkout event
   - `invoice.paid` → Polar subscription event
   - `customer.subscription.updated` → Polar subscription update
   - etc.
 
 **Environment Variables**:
-- Replace `STRIPE_SECRET_KEY` with `POLAR_ACCESS_TOKEN`
-- Replace `STRIPE_WEBHOOK_SECRET` with `POLAR_WEBHOOK_SECRET`
+- Use `POLAR_ACCESS_TOKEN` for the Polar SDK
+- Use `POLAR_WEBHOOK_SECRET` for webhook verification
 - Update `keys.ts` to use new environment variables
 
 **Consumer Updates**:
@@ -206,11 +206,10 @@ Update webhook handling:
 ### Acceptance Criteria
 
 - [ ] Polar SDK integrated and initialized correctly
-- [ ] All Stripe imports and usage removed
+- [ ] All payment provider imports and usage removed
 - [ ] Webhook handlers updated for Polar event structure
 - [ ] Environment variables migrated
 - [ ] Payment flows tested (checkout, webhook handling)
-- [ ] No `stripe` package references remain
 - [ ] Documentation updated with Polar setup instructions
 
 ---
@@ -322,7 +321,7 @@ Update webhook handling:
    - **Risk**: Data loss or corruption during migration
    - **Mitigation**: Full database backup before migration, test on staging first, reversible migration strategy
 
-2. **Payment Migration (Stripe → Polar)**
+2. **Payment Integration**
    - **Risk**: Payment processing downtime, lost subscriptions
    - **Mitigation**: Parallel run period, thorough webhook testing, customer communication
 

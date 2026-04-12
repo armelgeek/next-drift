@@ -75,18 +75,18 @@ describe('Database Schema', () => {
 });
 ```
 
-### Priority 2: Payment Testing (Critical for Stripe → Polar)
+### Priority 2: Payment Testing (Critical for Polar integration)
 
 **Create webhook test fixtures:**
 ```typescript
-// packages/payments/__tests__/fixtures/stripe-events.ts
-export const stripeCheckoutCompleted = {
+// packages/payments/__tests__/fixtures/payment-events.ts
+export const checkoutCompleted = {
   id: 'evt_test_checkout_completed',
-  type: 'checkout.session.completed',
+  type: 'checkout.completed',
   data: {
     object: {
-      id: 'cs_test_...',
-      customer: 'cus_test_...',
+      id: 'checkout_test_...',
+      customer: 'customer_test_...',
       payment_status: 'paid',
       // ...
     }
@@ -94,7 +94,7 @@ export const stripeCheckoutCompleted = {
 };
 
 export const polarCheckoutCompleted = {
-  // Polar equivalent structure
+  // Additional Polar event fixture
 };
 ```
 
@@ -102,15 +102,15 @@ export const polarCheckoutCompleted = {
 ```typescript
 // packages/payments/__tests__/webhooks.test.ts
 import { describe, it, expect, vi } from 'vitest';
-import { stripeCheckoutCompleted, polarCheckoutCompleted } from './fixtures/stripe-events';
+import { checkoutCompleted, polarCheckoutCompleted } from './fixtures/payment-events';
 
 describe('Payment Webhooks', () => {
-  it('should handle Stripe checkout.session.completed', async () => {
-    // Test current Stripe implementation
+  it('should handle checkout completed', async () => {
+    // Test Polar payment implementation
   });
   
-  it('should handle Polar checkout.completed with same outcome', async () => {
-    // Test Polar produces identical database updates
+  it('should handle checkout.completed with same outcome', async () => {
+    // Test payment processing produces the expected database updates
   });
 });
 ```
@@ -193,7 +193,7 @@ test.describe('Payments', () => {
     await page.goto('/pricing');
     await page.click('text=Buy Now');
     
-    // Complete Stripe/Polar checkout
+    // Complete payment checkout
     // Verify success
     await expect(page.locator('text=Payment successful')).toBeVisible();
     
@@ -239,7 +239,7 @@ test.describe('Payments', () => {
 
 ### Before Migration Starts
 - [ ] Database tests written for current Prisma implementation
-- [ ] Payment webhook tests written for current Stripe implementation
+- [ ] Payment webhook tests written for Polar payment implementation
 - [ ] Component tests written for 5 most-used Radix components
 - [ ] E2E test covering sign-up → dashboard flow
 - [ ] All tests passing in CI

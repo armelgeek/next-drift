@@ -3,14 +3,14 @@ title: Switch to Lemon Squeezy
 description: How to change the default payment processor to Lemon Squeezy.
 ---
 
-[Lemon Squeezy](https://www.lemonsqueezy.com) is an all-in-one platform for running your SaaS business. It handles payments, subscriptions, global tax compliance, fraud prevention, multi-currency, and more. Here's how to switch the default payment processor from Stripe to Lemon Squeezy.
+[Lemon Squeezy](https://www.lemonsqueezy.com) is an all-in-one platform for running your SaaS business. It handles payments, subscriptions, global tax compliance, fraud prevention, multi-currency, and more. Here's how to switch the default payment processor from Polar to Lemon Squeezy.
 
 ## 1. Swap out the required dependencies
 
 First, uninstall the existing dependencies from the Payments package...
 
 ```sh title="Terminal"
-pnpm remove stripe --filter @repo/payments
+pnpm remove @polar-sh/sdk --filter @repo/payments
 ```
 
 ... and install the new dependencies...
@@ -27,7 +27,7 @@ Next, update the environment variables across the project, for example:
 NEXT_PUBLIC_LEMON_SQUEEZY_API_KEY=""
 ```
 
-Additionally, replace all instances of `STRIPE_SECRET_KEY` with `LEMON_SQUEEZY_API_KEY` in the `packages/env/index.ts` file.
+Additionally, replace the Polar environment variables with `LEMON_SQUEEZY_API_KEY` in your payment keys module.
 
 ## 3. Update the payments client
 

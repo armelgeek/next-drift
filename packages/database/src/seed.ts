@@ -2,17 +2,14 @@ import { Pool } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-serverless";
 import { pages } from "./schema";
 
-const TEST_DATABASE_URL =
-  process.env.TEST_DATABASE_URL || process.env.DATABASE_URL;
+const databaseUrl = process.env.DATABASE_URL;
 
-if (!TEST_DATABASE_URL) {
-  console.error(
-    "❌ No database URL provided. Set TEST_DATABASE_URL or DATABASE_URL."
-  );
+if (!databaseUrl) {
+  console.error("❌ No database URL provided. Set DATABASE_URL.");
   process.exit(1);
 }
 
-const pool = new Pool({ connectionString: TEST_DATABASE_URL });
+const pool = new Pool({ connectionString: databaseUrl });
 const db = drizzle(pool);
 
 const samplePages = [
