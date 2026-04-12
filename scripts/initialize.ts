@@ -62,7 +62,6 @@ const setupEnvironmentVariables = async () => {
     { source: join("apps", "web"), target: ".env.local" },
     { source: join("packages", "cms"), target: ".env.local" },
     { source: join("packages", "database"), target: ".env" },
-    { source: join("packages", "internationalization"), target: ".env.local" },
   ];
 
   for (const { source, target } of files) {
@@ -71,15 +70,17 @@ const setupEnvironmentVariables = async () => {
 };
 
 const setupOrm = async (packageManager: string) => {
-  const filterCommand = packageManager === "npm" ? "--workspace" : "--filter";
+  if (!process.env.DATABASE_URL) {
+    return;
+  }
 
-  const command = [
-    packageManager,
-    "run",
-    "build",
-    filterCommand,
-    "@repo/database",
-  ].join(" ");
+  let command = `${packageManager} --filter @repo/database run build`;
+
+  if (packageManager === "npm") {
+    command = "npm run build --workspace @repo/database";
+  } else if (packageManager === "yarn") {
+    command = "yarn workspace @repo/database build";
+  }
 
   await exec(command, execSyncOpts);
 };
@@ -262,7 +263,7 @@ export const initialize = async (options: {
     s.stop("Project initialized successfully!");
 
     outro(
-      "Please make sure you install the Mintlify CLI and Stripe CLI before starting the project."
+      "Please make sure you install the Mintlify CLI before starting the project."
     );
   } catch (error) {
     const message =

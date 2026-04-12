@@ -109,7 +109,7 @@ function seedDatabase(connectionString: string) {
 
   execSync("tsx src/seed.ts", {
     cwd: process.cwd(),
-    env: { ...process.env, TEST_DATABASE_URL: connectionString },
+    env: { ...process.env, DATABASE_URL: connectionString },
     stdio: "inherit",
   });
 
@@ -122,7 +122,7 @@ function runTests(connectionString: string) {
   try {
     execSync("vitest run", {
       cwd: process.cwd(),
-      env: { ...process.env, TEST_DATABASE_URL: connectionString },
+      env: { ...process.env, DATABASE_URL: connectionString },
       stdio: "inherit",
     });
     console.log("✅ Tests passed");

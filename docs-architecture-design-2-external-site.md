@@ -407,7 +407,7 @@ Template Repo (Source of Truth)
 
 Similar real-world examples:
 - **Vercel/Next.js**: github.com/vercel/next.js (template) + nextjs.org/docs (external)
-- **Stripe**: stripe/stripe-node (template) + stripe.com/docs (external)
+- **Polar**: -sh/sdk (template) + polar.sh docs (external)
 - **Supabase**: supabase/supabase (template) + supabase.com/docs (external)
 
 These all use the external docs pattern with automated sync workflows.

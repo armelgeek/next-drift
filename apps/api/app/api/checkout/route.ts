@@ -49,10 +49,10 @@ const checkoutRouteHandler = withEvlog(async (req: Request, { log }) => {
   log.set({ cart });
 
   // Simulate payment processing
-  const charge = { id: "ch_123", success: true };
-  log.set({ stripe: { chargeId: charge.id } });
+  const checkout = { id: "checkout_123", success: true };
+  log.set({ polar: { checkoutId: checkout.id } });
 
-  if (!charge.success) {
+  if (!checkout.success) {
     throw createError({
       status: 402,
       message: "Payment failed",
@@ -63,12 +63,12 @@ const checkoutRouteHandler = withEvlog(async (req: Request, { log }) => {
 
   // Success - one wide event with all context
   log.set({
-    orderId: charge.id,
+    orderId: checkout.id,
     checkoutStatus: "complete",
   });
 
   return NextResponse.json({
-    orderId: charge.id,
+    orderId: checkout.id,
     status: "success",
   });
 });

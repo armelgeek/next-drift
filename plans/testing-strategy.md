@@ -31,7 +31,7 @@ Each package needs:
 
 **Priority packages for testing:**
 1. **@repo/database** - Critical for Prisma → Drizzle migration
-2. **@repo/payments** - Critical for Stripe → Polar migration
+2. **@repo/payments** - Critical for payment integration
 3. **@repo/auth** - Critical for user flows
 4. **@repo/design-system** - Critical for Radix → Base UI migration
 
@@ -61,29 +61,29 @@ Each package needs:
 
 ### 3. Payment Testing Strategy
 
-**For Stripe → Polar Migration:**
+**For Polar integration:**
 
 ```typescript
-// packages/payments/__tests__/stripe-parity.test.ts
-// Tests that Polar SDK produces equivalent results to Stripe SDK
+// packages/payments/__tests__/polar-flows.test.ts
+// Tests Polar SDK behavior for checkout and subscription flows
 // Tests webhook payload transformations
 ```
 
 **Testing approach:**
-- Mock external APIs (Stripe and Polar) using MSW or Vitest mocks
+- Mock external APIs (payment providers) using MSW or Vitest mocks
 - Create test fixtures for common payment scenarios:
   - Successful checkout
   - Failed payment
   - Subscription lifecycle
   - Refund processing
   - Webhook events
-- Test webhook signature verification for both providers
+- Test webhook signature verification
 - Validate event payload transformations
 
 **Integration test approach:**
-- Use Stripe test mode and Polar sandbox
-- Run parallel transactions (non-destructive)
-- Validate webhook handlers work with both providers
+- Use the Polar sandbox
+- Run sandbox transactions (non-destructive)
+- Validate webhook handlers work with Polar events
 
 ### 4. UI Component Testing Strategy
 
@@ -115,7 +115,7 @@ Each package needs:
 **API Route Testing:**
 ```typescript
 // apps/api/__tests__/webhooks/payments.test.ts
-// Tests webhook handling with both Stripe and Polar payloads
+// Tests webhook handling with payment payloads
 ```
 
 **Approach:**
@@ -125,7 +125,7 @@ Each package needs:
 - Test authentication/authorization guards
 
 **Test scenarios:**
-- Webhook endpoints (Stripe vs Polar payloads)
+- Webhook endpoints for payment payloads
 - Payment API routes
 - Auth callbacks
 - Database API routes
@@ -139,7 +139,7 @@ Each package needs:
 - Create `e2e/` directory in root or per-app
 - Test critical flows:
   - Sign up → Sign in → Dashboard
-  - Checkout flow (Stripe → Polar)
+  - Checkout flow (Polar integration)
   - Payment webhook processing
   - Database operations via UI
 
@@ -149,7 +149,7 @@ Each package needs:
 **E2E test scenarios for migrations:**
 - [ ] User can sign up and sign in
 - [ ] User can view their profile
-- [ ] User can make a purchase (test both Stripe and Polar)
+- [ ] User can make a purchase (test payment flows)
 - [ ] Webhook processing updates database correctly
 - [ ] UI components render and work correctly
 - [ ] Database queries return expected data
@@ -191,9 +191,9 @@ export const testProducts = {
 
 // Test payment scenarios
 export const testPayments = {
-  successful: { /* Stripe/Polar payload */ },
-  failed: { /* Stripe/Polar payload */ },
-  refunded: { /* Stripe/Polar payload */ },
+  successful: { /* payment payload */ },
+  failed: { /* payment payload */ },
+  refunded: { /* payment payload */ },
 };
 ```
 
@@ -222,9 +222,9 @@ export async function setupTestDatabase() {
 
 **Before any migration begins:**
 
-1. **Write comprehensive tests for current state (Prisma + Stripe + Radix)**
+1. **Write comprehensive tests for current state (Prisma + payments + Radix)**
    - Database CRUD tests with Prisma
-   - Payment webhook tests with Stripe
+   - Payment webhook tests with Polar
    - UI component tests with Radix
    - E2E tests for critical flows
 
@@ -262,7 +262,7 @@ export async function setupTestDatabase() {
 
 1. **Remove old implementation tests**
    - Delete Prisma-specific tests
-   - Delete Stripe-specific tests
+   - Delete payment-provider-specific tests
    - Delete Radix-specific tests
 
 2. **Update tests for new implementations**
@@ -296,10 +296,10 @@ packages/
   payments/
     __tests__/
       polar-sdk.test.ts              # Polar SDK tests
-      stripe-parity.test.ts          # Compare with Stripe (before removal)
+      polar-flows.test.ts          # Payment provider compatibility checks
       webhooks.test.ts               # Webhook handling
       fixtures/
-        stripe-events.ts
+        payment-events.ts
         polar-events.ts
         
   design-system/
@@ -390,8 +390,8 @@ To get immediate value with minimal effort:
    - Write one comprehensive CRUD test
 
 2. **Add payment webhook tests** (2-3 hours)
-   - Mock Stripe and Polar webhooks
-   - Test current Stripe implementation
+   - Mock payment webhooks
+   - Test Polar payment implementation
    - Create test fixtures for common events
 
 3. **Add component smoke tests** (2-3 hours)
@@ -432,7 +432,7 @@ To get immediate value with minimal effort:
 - Visual regression snapshots
 - Performance benchmarks
 
-### Stripe → Polar
+### Polar integration
 **Critical tests:**
 1. Webhook payload handling
 2. Database state updates correctly

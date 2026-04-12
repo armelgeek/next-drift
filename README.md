@@ -28,7 +28,7 @@ Most Next.js starters are either too basic or too complex. next-ship hits the sw
 | **Clerk** | Authentication — simple, secure, works out of the box |
 | **Drizzle ORM** | Database — type-safe, SQL-like, better performance than Prisma |
 | **Neon PostgreSQL** | Database hosting — serverless, scales with you |
-| **Polar.sh** | Payments — modern Stripe alternative with better DX |
+| **Polar.sh** | Payments — modern SaaS billing with strong TypeScript support |
 | **PostHog** | Analytics + Error tracking — one tool instead of three |
 | **Resend** | Transactional email — simple API, great deliverability |
 | **BaseHub** | CMS — type-safe content management |
@@ -166,7 +166,7 @@ Drizzle ORM instead of Prisma:
 
 ### Modern Payments
 
-Polar.sh instead of Stripe:
+Polar.sh for payments:
 - Better developer experience
 - Modern TypeScript SDK
 - Webhook handling included

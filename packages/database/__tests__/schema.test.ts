@@ -2,14 +2,13 @@ import { sql } from "drizzle-orm";
 import { afterAll, describe, expect, it } from "vitest";
 import { cleanupTestData, createTestDatabase } from "../src/test-utils";
 
-const TEST_DATABASE_URL =
-  process.env.TEST_DATABASE_URL || process.env.DATABASE_URL;
+const databaseUrl = process.env.DATABASE_URL;
 
 // Skip all tests if no database URL is provided
-const describeOrSkip = TEST_DATABASE_URL ? describe : describe.skip;
+const describeOrSkip = databaseUrl ? describe : describe.skip;
 
 describeOrSkip("Database Schema", () => {
-  const db = createTestDatabase(TEST_DATABASE_URL || "");
+  const db = createTestDatabase(databaseUrl || "");
 
   afterAll(async () => {
     await cleanupTestData(db);

@@ -3,7 +3,7 @@ title: Switch to Paddle Billing
 description: How to change the default payment processor to Paddle Billing.
 ---
 
-[Paddle Billing](https://www.paddle.com/) is a merchant of record for selling digital products and subscriptions. It takes care of payments, global tax compliance, fraud prevention, localization, and subscriptions. Here's how to switch the default payment processor from Stripe to Paddle Billing.
+[Paddle Billing](https://www.paddle.com/) is a merchant of record for selling digital products and subscriptions. It takes care of payments, global tax compliance, fraud prevention, localization, and subscriptions. Here's how to switch the default payment processor from Polar to Paddle Billing.
 
 <Note>
   This guide is for Paddle Billing, which is the latest version of Paddle. It doesn't include Paddle Classic.
@@ -15,7 +15,7 @@ description: How to change the default payment processor to Paddle Billing.
 First, uninstall the existing dependencies from the Payments package...
 
 ```sh title="Terminal"
-pnpm remove stripe --filter @repo/payments
+pnpm remove @polar-sh/sdk --filter @repo/payments
 ```
 
 ... and install the new dependencies...
@@ -61,7 +61,7 @@ export const keys = () =>
 
 ## 3. Update the environment variables
 
-Next, update the environment variables across the project, replacing the existing Stripe keys with the new Paddle keys:
+Next, update the environment variables across the project, replacing the existing Polar keys with the new Paddle keys:
 
 ```js title="apps/app/.env"
 # Server

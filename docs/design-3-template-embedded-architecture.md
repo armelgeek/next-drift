@@ -320,7 +320,7 @@ The scaffolding wizard guides them:
 ? Description: AI-powered customer support platform
 ? Which features are you using? 
   ☑ Authentication (NextAuth)
-  ☑ Billing (Stripe)
+  ☑ Billing (Polar)
   ☑ API (tRPC)
   ☐ Admin dashboard
 ? Team structure: Engineering, Product, Design
@@ -500,7 +500,7 @@ console.log(report);
 //   },
 //   recommendations: [
 //     'Consider creating your own architecture doc (template version archived)',
-//     'Update billing integration guide (template has new Stripe features)',
+//     'Update billing integration guide (template has new payment features)',
 //     'Your docs are highly customized - template updates will have minimal impact'
 //   ]
 // }
@@ -612,7 +612,7 @@ This documentation will help you get started with {{projectName}}.
 <Conditional feature="billing">
 ## Billing Setup
 
-Since you're using Stripe, here's how to set it up...
+Since you are using Polar, configure the access token and webhook secret before enabling billing flows.
 </Conditional>
 ```
 
