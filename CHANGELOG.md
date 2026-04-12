@@ -1,3 +1,15 @@
+# v0.0.14 (Sun Apr 12 2026)
+
+#### 🐛 Bug Fix
+
+- Fix installer GitHub URL for create-next-app [#6](https://github.com/oscardobsonbrown/next-ship/pull/6) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.13 (Sun Apr 12 2026)
 
 #### 🐛 Bug Fix
