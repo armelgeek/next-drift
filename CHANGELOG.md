@@ -1,3 +1,15 @@
+# v0.0.16 (Mon Apr 27 2026)
+
+#### 🐛 Bug Fix
+
+- [codex] Fix parseError CodeQL alert [#8](https://github.com/oscardobsonbrown/next-ship/pull/8) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.15 (Mon Apr 27 2026)
 
 #### 🐛 Bug Fix
