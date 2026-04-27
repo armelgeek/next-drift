@@ -43,6 +43,21 @@ function getChangedFiles() {
   }
 }
 
+function escapeRegex(value) {
+  return value.replaceAll(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function matchesFilePattern(file, pattern) {
+  if (pattern === file) {
+    return true;
+  }
+
+  const escapedPattern = escapeRegex(pattern).replaceAll("\\*", ".*");
+  const matcher = new RegExp(`^${escapedPattern}$`);
+
+  return matcher.test(file);
+}
+
 // Check if all changed files match skip patterns
 function shouldSkip(files) {
   if (!files || files.length === 0) {
@@ -53,7 +68,7 @@ function shouldSkip(files) {
     skipPatterns.some((pattern) =>
       pattern.endsWith("/")
         ? file.startsWith(pattern) || file.includes(`/${pattern}`)
-        : file === pattern || file.endsWith(pattern.replace("*", ""))
+        : matchesFilePattern(file, pattern)
     )
   );
 }
