@@ -1,3 +1,15 @@
+# v0.0.15 (Mon Apr 27 2026)
+
+#### 🐛 Bug Fix
+
+- Fix skip-ci glob matching for CodeQL [#7](https://github.com/oscardobsonbrown/next-ship/pull/7) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+#### Authors: 1
+
+- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+
+---
+
 # v0.0.14 (Sun Apr 12 2026)
 
 #### 🐛 Bug Fix
