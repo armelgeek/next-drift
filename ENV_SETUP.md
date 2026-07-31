@@ -5,9 +5,9 @@ This document provides a comprehensive reference for all API keys and services n
 ## Quick Setup Checklist
 
 **Required for basic functionality:**
-- [ ] Clerk (Authentication)
+- [ ] Better Auth (Authentication)
 - [ ] PostgreSQL Database (DATABASE_URL)
-- [ ] Polar (Payments)
+- [ ] Stripe (Payments)
 - [ ] PostHog (Analytics)
 
 **Optional but recommended:**
@@ -27,35 +27,33 @@ This document provides a comprehensive reference for all API keys and services n
 
 ## Authentication
 
-### Clerk
+### Better Auth
 
 **Purpose:** User authentication and authorization
 
 **Status:** Required
 
-**Where to get it:** https://clerk.com
+**Where to get it:** https://better-auth.com
 
 **Environment Variables:**
 
 | Variable | Type | Format | Description |
 |----------|------|--------|-------------|
-| `CLERK_SECRET_KEY` | Server | `sk_...` | Clerk secret key for server-side operations |
-| `CLERK_WEBHOOK_SECRET` | Server | `whsec_...` | Webhook secret for Clerk events |
-| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Client | `pk_...` | Public key for client-side auth |
-| `NEXT_PUBLIC_CLERK_SIGN_IN_URL` | Client | `/sign-in` | URL path for sign-in page |
-| `NEXT_PUBLIC_CLERK_SIGN_UP_URL` | Client | `/sign-up` | URL path for sign-up page |
-| `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` | Client | `/` | Redirect after sign-in |
-| `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` | Client | `/` | Redirect after sign-up |
+| `BETTER_AUTH_SECRET` | Server | String | Secret for Better Auth session encryption |
+| `BETTER_AUTH_WEBHOOK_SECRET` | Server | String | Webhook secret for Better Auth events |
+| `GITHUB_CLIENT_ID` | Server | String | GitHub OAuth client ID |
+| `GITHUB_CLIENT_SECRET` | Server | String | GitHub OAuth client secret |
+| `GOOGLE_CLIENT_ID` | Server | String | Google OAuth client ID |
+| `GOOGLE_CLIENT_SECRET` | Server | String | Google OAuth client secret |
 
 **Example values:**
 ```env
-CLERK_SECRET_KEY="sk_test_..."
-CLERK_WEBHOOK_SECRET="whsec_..."
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_..."
-NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
-NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/"
+BETTER_AUTH_SECRET="your-super-secret-key-min-32-chars"
+BETTER_AUTH_WEBHOOK_SECRET="whsec_test_..."
+GITHUB_CLIENT_ID="Ov23liXXXXXXXXXX"
+GITHUB_CLIENT_SECRET="XXXXXXXXXXXXXXXXXXXXXXX"
+GOOGLE_CLIENT_ID="XXXXXXX-XXXXXXXXXXXXXXX.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="GOCSPX-XXXXXXXXXXXXXXX"
 ```
 
 ---
@@ -96,27 +94,27 @@ DATABASE_URL="postgresql://postgres:password@localhost:5432/nextship"
 
 ## Payments
 
-### Polar
+### Stripe
 
 **Purpose:** Payment processing and subscription management
 
 **Status:** Required
 
-**Where to get it:** https://polar.sh
+**Where to get it:** https://stripe.com
 
 **Environment Variables:**
 
 | Variable | Type | Format | Description |
 |----------|------|--------|-------------|
-| `POLAR_ACCESS_TOKEN` | Server | `polar_...` | Polar API access token |
-| `POLAR_WEBHOOK_SECRET` | Server | String | Secret for verifying webhooks |
-| `POLAR_SERVER` | Server | `sandbox` or `production` | Polar environment (optional) |
+| `STRIPE_SECRET_KEY` | Server | `sk_...` | Stripe secret API key |
+| `STRIPE_PUBLISHABLE_KEY` | Server | `pk_...` | Stripe publishable API key |
+| `STRIPE_WEBHOOK_SECRET` | Server | `whsec_...` | Secret for verifying webhooks |
 
 **Example values:**
 ```env
-POLAR_ACCESS_TOKEN="polar_test_..."
-POLAR_WEBHOOK_SECRET="whsec_..."
-POLAR_SERVER="sandbox"  # or "production"
+STRIPE_SECRET_KEY="sk_test_XXXXXXXXXXXXXXXXXXXX"
+STRIPE_PUBLISHABLE_KEY="pk_test_XXXXXXXXXXXXXXXXXXXX"
+STRIPE_WEBHOOK_SECRET="whsec_XXXXXXXXXXXXXXXXXXXX"
 ```
 
 ---
@@ -405,13 +403,13 @@ VERCEL_PROJECT_PRODUCTION_URL="https://app.yourdomain.com"
 
 ```env
 # Server
-CLERK_SECRET_KEY="sk_test_..."
-CLERK_WEBHOOK_SECRET="whsec_..."
+BETTER_AUTH_SECRET="your-super-secret-key-min-32-chars"
+BETTER_AUTH_WEBHOOK_SECRET="whsec_test_..."
 RESEND_FROM="hello@yourdomain.com"
 DATABASE_URL="postgresql://..."
 RESEND_TOKEN="re_..."
-POLAR_ACCESS_TOKEN="polar_test_..."
-POLAR_WEBHOOK_SECRET="whsec_..."
+STRIPE_SECRET_KEY="sk_test_XXXXXXXXXXXXXXXXXXXX"
+STRIPE_WEBHOOK_SECRET="whsec_XXXXXXXXXXXXXXXXXXXX"
 FLAGS_SECRET="..."
 SVIX_TOKEN="sk_..."
 BASEHUB_TOKEN="bshb_pk_..."
@@ -421,11 +419,11 @@ KNOCK_FEED_CHANNEL_ID="..."
 KNOCK_SECRET_API_KEY="sk_test_..."
 
 # Client
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_..."
-NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
-NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/"
+GITHUB_CLIENT_ID="Ov23liXXXXXXXXXX"
+
+
+GOOGLE_CLIENT_ID="XXXXXXX-XXXXXXXXXXXXXXX.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="GOCSPX-XXXXXXXXXXXXXXX"
 NEXT_PUBLIC_GA_MEASUREMENT_ID="G-..."
 NEXT_PUBLIC_POSTHOG_KEY="phc_..."
 NEXT_PUBLIC_POSTHOG_HOST="https://us.i.posthog.com"
@@ -441,13 +439,13 @@ NEXT_PUBLIC_KNOCK_FEED_CHANNEL_ID="..."
 
 ```env
 # Server
-CLERK_SECRET_KEY="sk_test_..."
-CLERK_WEBHOOK_SECRET="whsec_..."
+BETTER_AUTH_SECRET="your-super-secret-key-min-32-chars"
+BETTER_AUTH_WEBHOOK_SECRET="whsec_test_..."
 RESEND_FROM="hello@yourdomain.com"
 DATABASE_URL="postgresql://..."
 RESEND_TOKEN="re_..."
-POLAR_ACCESS_TOKEN="polar_test_..."
-POLAR_WEBHOOK_SECRET="whsec_..."
+STRIPE_SECRET_KEY="sk_test_XXXXXXXXXXXXXXXXXXXX"
+STRIPE_WEBHOOK_SECRET="whsec_XXXXXXXXXXXXXXXXXXXX"
 FLAGS_SECRET="..."
 SVIX_TOKEN="sk_..."
 BASEHUB_TOKEN="bshb_pk_..."
@@ -461,11 +459,11 @@ OPENAI_API_KEY="sk-..."
 BLOB_READ_WRITE_TOKEN="vercel_blob_rw_..."
 
 # Client
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_..."
-NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
-NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/"
+GITHUB_CLIENT_ID="Ov23liXXXXXXXXXX"
+
+
+GOOGLE_CLIENT_ID="XXXXXXX-XXXXXXXXXXXXXXX.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="GOCSPX-XXXXXXXXXXXXXXX"
 NEXT_PUBLIC_GA_MEASUREMENT_ID="G-..."
 NEXT_PUBLIC_POSTHOG_KEY="phc_..."
 NEXT_PUBLIC_POSTHOG_HOST="https://us.i.posthog.com"
@@ -480,13 +478,13 @@ NEXT_PUBLIC_KNOCK_FEED_CHANNEL_ID="..."
 
 ```env
 # Server
-CLERK_SECRET_KEY="sk_test_..."
-CLERK_WEBHOOK_SECRET="whsec_..."
+BETTER_AUTH_SECRET="your-super-secret-key-min-32-chars"
+BETTER_AUTH_WEBHOOK_SECRET="whsec_test_..."
 RESEND_FROM="hello@yourdomain.com"
 DATABASE_URL="postgresql://..."
 RESEND_TOKEN="re_..."
-POLAR_ACCESS_TOKEN="polar_test_..."
-POLAR_WEBHOOK_SECRET="whsec_..."
+STRIPE_SECRET_KEY="sk_test_XXXXXXXXXXXXXXXXXXXX"
+STRIPE_WEBHOOK_SECRET="whsec_XXXXXXXXXXXXXXXXXXXX"
 FLAGS_SECRET="..."
 SVIX_TOKEN="sk_..."
 BASEHUB_TOKEN="bshb_pk_..."
@@ -498,11 +496,11 @@ UPSTASH_REDIS_REST_TOKEN="..."
 OPENAI_API_KEY="sk-..."
 
 # Client
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_..."
-NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
-NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/"
+GITHUB_CLIENT_ID="Ov23liXXXXXXXXXX"
+
+
+GOOGLE_CLIENT_ID="XXXXXXX-XXXXXXXXXXXXXXX.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="GOCSPX-XXXXXXXXXXXXXXX"
 NEXT_PUBLIC_GA_MEASUREMENT_ID="G-..."
 NEXT_PUBLIC_POSTHOG_KEY="phc_..."
 NEXT_PUBLIC_POSTHOG_HOST="https://us.i.posthog.com"
@@ -542,7 +540,7 @@ NEXT_PUBLIC_DOCS_URL="http://localhost:3004"
 If you encounter issues with any service:
 
 - **Clerk:** https://clerk.com/support
-- **Polar:** https://polar.sh/support
+- **Stripe:** https://stripe.com/docs
 - **PostHog:** https://posthog.com/docs
 - **Resend:** https://resend.com/docs
 - **BaseHub:** https://basehub.com/docs

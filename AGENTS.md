@@ -26,7 +26,7 @@ This is **next-ship**, a production-grade Turborepo template for Next.js applica
 - `pnpm check` — Run ultracite check (format + lint)
 - `pnpm fix` — Run ultracite fix (format + lint with auto-fix)
 - `pnpm test` — Run tests
-- `pnpm migrate` — Run Prisma migrations
+- `pnpm migrate` — Run Drizzle migrations
 - `pnpm boundaries` — Check monorepo boundaries
 - `pnpm biome:check` — Direct Biome check (if needed)
 - `pnpm biome:ci` — Direct Biome CI check (if needed)
@@ -36,8 +36,8 @@ This is **next-ship**, a production-grade Turborepo template for Next.js applica
 - Key variables: DATABASE_URL, POSTHOG_API_KEY, POLAR_ACCESS_TOKEN, etc.
 
 ### Database
-- Uses Prisma with PostgreSQL
-- Schema defined in `packages/database/prisma/schema.prisma`
+- Uses Drizzle with PostgreSQL
+- Schema defined in `packages/database/drizzle/schema.drizzle`
 - Studio available at `pnpm studio` (port 5555)
 
 ### Error Tracking
