@@ -12,15 +12,37 @@ import {
 import { cn } from "@repo/design-system/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon, Check, MoveRight } from "lucide-react";
-import { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { Dictionary } from "@/lib/dictionary";
+import { contactSchema, type ContactInput } from "../schemas";
 
 type ContactFormProps = {
   dictionary: Dictionary;
 };
 
 export const ContactForm = ({ dictionary }: ContactFormProps) => {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setError: setFormError,
+  } = useForm<ContactInput>({
+    resolver: zodResolver(contactSchema),
+  });
+
+  async function onSubmit(data: ContactInput) {
+    try {
+      // Handle form submission - e.g., send to server action
+      console.log("Form submitted:", data);
+      // TODO: Call server action with form data
+    } catch (error) {
+      setFormError("root", {
+        message: "An error occurred. Please try again.",
+      });
+    }
+  }
 
   return (
     <div className="w-full py-20 lg:py-40">
@@ -54,63 +76,124 @@ export const ContactForm = ({ dictionary }: ContactFormProps) => {
           </div>
 
           <div className="flex items-center justify-center">
-            <div className="flex max-w-sm flex-col gap-4 rounded-md border p-8">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex max-w-sm flex-col gap-4 rounded-md border p-8"
+            >
               <p>{dictionary.contact.hero.form.title}</p>
+
               <div className="grid w-full max-w-sm items-center gap-1">
-                <Label htmlFor="picture">
+                <Label htmlFor="date">
                   {dictionary.contact.hero.form.date}
                 </Label>
-                <Popover>
-                  <PopoverTrigger>
-                    <Button
-                      className={cn(
-                        "w-full max-w-sm justify-start text-left font-normal",
-                        !date && "text-muted-foreground"
-                      )}
-                      variant="outline"
-                    >
-                      <CalendarIcon className="mr-2 h-4 w-4" />
-                      {date ? (
-                        format(date, "PPP")
-                      ) : (
-                        <span>{dictionary.contact.hero.form.date}</span>
-                      )}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0">
-                    <Calendar
-                      initialFocus
-                      mode="single"
-                      onSelect={setDate}
-                      selected={date}
-                    />
-                  </PopoverContent>
-                </Popover>
-              </div>
-              <div className="grid w-full max-w-sm items-center gap-1">
-                <Label htmlFor="firstname">
-                  {dictionary.contact.hero.form.firstName}
-                </Label>
-                <Input id="firstname" type="text" />
-              </div>
-              <div className="grid w-full max-w-sm items-center gap-1">
-                <Label htmlFor="lastname">
-                  {dictionary.contact.hero.form.lastName}
-                </Label>
-                <Input id="lastname" type="text" />
-              </div>
-              <div className="grid w-full max-w-sm items-center gap-1">
-                <Label htmlFor="picture">
-                  {dictionary.contact.hero.form.resume}
-                </Label>
-                <Input id="picture" type="file" />
+                <Controller
+                  name="date"
+                  control={control}
+                  render={({ field }) => (
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          className={cn(
+                            "w-full max-w-sm justify-start text-left font-normal",
+                            !field.value && "text-muted-foreground"
+                          )}
+                          variant="outline"
+                          disabled={isSubmitting}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>{dictionary.contact.hero.form.date}</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          initialFocus
+                          mode="single"
+                          onSelect={field.onChange}
+                          selected={field.value}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                />
+                {errors.date && (
+                  <span className="text-sm text-red-600">
+                    {errors.date.message}
+                  </span>
+                )}
               </div>
 
-              <Button className="w-full gap-4">
-                {dictionary.contact.hero.form.cta}{" "}
-                <MoveRight className="h-4 w-4" />
+              <div className="grid w-full max-w-sm items-center gap-1">
+                <Label htmlFor="firstName">
+                  {dictionary.contact.hero.form.firstName}
+                </Label>
+                <Input
+                  id="firstName"
+                  type="text"
+                  placeholder="John"
+                  disabled={isSubmitting}
+                  {...register("firstName")}
+                />
+                {errors.firstName && (
+                  <span className="text-sm text-red-600">
+                    {errors.firstName.message}
+                  </span>
+                )}
+              </div>
+
+              <div className="grid w-full max-w-sm items-center gap-1">
+                <Label htmlFor="lastName">
+                  {dictionary.contact.hero.form.lastName}
+                </Label>
+                <Input
+                  id="lastName"
+                  type="text"
+                  placeholder="Doe"
+                  disabled={isSubmitting}
+                  {...register("lastName")}
+                />
+                {errors.lastName && (
+                  <span className="text-sm text-red-600">
+                    {errors.lastName.message}
+                  </span>
+                )}
+              </div>
+
+              <div className="grid w-full max-w-sm items-center gap-1">
+                <Label htmlFor="resume">
+                  {dictionary.contact.hero.form.resume}
+                </Label>
+                <Input
+                  id="resume"
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  disabled={isSubmitting}
+                  {...register("resume", {
+                    validate: (files) => {
+                      if (!files || files.length === 0) return "Resume is required";
+                      return true;
+                    },
+                  })}
+                />
+                {errors.resume && (
+                  <span className="text-sm text-red-600">
+                    {errors.resume.message}
+                  </span>
+                )}
+              </div>
+
+              {errors.root && (
+                <div className="text-sm text-red-600">{errors.root.message}</div>
+              )}
+
+              <Button className="w-full gap-4" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : dictionary.contact.hero.form.cta}
+                {!isSubmitting && <MoveRight className="h-4 w-4" />}
               </Button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

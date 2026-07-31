@@ -17,7 +17,7 @@ vi.mock("@repo/auth/server", () => ({
           {
             id: "user_test_123",
             privateMetadata: {
-              polarCustomerId: "customer_test_456",
+              stripeCustomerId: "customer_test_456",
             },
           },
         ],

@@ -50,7 +50,7 @@ const checkoutRouteHandler = withEvlog(async (req: Request, { log }) => {
 
   // Simulate payment processing
   const checkout = { id: "checkout_123", success: true };
-  log.set({ polar: { checkoutId: checkout.id } });
+  log.set({ stripe: { checkoutId: checkout.id } });
 
   if (!checkout.success) {
     throw createError({

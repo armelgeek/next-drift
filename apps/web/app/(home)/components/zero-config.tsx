@@ -67,17 +67,17 @@ if (typeof window !== "undefined") {
 }`,
   },
   payments: {
-    title: "Polar.sh",
-    code: `// lib/polar.ts
-import { Polar } from "@polar-sh/sdk";
+    title: "stripe.sh",
+    code: `// lib/stripe.ts
+import { stripe } from "@stripe-sh/sdk";
 
-export const polar = new Polar({
+export const stripe = new stripe({
   accessToken: process.env.POLAR_ACCESS_TOKEN!,
   server: process.env.POLAR_SERVER ?? "sandbox",
 });
 
 export async function listProducts() {
-  return polar.products.list();
+  return stripe.products.list();
 }`,
   },
   security: {

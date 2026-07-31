@@ -13,7 +13,7 @@ We have **minimal testing** in place:
 
 ## Immediate Action Items
 
-### Priority 1: Database Testing (Critical for Prisma → Drizzle)
+### Priority 1: Database Testing (Critical for Drizzle → Drizzle)
 
 **Install dependencies:**
 ```bash
@@ -238,7 +238,7 @@ test.describe('Payments', () => {
 ## Testing Checklist for Migration
 
 ### Before Migration Starts
-- [ ] Database tests written for current Prisma implementation
+- [ ] Database tests written for current Drizzle implementation
 - [ ] Payment webhook tests written for Polar payment implementation
 - [ ] Component tests written for 5 most-used Radix components
 - [ ] E2E test covering sign-up → dashboard flow

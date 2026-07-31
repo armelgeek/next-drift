@@ -211,7 +211,7 @@ export const docsConfig = {
       // Extract from components
       components: './packages/design-system/src/**/*.tsx',
       // Extract from database
-      schema: './packages/database/prisma/schema.prisma'
+      schema: './packages/database/src/schema.ts'
     }
   },
   
@@ -320,7 +320,7 @@ The scaffolding wizard guides them:
 ? Description: AI-powered customer support platform
 ? Which features are you using? 
   ☑ Authentication (NextAuth)
-  ☑ Billing (Polar)
+  ☑ Billing (Stripe)
   ☑ API (tRPC)
   ☐ Admin dashboard
 ? Team structure: Engineering, Product, Design
@@ -534,7 +534,7 @@ apps/docs/
 │   │   └── impact-assessor.ts     # Analyze breaking changes
 │   ├── content-sync/
 │   │   ├── typescript-scanner.ts  # Extract from .ts files
-│   │   ├── prisma-parser.ts       # Extract from schema
+│   │   ├── drizzle-parser.ts       # Extract from schema
 │   │   └── component-analyzer.ts  # Extract from React components
 │   └── evolution/
 │       ├── tracker.ts             # Track customization progress
@@ -612,7 +612,7 @@ This documentation will help you get started with {{projectName}}.
 <Conditional feature="billing">
 ## Billing Setup
 
-Since you are using Polar, configure the access token and webhook secret before enabling billing flows.
+Since you are using Stripe, configure the API keys and webhook secret before enabling billing flows.
 </Conditional>
 ```
 

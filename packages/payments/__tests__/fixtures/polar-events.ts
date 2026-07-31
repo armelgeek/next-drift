@@ -1,12 +1,12 @@
-// Mock webhook payloads for Polar.sh events
-// Based on Polar.sh webhook event structure
-// https://docs.polar.sh/api/webhooks
+// Mock webhook payloads for stripe.sh events
+// Based on stripe.sh webhook event structure
+// https://docs.stripe.sh/api/webhooks
 
 export const checkoutCreatedEvent = {
   type: "checkout.created",
   data: {
     id: "checkout_test_123",
-    url: "https://sandbox.polar.sh/checkout/checkout_test_123",
+    url: "https://sandbox.stripe.sh/checkout/checkout_test_123",
     status: "confirmed",
     customer_name: "Test User",
     customer_email: "test@example.com",
