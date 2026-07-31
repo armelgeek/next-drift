@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { profileSchema, type ProfileInput } from "../../schemas";
-import { updateProfile } from "../../actions";
+import { profileSchema, type ProfileInput } from "@repo/account-pages";
+import { updateProfile } from "@repo/account-pages";
 import { Button } from "@repo/design-system/ui/button";
 import { Input } from "@repo/design-system/ui/input";
 import { Textarea } from "@repo/design-system/ui/textarea";

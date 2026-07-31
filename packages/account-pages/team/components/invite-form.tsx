@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { inviteSchema, type InviteInput } from "../../schemas";
-import { inviteMember } from "../../actions";
+import { inviteSchema, type InviteInput } from "@repo/account-pages";
+import { inviteMember } from "@repo/account-pages";
 import { Card } from "@repo/design-system/ui/card";
 import { Button } from "@repo/design-system/ui/button";
 import { Input } from "@repo/design-system/ui/input";

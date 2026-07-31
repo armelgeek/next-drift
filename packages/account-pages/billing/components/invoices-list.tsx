@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getInvoices, downloadInvoice } from "../../actions";
+import { getInvoices, downloadInvoice } from "@repo/account-pages";
 import { Card } from "@repo/design-system/ui/card";
 import { Button } from "@repo/design-system/ui/button";
 import { Loader2, Download } from "lucide-react";

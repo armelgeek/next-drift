@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { updatePreferences } from "../../actions";
+import { updatePreferences } from "@repo/account-pages";
 import { Button } from "@repo/design-system/ui/button";
 import {
   Checkbox,

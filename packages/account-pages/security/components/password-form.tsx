@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { passwordSchema, type PasswordInput } from "../../schemas";
-import { changePassword } from "../../actions";
+import { passwordSchema, type PasswordInput } from "@repo/account-pages";
+import { changePassword } from "@repo/account-pages";
 import { Button } from "@repo/design-system/ui/button";
 import { Input } from "@repo/design-system/ui/input";
 import { toast } from "sonner";
