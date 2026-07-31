@@ -65,6 +65,7 @@
     "docs": true,
     "runbooks": true,
     "patches": true,
+    "turbo": true,
     "e2e": true,
     "plans": true
   },
