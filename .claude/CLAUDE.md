@@ -186,6 +186,11 @@
 - Prefer type refinements (z.refine) over manual validation blocks
 - Do not duplicate validation logic: if a Zod schema exists, use it instead of manual checks
 
+## Type Definitions
+- Never redefine a shape by hand in a component's props interface if it already exists as a Prisma model or a Zod schema — derive it instead (`Pick<User, "id" | "name">`, or `z.infer<typeof schema>`)
+- Component-local types (Props interfaces) are colocated with the route's schema.ts/types.ts, not declared inline inside the component file
+- A type that mirrors a database model or a validation schema is a sign to import/derive, not to retype — two independent definitions of the same shape will silently drift apart when one is updated and the other isn't
+- Shared types used across multiple routes go in packages/database or packages/types; route-specific types stay in that route's own types.ts
 
 ## Abstraction
 - Don't abstract after one occurrence — duplicate code twice is fine, extract on the third occurrence (rule of three)
