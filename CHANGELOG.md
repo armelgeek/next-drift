@@ -259,7 +259,7 @@
 - Update meta.json ([@haydenbleasel](https://github.com/haydenbleasel))
 - Fix min-widths ([@haydenbleasel](https://github.com/haydenbleasel))
 - Remove redundant email component ([@haydenbleasel](https://github.com/haydenbleasel))
-- Roll back Prisma updates ([@haydenbleasel](https://github.com/haydenbleasel))
+- Roll back Drizzle updates ([@haydenbleasel](https://github.com/haydenbleasel))
 - Resolves #537 ([@haydenbleasel](https://github.com/haydenbleasel))
 - Fix broken links in code ([@haydenbleasel](https://github.com/haydenbleasel))
 - Add link validation script ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -279,8 +279,8 @@
 - Update vercel.mdx ([@haydenbleasel](https://github.com/haydenbleasel))
 - Implement Clerk keyless mode ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update pnpm-lock.yaml ([@haydenbleasel](https://github.com/haydenbleasel))
-- Remove Prisma client from app ([@haydenbleasel](https://github.com/haydenbleasel))
-- Bump deps except Prisma ([@haydenbleasel](https://github.com/haydenbleasel))
+- Remove Drizzle client from app ([@haydenbleasel](https://github.com/haydenbleasel))
+- Bump deps except Drizzle ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update structure.mdx ([@haydenbleasel](https://github.com/haydenbleasel))
 - Upgrade shadcn/ui ([@haydenbleasel](https://github.com/haydenbleasel))
 - Merge branch 'main' of https://github.com/haydenbleasel/next-forge ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -307,7 +307,7 @@
 - Misc CLI fixes and improvements ([@haydenbleasel](https://github.com/haydenbleasel))
 - Move search package to addon ([@haydenbleasel](https://github.com/haydenbleasel))
 - Create basic search package ([@haydenbleasel](https://github.com/haydenbleasel))
-- Update schema.prisma ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update schema.drizzle ([@haydenbleasel](https://github.com/haydenbleasel))
 - Fix button hydration issue ([@haydenbleasel](https://github.com/haydenbleasel))
 - Redesign CLI with Ora, fix maxBuffer issue on diff ([@haydenbleasel](https://github.com/haydenbleasel))
 - Resolves #394 ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -435,7 +435,7 @@
 - Add socials to homepage ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update layout.tsx ([@haydenbleasel](https://github.com/haydenbleasel))
 - Load Geist from Google Fonts ([@haydenbleasel](https://github.com/haydenbleasel))
-- Update prisma-postgres.mdx ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update drizzle-postgres.mdx ([@haydenbleasel](https://github.com/haydenbleasel))
 - Create new SEO docs category ([@haydenbleasel](https://github.com/haydenbleasel))
 - Resolves #202 ([@haydenbleasel](https://github.com/haydenbleasel))
 - Resolves #201 ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -577,7 +577,7 @@
 - Add Tailwind Typography ([@haydenbleasel](https://github.com/haydenbleasel))
 - Add basic auth system ([@haydenbleasel](https://github.com/haydenbleasel))
 - Scaffold next-auth ([@haydenbleasel](https://github.com/haydenbleasel))
-- Add Prisma ([@haydenbleasel](https://github.com/haydenbleasel))
+- Add Drizzle ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update tsconfig.json ([@haydenbleasel](https://github.com/haydenbleasel))
 - Make font names generic ([@haydenbleasel](https://github.com/haydenbleasel))
 - Add handleError function ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -658,7 +658,7 @@ Thank you, Dmytro Pletenskyi ([@ph1losof](https://github.com/ph1losof)), for all
 #### 🐛 Bug Fix
 
 - docs(migrations): fixes middleware configuration for better-auth [#667](https://github.com/vercel/next-ship/pull/667) ([@ph1losof](https://github.com/ph1losof) [@haydenbleasel](https://github.com/haydenbleasel))
-- fix: update prisma to 7.0.0 and use prisma-client generator [#663](https://github.com/vercel/next-ship/pull/663) ([@ph1losof](https://github.com/ph1losof))
+- fix: update drizzle to 7.0.0 and use drizzle-client generator [#663](https://github.com/vercel/next-ship/pull/663) ([@ph1losof](https://github.com/ph1losof))
 
 #### Authors: 2
 
@@ -902,7 +902,7 @@ Thanks for all your work!
 
 #### ⚠️ Pushed to `main`
 
-- Roll back Prisma updates ([@haydenbleasel](https://github.com/haydenbleasel))
+- Roll back Drizzle updates ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -991,7 +991,7 @@ Thanks for all your work!
 
 #### 🚀 Enhancement
 
-- Bump @prisma/nextjs-monorepo-workaround-plugin from 6.6.0 to 6.7.0 [#534](https://github.com/haydenbleasel/next-ship/pull/534) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @drizzle/nextjs-monorepo-workaround-plugin from 6.6.0 to 6.7.0 [#534](https://github.com/haydenbleasel/next-ship/pull/534) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump @liveblocks/react from 2.22.3 to 2.24.1 [#536](https://github.com/haydenbleasel/next-ship/pull/536) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### 🐛 Bug Fix
@@ -1177,8 +1177,8 @@ Thank you, Jan Kuppens ([@JanKups](https://github.com/JanKups)), for all your wo
 
 #### ⚠️ Pushed to `main`
 
-- Remove Prisma client from app ([@haydenbleasel](https://github.com/haydenbleasel))
-- Bump deps except Prisma ([@haydenbleasel](https://github.com/haydenbleasel))
+- Remove Drizzle client from app ([@haydenbleasel](https://github.com/haydenbleasel))
+- Bump deps except Drizzle ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update structure.mdx ([@haydenbleasel](https://github.com/haydenbleasel))
 - Upgrade shadcn/ui ([@haydenbleasel](https://github.com/haydenbleasel))
 
@@ -1346,7 +1346,7 @@ Thank you, David Bonachera ([@davidbonachera](https://github.com/davidbonachera)
 
 #### 🐛 Bug Fix
 
-- docs: add link to Prisma Database Configuration Guide [#478](https://github.com/haydenbleasel/next-ship/pull/478) ([@haydenbleasel](https://github.com/haydenbleasel) [@davidbonachera](https://github.com/davidbonachera))
+- docs: add link to Drizzle Database Configuration Guide [#478](https://github.com/haydenbleasel/next-ship/pull/478) ([@haydenbleasel](https://github.com/haydenbleasel) [@davidbonachera](https://github.com/davidbonachera))
 
 #### Authors: 2
 
@@ -1455,7 +1455,7 @@ Thank you, Justin Barsketis ([@barsketis](https://github.com/barsketis)), for al
 
 #### 🐛 Bug Fix
 
-- Prisma fixes [#452](https://github.com/haydenbleasel/next-ship/pull/452) ([@haydenbleasel](https://github.com/haydenbleasel) [@barsketis](https://github.com/barsketis))
+- Drizzle fixes [#452](https://github.com/haydenbleasel/next-ship/pull/452) ([@haydenbleasel](https://github.com/haydenbleasel) [@barsketis](https://github.com/barsketis))
 
 #### Authors: 2
 
@@ -1545,7 +1545,7 @@ Thank you, YuCheng Chen ([@shamenchens](https://github.com/shamenchens)), for al
 - Bump @next/bundle-analyzer from 15.1.5 to 15.1.6 [#433](https://github.com/haydenbleasel/next-ship/pull/433) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump @radix-ui/react-dropdown-menu from 2.1.4 to 2.1.5 [#435](https://github.com/haydenbleasel/next-ship/pull/435) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump basehub from 8.1.1 to 8.1.9 [#436](https://github.com/haydenbleasel/next-ship/pull/436) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @prisma/client from 6.2.1 to 6.3.0 [#437](https://github.com/haydenbleasel/next-ship/pull/437) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @drizzle/client from 6.2.1 to 6.3.0 [#437](https://github.com/haydenbleasel/next-ship/pull/437) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 3
 
@@ -1717,7 +1717,7 @@ Thanks for all your work!
 
 - Merge branch 'main' of https://github.com/haydenbleasel/next-ship ([@haydenbleasel](https://github.com/haydenbleasel))
 - Create basic search package ([@haydenbleasel](https://github.com/haydenbleasel))
-- Update schema.prisma ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update schema.drizzle ([@haydenbleasel](https://github.com/haydenbleasel))
 - Fix button hydration issue ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
@@ -3072,7 +3072,7 @@ Thank you, Emmanuel Isenah ([@Armadillidiid](https://github.com/Armadillidiid)),
 - Bump posthog-node from 4.3.0 to 4.3.1 [#303](https://github.com/haydenbleasel/next-ship/pull/303) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump class-variance-authority from 0.7.0 to 0.7.1 [#302](https://github.com/haydenbleasel/next-ship/pull/302) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump posthog-js from 1.188.0 to 1.194.1 [#304](https://github.com/haydenbleasel/next-ship/pull/304) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @prisma/client from 5.22.0 to 6.0.0 [#305](https://github.com/haydenbleasel/next-ship/pull/305) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @drizzle/client from 5.22.0 to 6.0.0 [#305](https://github.com/haydenbleasel/next-ship/pull/305) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump @arcjet/next from 1.0.0-alpha.31 to 1.0.0-alpha.33 [#306](https://github.com/haydenbleasel/next-ship/pull/306) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump fumadocs-core from 14.5.4 to 14.5.5 [#307](https://github.com/haydenbleasel/next-ship/pull/307) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump undici from 6.21.0 to 7.0.0 [#308](https://github.com/haydenbleasel/next-ship/pull/308) ([@dependabot[bot]](https://github.com/dependabot[bot]))
@@ -4551,7 +4551,7 @@ Thank you, Yam Catzenelson ([@yamz8](https://github.com/yamz8)), for all your wo
 
 #### ⚠️ Pushed to `main`
 
-- Update prisma-postgres.mdx ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update drizzle-postgres.mdx ([@haydenbleasel](https://github.com/haydenbleasel))
 - Create new SEO docs category ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
@@ -4760,7 +4760,7 @@ Thanks for all your work!
 
 #### 📝 Documentation
 
-- add docs for switching to Prisma Postgres [#192](https://github.com/haydenbleasel/next-ship/pull/192) ([@nikolasburk](https://github.com/nikolasburk))
+- add docs for switching to Drizzle Postgres [#192](https://github.com/haydenbleasel/next-ship/pull/192) ([@nikolasburk](https://github.com/nikolasburk))
 
 #### Authors: 4
 

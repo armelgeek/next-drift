@@ -1,10 +1,9 @@
 import "server-only";
-import { Polar } from "@polar-sh/sdk";
+import Stripe from "stripe";
 import { keys } from "./keys";
 
-export const polar = new Polar({
-  accessToken: keys().POLAR_ACCESS_TOKEN,
-  server: keys().POLAR_SERVER || "sandbox",
+export const stripe = new Stripe(keys().STRIPE_SECRET_KEY, {
+  apiVersion: "2024-06-20",
 });
 
-export type { Polar } from "@polar-sh/sdk";
+export type Stripe = typeof stripe;

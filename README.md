@@ -25,10 +25,10 @@ Most Next.js starters are either too basic or too complex. next-ship hits the sw
 ### Core Services
 | Service | Purpose |
 |---------|---------|
-| **Clerk** | Authentication — simple, secure, works out of the box |
-| **Drizzle ORM** | Database — type-safe, SQL-like, better performance than Prisma |
+| **Better Auth** | Authentication — self-hosted, type-safe, works out of the box |
+| **Drizzle ORM** | Database — type-safe, SQL-like, excellent performance |
 | **Neon PostgreSQL** | Database hosting — serverless, scales with you |
-| **Polar.sh** | Payments — modern SaaS billing with strong TypeScript support |
+| **Stripe** | Payments — modern SaaS billing with advanced features |
 | **PostHog** | Analytics + Error tracking — one tool instead of three |
 | **Resend** | Transactional email — simple API, great deliverability |
 | **BaseHub** | CMS — type-safe content management |
@@ -71,7 +71,6 @@ Create `.env` files in each app directory:
 
 **apps/web/.env:**
 ```
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 NEXT_PUBLIC_WEB_URL=http://localhost:3001
 NEXT_PUBLIC_POSTHOG_KEY=phc_...
@@ -79,9 +78,8 @@ NEXT_PUBLIC_POSTHOG_KEY=phc_...
 
 **apps/app/.env:**
 ```
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
-CLERK_WEBHOOK_SECRET=whsec_...
+BETTER_AUTH_SECRET=your-super-secret-key-min-32-chars
+BETTER_AUTH_URL=http://localhost:3000
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 NEXT_PUBLIC_POSTHOG_KEY=phc_...
 ```
@@ -89,10 +87,9 @@ NEXT_PUBLIC_POSTHOG_KEY=phc_...
 **apps/api/.env:**
 ```
 DATABASE_URL=postgresql://...
-CLERK_SECRET_KEY=sk_test_...
-CLERK_WEBHOOK_SECRET=whsec_...
-POLAR_ACCESS_TOKEN=polar_...
-POLAR_WEBHOOK_SECRET=whsec_...
+BETTER_AUTH_SECRET=your-super-secret-key-min-32-chars
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
 RESEND_TOKEN=re_...
 
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -158,7 +155,7 @@ One tool instead of three:
 
 ### Modern Database Layer
 
-Drizzle ORM instead of Prisma:
+Drizzle ORM instead of Drizzle:
 - Better query performance
 - SQL-like syntax (you write actual SQL)
 - Smaller bundle size

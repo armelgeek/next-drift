@@ -248,7 +248,7 @@ psql $DATABASE_URL -c "SELECT * FROM pg_stat_activity;"
 
 ```bash
 # Enable query logging in dev
-# Add to .env: DEBUG="prisma:query"
+# Add to .env: DEBUG="drizzle:query"
 
 # Check slow queries
 # Look in logs for queries > 1s

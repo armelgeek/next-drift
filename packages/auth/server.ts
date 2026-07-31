@@ -1,3 +1,7 @@
 import "server-only";
 
-export * from "@clerk/nextjs/server";
+export {
+  getSession as auth,
+  getCurrentUser as currentUser,
+  getAdminClient as clerkClient,
+} from "./lib/server-helpers";

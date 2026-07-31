@@ -24,7 +24,7 @@
 │    ├── email/       # Email service                       │
 │    └── studio/      # Content/DB studio                   │
 │  packages/                                                   │
-│    ├── database/    # Prisma schema & client              │
+│    ├── database/    # Drizzle schema & client              │
 │    ├── auth/        # Authentication utilities            │
 │    └── ...                                                   │
 │  README.md          # Points to external docs               │
@@ -284,7 +284,7 @@ Behind the scenes:
 
 ```
 Template Repo (Source of Truth)
-├── packages/database/prisma/schema.prisma
+├── packages/database/drizzle/schema.drizzle
 │   └── Generates: /reference/database-schema.md
 │
 ├── packages/auth/src/

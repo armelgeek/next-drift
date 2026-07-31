@@ -6,7 +6,7 @@ import {
   paymentSucceededEvent,
   subscriptionCancelledEvent,
   subscriptionCreatedEvent,
-} from "./fixtures/polar-events";
+} from "./fixtures/stripe-events";
 
 // Simple webhook verification utility for testing
 function verifyWebhookSignature(

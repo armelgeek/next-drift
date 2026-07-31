@@ -3,7 +3,7 @@
 ## Overview
 
 This plan covers five major migrations to modernize the next-ship stack:
-1. **Prisma → Drizzle ORM** (type-safe, SQL-like, edge-compatible)
+1. **Drizzle → Drizzle ORM** (type-safe, SQL-like, edge-compatible)
 2. **Radix UI → Base UI** (shadcn's next-gen component primitives)
 3. **Next.js 16.0.10 → 16.2** (latest features and improvements)
 4. **Polar.sh integration** (modern payment infrastructure)
@@ -64,27 +64,27 @@ Update related dependencies that may have peer dependency requirements:
 
 ---
 
-## Phase 2: Prisma → Drizzle ORM Migration
+## Phase 2: Drizzle → Drizzle ORM Migration
 
-**Goal**: Replace Prisma with Drizzle ORM while maintaining all database functionality
+**Goal**: Replace Drizzle with Drizzle ORM while maintaining all database functionality
 
 ### What to build
 
 **Schema Migration**:
-- Convert `packages/database/prisma/schema.prisma` to Drizzle schema
+- Convert `packages/database/drizzle/schema.drizzle` to Drizzle schema
 - Install `drizzle-orm` and `drizzle-kit`
 - Configure Drizzle with Neon serverless driver
 - Set up Drizzle migrations folder structure
 
 **Package Updates**:
 - Update `packages/database/package.json` dependencies
-- Remove Prisma-related dependencies
+- Remove Drizzle-related dependencies
 - Add Drizzle Kit scripts (generate, migrate, push, studio)
 
 **Code Migration**:
-- Create Drizzle schema files that mirror existing Prisma models
-- Migrate all database queries in other packages from Prisma Client to Drizzle
-- Update type imports from `@prisma/client` to Drizzle-generated types
+- Create Drizzle schema files that mirror existing Drizzle models
+- Migrate all database queries in other packages from Drizzle Client to Drizzle
+- Update type imports from `@drizzle/client` to Drizzle-generated types
 
 **Environment Variables**:
 - Update `DATABASE_URL` usage (Drizzle uses it directly)
@@ -92,11 +92,11 @@ Update related dependencies that may have peer dependency requirements:
 
 ### Acceptance Criteria
 
-- [ ] Drizzle schema covers all existing Prisma models
+- [ ] Drizzle schema covers all existing Drizzle models
 - [ ] `drizzle-kit generate` produces valid SQL migrations
 - [ ] `drizzle-kit push` successfully applies migrations to Neon
 - [ ] All database queries in `@repo/database` consumers updated
-- [ ] No `@prisma/client` imports remain in the codebase
+- [ ] No `@drizzle/client` imports remain in the codebase
 - [ ] Type safety maintained (no `any` types introduced)
 - [ ] Database tests pass (if any exist)
 
@@ -317,7 +317,7 @@ Update webhook handling:
 ## Risk Assessment & Mitigation
 
 ### High Risk
-1. **Database Migration (Prisma → Drizzle)**
+1. **Database Migration (Drizzle → Drizzle)**
    - **Risk**: Data loss or corruption during migration
    - **Mitigation**: Full database backup before migration, test on staging first, reversible migration strategy
 

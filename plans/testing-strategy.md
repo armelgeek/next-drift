@@ -30,18 +30,18 @@ Each package needs:
 - Coverage reporting
 
 **Priority packages for testing:**
-1. **@repo/database** - Critical for Prisma → Drizzle migration
+1. **@repo/database** - Critical for Drizzle → Drizzle migration
 2. **@repo/payments** - Critical for payment integration
 3. **@repo/auth** - Critical for user flows
 4. **@repo/design-system** - Critical for Radix → Base UI migration
 
 ### 2. Database Testing Strategy
 
-**For Prisma → Drizzle Migration:**
+**For Drizzle → Drizzle Migration:**
 
 ```typescript
 // packages/database/__tests__/schema-validation.test.ts
-// Validates that Drizzle schema matches Prisma schema 1:1
+// Validates that Drizzle schema matches Drizzle schema 1:1
 // Tests all CRUD operations
 // Tests relationships and constraints
 ```
@@ -50,7 +50,7 @@ Each package needs:
 - Use **testcontainers** or **pg-mem** for isolated PostgreSQL testing
 - Create test database utilities in `@repo/database`
 - Seed test data for consistent test scenarios
-- Test both Prisma (before) and Drizzle (after) implementations side-by-side
+- Test both Drizzle (before) and Drizzle (after) implementations side-by-side
 - Run dual-write validation during migration period
 
 **Key tests to write:**
@@ -164,7 +164,7 @@ Each package needs:
 ```
 
 **Database Schema Validation:**
-- Compare Prisma schema with Drizzle schema
+- Compare Drizzle schema with Drizzle schema
 - Ensure no breaking changes in table/column names
 - Validate migration scripts produce correct SQL
 
@@ -222,8 +222,8 @@ export async function setupTestDatabase() {
 
 **Before any migration begins:**
 
-1. **Write comprehensive tests for current state (Prisma + payments + Radix)**
-   - Database CRUD tests with Prisma
+1. **Write comprehensive tests for current state (Drizzle + payments + Radix)**
+   - Database CRUD tests with Drizzle
    - Payment webhook tests with Polar
    - UI component tests with Radix
    - E2E tests for critical flows
@@ -261,7 +261,7 @@ export async function setupTestDatabase() {
 **After migration completes:**
 
 1. **Remove old implementation tests**
-   - Delete Prisma-specific tests
+   - Delete Drizzle-specific tests
    - Delete payment-provider-specific tests
    - Delete Radix-specific tests
 
@@ -410,7 +410,7 @@ To get immediate value with minimal effort:
 
 ## Test Priorities for Each Migration
 
-### Prisma → Drizzle
+### Drizzle → Drizzle
 **Critical tests:**
 1. Schema validation (tables, columns, types match)
 2. CRUD operations return identical results

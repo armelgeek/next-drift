@@ -28,7 +28,7 @@
       "onAutoForward": "silent"
     },
     "5555": {
-      "label": "Prisma Studio",
+      "label": "Drizzle Studio",
       "onAutoForward": "silent"
     },
     "5432": {
@@ -56,7 +56,7 @@
         "biomejs.biome",
         "bradlc.vscode-tailwindcss",
         "esbenp.prettier-vscode",
-        "Prisma.prisma",
+        "Drizzle.drizzle",
         "ms-vscode.vscode-typescript-next"
       ],
       "settings": {
