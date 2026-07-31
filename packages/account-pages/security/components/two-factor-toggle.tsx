@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { toggleTwoFactor } from "../../actions";
+import { toggleTwoFactor } from "@repo/account-pages";
 import { Button } from "@repo/design-system/ui/button";
 import { toast } from "sonner";
 

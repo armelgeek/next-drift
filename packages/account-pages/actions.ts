@@ -88,8 +88,42 @@ export async function updatePreferences(data: PreferencesInput) {
   const session = await auth();
   if (!session?.user.id) throw new Error("Not authenticated");
 
-  // TODO: Implement
-  return { success: true };
+  const { db } = await import("@repo/database/drizzle");
+  const { userPreferences } = await import("@repo/database/schema");
+  const { eq } = await import("drizzle-orm");
+
+  try {
+    const userId = session.user.id as any;
+
+    const existing = await db.query.userPreferences.findFirst({
+      where: eq(userPreferences.userId, userId),
+    });
+
+    if (existing) {
+      await db
+        .update(userPreferences)
+        .set({
+          emailNotifications: data.emailNotifications,
+          marketingEmails: data.marketingEmails,
+          preferredTheme: data.preferredTheme,
+          language: data.language,
+        })
+        .where(eq(userPreferences.userId, userId));
+    } else {
+      await db.insert(userPreferences).values({
+        userId,
+        emailNotifications: data.emailNotifications,
+        marketingEmails: data.marketingEmails,
+        preferredTheme: data.preferredTheme,
+        language: data.language,
+      });
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("Preferences update error:", error);
+    return { success: false, error: "Failed to update preferences" };
+  }
 }
 
 // Team actions

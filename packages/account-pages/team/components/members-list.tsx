@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { removeMember, updateMemberRole } from "../../actions";
+import { removeMember, updateMemberRole } from "@repo/account-pages";
 import { Card } from "@repo/design-system/ui/card";
 import { Button } from "@repo/design-system/ui/button";
 import {
