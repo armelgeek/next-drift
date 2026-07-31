@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { revokeSession } from "../../actions";
+import { revokeSession } from "@repo/account-pages";
 import { Button } from "@repo/design-system/ui/button";
 import { toast } from "sonner";
 import { Trash2, Smartphone } from "lucide-react";

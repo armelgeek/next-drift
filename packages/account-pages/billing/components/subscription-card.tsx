@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getSubscription } from "../../actions";
+import { getSubscription } from "@repo/account-pages";
 import { Card } from "@repo/design-system/ui/card";
 import { Badge } from "@repo/design-system/ui/badge";
 import { Button } from "@repo/design-system/ui/button";

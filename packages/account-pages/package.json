@@ -1,0 +1,32 @@
+{
+  "name": "@repo/account-pages",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
+    "@repo/auth": "workspace:*",
+    "@repo/database": "workspace:*",
+    "@repo/design-system": "workspace:*",
+    "@repo/payments": "workspace:*",
+    "drizzle-orm": "^0.45.2",
+    "react": "19.2.1",
+    "react-hook-form": "^7.52.0",
+    "sonner": "^1.7.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@repo/testing": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.15"
+  }
+}
