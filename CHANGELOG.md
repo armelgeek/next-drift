@@ -1,3 +1,23 @@
+# v0.1.1 (Thu Aug 06 2026)
+
+#### ⚠️ Pushed to `main`
+
+- fix: auto run ([@armelgeek](https://github.com/armelgeek))
+- Update release.yml ([@armelgeek](https://github.com/armelgeek))
+- fix: GITHUB TOKEN ([@armelgeek](https://github.com/armelgeek))
+- fix: build ([@armelgeek](https://github.com/armelgeek))
+- Add .env.local to gitignore ([@armelgeek](https://github.com/armelgeek))
+- Clean: update author references to armelgeek ([@armelgeek](https://github.com/armelgeek))
+- Fix: update .autorc to correct GitHub owner ([@armelgeek](https://github.com/armelgeek))
+- Fix: update .autorc repo name to drift ([@armelgeek](https://github.com/armelgeek))
+- Rename project from next-ship to drift ([@armelgeek](https://github.com/armelgeek))
+
+#### Authors: 1
+
+- [@armelgeek](https://github.com/armelgeek)
+
+---
+
 # v0.0.16 (Mon Apr 27 2026)
 
 #### 🐛 Bug Fix
