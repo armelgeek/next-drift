@@ -63,9 +63,17 @@ mkdir -p .claude
 ln -s ../drift/.claude/skills .claude/skills
 ln -s ../drift/.claude/templates .claude/templates
 
-# 5. Create apps directory with stubs
+# 5. Create apps directory and populate from templates
 echo "📁 Creating apps structure..."
-mkdir -p apps/web apps/app apps/api
+TEMPLATES_PATH="$DRIFT_PATH/scripts/templates"
+
+mkdir -p apps
+# Copy app template
+cp -r "$TEMPLATES_PATH/app" apps/
+# Copy web template
+cp -r "$TEMPLATES_PATH/web" apps/
+# Copy api template
+cp -r "$TEMPLATES_PATH/api" apps/
 
 # 6. Create root package.json (pnpm workspace)
 echo "📦 Creating package.json..."
