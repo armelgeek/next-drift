@@ -77,8 +77,8 @@ cat > package.json << EOF
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=10.0.0"
+    "node": ">=18.0.0",
+    "pnpm": ">=9.0.0"
   },
   "scripts": {
     "dev": "turbo dev",
