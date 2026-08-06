@@ -1,23 +1,30 @@
 ---
 name: ship-feature
-description: "Fast feature delivery: PRD → Epic → Code → Deploy (no strategy phase)"
+description: "Fast feature delivery: Scope → PRD → Epic → Code → Deploy"
 ---
 
 # /ship-feature — Ship a Feature Fast
 
-Deliver a feature from spec to production without the strategy phase.
+Deliver a feature from spec to production. Scope first to kill feature creep.
 
 ## Usage
 
 ```
 /ship-feature "add dark mode"
 /ship-feature "implement OAuth login"
+/ship-feature "add analytics dashboard with real-time charts"
 ```
 
 ## Workflow
 
+0. **Scope Cut** (scope-cutter) ← AUTO FIRST
+   - MVP vs V2+ breakdown
+   - Solo dev time estimate
+   - List gotchas to ignore
+   - Forces binaries: no scope creep
+
 1. **Write PRD** (drift-ccpm)
-   - Quick spec of the feature
+   - Quick spec of MVP scope
    - User stories
    - Success criteria
 
@@ -28,7 +35,7 @@ Deliver a feature from spec to production without the strategy phase.
 
 3. **Code** (drift-nextjs-ui)
    - Start on issues
-   - Build incrementally
+   - Build MVP incrementally
    - Push to GitHub
 
 4. **Verify** (drift-readiness)
@@ -43,6 +50,12 @@ Deliver a feature from spec to production without the strategy phase.
 
 ---
 
-## Time estimate: 1-3 days per feature
+## Time estimate: 1-3 days for MVP (per scope-cutter breakdown)
 
-Actual time depends on complexity and parallel agent execution.
+Actual time depends on MVP scope and parallel agent execution.
+
+## Key flow
+
+Feature description → **Auto-scope** → PRD (scope-aware) → Epic → Code → Ship
+
+No waffling on scope. Scope-cutter is step 0.
