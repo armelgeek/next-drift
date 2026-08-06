@@ -49,7 +49,7 @@ Most Next.js starters are either too basic or too complex. Drift hits the sweet 
 
 ```bash
 # Clone the repository
-git clone https://github.com/oscardobsonbrown/drift.git
+git clone https://github.com/armelgeek/drift.git
 cd drift
 
 # Install dependencies
