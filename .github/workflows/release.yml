@@ -47,11 +47,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build CLI
-        run: npx tsup
+      - name: Build
+        run: pnpm build
 
       - name: Create Release
         env:
-          GH_TOKEN: ${{ secrets.AUTO_GH_TOKEN || secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: npx auto shipit
