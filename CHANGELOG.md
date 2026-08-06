@@ -1,3 +1,16 @@
+# v0.1.3 (Thu Aug 06 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'main' of https://github.com/armelgeek/next-drift ([@armelgeek](https://github.com/armelgeek))
+- Add GitHub-native Drift docs, commands & setup ([@armelgeek](https://github.com/armelgeek))
+
+#### Authors: 1
+
+- [@armelgeek](https://github.com/armelgeek)
+
+---
+
 # v0.1.2 (Thu Aug 06 2026)
 
 #### ⚠️ Pushed to `main`
