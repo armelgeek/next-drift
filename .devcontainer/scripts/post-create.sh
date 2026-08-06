@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Setting up next-ship development environment..."
+echo "🚀 Setting up drift development environment..."
 
 # Enable corepack and activate pnpm
 echo "📦 Setting up pnpm..."
@@ -56,7 +56,7 @@ pnpm run migrate
 # Seed database with test data
 echo "🌱 Seeding database..."
 cd packages/database && npx prisma db seed || echo "⚠️ No seed script configured, skipping..."
-cd /workspaces/next-ship
+cd /workspaces/drift
 
 # Warm build cache
 echo "🔨 Running initial build..."

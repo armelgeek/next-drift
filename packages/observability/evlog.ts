@@ -30,7 +30,7 @@ export const initEvlog = () => {
 
   initLogger({
     env: {
-      service: "next-ship",
+      service: "drift",
     },
     drain: pipeline(
       createPostHogDrain({

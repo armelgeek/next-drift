@@ -38,7 +38,7 @@ if [ -z "${DOPPLER_TOKEN:-}" ]; then
   DOPPLER_TOKEN="$(tr -d '\r\n' < "$TOKEN_FILE")"
 fi
 
-PROJECT="${DOPPLER_PROJECT:-next-ship}"
+PROJECT="${DOPPLER_PROJECT:-drift}"
 SHARED_CONFIG="${DOPPLER_CONFIG_SHARED:-dev_shared}"
 APP_CONFIG="${DOPPLER_CONFIG_APP:-dev_app}"
 WEB_CONFIG="${DOPPLER_CONFIG_WEB:-dev_web}"

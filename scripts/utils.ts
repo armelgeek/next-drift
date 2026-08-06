@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { promisify } from "node:util";
 
-export const url = "https://github.com/oscardobsonbrown/next-ship";
+export const url = "https://github.com/oscardobsonbrown/drift";
 
 export const cleanFileName = (file: string) =>
   file.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\\/g, "/");
@@ -28,7 +28,7 @@ export const allInternalContent = [
 
 export const semver = /^\d+\.\d+\.\d+$/;
 
-export const tempDirName = "next-ship-update";
+export const tempDirName = "drift-update";
 
 export const exec = promisify(execRaw);
 

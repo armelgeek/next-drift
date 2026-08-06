@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is **next-ship**, a production-grade Turborepo template for Next.js applications. It's a monorepo containing multiple apps and shared packages.
+This is **drift**, a production-grade Turborepo template for Next.js applications. It's a monorepo containing multiple apps and shared packages.
 
 ## AI Agent Guidelines
 

@@ -1,6 +1,6 @@
 export const en = {
   metadata: {
-    title: "next-ship - A done-for-you Next.js template that just works",
+    title: "drift - A done-for-you Next.js template that just works",
     description:
       "Zero-config auth, payments, database, and analytics. Built for solo founders who want to ship fast, not configure webpack.",
   },
@@ -14,7 +14,7 @@ export const en = {
     title: "A done-for-you Next.js template that just works",
     subtitle:
       "Zero-config auth, payments, database, and analytics. Built for solo founders who want to ship fast, not configure webpack.",
-    installCommand: "npx next-ship@latest init",
+    installCommand: "npx drift@latest init",
     copyCommand: "Copy Install Command",
     agentPrompt: "Agent prompt",
   },
@@ -85,7 +85,7 @@ export const en = {
   cta: {
     title: "Get started in minutes.",
     subtitle: "Stop configuring. Start shipping.",
-    installCommand: "npx next-ship@latest init",
+    installCommand: "npx drift@latest init",
     copyCommand: "Copy Install Command",
   },
   footer: {
