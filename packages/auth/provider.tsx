@@ -1,19 +1,19 @@
 "use client";
 
-import { SessionProvider } from "better-auth/react";
-import type { ComponentProps } from "react";
+import type { ReactNode } from "react";
 
-type AuthProviderProperties = ComponentProps<typeof SessionProvider> & {
+type AuthProviderProperties = {
+  children: ReactNode;
   privacyUrl?: string;
   termsUrl?: string;
   helpUrl?: string;
 };
 
 export const AuthProvider = ({
+  children,
   privacyUrl: _privacyUrl,
   termsUrl: _termsUrl,
   helpUrl: _helpUrl,
-  ...properties
 }: AuthProviderProperties) => {
-  return <SessionProvider {...properties} />;
+  return <>{children}</>;
 };

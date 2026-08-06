@@ -1,12 +1,9 @@
-import { config, withAnalyzer } from "@repo/next-config";
-import { withObservability } from "@repo/observability/next-config";
-import type { NextConfig } from "next";
-import { env } from "@/env";
+import { createNextConfig } from '@repo/next-config';
+import path from 'path';
 
-let nextConfig: NextConfig = withObservability(config);
-
-if (env.ANALYZE === "true") {
-  nextConfig = withAnalyzer(nextConfig);
-}
-
-export default nextConfig;
+export default createNextConfig({
+  transpilePackages: ['@repo/database', '@repo/auth'],
+  turbopack: {
+    root: path.join(__dirname, '../../'),
+  },
+});
