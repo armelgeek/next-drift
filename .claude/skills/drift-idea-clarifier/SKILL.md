@@ -1,6 +1,6 @@
 ---
-name: idea-clarifier
-description: Turn vague product ideas into clear, implementation-ready specifications. Auto-generates docs/product/ with 14 markdown files covering all requirements.
+name: drift-idea-clarifier
+description: Turn vague product ideas into clear, implementation-ready specifications for Drift. Auto-generates docs/product/ with 14 markdown files covering all requirements.
 ---
 
 # Idea Clarifier

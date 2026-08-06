@@ -2,6 +2,38 @@
 
 A production-ready Next.js 15 SaaS starter kit for solo founders and small teams.
 
+---
+
+## 🚀 Quick Drift Setup (GitHub-Native Workflow)
+
+```bash
+# One-command setup for Drift development workflow
+.claude/setup-github.sh
+
+# Or use Claude command
+/setup
+```
+
+This enables:
+- 📊 **Standups** → GitHub Discussions
+- 📝 **PRDs** → GitHub Wiki  
+- 📋 **Issues** → GitHub Issues
+- 💬 **Team chat** → GitHub Discussions
+
+Then use:
+```bash
+/ship-feature "feature name"    # Ship a feature
+/ship-bug "bug description"     # Fix a bug
+/postmortem "incident"          # Incident response
+/standup                         # Daily status
+```
+
+**No Slack. No Notion. Just GitHub.** ✨
+
+See `.claude/GITHUB-NATIVE.md` for details.
+
+---
+
 ## Project Description
 - Comprehensive starter kit for building production-ready SaaS applications
 - Full-stack TypeScript monorepo with modern tooling and best practices

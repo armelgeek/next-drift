@@ -1,6 +1,6 @@
 ---
-name: startup-validator
-description: Validate product ideas before coding. Reads spec from idea-clarifier, proposes intelligent tests, creates validation plan adapted to your product type.
+name: drift-startup-validator
+description: Validate product ideas before coding. Reads spec from drift-idea-clarifier, proposes intelligent tests, creates validation plan adapted to your Drift product type.
 ---
 
 # Startup Validator
