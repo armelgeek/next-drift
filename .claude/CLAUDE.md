@@ -1,9 +1,35 @@
-# next-forge
+# Drift
+
+A production-ready Next.js 15 SaaS starter kit for solo founders and small teams.
 
 ## Project Description
-- A comprehensive Next.js 15 starter kit for building production-ready SaaS applications
+- Comprehensive starter kit for building production-ready SaaS applications
 - Full-stack TypeScript monorepo with modern tooling and best practices
 - Includes authentication, payments, database, CMS, analytics, and observability out of the box
+- Designed for solo founders and small teams — simplified stack without enterprise complexity
+
+## Quick Start Commands
+
+```bash
+# Setup
+pnpm install
+pnpm db:push  # Setup PostgreSQL (requires DATABASE_URL)
+
+# Development (all apps in parallel)
+pnpm dev
+
+# Run a single app
+pnpm --filter @repo/web dev      # Port 3001 (marketing site)
+pnpm --filter @repo/app dev      # Port 3000 (main SaaS app)
+pnpm --filter @repo/api dev      # Port 3002 (API server)
+
+# Common tasks
+pnpm check                        # Lint all files
+pnpm test                         # Run all tests
+pnpm test --filter @repo/auth    # Test specific package
+pnpm build                        # Build all
+pnpm db:studio                    # Open Drizzle Studio
+```
 
 ## Tech Stack
 
@@ -41,9 +67,9 @@
 - Neon PostgreSQL (serverless)
 - Vercel for hosting
 - PostHog for analytics & observability
-- Polar for payments
+- Stripe for payments (modern SaaS billing, webhooks via Svix)
 - Basehub for CMS
-- Liveblocks for real-time collaboration
+- Better Auth for authentication
 
 ## AI Agent Role
 - You are a senior full-stack TypeScript engineer specializing in Next.js 15 and React 19
@@ -114,13 +140,15 @@
 - Use @t3-oss/env-nextjs for type-safe env validation
 
 ## UI & Styling
-- Use Tailwind CSS with utility-first approach
-- Leverage @repo/design-system for shared components
-- Follow shadcn/ui component patterns and naming
-- Use Radix UI primitives for accessibility
+- Use Tailwind CSS v4 with utility-first approach
+- Leverage @repo/design-system for shared components — Base UI v2 (shadcn next-gen)
+- Base UI does NOT use `asChild` prop: compose directly instead
+  - ✅ `<Link><Button>Click</Button></Link>`
+  - ❌ `<Button asChild><Link>Click</Link></Button>` (breaks with Base UI)
 - Implement proper loading states with Suspense boundaries
 - Use next/image for optimized images
 - Support dark mode via class-based theming
+- Add new components via: `npx shadcn@latest add button -c packages/design-system`
 
 ## Performance
 - Use React Server Components to minimize client-side JavaScript
@@ -314,6 +342,22 @@
 - Prop soup: components accepting 10+ props as an escape hatch instead of composing smaller pieces
 - Singleton service instances holding mutable state across requests — Next.js server runtime reuses processes, so any module-level mutable state leaks between unrelated requests/users
 
+## Key Directories & Files
+
+| Path | Purpose |
+|------|---------|
+| `apps/app` | Main SaaS application (port 3000) — most development happens here |
+| `apps/web` | Marketing site (port 3001) — public landing pages |
+| `apps/api` | API server (port 3002) — webhook handlers, internal APIs |
+| `packages/database` | Drizzle schema, migrations, query functions |
+| `packages/design-system` | Shared UI components (Base UI v2, Tailwind) |
+| `packages/auth` | Better Auth configuration (sessions, OAuth) |
+| `packages/payments` | Stripe integration (invoices, subscriptions) |
+| `packages/observability` | PostHog client setup, error handling |
+| `.claude/` | Claude Code configuration (this CLAUDE.md, settings.json, skills) |
+| `.github/workflows` | GitHub Actions CI/CD |
+| `turbo.json` | Build graph for Turborepo |
+
 ## Packageable Infrastructure
 - Before writing new infrastructure code (payment provider, email sending, auth logic, notification/event system), ask: "would this exact code work unchanged on a different client project?" If yes, it goes in packages/, never inline in apps/.
 - Infrastructure code (Stripe, email, auth) is packaged even on first use if it's a known reusable concern — unlike business logic, don't wait for a 2nd occurrence here.
@@ -323,14 +367,85 @@
 - Before extracting to a package, check packages/ for an existing one that already covers this concern — don't create packages/stripe-v2 next to an existing packages/payments.
 
 
+## Common Development Patterns
+
+### Environment Setup
+- Never commit `.env*` files — they're in `.gitignore`
+- Copy `.env.example` to `.env.local` in each app directory (`apps/app`, `apps/web`, `apps/api`)
+- **Minimal setup**: only `DATABASE_URL` is required to start developing
+- For a complete feature set, see `ENV_SETUP.md` for all services (Stripe, PostHog, Resend, etc.)
+- Test keys work: use `sk_test_*` for Stripe, `phc_*` for PostHog, etc.
+
+### Testing a Specific Feature
+When adding a feature, test the whole flow:
+```bash
+# 1. Run the single app you're modifying
+pnpm --filter @repo/app dev
+
+# 2. In another terminal, run type-checking on changes
+pnpm --filter @repo/app typecheck --watch
+
+# 3. If tests exist for this package:
+pnpm test --filter @repo/auth
+```
+
+### Database Schema Changes
+```bash
+# 1. Edit packages/database/src/schema.ts
+# 2. Generate migration file (reads diffs)
+pnpm db:generate
+
+# 3. Push to your database
+pnpm db:push
+
+# 4. Open Drizzle Studio to verify
+pnpm db:studio
+```
+
+### Adding a UI Component
+```bash
+# Add from shadcn v2 registry to design-system
+pnpm --filter @repo/design-system shadcn add button
+
+# Import in your app
+import { Button } from "@repo/design-system/components/ui/button"
+
+# Test it in Storybook
+pnpm --filter @repo/storybook dev
+```
+
 ## Command Reference
-- `pnpm dev` - Start development server
-- `pnpm build` - Build all applications
-- `pnpm check` - Run Ultracite linting
-- `pnpm fix` - Auto-fix linting issues
-- `pnpm test` - Run all tests
-- `pnpm db:generate` - Generate Drizzle migrations
-- `pnpm db:migrate` - Run database migrations
-- `pnpm db:studio` - Open Drizzle Studio
-- `pnpm bump-deps` - Update all dependencies
-- `pnpm clean` - Clean node_modules
+
+### Development
+| Command | When to use |
+|---------|------------|
+| `pnpm dev` | Start all apps (web, app, api) in parallel |
+| `pnpm --filter @repo/app dev` | Run only the SaaS app (faster for focused work) |
+| `pnpm --filter @repo/web dev` | Run only marketing site |
+| `pnpm --filter @repo/api dev` | Run only API server |
+
+### Database
+| Command | When to use |
+|---------|------------|
+| `pnpm db:generate` | After editing `packages/database/src/schema.ts` |
+| `pnpm db:push` | Apply migrations to your database |
+| `pnpm db:studio` | Visual database explorer — view/edit data, inspect schema |
+
+### Testing & Quality
+| Command | When to use |
+|---------|------------|
+| `pnpm test` | Run all tests in packages/* |
+| `pnpm test --filter @repo/database` | Test only one package |
+| `pnpm check` | Lint everything (pre-commit runs this) |
+| `pnpm fix` | Auto-fix linting issues |
+| `pnpm dead-code` | Find unused imports/exports |
+
+### Build & Deploy
+| Command | When to use |
+|---------|------------|
+| `pnpm build` | Build all apps for production |
+| `pnpm typecheck` | Type-check all packages (faster than build) |
+| `pnpm analyze` | Analyze bundle sizes |
+| `pnpm bump-deps` | Update all dependencies (use carefully) |
+| `pnpm clean` | Remove node_modules and .next caches |
+| `pnpm migrate` | Generate + push database migrations (alias for db:generate + db:push) |
