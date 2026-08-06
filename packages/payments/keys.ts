@@ -4,11 +4,11 @@ import { z } from "zod";
 export const keys = () =>
   createEnv({
     server: {
-      STRIPE_SECRET_KEY: z.string().startsWith("sk_"),
-      STRIPE_WEBHOOK_SECRET: z.string().startsWith("whsec_"),
+      STRIPE_SECRET_KEY: z.union([z.literal(""), z.string().startsWith("sk_")]).default(""),
+      STRIPE_WEBHOOK_SECRET: z.union([z.literal(""), z.string().startsWith("whsec_")]).default(""),
     },
     client: {
-      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().startsWith("pk_"),
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.union([z.literal(""), z.string().startsWith("pk_")]).default(""),
     },
     runtimeEnv: {
       STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,

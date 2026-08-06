@@ -1,27 +1,17 @@
-import { webhooks } from "@repo/webhooks";
-import { notFound } from "next/navigation";
-
 export const metadata = {
   title: "Webhooks",
   description: "Send webhooks to your users.",
 };
 
-const WebhooksPage = async () => {
-  const response = await webhooks.getAppPortal();
-
-  if (!response?.url) {
-    notFound();
-  }
-
+const WebhooksPage = () => {
   return (
-    <div className="h-full w-full overflow-hidden">
-      <iframe
-        allow="clipboard-write"
-        className="h-full w-full border-none"
-        loading="lazy"
-        src={response.url}
-        title="Webhooks"
-      />
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">Webhooks Coming Soon</h1>
+        <p className="text-muted-foreground">
+          Webhook management will be available soon.
+        </p>
+      </div>
     </div>
   );
 };

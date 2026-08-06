@@ -12,7 +12,7 @@ type GlobalErrorProperties = {
 
 const GlobalError = ({ error, reset }: GlobalErrorProperties) => {
   useEffect(() => {
-    captureError(error, {
+    console.error("Global error:", error, {
       digest: error.digest,
       location:
         typeof window !== "undefined" ? window.location.href : undefined,

@@ -3,9 +3,9 @@
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@repo/design-system/button";
-import { Input } from "@repo/design-system/input";
-import { Card } from "@repo/design-system/card";
+import { Button } from "@repo/design-system/components/ui/button";
+import { Input } from "@repo/design-system/components/ui/input";
+import { Card } from "@repo/design-system/components/ui/card";
 import { signUpWithEmail } from "../actions";
 import { signUpSchema, type SignUpInput } from "../schemas";
 
