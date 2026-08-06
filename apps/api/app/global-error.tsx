@@ -3,7 +3,6 @@
 import { Button } from "@repo/design-system/components/ui/button";
 import { fonts } from "@repo/design-system/lib/fonts";
 import type NextError from "next/error";
-import { useEffect } from "react";
 
 type GlobalErrorProperties = {
   readonly error: NextError & { digest?: string };
@@ -11,9 +10,6 @@ type GlobalErrorProperties = {
 };
 
 const GlobalError = ({ error, reset }: GlobalErrorProperties) => {
-  useEffect(() => {
-    posthog.captureException(error);
-  }, [error]);
 
   return (
     <html className={fonts} lang="en">

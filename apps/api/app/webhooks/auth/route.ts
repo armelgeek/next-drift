@@ -8,29 +8,29 @@ export async function POST(request: Request) {
   const payload = await request.json();
   
   try {
-    logger.info("Auth webhook received", { event: payload.type });
+    logger.info(`Auth webhook received: ${payload.type}`);
     
     // Handle different webhook events
     switch (payload.type) {
       case "user.created":
-        logger.info("User created", { userId: payload.data?.id });
+        logger.info(`User created: ${payload.data?.id}`);
         break;
       case "user.updated":
-        logger.info("User updated", { userId: payload.data?.id });
+        logger.info(`User updated: ${payload.data?.id}`);
         break;
       case "user.deleted":
-        logger.info("User deleted", { userId: payload.data?.id });
+        logger.info(`User deleted: ${payload.data?.id}`);
         break;
       case "organization.created":
-        logger.info("Organization created", { orgId: payload.data?.id });
+        logger.info(`Organization created: ${payload.data?.id}`);
         break;
       default:
-        logger.info("Unknown auth event", { type: payload.type });
+        logger.info(`Unknown auth event: ${payload.type}`);
     }
     
     return NextResponse.json({ success: true });
   } catch (error) {
-    logger.error("Auth webhook error", { error });
+    logger.error("Auth webhook error");
     return NextResponse.json({ error: "Webhook processing failed" }, { status: 400 });
   }
 }
