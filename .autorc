@@ -1,9 +1,9 @@
 {
   "plugins": ["git-tag"],
-  "owner": "oscardobsonbrown",
+  "owner": "armelgeek",
   "repo": "drift",
-  "name": "Oscar Dobson-Brown",
-  "email": "git@oscardb.xyz",
+  "name": "Armel",
+  "email": "armelgeek5@gmail.com",
   "onlyPublishWithReleaseLabel": false,
   "labels": [
     {
