@@ -296,3 +296,16 @@ packages/database/generated
 
 .worktrees
 .env.local
+
+# ─── Drift Claude Code Integrations ────────────────────────────────────────
+.claude/integrations.env
+.claude/.env*
+.claude/**/.env*
+
+# Keep these in git:
+# ✓ .claude/CLAUDE.md
+# ✓ .claude/WORKFLOW.md
+# ✓ .claude/README.md
+# ✓ .claude/commands/
+# ✓ .claude/skills/
+# ✓ .claude/settings.json
