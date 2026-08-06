@@ -1,3 +1,16 @@
+# v0.1.5 (Thu Aug 06 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'main' of https://github.com/armelgeek/next-drift ([@armelgeek](https://github.com/armelgeek))
+- docs: Add PRODUCT.md and DESIGN.md for Drift ([@armelgeek](https://github.com/armelgeek))
+
+#### Authors: 1
+
+- [@armelgeek](https://github.com/armelgeek)
+
+---
+
 # v0.1.4 (Thu Aug 06 2026)
 
 #### ⚠️ Pushed to `main`
