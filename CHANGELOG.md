@@ -2,7 +2,7 @@
 
 #### 🐛 Bug Fix
 
-- [codex] Fix parseError CodeQL alert [#8](https://github.com/oscardobsonbrown/next-ship/pull/8) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- [codex] Fix parseError CodeQL alert [#8](https://github.com/oscardobsonbrown/drift/pull/8) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 
 #### Authors: 1
 
@@ -14,7 +14,7 @@
 
 #### 🐛 Bug Fix
 
-- Fix skip-ci glob matching for CodeQL [#7](https://github.com/oscardobsonbrown/next-ship/pull/7) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Fix skip-ci glob matching for CodeQL [#7](https://github.com/oscardobsonbrown/drift/pull/7) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 
 #### Authors: 1
 
@@ -26,7 +26,7 @@
 
 #### 🐛 Bug Fix
 
-- Fix installer GitHub URL for create-next-app [#6](https://github.com/oscardobsonbrown/next-ship/pull/6) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Fix installer GitHub URL for create-next-app [#6](https://github.com/oscardobsonbrown/drift/pull/6) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 
 #### Authors: 1
 
@@ -38,7 +38,7 @@
 
 #### 🐛 Bug Fix
 
-- Fix next-ship CLI package publishing [#5](https://github.com/oscardobsonbrown/next-ship/pull/5) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Fix drift CLI package publishing [#5](https://github.com/oscardobsonbrown/drift/pull/5) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 
 #### Authors: 1
 
@@ -50,7 +50,7 @@
 
 #### 🐛 Bug Fix
 
-- feat(observability): add structured logging wrapper [#4](https://github.com/oscardobsonbrown/next-ship/pull/4) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- feat(observability): add structured logging wrapper [#4](https://github.com/oscardobsonbrown/drift/pull/4) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 
 #### Authors: 1
 
@@ -98,7 +98,7 @@
 
 #### ⚠️ Pushed to `main`
 
-- Merge branch 'main' of https://github.com/oscardobsonbrown/next-ship ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Merge branch 'main' of https://github.com/oscardobsonbrown/drift ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - docs: update AGENTS.md with ultracite formatting guidelines ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - chore: standardize formatting with ultracite across IDE and pre-commit hooks ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - test fixes ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
@@ -149,7 +149,7 @@
 
 #### ⚠️ Pushed to `main`
 
-- Merge branch 'main' of https://github.com/oscardobsonbrown/next-ship ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Merge branch 'main' of https://github.com/oscardobsonbrown/drift ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 - fix: Add all required environment variables to E2E workflow ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 
 #### Authors: 1
@@ -186,8 +186,8 @@
 
 #### 🐛 Bug Fix
 
-- Add CODEOWNERS file defining code review ownership [#2](https://github.com/oscardobsonbrown/next-ship/pull/2) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Add activity feed API [#1](https://github.com/oscardobsonbrown/next-ship/pull/1) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Add CODEOWNERS file defining code review ownership [#2](https://github.com/oscardobsonbrown/drift/pull/2) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Add activity feed API [#1](https://github.com/oscardobsonbrown/drift/pull/1) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
 
 #### ⚠️ Pushed to `main`
 
@@ -653,12 +653,12 @@ Thank you, Dmytro Pletenskyi ([@ph1losof](https://github.com/ph1losof)), for all
 
 #### 🚀 Enhancement
 
-- Update dependencies [#670](https://github.com/vercel/next-ship/pull/670) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update dependencies [#670](https://github.com/vercel/drift/pull/670) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### 🐛 Bug Fix
 
-- docs(migrations): fixes middleware configuration for better-auth [#667](https://github.com/vercel/next-ship/pull/667) ([@ph1losof](https://github.com/ph1losof) [@haydenbleasel](https://github.com/haydenbleasel))
-- fix: update drizzle to 7.0.0 and use drizzle-client generator [#663](https://github.com/vercel/next-ship/pull/663) ([@ph1losof](https://github.com/ph1losof))
+- docs(migrations): fixes middleware configuration for better-auth [#667](https://github.com/vercel/drift/pull/667) ([@ph1losof](https://github.com/ph1losof) [@haydenbleasel](https://github.com/haydenbleasel))
+- fix: update drizzle to 7.0.0 and use drizzle-client generator [#663](https://github.com/vercel/drift/pull/663) ([@ph1losof](https://github.com/ph1losof))
 
 #### Authors: 2
 
@@ -671,7 +671,7 @@ Thank you, Dmytro Pletenskyi ([@ph1losof](https://github.com/ph1losof)), for all
 
 #### 🐛 Bug Fix
 
-- Update packages for React Flight RCE advisory [#669](https://github.com/vercel/next-ship/pull/669) ([@vercel[bot]](https://github.com/vercel[bot]))
+- Update packages for React Flight RCE advisory [#669](https://github.com/vercel/drift/pull/669) ([@vercel[bot]](https://github.com/vercel[bot]))
 
 #### Authors: 1
 
@@ -683,7 +683,7 @@ Thank you, Dmytro Pletenskyi ([@ph1losof](https://github.com/ph1losof)), for all
 
 #### 🐛 Bug Fix
 
-- fix: email pkg tsconfig to encompass .ts(x) files [#660](https://github.com/vercel/next-ship/pull/660) ([@karelvuong](https://github.com/karelvuong))
+- fix: email pkg tsconfig to encompass .ts(x) files [#660](https://github.com/vercel/drift/pull/660) ([@karelvuong](https://github.com/karelvuong))
 
 #### Authors: 1
 
@@ -707,7 +707,7 @@ Thank you, Dmytro Pletenskyi ([@ph1losof](https://github.com/ph1losof)), for all
 
 #### 🐛 Bug Fix
 
-- Bump deps [#648](https://github.com/vercel/next-ship/pull/648) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Bump deps [#648](https://github.com/vercel/drift/pull/648) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -729,12 +729,12 @@ Thanks for all your work!
 
 #### 🚀 Enhancement
 
-- Use improved colors and font for react-tweet [#599](https://github.com/vercel/next-ship/pull/599) ([@lakbychance](https://github.com/lakbychance) [@haydenbleasel](https://github.com/haydenbleasel))
+- Use improved colors and font for react-tweet [#599](https://github.com/vercel/drift/pull/599) ([@lakbychance](https://github.com/lakbychance) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### 🐛 Bug Fix
 
-- Update Storybook to the latest version [#645](https://github.com/vercel/next-ship/pull/645) ([@kuizuo](https://github.com/kuizuo))
-- fix: Refactor PrismaNeon initialization to use PoolConfig instead of Pool directly [#644](https://github.com/vercel/next-ship/pull/644) ([@rnwolfe](https://github.com/rnwolfe))
+- Update Storybook to the latest version [#645](https://github.com/vercel/drift/pull/645) ([@kuizuo](https://github.com/kuizuo))
+- fix: Refactor PrismaNeon initialization to use PoolConfig instead of Pool directly [#644](https://github.com/vercel/drift/pull/644) ([@rnwolfe](https://github.com/rnwolfe))
 
 #### Authors: 4
 
@@ -749,7 +749,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- Update Analytics package [#640](https://github.com/vercel/next-ship/pull/640) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update Analytics package [#640](https://github.com/vercel/drift/pull/640) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -761,7 +761,7 @@ Thanks for all your work!
 
 #### 🚀 Enhancement
 
-- Update README.md [#639](https://github.com/vercel/next-ship/pull/639) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Update README.md [#639](https://github.com/vercel/drift/pull/639) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -773,7 +773,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- 5.1 [#637](https://github.com/vercel/next-ship/pull/637) ([@haydenbleasel](https://github.com/haydenbleasel))
+- 5.1 [#637](https://github.com/vercel/drift/pull/637) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -785,7 +785,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- fix: knock provider theme [#566](https://github.com/vercel/next-ship/pull/566) ([@jpvalery](https://github.com/jpvalery) [@haydenbleasel](https://github.com/haydenbleasel))
+- fix: knock provider theme [#566](https://github.com/vercel/drift/pull/566) ([@jpvalery](https://github.com/jpvalery) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -802,10 +802,10 @@ Thank you, null[@jonathanagustin](https://github.com/jonathanagustin), for all y
 
 #### 🐛 Bug Fix
 
-- fix: better dark/light support on unauthenticated [#567](https://github.com/vercel/next-ship/pull/567) ([@jpvalery](https://github.com/jpvalery))
-- Fix badge image in Metabase docs [#603](https://github.com/vercel/next-ship/pull/603) ([@matthewhefferon](https://github.com/matthewhefferon))
-- fix: add missing --dir flag to email build and export scripts [#620](https://github.com/vercel/next-ship/pull/620) ([@jonathanagustin](https://github.com/jonathanagustin))
-- upgrade basehub to v9 [#606](https://github.com/vercel/next-ship/pull/606) ([@julianbenegas](https://github.com/julianbenegas))
+- fix: better dark/light support on unauthenticated [#567](https://github.com/vercel/drift/pull/567) ([@jpvalery](https://github.com/jpvalery))
+- Fix badge image in Metabase docs [#603](https://github.com/vercel/drift/pull/603) ([@matthewhefferon](https://github.com/matthewhefferon))
+- fix: add missing --dir flag to email build and export scripts [#620](https://github.com/vercel/drift/pull/620) ([@jonathanagustin](https://github.com/jonathanagustin))
+- upgrade basehub to v9 [#606](https://github.com/vercel/drift/pull/606) ([@julianbenegas](https://github.com/julianbenegas))
 
 #### Authors: 4
 
@@ -820,7 +820,7 @@ Thank you, null[@jonathanagustin](https://github.com/jonathanagustin), for all y
 
 #### 🐛 Bug Fix
 
-- Improve Metabase integration instructions [#601](https://github.com/vercel/next-ship/pull/601) ([@matthewhefferon](https://github.com/matthewhefferon))
+- Improve Metabase integration instructions [#601](https://github.com/vercel/drift/pull/601) ([@matthewhefferon](https://github.com/matthewhefferon))
 
 #### Authors: 1
 
@@ -840,8 +840,8 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- fix: correct google analytics env [#600](https://github.com/vercel/next-ship/pull/600) ([@karelvuong](https://github.com/karelvuong))
-- add mobile menu [#574](https://github.com/vercel/next-ship/pull/574) ([@chocochu](https://github.com/chocochu))
+- fix: correct google analytics env [#600](https://github.com/vercel/drift/pull/600) ([@karelvuong](https://github.com/karelvuong))
+- add mobile menu [#574](https://github.com/vercel/drift/pull/574) ([@chocochu](https://github.com/chocochu))
 
 #### Authors: 2
 
@@ -878,7 +878,7 @@ Thanks for all your work!
 
 #### 💥 Breaking Change
 
-- ▲ [#561](https://github.com/vercel/next-ship/pull/561) ([@haydenbleasel](https://github.com/haydenbleasel))
+- ▲ [#561](https://github.com/vercel/drift/pull/561) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -951,7 +951,7 @@ Thanks for all your work!
 
 #### 🚀 Enhancement
 
-- Migrate docs and landing page to Fumadocs [#548](https://github.com/haydenbleasel/next-ship/pull/548) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Migrate docs and landing page to Fumadocs [#548](https://github.com/haydenbleasel/drift/pull/548) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -991,14 +991,14 @@ Thanks for all your work!
 
 #### 🚀 Enhancement
 
-- Bump @drizzle/nextjs-monorepo-workaround-plugin from 6.6.0 to 6.7.0 [#534](https://github.com/haydenbleasel/next-ship/pull/534) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @liveblocks/react from 2.22.3 to 2.24.1 [#536](https://github.com/haydenbleasel/next-ship/pull/536) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @drizzle/nextjs-monorepo-workaround-plugin from 6.6.0 to 6.7.0 [#534](https://github.com/haydenbleasel/drift/pull/534) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @liveblocks/react from 2.22.3 to 2.24.1 [#536](https://github.com/haydenbleasel/drift/pull/536) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### 🐛 Bug Fix
 
-- Bump @next/third-parties from 15.3.0 to 15.3.1 [#530](https://github.com/haydenbleasel/next-ship/pull/530) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump recharts from 2.15.2 to 2.15.3 [#532](https://github.com/haydenbleasel/next-ship/pull/532) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @radix-ui/react-menubar from 1.1.7 to 1.1.12 [#535](https://github.com/haydenbleasel/next-ship/pull/535) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @next/third-parties from 15.3.0 to 15.3.1 [#530](https://github.com/haydenbleasel/drift/pull/530) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump recharts from 2.15.2 to 2.15.3 [#532](https://github.com/haydenbleasel/drift/pull/532) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @radix-ui/react-menubar from 1.1.7 to 1.1.12 [#535](https://github.com/haydenbleasel/drift/pull/535) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 1
 
@@ -1062,7 +1062,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- fix(web): add missing 'mx-auto' on container in BlogPost page - fix #545 [#547](https://github.com/haydenbleasel/next-ship/pull/547) ([@QuentinFrc](https://github.com/QuentinFrc))
+- fix(web): add missing 'mx-auto' on container in BlogPost page - fix #545 [#547](https://github.com/haydenbleasel/drift/pull/547) ([@QuentinFrc](https://github.com/QuentinFrc))
 
 #### Authors: 1
 
@@ -1074,7 +1074,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- fix: language switcher [#541](https://github.com/haydenbleasel/next-ship/pull/541) ([@jpvalery](https://github.com/jpvalery))
+- fix: language switcher [#541](https://github.com/haydenbleasel/drift/pull/541) ([@jpvalery](https://github.com/jpvalery))
 
 #### Authors: 1
 
@@ -1090,7 +1090,7 @@ Thank you, Quentin ([@QuentinFrc](https://github.com/QuentinFrc)), for all your 
 
 #### 🐛 Bug Fix
 
-- Enhanced better-auth migration docs [#542](https://github.com/haydenbleasel/next-ship/pull/542) ([@QuentinFrc](https://github.com/QuentinFrc))
+- Enhanced better-auth migration docs [#542](https://github.com/haydenbleasel/drift/pull/542) ([@QuentinFrc](https://github.com/QuentinFrc))
 
 #### Authors: 1
 
@@ -1106,8 +1106,8 @@ Thank you, Jp ([@jpvalery](https://github.com/jpvalery)), for all your work!
 
 #### 🐛 Bug Fix
 
-- fix: metadataBase [#540](https://github.com/haydenbleasel/next-ship/pull/540) ([@jpvalery](https://github.com/jpvalery) [@haydenbleasel](https://github.com/haydenbleasel))
-- fix: add success color variable [#538](https://github.com/haydenbleasel/next-ship/pull/538) ([@jpvalery](https://github.com/jpvalery) [@haydenbleasel](https://github.com/haydenbleasel))
+- fix: metadataBase [#540](https://github.com/haydenbleasel/drift/pull/540) ([@jpvalery](https://github.com/jpvalery) [@haydenbleasel](https://github.com/haydenbleasel))
+- fix: add success color variable [#538](https://github.com/haydenbleasel/drift/pull/538) ([@jpvalery](https://github.com/jpvalery) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -1120,7 +1120,7 @@ Thank you, Jp ([@jpvalery](https://github.com/jpvalery)), for all your work!
 
 #### 🐛 Bug Fix
 
-- Update Turborepo documentation link. [#526](https://github.com/haydenbleasel/next-ship/pull/526) ([@anthonyshew](https://github.com/anthonyshew))
+- Update Turborepo documentation link. [#526](https://github.com/haydenbleasel/drift/pull/526) ([@anthonyshew](https://github.com/anthonyshew))
 
 #### Authors: 1
 
@@ -1136,7 +1136,7 @@ Thank you, Uma Shankar ([@maverickdude](https://github.com/maverickdude)), for a
 
 #### 🐛 Bug Fix
 
-- Fix a typo in debugging.mdx [#524](https://github.com/haydenbleasel/next-ship/pull/524) ([@maverickdude](https://github.com/maverickdude))
+- Fix a typo in debugging.mdx [#524](https://github.com/haydenbleasel/drift/pull/524) ([@maverickdude](https://github.com/maverickdude))
 
 #### Authors: 1
 
@@ -1152,7 +1152,7 @@ Thank you, Jan Kuppens ([@JanKups](https://github.com/JanKups)), for all your wo
 
 #### 🐛 Bug Fix
 
-- Fixed Build fails (Storybook) - fresh install #517 [#520](https://github.com/haydenbleasel/next-ship/pull/520) ([@JanKups](https://github.com/JanKups))
+- Fixed Build fails (Storybook) - fresh install #517 [#520](https://github.com/haydenbleasel/drift/pull/520) ([@JanKups](https://github.com/JanKups))
 
 #### Authors: 1
 
@@ -1192,7 +1192,7 @@ Thank you, Jan Kuppens ([@JanKups](https://github.com/JanKups)), for all your wo
 
 #### ⚠️ Pushed to `main`
 
-- Merge branch 'main' of https://github.com/haydenbleasel/next-ship ([@haydenbleasel](https://github.com/haydenbleasel))
+- Merge branch 'main' of https://github.com/haydenbleasel/drift ([@haydenbleasel](https://github.com/haydenbleasel))
 - Resolves #499 ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update shadcn CSS, resolved #438 ([@haydenbleasel](https://github.com/haydenbleasel))
 - Fix typo ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -1219,7 +1219,7 @@ Thank you, Jan Kuppens ([@JanKups](https://github.com/JanKups)), for all your wo
 
 #### 🐛 Bug Fix
 
-- Fixed Issue #500 [#513](https://github.com/haydenbleasel/next-ship/pull/513) ([@mathewlewallen](https://github.com/mathewlewallen) [@haydenbleasel](https://github.com/haydenbleasel))
+- Fixed Issue #500 [#513](https://github.com/haydenbleasel/drift/pull/513) ([@mathewlewallen](https://github.com/mathewlewallen) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -1232,7 +1232,7 @@ Thank you, Jan Kuppens ([@JanKups](https://github.com/JanKups)), for all your wo
 
 #### 🚀 Enhancement
 
-- Bump vitest from 3.0.7 to 3.1.1 [#503](https://github.com/haydenbleasel/next-ship/pull/503) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump vitest from 3.0.7 to 3.1.1 [#503](https://github.com/haydenbleasel/drift/pull/503) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 1
 
@@ -1244,7 +1244,7 @@ Thank you, Jan Kuppens ([@JanKups](https://github.com/JanKups)), for all your wo
 
 #### 🚀 Enhancement
 
-- Bump shiki from 3.1.0 to 3.2.1 [#504](https://github.com/haydenbleasel/next-ship/pull/504) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump shiki from 3.1.0 to 3.2.1 [#504](https://github.com/haydenbleasel/drift/pull/504) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 1
 
@@ -1256,19 +1256,19 @@ Thank you, Jan Kuppens ([@JanKups](https://github.com/JanKups)), for all your wo
 
 #### 💥 Breaking Change
 
-- Bump react-email from 3.0.7 to 4.0.2 [#507](https://github.com/haydenbleasel/next-ship/pull/507) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump react-email from 3.0.7 to 4.0.2 [#507](https://github.com/haydenbleasel/drift/pull/507) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### 🚀 Enhancement
 
-- Bump @liveblocks/node from 2.20.0 to 2.22.2 [#502](https://github.com/haydenbleasel/next-ship/pull/502) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump react-markdown from 10.0.1 to 10.1.0 [#505](https://github.com/haydenbleasel/next-ship/pull/505) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump fumadocs-core from 15.0.15 to 15.2.1 [#510](https://github.com/haydenbleasel/next-ship/pull/510) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @liveblocks/node from 2.20.0 to 2.22.2 [#502](https://github.com/haydenbleasel/drift/pull/502) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump react-markdown from 10.0.1 to 10.1.0 [#505](https://github.com/haydenbleasel/drift/pull/505) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump fumadocs-core from 15.0.15 to 15.2.1 [#510](https://github.com/haydenbleasel/drift/pull/510) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### 🐛 Bug Fix
 
-- Bump @types/node from 22.13.9 to 22.13.14 [#506](https://github.com/haydenbleasel/next-ship/pull/506) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @tailwindcss/postcss from 4.0.12 to 4.0.17 [#508](https://github.com/haydenbleasel/next-ship/pull/508) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @storybook/blocks from 8.6.4 to 8.6.11 [#509](https://github.com/haydenbleasel/next-ship/pull/509) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/node from 22.13.9 to 22.13.14 [#506](https://github.com/haydenbleasel/drift/pull/506) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @tailwindcss/postcss from 4.0.12 to 4.0.17 [#508](https://github.com/haydenbleasel/drift/pull/508) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @storybook/blocks from 8.6.4 to 8.6.11 [#509](https://github.com/haydenbleasel/drift/pull/509) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### ⚠️ Pushed to `main`
 
@@ -1289,7 +1289,7 @@ Thank you, mathewlewallen ([@mathewlewallen](https://github.com/mathewlewallen))
 
 #### 🐛 Bug Fix
 
-- feat: amend internationalization middleware and index. Still uses nex… [#491](https://github.com/haydenbleasel/next-ship/pull/491) ([@mathewlewallen](https://github.com/mathewlewallen) [@haydenbleasel](https://github.com/haydenbleasel))
+- feat: amend internationalization middleware and index. Still uses nex… [#491](https://github.com/haydenbleasel/drift/pull/491) ([@mathewlewallen](https://github.com/mathewlewallen) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -1306,7 +1306,7 @@ Thank you, Buns Enchantress ([@BunsDev](https://github.com/BunsDev)), for all yo
 
 #### 🐛 Bug Fix
 
-- fix error: build script in /packages/cms [#492](https://github.com/haydenbleasel/next-ship/pull/492) ([@BunsDev](https://github.com/BunsDev))
+- fix error: build script in /packages/cms [#492](https://github.com/haydenbleasel/drift/pull/492) ([@BunsDev](https://github.com/BunsDev))
 
 #### Authors: 1
 
@@ -1330,7 +1330,7 @@ Thank you, Buns Enchantress ([@BunsDev](https://github.com/BunsDev)), for all yo
 
 #### 🐛 Bug Fix
 
-- Tailwind 4 [#425](https://github.com/haydenbleasel/next-ship/pull/425) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Tailwind 4 [#425](https://github.com/haydenbleasel/drift/pull/425) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -1346,7 +1346,7 @@ Thank you, David Bonachera ([@davidbonachera](https://github.com/davidbonachera)
 
 #### 🐛 Bug Fix
 
-- docs: add link to Drizzle Database Configuration Guide [#478](https://github.com/haydenbleasel/next-ship/pull/478) ([@haydenbleasel](https://github.com/haydenbleasel) [@davidbonachera](https://github.com/davidbonachera))
+- docs: add link to Drizzle Database Configuration Guide [#478](https://github.com/haydenbleasel/drift/pull/478) ([@haydenbleasel](https://github.com/haydenbleasel) [@davidbonachera](https://github.com/davidbonachera))
 
 #### Authors: 2
 
@@ -1371,7 +1371,7 @@ Thank you, David Bonachera ([@davidbonachera](https://github.com/davidbonachera)
 
 #### 🐛 Bug Fix
 
-- Add more Languine keys [#475](https://github.com/haydenbleasel/next-ship/pull/475) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Add more Languine keys [#475](https://github.com/haydenbleasel/drift/pull/475) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -1407,11 +1407,11 @@ Thank you, David Bonachera ([@davidbonachera](https://github.com/davidbonachera)
 
 #### 🚀 Enhancement
 
-- Internationalization and Languine [#473](https://github.com/haydenbleasel/next-ship/pull/473) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Internationalization and Languine [#473](https://github.com/haydenbleasel/drift/pull/473) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### 📝 Documentation
 
-- Dub [#455](https://github.com/haydenbleasel/next-ship/pull/455) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Dub [#455](https://github.com/haydenbleasel/drift/pull/455) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -1423,7 +1423,7 @@ Thank you, David Bonachera ([@davidbonachera](https://github.com/davidbonachera)
 
 #### 🐛 Bug Fix
 
-- Upgrade deps [#470](https://github.com/haydenbleasel/next-ship/pull/470) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Upgrade deps [#470](https://github.com/haydenbleasel/drift/pull/470) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -1439,7 +1439,7 @@ Thank you, Andrés Filoso ([@andresfiloso](https://github.com/andresfiloso)), fo
 
 #### 🐛 Bug Fix
 
-- Add Knock environment variables to .env.example [#457](https://github.com/haydenbleasel/next-ship/pull/457) ([@andresfiloso](https://github.com/andresfiloso))
+- Add Knock environment variables to .env.example [#457](https://github.com/haydenbleasel/drift/pull/457) ([@andresfiloso](https://github.com/andresfiloso))
 
 #### Authors: 1
 
@@ -1455,7 +1455,7 @@ Thank you, Justin Barsketis ([@barsketis](https://github.com/barsketis)), for al
 
 #### 🐛 Bug Fix
 
-- Drizzle fixes [#452](https://github.com/haydenbleasel/next-ship/pull/452) ([@haydenbleasel](https://github.com/haydenbleasel) [@barsketis](https://github.com/barsketis))
+- Drizzle fixes [#452](https://github.com/haydenbleasel/drift/pull/452) ([@haydenbleasel](https://github.com/haydenbleasel) [@barsketis](https://github.com/barsketis))
 
 #### Authors: 2
 
@@ -1485,7 +1485,7 @@ Thank you, Dan Billson ([@danbillson](https://github.com/danbillson)), for all y
 
 #### 🐛 Bug Fix
 
-- Add 'Switch to Paddle Billing' migration guide [#450](https://github.com/haydenbleasel/next-ship/pull/450) ([@danbillson](https://github.com/danbillson) [@haydenbleasel](https://github.com/haydenbleasel))
+- Add 'Switch to Paddle Billing' migration guide [#450](https://github.com/haydenbleasel/drift/pull/450) ([@danbillson](https://github.com/danbillson) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -1510,7 +1510,7 @@ Thank you, Dan Billson ([@danbillson](https://github.com/danbillson)), for all y
 
 #### 🐛 Bug Fix
 
-- Upgrade [#447](https://github.com/haydenbleasel/next-ship/pull/447) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Upgrade [#447](https://github.com/haydenbleasel/drift/pull/447) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -1526,7 +1526,7 @@ Thank you, YuCheng Chen ([@shamenchens](https://github.com/shamenchens)), for al
 
 #### 🐛 Bug Fix
 
-- feat: Use Link component for sidebar links [#441](https://github.com/haydenbleasel/next-ship/pull/441) ([@shamenchens](https://github.com/shamenchens))
+- feat: Use Link component for sidebar links [#441](https://github.com/haydenbleasel/drift/pull/441) ([@shamenchens](https://github.com/shamenchens))
 
 #### ⚠️ Pushed to `main`
 
@@ -1534,18 +1534,18 @@ Thank you, YuCheng Chen ([@shamenchens](https://github.com/shamenchens)), for al
 
 #### 🔩 Dependency Updates
 
-- Bump @storybook/nextjs from 8.5.0 to 8.5.3 [#444](https://github.com/haydenbleasel/next-ship/pull/444) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @radix-ui/react-dropdown-menu from 2.1.5 to 2.1.6 [#445](https://github.com/haydenbleasel/next-ship/pull/445) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump the npm_and_yarn group with 2 updates [#446](https://github.com/haydenbleasel/next-ship/pull/446) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump recharts from 2.15.0 to 2.15.1 [#430](https://github.com/haydenbleasel/next-ship/pull/430) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump chromatic from 11.25.0 to 11.25.2 [#428](https://github.com/haydenbleasel/next-ship/pull/428) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @clerk/themes from 2.2.9 to 2.2.16 [#429](https://github.com/haydenbleasel/next-ship/pull/429) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump require-in-the-middle from 7.4.0 to 7.5.0 [#431](https://github.com/haydenbleasel/next-ship/pull/431) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump turbo from 2.3.3 to 2.4.0 [#432](https://github.com/haydenbleasel/next-ship/pull/432) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @next/bundle-analyzer from 15.1.5 to 15.1.6 [#433](https://github.com/haydenbleasel/next-ship/pull/433) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @radix-ui/react-dropdown-menu from 2.1.4 to 2.1.5 [#435](https://github.com/haydenbleasel/next-ship/pull/435) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump basehub from 8.1.1 to 8.1.9 [#436](https://github.com/haydenbleasel/next-ship/pull/436) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @drizzle/client from 6.2.1 to 6.3.0 [#437](https://github.com/haydenbleasel/next-ship/pull/437) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @storybook/nextjs from 8.5.0 to 8.5.3 [#444](https://github.com/haydenbleasel/drift/pull/444) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @radix-ui/react-dropdown-menu from 2.1.5 to 2.1.6 [#445](https://github.com/haydenbleasel/drift/pull/445) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the npm_and_yarn group with 2 updates [#446](https://github.com/haydenbleasel/drift/pull/446) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump recharts from 2.15.0 to 2.15.1 [#430](https://github.com/haydenbleasel/drift/pull/430) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump chromatic from 11.25.0 to 11.25.2 [#428](https://github.com/haydenbleasel/drift/pull/428) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @clerk/themes from 2.2.9 to 2.2.16 [#429](https://github.com/haydenbleasel/drift/pull/429) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump require-in-the-middle from 7.4.0 to 7.5.0 [#431](https://github.com/haydenbleasel/drift/pull/431) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump turbo from 2.3.3 to 2.4.0 [#432](https://github.com/haydenbleasel/drift/pull/432) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @next/bundle-analyzer from 15.1.5 to 15.1.6 [#433](https://github.com/haydenbleasel/drift/pull/433) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @radix-ui/react-dropdown-menu from 2.1.4 to 2.1.5 [#435](https://github.com/haydenbleasel/drift/pull/435) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump basehub from 8.1.1 to 8.1.9 [#436](https://github.com/haydenbleasel/drift/pull/436) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @drizzle/client from 6.2.1 to 6.3.0 [#437](https://github.com/haydenbleasel/drift/pull/437) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 3
 
@@ -1563,7 +1563,7 @@ Thank you, YuCheng Chen ([@shamenchens](https://github.com/shamenchens)), for al
 
 #### 🔩 Dependency Updates
 
-- Bump the npm_and_yarn group with 2 updates [#423](https://github.com/haydenbleasel/next-ship/pull/423) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump the npm_and_yarn group with 2 updates [#423](https://github.com/haydenbleasel/drift/pull/423) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 2
 
@@ -1584,7 +1584,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- Add 'Switch to Hypertune' migration guide [#422](https://github.com/haydenbleasel/next-ship/pull/422) ([@SpeedyCoder](https://github.com/SpeedyCoder) [@miraan](https://github.com/miraan))
+- Add 'Switch to Hypertune' migration guide [#422](https://github.com/haydenbleasel/drift/pull/422) ([@SpeedyCoder](https://github.com/SpeedyCoder) [@miraan](https://github.com/miraan))
 
 #### ⚠️ Pushed to `main`
 
@@ -1628,7 +1628,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- Enhance CLI command - Update [#406](https://github.com/haydenbleasel/next-ship/pull/406) ([@carvillanueva](https://github.com/carvillanueva) [@haydenbleasel](https://github.com/haydenbleasel))
+- Enhance CLI command - Update [#406](https://github.com/haydenbleasel/drift/pull/406) ([@carvillanueva](https://github.com/carvillanueva) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -1691,7 +1691,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- Upgrade cli [#404](https://github.com/haydenbleasel/next-ship/pull/404) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Upgrade cli [#404](https://github.com/haydenbleasel/drift/pull/404) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -1715,7 +1715,7 @@ Thanks for all your work!
 
 #### ⚠️ Pushed to `main`
 
-- Merge branch 'main' of https://github.com/haydenbleasel/next-ship ([@haydenbleasel](https://github.com/haydenbleasel))
+- Merge branch 'main' of https://github.com/haydenbleasel/drift ([@haydenbleasel](https://github.com/haydenbleasel))
 - Create basic search package ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update schema.drizzle ([@haydenbleasel](https://github.com/haydenbleasel))
 - Fix button hydration issue ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -1826,7 +1826,7 @@ Thanks for all your work!
 
 #### 🚀 Enhancement
 
-- 240 setup cli [#344](https://github.com/haydenbleasel/next-ship/pull/344) ([@haydenbleasel](https://github.com/haydenbleasel))
+- 240 setup cli [#344](https://github.com/haydenbleasel/drift/pull/344) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -1838,7 +1838,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- add basehub to turbo.json's build outputs, plus reorder toolbar [#401](https://github.com/haydenbleasel/next-ship/pull/401) ([@julianbenegas](https://github.com/julianbenegas) [@haydenbleasel](https://github.com/haydenbleasel))
+- add basehub to turbo.json's build outputs, plus reorder toolbar [#401](https://github.com/haydenbleasel/drift/pull/401) ([@julianbenegas](https://github.com/julianbenegas) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -1887,7 +1887,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- upgrade basehub + hook up legal pages [#400](https://github.com/haydenbleasel/next-ship/pull/400) ([@julianbenegas](https://github.com/julianbenegas))
+- upgrade basehub + hook up legal pages [#400](https://github.com/haydenbleasel/drift/pull/400) ([@julianbenegas](https://github.com/julianbenegas))
 
 #### Authors: 1
 
@@ -1903,7 +1903,7 @@ Thank you, Kuizuo ([@kuizuo](https://github.com/kuizuo)), for all your work!
 
 #### 🐛 Bug Fix
 
-- Imporve document for ESLint configuration [#397](https://github.com/haydenbleasel/next-ship/pull/397) ([@kuizuo](https://github.com/kuizuo) [@haydenbleasel](https://github.com/haydenbleasel))
+- Imporve document for ESLint configuration [#397](https://github.com/haydenbleasel/drift/pull/397) ([@kuizuo](https://github.com/kuizuo) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -1964,7 +1964,7 @@ Thank you, Kuizuo ([@kuizuo](https://github.com/kuizuo)), for all your work!
 
 #### 🐛 Bug Fix
 
-- Fix installation for non-pnpm package managers [#395](https://github.com/haydenbleasel/next-ship/pull/395) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Fix installation for non-pnpm package managers [#395](https://github.com/haydenbleasel/drift/pull/395) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -1992,7 +1992,7 @@ Thank you, Carlos Villanueva ([@carvillanueva](https://github.com/carvillanueva)
 
 #### 🐛 Bug Fix
 
-- Adding AI Agent Rules (Cursor + Copilot) [#371](https://github.com/haydenbleasel/next-ship/pull/371) ([@carvillanueva](https://github.com/carvillanueva) [@haydenbleasel](https://github.com/haydenbleasel))
+- Adding AI Agent Rules (Cursor + Copilot) [#371](https://github.com/haydenbleasel/drift/pull/371) ([@carvillanueva](https://github.com/carvillanueva) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -2009,7 +2009,7 @@ Thank you, Jeff Everhart ([@JEverhart383](https://github.com/JEverhart383)), for
 
 #### 🚀 Enhancement
 
-- Add Notifications [#161](https://github.com/haydenbleasel/next-ship/pull/161) ([@haydenbleasel](https://github.com/haydenbleasel) [@JEverhart383](https://github.com/JEverhart383))
+- Add Notifications [#161](https://github.com/haydenbleasel/drift/pull/161) ([@haydenbleasel](https://github.com/haydenbleasel) [@JEverhart383](https://github.com/JEverhart383))
 
 #### Authors: 2
 
@@ -2038,7 +2038,7 @@ Thank you, Jeff Everhart ([@JEverhart383](https://github.com/JEverhart383)), for
 
 #### 🔩 Dependency Updates
 
-- Bump next from 15.1.3 to 15.1.4 in the npm_and_yarn group [#392](https://github.com/haydenbleasel/next-ship/pull/392) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump next from 15.1.3 to 15.1.4 in the npm_and_yarn group [#392](https://github.com/haydenbleasel/drift/pull/392) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 2
 
@@ -2055,7 +2055,7 @@ Thank you, Trevor Pfizenmaier ([@trevorpfiz](https://github.com/trevorpfiz)), fo
 
 #### 🐛 Bug Fix
 
-- Fix: cron jobs must use GET on Vercel [#391](https://github.com/haydenbleasel/next-ship/pull/391) ([@trevorpfiz](https://github.com/trevorpfiz))
+- Fix: cron jobs must use GET on Vercel [#391](https://github.com/haydenbleasel/drift/pull/391) ([@trevorpfiz](https://github.com/trevorpfiz))
 
 #### Authors: 1
 
@@ -2179,7 +2179,7 @@ Thank you, Aleksandra ([@beerose](https://github.com/beerose)), for all your wor
 
 #### 🐛 Bug Fix
 
-- Add EdgeDB migration guide [#383](https://github.com/haydenbleasel/next-ship/pull/383) ([@beerose](https://github.com/beerose) [@haydenbleasel](https://github.com/haydenbleasel))
+- Add EdgeDB migration guide [#383](https://github.com/haydenbleasel/drift/pull/383) ([@beerose](https://github.com/beerose) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -2197,7 +2197,7 @@ Thank you, Aleksandra ([@beerose](https://github.com/beerose)), for all your wor
 
 #### 🔩 Dependency Updates
 
-- Bump @types/node from 22.9.4 to 22.10.3 [#380](https://github.com/haydenbleasel/next-ship/pull/380) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @types/node from 22.9.4 to 22.10.3 [#380](https://github.com/haydenbleasel/drift/pull/380) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 2
 
@@ -2260,7 +2260,7 @@ Thank you, Aleksandra ([@beerose](https://github.com/beerose)), for all your wor
 
 #### 💥 Breaking Change
 
-- Composable environment variables [#332](https://github.com/haydenbleasel/next-ship/pull/332) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Composable environment variables [#332](https://github.com/haydenbleasel/drift/pull/332) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -2284,7 +2284,7 @@ Thank you, Aleksandra ([@beerose](https://github.com/beerose)), for all your wor
 
 #### 🐛 Bug Fix
 
-- Docs - next safe action Addon [#348](https://github.com/haydenbleasel/next-ship/pull/348) ([@pedrocarlo](https://github.com/pedrocarlo) [@haydenbleasel](https://github.com/haydenbleasel))
+- Docs - next safe action Addon [#348](https://github.com/haydenbleasel/drift/pull/348) ([@pedrocarlo](https://github.com/pedrocarlo) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -2297,7 +2297,7 @@ Thank you, Aleksandra ([@beerose](https://github.com/beerose)), for all your wor
 
 #### 🐛 Bug Fix
 
-- add info about getting basehub set up in the intstallation doc [#361](https://github.com/haydenbleasel/next-ship/pull/361) ([@julianbenegas](https://github.com/julianbenegas))
+- add info about getting basehub set up in the intstallation doc [#361](https://github.com/haydenbleasel/drift/pull/361) ([@julianbenegas](https://github.com/julianbenegas))
 
 #### Authors: 1
 
@@ -2325,7 +2325,7 @@ Thank you, Donovan Dikaio ([@dikaio](https://github.com/dikaio)), for all your w
 
 #### 🐛 Bug Fix
 
-- Fix: This fixes the bun install failure when opting for bun [#355](https://github.com/haydenbleasel/next-ship/pull/355) ([@dikaio](https://github.com/dikaio))
+- Fix: This fixes the bun install failure when opting for bun [#355](https://github.com/haydenbleasel/drift/pull/355) ([@dikaio](https://github.com/dikaio))
 
 #### Authors: 1
 
@@ -2341,7 +2341,7 @@ Thank you, Mike Keating ([@mikerkeating](https://github.com/mikerkeating)), for 
 
 #### 🐛 Bug Fix
 
-- Change Cron to daily to allow vercel hobby projects [#354](https://github.com/haydenbleasel/next-ship/pull/354) ([@mikerkeating](https://github.com/mikerkeating))
+- Change Cron to daily to allow vercel hobby projects [#354](https://github.com/haydenbleasel/drift/pull/354) ([@mikerkeating](https://github.com/mikerkeating))
 
 #### Authors: 1
 
@@ -2357,7 +2357,7 @@ Thank you, Mike Keating ([@mikerkeating](https://github.com/mikerkeating)), for 
 
 #### 📝 Documentation
 
-- Add uploadthing migration guide [#353](https://github.com/haydenbleasel/next-ship/pull/353) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Add uploadthing migration guide [#353](https://github.com/haydenbleasel/drift/pull/353) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -2421,7 +2421,7 @@ Thank you, Mike Keating ([@mikerkeating](https://github.com/mikerkeating)), for 
 
 #### 🚀 Enhancement
 
-- Release 2.21 w/ Rate Limiting package [#349](https://github.com/haydenbleasel/next-ship/pull/349) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Release 2.21 w/ Rate Limiting package [#349](https://github.com/haydenbleasel/drift/pull/349) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -2437,7 +2437,7 @@ Thank you, Fahreddin Özcan ([@fahreddinozcan](https://github.com/fahreddinozcan
 
 #### 🐛 Bug Fix
 
-- feat: Upstash Redis and Upstash Ratelimit [#328](https://github.com/haydenbleasel/next-ship/pull/328) ([@fahreddinozcan](https://github.com/fahreddinozcan) [@haydenbleasel](https://github.com/haydenbleasel))
+- feat: Upstash Redis and Upstash Ratelimit [#328](https://github.com/haydenbleasel/drift/pull/328) ([@fahreddinozcan](https://github.com/fahreddinozcan) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -2458,12 +2458,12 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- fix: clean tasks needed to be added to turbo.json [#346](https://github.com/haydenbleasel/next-ship/pull/346) ([@pedrocarlo](https://github.com/pedrocarlo))
-- docs: add context to better-auth migration [#347](https://github.com/haydenbleasel/next-ship/pull/347) ([@simon-v-swyftx](https://github.com/simon-v-swyftx))
+- fix: clean tasks needed to be added to turbo.json [#346](https://github.com/haydenbleasel/drift/pull/346) ([@pedrocarlo](https://github.com/pedrocarlo))
+- docs: add context to better-auth migration [#347](https://github.com/haydenbleasel/drift/pull/347) ([@simon-v-swyftx](https://github.com/simon-v-swyftx))
 
 #### 🔩 Dependency Updates
 
-- Bump zod from 3.24.0 to 3.24.1 in the npm_and_yarn group [#345](https://github.com/haydenbleasel/next-ship/pull/345) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump zod from 3.24.0 to 3.24.1 in the npm_and_yarn group [#345](https://github.com/haydenbleasel/drift/pull/345) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 3
 
@@ -2493,7 +2493,7 @@ Thanks for all your work!
 
 #### 📝 Documentation
 
-- Replace next-secure-headers with Nosecone for security headers [#343](https://github.com/haydenbleasel/next-ship/pull/343) ([@davidmytton](https://github.com/davidmytton) [@haydenbleasel](https://github.com/haydenbleasel))
+- Replace next-secure-headers with Nosecone for security headers [#343](https://github.com/haydenbleasel/drift/pull/343) ([@davidmytton](https://github.com/davidmytton) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -2591,7 +2591,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- Update Drizzle migration documentation [#341](https://github.com/haydenbleasel/next-ship/pull/341) ([@yamz8](https://github.com/yamz8))
+- Update Drizzle migration documentation [#341](https://github.com/haydenbleasel/drift/pull/341) ([@yamz8](https://github.com/yamz8))
 
 #### Authors: 1
 
@@ -2631,7 +2631,7 @@ Thank you, null[@pedrocarlo](https://github.com/pedrocarlo), for all your work!
 
 #### 🐛 Bug Fix
 
-- Feature: Turborepo generator [#334](https://github.com/haydenbleasel/next-ship/pull/334) ([@pedrocarlo](https://github.com/pedrocarlo))
+- Feature: Turborepo generator [#334](https://github.com/haydenbleasel/drift/pull/334) ([@pedrocarlo](https://github.com/pedrocarlo))
 
 #### ⚠️ Pushed to `main`
 
@@ -2652,7 +2652,7 @@ Thank you, Simon ([@simon-v-swyftx](https://github.com/simon-v-swyftx)), for all
 
 #### 🐛 Bug Fix
 
-- Chore: cleaner git repo with init and update scripts [#336](https://github.com/haydenbleasel/next-ship/pull/336) ([@simon-v-swyftx](https://github.com/simon-v-swyftx))
+- Chore: cleaner git repo with init and update scripts [#336](https://github.com/haydenbleasel/drift/pull/336) ([@simon-v-swyftx](https://github.com/simon-v-swyftx))
 
 #### Authors: 1
 
@@ -2760,11 +2760,11 @@ Thank you, Simon ([@simon-v-swyftx](https://github.com/simon-v-swyftx)), for all
 
 #### 🐛 Bug Fix
 
-- Make application security optional [#327](https://github.com/haydenbleasel/next-ship/pull/327) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Make application security optional [#327](https://github.com/haydenbleasel/drift/pull/327) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### 📝 Documentation
 
-- Add Lemon Squeezy guide [#331](https://github.com/haydenbleasel/next-ship/pull/331) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Add Lemon Squeezy guide [#331](https://github.com/haydenbleasel/drift/pull/331) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -2792,7 +2792,7 @@ Thank you, Simon ([@simon-v-swyftx](https://github.com/simon-v-swyftx)), for all
 
 #### 📝 Documentation
 
-- Tabs [#330](https://github.com/haydenbleasel/next-ship/pull/330) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Tabs [#330](https://github.com/haydenbleasel/drift/pull/330) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -2810,7 +2810,7 @@ Thank you, Simon ([@simon-v-swyftx](https://github.com/simon-v-swyftx)), for all
 
 #### 📝 Documentation
 
-- Recipes [#329](https://github.com/haydenbleasel/next-ship/pull/329) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Recipes [#329](https://github.com/haydenbleasel/drift/pull/329) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -2858,7 +2858,7 @@ Thank you, Simon ([@simon-v-swyftx](https://github.com/simon-v-swyftx)), for all
 
 #### 🚀 Enhancement
 
-- New update command [#320](https://github.com/haydenbleasel/next-ship/pull/320) ([@haydenbleasel](https://github.com/haydenbleasel))
+- New update command [#320](https://github.com/haydenbleasel/drift/pull/320) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### ⚠️ Pushed to `main`
 
@@ -2925,7 +2925,7 @@ Thank you, Simon ([@simon-v-swyftx](https://github.com/simon-v-swyftx)), for all
 
 #### 🚀 Enhancement
 
-- New CMS package [#325](https://github.com/haydenbleasel/next-ship/pull/325) ([@haydenbleasel](https://github.com/haydenbleasel))
+- New CMS package [#325](https://github.com/haydenbleasel/drift/pull/325) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -2941,7 +2941,7 @@ Thank you, Julian Benegas ([@julianbenegas](https://github.com/julianbenegas)), 
 
 #### 🐛 Bug Fix
 
-- [wip] basehub docs [#219](https://github.com/haydenbleasel/next-ship/pull/219) ([@julianbenegas](https://github.com/julianbenegas) [@haydenbleasel](https://github.com/haydenbleasel))
+- [wip] basehub docs [#219](https://github.com/haydenbleasel/drift/pull/219) ([@julianbenegas](https://github.com/julianbenegas) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -2958,7 +2958,7 @@ Thank you, Fuma Nama ([@fuma-nama](https://github.com/fuma-nama)), for all your 
 
 #### 🐛 Bug Fix
 
-- add Fumadocs guide [#324](https://github.com/haydenbleasel/next-ship/pull/324) ([@fuma-nama](https://github.com/fuma-nama) [@haydenbleasel](https://github.com/haydenbleasel))
+- add Fumadocs guide [#324](https://github.com/haydenbleasel/drift/pull/324) ([@fuma-nama](https://github.com/fuma-nama) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -2971,7 +2971,7 @@ Thank you, Fuma Nama ([@fuma-nama](https://github.com/fuma-nama)), for all your 
 
 #### 🐛 Bug Fix
 
-- Set up storybook tool bar for dark + light mode swap. [#318](https://github.com/haydenbleasel/next-ship/pull/318) ([@Balance8](https://github.com/Balance8))
+- Set up storybook tool bar for dark + light mode swap. [#318](https://github.com/haydenbleasel/drift/pull/318) ([@Balance8](https://github.com/Balance8))
 
 #### Authors: 1
 
@@ -2983,7 +2983,7 @@ Thank you, Fuma Nama ([@fuma-nama](https://github.com/fuma-nama)), for all your 
 
 #### 🐛 Bug Fix
 
-- Add ESLint migration doc [#291](https://github.com/haydenbleasel/next-ship/pull/291) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Add ESLint migration doc [#291](https://github.com/haydenbleasel/drift/pull/291) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### ⚠️ Pushed to `main`
 
@@ -3024,7 +3024,7 @@ Thank you, Fuma Nama ([@fuma-nama](https://github.com/fuma-nama)), for all your 
 #### ⚠️ Pushed to `main`
 
 - Update mint.json ([@haydenbleasel](https://github.com/haydenbleasel))
-- Merge branch 'main' of https://github.com/haydenbleasel/next-ship ([@haydenbleasel](https://github.com/haydenbleasel))
+- Merge branch 'main' of https://github.com/haydenbleasel/drift ([@haydenbleasel](https://github.com/haydenbleasel))
 - Add Netlify deployment doc ([@haydenbleasel](https://github.com/haydenbleasel))
 - Build fixes ([@haydenbleasel](https://github.com/haydenbleasel))
 - Bump deps ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -3047,7 +3047,7 @@ Thank you, Sergiy Dybskiy ([@sergical](https://github.com/sergical)), for all yo
 
 #### 📝 Documentation
 
-- [Docs] Supabase database [#312](https://github.com/haydenbleasel/next-ship/pull/312) ([@sergical](https://github.com/sergical) [@haydenbleasel](https://github.com/haydenbleasel))
+- [Docs] Supabase database [#312](https://github.com/haydenbleasel/drift/pull/312) ([@sergical](https://github.com/sergical) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -3064,20 +3064,20 @@ Thank you, Emmanuel Isenah ([@Armadillidiid](https://github.com/Armadillidiid)),
 
 #### 🐛 Bug Fix
 
-- Improve Grammer in Turso Docs [#319](https://github.com/haydenbleasel/next-ship/pull/319) ([@Armadillidiid](https://github.com/Armadillidiid))
+- Improve Grammer in Turso Docs [#319](https://github.com/haydenbleasel/drift/pull/319) ([@Armadillidiid](https://github.com/Armadillidiid))
 
 #### 🔩 Dependency Updates
 
-- Bump @storybook/react from 8.4.5 to 8.4.6 [#301](https://github.com/haydenbleasel/next-ship/pull/301) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump posthog-node from 4.3.0 to 4.3.1 [#303](https://github.com/haydenbleasel/next-ship/pull/303) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump class-variance-authority from 0.7.0 to 0.7.1 [#302](https://github.com/haydenbleasel/next-ship/pull/302) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump posthog-js from 1.188.0 to 1.194.1 [#304](https://github.com/haydenbleasel/next-ship/pull/304) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @drizzle/client from 5.22.0 to 6.0.0 [#305](https://github.com/haydenbleasel/next-ship/pull/305) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @arcjet/next from 1.0.0-alpha.31 to 1.0.0-alpha.33 [#306](https://github.com/haydenbleasel/next-ship/pull/306) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump fumadocs-core from 14.5.4 to 14.5.5 [#307](https://github.com/haydenbleasel/next-ship/pull/307) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump undici from 6.21.0 to 7.0.0 [#308](https://github.com/haydenbleasel/next-ship/pull/308) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump ai from 4.0.4 to 4.0.9 [#309](https://github.com/haydenbleasel/next-ship/pull/309) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Bump @storybook/addon-onboarding from 8.4.5 to 8.4.6 [#310](https://github.com/haydenbleasel/next-ship/pull/310) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @storybook/react from 8.4.5 to 8.4.6 [#301](https://github.com/haydenbleasel/drift/pull/301) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump posthog-node from 4.3.0 to 4.3.1 [#303](https://github.com/haydenbleasel/drift/pull/303) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump class-variance-authority from 0.7.0 to 0.7.1 [#302](https://github.com/haydenbleasel/drift/pull/302) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump posthog-js from 1.188.0 to 1.194.1 [#304](https://github.com/haydenbleasel/drift/pull/304) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @drizzle/client from 5.22.0 to 6.0.0 [#305](https://github.com/haydenbleasel/drift/pull/305) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @arcjet/next from 1.0.0-alpha.31 to 1.0.0-alpha.33 [#306](https://github.com/haydenbleasel/drift/pull/306) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump fumadocs-core from 14.5.4 to 14.5.5 [#307](https://github.com/haydenbleasel/drift/pull/307) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump undici from 6.21.0 to 7.0.0 [#308](https://github.com/haydenbleasel/drift/pull/308) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump ai from 4.0.4 to 4.0.9 [#309](https://github.com/haydenbleasel/drift/pull/309) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump @storybook/addon-onboarding from 8.4.5 to 8.4.6 [#310](https://github.com/haydenbleasel/drift/pull/310) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 2
 
@@ -3106,7 +3106,7 @@ Thank you, Michael Slocum ([@Balance8](https://github.com/Balance8)), for all yo
 
 #### 🐛 Bug Fix
 
-- Set defaults for Shadcn darkmode in Storybook [#311](https://github.com/haydenbleasel/next-ship/pull/311) ([@Balance8](https://github.com/Balance8))
+- Set defaults for Shadcn darkmode in Storybook [#311](https://github.com/haydenbleasel/drift/pull/311) ([@Balance8](https://github.com/Balance8))
 
 #### Authors: 1
 
@@ -3130,7 +3130,7 @@ Thank you, Michael Slocum ([@Balance8](https://github.com/Balance8)), for all yo
 
 #### 🐛 Bug Fix
 
-- fix: Log Arcjet deny reason [#299](https://github.com/haydenbleasel/next-ship/pull/299) ([@davidmytton](https://github.com/davidmytton))
+- fix: Log Arcjet deny reason [#299](https://github.com/haydenbleasel/drift/pull/299) ([@davidmytton](https://github.com/davidmytton))
 
 #### Authors: 1
 
@@ -3146,7 +3146,7 @@ Thank you, DaniEnsi ([@DaniEnsi](https://github.com/DaniEnsi)), for all your wor
 
 #### 🐛 Bug Fix
 
-- feat: added missing imports and fixed speeling [#295](https://github.com/haydenbleasel/next-ship/pull/295) ([@DaniEnsi](https://github.com/DaniEnsi))
+- feat: added missing imports and fixed speeling [#295](https://github.com/haydenbleasel/drift/pull/295) ([@DaniEnsi](https://github.com/DaniEnsi))
 
 #### Authors: 1
 
@@ -3166,11 +3166,11 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- docs: add better-auth guide [#294](https://github.com/haydenbleasel/next-ship/pull/294) ([@Bekacru](https://github.com/Bekacru) [@haydenbleasel](https://github.com/haydenbleasel))
+- docs: add better-auth guide [#294](https://github.com/haydenbleasel/drift/pull/294) ([@Bekacru](https://github.com/Bekacru) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### 📝 Documentation
 
-- Added Metabase documentation [#292](https://github.com/haydenbleasel/next-ship/pull/292) ([@matthewhefferon](https://github.com/matthewhefferon) [@haydenbleasel](https://github.com/haydenbleasel))
+- Added Metabase documentation [#292](https://github.com/haydenbleasel/drift/pull/292) ([@matthewhefferon](https://github.com/matthewhefferon) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 3
 
@@ -3317,7 +3317,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- feat: Add built-in components for readability [#287](https://github.com/haydenbleasel/next-ship/pull/287) ([@fmerian](https://github.com/fmerian))
+- feat: Add built-in components for readability [#287](https://github.com/haydenbleasel/drift/pull/287) ([@fmerian](https://github.com/fmerian))
 
 #### Authors: 1
 
@@ -3367,7 +3367,7 @@ Thanks for all your work!
 #### ⚠️ Pushed to `main`
 
 - Update mint.json ([@haydenbleasel](https://github.com/haydenbleasel))
-- Merge branch 'main' of https://github.com/haydenbleasel/next-ship ([@haydenbleasel](https://github.com/haydenbleasel))
+- Merge branch 'main' of https://github.com/haydenbleasel/drift ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update .gitignore ([@haydenbleasel](https://github.com/haydenbleasel))
 - Resolves #275 ([@haydenbleasel](https://github.com/haydenbleasel))
 - Resolves #199 ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -3382,7 +3382,7 @@ Thanks for all your work!
 
 #### 🐛 Bug Fix
 
-- Added env variable NEXT_PUBLIC_API_URL [#245](https://github.com/haydenbleasel/next-ship/pull/245) ([@OsoThevenin](https://github.com/OsoThevenin) [@haydenbleasel](https://github.com/haydenbleasel))
+- Added env variable NEXT_PUBLIC_API_URL [#245](https://github.com/haydenbleasel/drift/pull/245) ([@OsoThevenin](https://github.com/OsoThevenin) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -3407,7 +3407,7 @@ Thanks for all your work!
 
 #### 🚀 Enhancement
 
-- Symlink environment variables [#285](https://github.com/haydenbleasel/next-ship/pull/285) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Symlink environment variables [#285](https://github.com/haydenbleasel/drift/pull/285) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -3419,7 +3419,7 @@ Thanks for all your work!
 
 #### ⚠️ Pushed to `main`
 
-- Merge branch 'main' of https://github.com/haydenbleasel/next-ship ([@haydenbleasel](https://github.com/haydenbleasel))
+- Merge branch 'main' of https://github.com/haydenbleasel/drift ([@haydenbleasel](https://github.com/haydenbleasel))
 - Resolves #271 ([@haydenbleasel](https://github.com/haydenbleasel))
 - Resolves #272 ([@haydenbleasel](https://github.com/haydenbleasel))
 - Resolves #280 ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -3458,7 +3458,7 @@ Thanks for all your work!
 
 #### 🚀 Enhancement
 
-- Add Storybook [#167](https://github.com/haydenbleasel/next-ship/pull/167) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Add Storybook [#167](https://github.com/haydenbleasel/drift/pull/167) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -3487,7 +3487,7 @@ Thank you, Pierangelo Di Pilato ([@pierDipi](https://github.com/pierDipi)), for 
 
 #### 🐛 Bug Fix
 
-- Minor: fix authjs migration secrets creation command [#281](https://github.com/haydenbleasel/next-ship/pull/281) ([@pierDipi](https://github.com/pierDipi))
+- Minor: fix authjs migration secrets creation command [#281](https://github.com/haydenbleasel/drift/pull/281) ([@pierDipi](https://github.com/pierDipi))
 
 #### Authors: 1
 
@@ -3503,7 +3503,7 @@ Thank you, Yanis Vestfalskii ([@yanisneverlies](https://github.com/yanisneverlie
 
 #### 🐛 Bug Fix
 
-- fix: resolve submenu duplication issues by using index as a key [#278](https://github.com/haydenbleasel/next-ship/pull/278) ([@yanisneverlies](https://github.com/yanisneverlies))
+- fix: resolve submenu duplication issues by using index as a key [#278](https://github.com/haydenbleasel/drift/pull/278) ([@yanisneverlies](https://github.com/yanisneverlies))
 
 #### Authors: 1
 
@@ -3543,7 +3543,7 @@ Thank you, Yanis Vestfalskii ([@yanisneverlies](https://github.com/yanisneverlie
 
 #### 📝 Documentation
 
-- Create Auth.js migration guide [#268](https://github.com/haydenbleasel/next-ship/pull/268) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Create Auth.js migration guide [#268](https://github.com/haydenbleasel/drift/pull/268) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -3592,7 +3592,7 @@ Thank you, Yanis Vestfalskii ([@yanisneverlies](https://github.com/yanisneverlie
 
 #### 🐛 Bug Fix
 
-- Add recommended libraries documentation [#270](https://github.com/haydenbleasel/next-ship/pull/270) ([@yamz8](https://github.com/yamz8) [@haydenbleasel](https://github.com/haydenbleasel))
+- Add recommended libraries documentation [#270](https://github.com/haydenbleasel/drift/pull/270) ([@yamz8](https://github.com/yamz8) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -3645,7 +3645,7 @@ Thank you, null[@idkgene](https://github.com/idkgene), for all your work!
 
 #### 🐛 Bug Fix
 
-- VSCode workspace configuration [#253](https://github.com/haydenbleasel/next-ship/pull/253) ([@idkgene](https://github.com/idkgene) [@haydenbleasel](https://github.com/haydenbleasel))
+- VSCode workspace configuration [#253](https://github.com/haydenbleasel/drift/pull/253) ([@idkgene](https://github.com/idkgene) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -3658,7 +3658,7 @@ Thank you, null[@idkgene](https://github.com/idkgene), for all your work!
 
 #### 🐛 Bug Fix
 
-- Extract testing configuration into repo/testing package [#182](https://github.com/haydenbleasel/next-ship/pull/182) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Extract testing configuration into repo/testing package [#182](https://github.com/haydenbleasel/drift/pull/182) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -3694,7 +3694,7 @@ Thank you, null[@idkgene](https://github.com/idkgene), for all your work!
 
 ### Release Notes
 
-#### Collaboration ([#249](https://github.com/haydenbleasel/next-ship/pull/249))
+#### Collaboration ([#249](https://github.com/haydenbleasel/drift/pull/249))
 
 - **New Features**
 	- Introduced `AvatarStack` and `Cursors` components for enhanced user presence and cursor tracking in collaborative environments.
@@ -3715,7 +3715,7 @@ Thank you, null[@idkgene](https://github.com/idkgene), for all your work!
 
 #### 🚀 Enhancement
 
-- Collaboration [#249](https://github.com/haydenbleasel/next-ship/pull/249) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Collaboration [#249](https://github.com/haydenbleasel/drift/pull/249) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -3743,7 +3743,7 @@ Thank you, Kaiden Riley ([@krpleo](https://github.com/krpleo)), for all your wor
 
 #### 🐛 Bug Fix
 
-- fix: sidebar collapsible triggers [#256](https://github.com/haydenbleasel/next-ship/pull/256) ([@krpleo](https://github.com/krpleo))
+- fix: sidebar collapsible triggers [#256](https://github.com/haydenbleasel/drift/pull/256) ([@krpleo](https://github.com/krpleo))
 
 #### ⚠️ Pushed to `main`
 
@@ -3765,7 +3765,7 @@ Thank you, Pere Bruy ([@OsoThevenin](https://github.com/OsoThevenin)), for all y
 
 #### 🐛 Bug Fix
 
-- Export PrismaClient in database package [#258](https://github.com/haydenbleasel/next-ship/pull/258) ([@OsoThevenin](https://github.com/OsoThevenin))
+- Export PrismaClient in database package [#258](https://github.com/haydenbleasel/drift/pull/258) ([@OsoThevenin](https://github.com/OsoThevenin))
 
 #### Authors: 1
 
@@ -3781,7 +3781,7 @@ Thank you, Dade ([@shengdade](https://github.com/shengdade)), for all your work!
 
 #### 🐛 Bug Fix
 
-- Remove duplicate Tailwind utility classes [#255](https://github.com/haydenbleasel/next-ship/pull/255) ([@shengdade](https://github.com/shengdade))
+- Remove duplicate Tailwind utility classes [#255](https://github.com/haydenbleasel/drift/pull/255) ([@shengdade](https://github.com/shengdade))
 
 #### ⚠️ Pushed to `main`
 
@@ -3851,7 +3851,7 @@ Thank you, Matthew Lewis ([@malewis5](https://github.com/malewis5)), for all you
 
 #### 🐛 Bug Fix
 
-- fix: add sheet title for a11y. [#250](https://github.com/haydenbleasel/next-ship/pull/250) ([@malewis5](https://github.com/malewis5) [@haydenbleasel](https://github.com/haydenbleasel))
+- fix: add sheet title for a11y. [#250](https://github.com/haydenbleasel/drift/pull/250) ([@malewis5](https://github.com/malewis5) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -3877,7 +3877,7 @@ Thank you, Matthew Lewis ([@malewis5](https://github.com/malewis5)), for all you
 
 #### 🚀 Enhancement
 
-- Turbo [#170](https://github.com/haydenbleasel/next-ship/pull/170) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Turbo [#170](https://github.com/haydenbleasel/drift/pull/170) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -3889,7 +3889,7 @@ Thank you, Matthew Lewis ([@malewis5](https://github.com/malewis5)), for all you
 
 #### 🐛 Bug Fix
 
-- Add IP geolocation docs [#248](https://github.com/haydenbleasel/next-ship/pull/248) ([@davidmytton](https://github.com/davidmytton))
+- Add IP geolocation docs [#248](https://github.com/haydenbleasel/drift/pull/248) ([@davidmytton](https://github.com/davidmytton))
 
 #### Authors: 1
 
@@ -3905,7 +3905,7 @@ Thank you, Matthew Lewis ([@malewis5](https://github.com/malewis5)), for all you
 
 #### 📝 Documentation
 
-- Added anti-fraud advice [#237](https://github.com/haydenbleasel/next-ship/pull/237) ([@davidmytton](https://github.com/davidmytton))
+- Added anti-fraud advice [#237](https://github.com/haydenbleasel/drift/pull/237) ([@davidmytton](https://github.com/davidmytton))
 
 #### Authors: 2
 
@@ -3922,7 +3922,7 @@ Thank you, Michael Zavattaro ([@mzavattaro](https://github.com/mzavattaro)), for
 
 #### 🐛 Bug Fix
 
-- Update location of .env file in directory docs [#241](https://github.com/haydenbleasel/next-ship/pull/241) ([@mzavattaro](https://github.com/mzavattaro))
+- Update location of .env file in directory docs [#241](https://github.com/haydenbleasel/drift/pull/241) ([@mzavattaro](https://github.com/mzavattaro))
 
 #### Authors: 1
 
@@ -4082,8 +4082,8 @@ Thank you, Anthony Shew ([@anthonyshew](https://github.com/anthonyshew)), for al
 
 #### 🐛 Bug Fix
 
-- Update `turbo.json` to improve cache hit ratios [#235](https://github.com/haydenbleasel/next-ship/pull/235) ([@anthonyshew](https://github.com/anthonyshew) [@haydenbleasel](https://github.com/haydenbleasel))
-- Remove root tsconfig.json [#236](https://github.com/haydenbleasel/next-ship/pull/236) ([@anthonyshew](https://github.com/anthonyshew))
+- Update `turbo.json` to improve cache hit ratios [#235](https://github.com/haydenbleasel/drift/pull/235) ([@anthonyshew](https://github.com/anthonyshew) [@haydenbleasel](https://github.com/haydenbleasel))
+- Remove root tsconfig.json [#236](https://github.com/haydenbleasel/drift/pull/236) ([@anthonyshew](https://github.com/anthonyshew))
 
 #### Authors: 2
 
@@ -4100,7 +4100,7 @@ Thank you, null[@svix-lucho](https://github.com/svix-lucho), for all your work!
 
 #### 🚀 Enhancement
 
-- Add Svix Webhooks [#212](https://github.com/haydenbleasel/next-ship/pull/212) ([@svix-lucho](https://github.com/svix-lucho) [@haydenbleasel](https://github.com/haydenbleasel))
+- Add Svix Webhooks [#212](https://github.com/haydenbleasel/drift/pull/212) ([@svix-lucho](https://github.com/svix-lucho) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -4113,7 +4113,7 @@ Thank you, null[@svix-lucho](https://github.com/svix-lucho), for all your work!
 
 #### 🐛 Bug Fix
 
-- Adjust Arcjet middleware to allow monitoring & expand docs [#231](https://github.com/haydenbleasel/next-ship/pull/231) ([@davidmytton](https://github.com/davidmytton))
+- Adjust Arcjet middleware to allow monitoring & expand docs [#231](https://github.com/haydenbleasel/drift/pull/231) ([@davidmytton](https://github.com/davidmytton))
 
 #### Authors: 1
 
@@ -4129,8 +4129,8 @@ Thank you, David Mytton ([@davidmytton](https://github.com/davidmytton)), for al
 
 #### 🐛 Bug Fix
 
-- List the required accounts in setup [#229](https://github.com/haydenbleasel/next-ship/pull/229) ([@davidmytton](https://github.com/davidmytton))
-- Update drizzle.mdx [#230](https://github.com/haydenbleasel/next-ship/pull/230) ([@yamz8](https://github.com/yamz8))
+- List the required accounts in setup [#229](https://github.com/haydenbleasel/drift/pull/229) ([@davidmytton](https://github.com/davidmytton))
+- Update drizzle.mdx [#230](https://github.com/haydenbleasel/drift/pull/230) ([@yamz8](https://github.com/yamz8))
 
 #### Authors: 2
 
@@ -4233,7 +4233,7 @@ Thank you, Jamie Barton ([@notrab](https://github.com/notrab)), for all your wor
 
 #### 🐛 Bug Fix
 
-- feat: add turso guide [#226](https://github.com/haydenbleasel/next-ship/pull/226) ([@notrab](https://github.com/notrab) [@haydenbleasel](https://github.com/haydenbleasel))
+- feat: add turso guide [#226](https://github.com/haydenbleasel/drift/pull/226) ([@notrab](https://github.com/notrab) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -4270,7 +4270,7 @@ Thank you, Jamie Barton ([@notrab](https://github.com/notrab)), for all your wor
 
 #### 🐛 Bug Fix
 
-- Finish extracting arcjet package [#221](https://github.com/haydenbleasel/next-ship/pull/221) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Finish extracting arcjet package [#221](https://github.com/haydenbleasel/drift/pull/221) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -4286,7 +4286,7 @@ Thank you, Christian Leonardo ([@whyleonardo](https://github.com/whyleonardo)), 
 
 #### 🐛 Bug Fix
 
-- Fix fetch status response error check condition [#217](https://github.com/haydenbleasel/next-ship/pull/217) ([@whyleonardo](https://github.com/whyleonardo))
+- Fix fetch status response error check condition [#217](https://github.com/haydenbleasel/drift/pull/217) ([@whyleonardo](https://github.com/whyleonardo))
 
 #### Authors: 1
 
@@ -4346,7 +4346,7 @@ Thank you, Christian Leonardo ([@whyleonardo](https://github.com/whyleonardo)), 
 
 #### 🐛 Bug Fix
 
-- Update `mint.json` [#216](https://github.com/haydenbleasel/next-ship/pull/216) ([@fmerian](https://github.com/fmerian))
+- Update `mint.json` [#216](https://github.com/haydenbleasel/drift/pull/216) ([@fmerian](https://github.com/fmerian))
 
 #### Authors: 1
 
@@ -4358,7 +4358,7 @@ Thank you, Christian Leonardo ([@whyleonardo](https://github.com/whyleonardo)), 
 
 #### 🐛 Bug Fix
 
-- Add Documentation section to docs [#214](https://github.com/haydenbleasel/next-ship/pull/214) ([@fmerian](https://github.com/fmerian) [@haydenbleasel](https://github.com/haydenbleasel))
+- Add Documentation section to docs [#214](https://github.com/haydenbleasel/drift/pull/214) ([@fmerian](https://github.com/fmerian) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -4371,7 +4371,7 @@ Thank you, Christian Leonardo ([@whyleonardo](https://github.com/whyleonardo)), 
 
 #### 🚀 Enhancement
 
-- V2.13 [#215](https://github.com/haydenbleasel/next-ship/pull/215) ([@haydenbleasel](https://github.com/haydenbleasel))
+- V2.13 [#215](https://github.com/haydenbleasel/drift/pull/215) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -4383,7 +4383,7 @@ Thank you, Christian Leonardo ([@whyleonardo](https://github.com/whyleonardo)), 
 
 #### 🐛 Bug Fix
 
-- Fix `.font` instructions in docs app [#213](https://github.com/haydenbleasel/next-ship/pull/213) ([@fmerian](https://github.com/fmerian) [@haydenbleasel](https://github.com/haydenbleasel))
+- Fix `.font` instructions in docs app [#213](https://github.com/haydenbleasel/drift/pull/213) ([@fmerian](https://github.com/fmerian) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -4412,7 +4412,7 @@ Thank you, jcchrrr ([@jcchrrr](https://github.com/jcchrrr)), for all your work!
 
 #### 🐛 Bug Fix
 
-- fix: vscode settings, tailwind config location [#211](https://github.com/haydenbleasel/next-ship/pull/211) ([@jcchrrr](https://github.com/jcchrrr))
+- fix: vscode settings, tailwind config location [#211](https://github.com/haydenbleasel/drift/pull/211) ([@jcchrrr](https://github.com/jcchrrr))
 
 #### Authors: 1
 
@@ -4475,7 +4475,7 @@ Thank you, jcchrrr ([@jcchrrr](https://github.com/jcchrrr)), for all your work!
 
 #### 🐛 Bug Fix
 
-- Include database scaffolding step in setup instructions [#208](https://github.com/haydenbleasel/next-ship/pull/208) ([@paulgrieselhuber](https://github.com/paulgrieselhuber))
+- Include database scaffolding step in setup instructions [#208](https://github.com/haydenbleasel/drift/pull/208) ([@paulgrieselhuber](https://github.com/paulgrieselhuber))
 
 #### Authors: 1
 
@@ -4491,7 +4491,7 @@ Thank you, Paul Grieselhuber ([@paulgrieselhuber](https://github.com/paulgriesel
 
 #### 🐛 Bug Fix
 
-- Include necessary global env vars for turbo.json to allow Vercel builds [#206](https://github.com/haydenbleasel/next-ship/pull/206) ([@paulgrieselhuber](https://github.com/paulgrieselhuber))
+- Include necessary global env vars for turbo.json to allow Vercel builds [#206](https://github.com/haydenbleasel/drift/pull/206) ([@paulgrieselhuber](https://github.com/paulgrieselhuber))
 
 #### Authors: 1
 
@@ -4503,7 +4503,7 @@ Thank you, Paul Grieselhuber ([@paulgrieselhuber](https://github.com/paulgriesel
 
 #### ⚠️ Pushed to `main`
 
-- Merge branch 'main' of https://github.com/haydenbleasel/next-ship ([@haydenbleasel](https://github.com/haydenbleasel))
+- Merge branch 'main' of https://github.com/haydenbleasel/drift ([@haydenbleasel](https://github.com/haydenbleasel))
 - Add socials to homepage ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update layout.tsx ([@haydenbleasel](https://github.com/haydenbleasel))
 - Load Geist from Google Fonts ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -4522,7 +4522,7 @@ Thank you, null[@000-KunalPal](https://github.com/000-KunalPal), for all your wo
 
 #### 🐛 Bug Fix
 
-- fix: Remove duplicate "is" in text [#205](https://github.com/haydenbleasel/next-ship/pull/205) ([@000-KunalPal](https://github.com/000-KunalPal))
+- fix: Remove duplicate "is" in text [#205](https://github.com/haydenbleasel/drift/pull/205) ([@000-KunalPal](https://github.com/000-KunalPal))
 
 #### Authors: 1
 
@@ -4538,7 +4538,7 @@ Thank you, Yam Catzenelson ([@yamz8](https://github.com/yamz8)), for all your wo
 
 #### 🐛 Bug Fix
 
-- Update README.md [#204](https://github.com/haydenbleasel/next-ship/pull/204) ([@yamz8](https://github.com/yamz8) [@haydenbleasel](https://github.com/haydenbleasel))
+- Update README.md [#204](https://github.com/haydenbleasel/drift/pull/204) ([@yamz8](https://github.com/yamz8) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -4637,7 +4637,7 @@ Thank you, flo merian ([@fmerian](https://github.com/fmerian)), for all your wor
 
 #### 📝 Documentation
 
-- Switch docs to Mintlify [#197](https://github.com/haydenbleasel/next-ship/pull/197) ([@fmerian](https://github.com/fmerian) [@haydenbleasel](https://github.com/haydenbleasel))
+- Switch docs to Mintlify [#197](https://github.com/haydenbleasel/drift/pull/197) ([@fmerian](https://github.com/fmerian) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 2
 
@@ -4650,7 +4650,7 @@ Thank you, flo merian ([@fmerian](https://github.com/fmerian)), for all your wor
 
 #### 🚀 Enhancement
 
-- 198 improve package isolation [#200](https://github.com/haydenbleasel/next-ship/pull/200) ([@haydenbleasel](https://github.com/haydenbleasel))
+- 198 improve package isolation [#200](https://github.com/haydenbleasel/drift/pull/200) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -4698,7 +4698,7 @@ Thank you, flo merian ([@fmerian](https://github.com/fmerian)), for all your wor
 
 #### ⚠️ Pushed to `main`
 
-- Merge branch 'main' of https://github.com/haydenbleasel/next-ship ([@haydenbleasel](https://github.com/haydenbleasel))
+- Merge branch 'main' of https://github.com/haydenbleasel/drift ([@haydenbleasel](https://github.com/haydenbleasel))
 - Redesign hero ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update installer.tsx ([@haydenbleasel](https://github.com/haydenbleasel))
 - Add logo.dev attribution ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -4730,7 +4730,7 @@ Thank you, flo merian ([@fmerian](https://github.com/fmerian)), for all your wor
 
 #### 📝 Documentation
 
-- Co-author: Drizzle [#168](https://github.com/haydenbleasel/next-ship/pull/168) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Co-author: Drizzle [#168](https://github.com/haydenbleasel/drift/pull/168) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -4752,15 +4752,15 @@ Thanks for all your work!
 
 #### 🚀 Enhancement
 
-- feat: Add Arcjet security [#187](https://github.com/haydenbleasel/next-ship/pull/187) ([@davidmytton](https://github.com/davidmytton) [@haydenbleasel](https://github.com/haydenbleasel))
+- feat: Add Arcjet security [#187](https://github.com/haydenbleasel/drift/pull/187) ([@davidmytton](https://github.com/davidmytton) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### 🐛 Bug Fix
 
-- chore(windows_setup): add windows setup script [#196](https://github.com/haydenbleasel/next-ship/pull/196) ([@ktfth](https://github.com/ktfth))
+- chore(windows_setup): add windows setup script [#196](https://github.com/haydenbleasel/drift/pull/196) ([@ktfth](https://github.com/ktfth))
 
 #### 📝 Documentation
 
-- add docs for switching to Drizzle Postgres [#192](https://github.com/haydenbleasel/next-ship/pull/192) ([@nikolasburk](https://github.com/nikolasburk))
+- add docs for switching to Drizzle Postgres [#192](https://github.com/haydenbleasel/drift/pull/192) ([@nikolasburk](https://github.com/nikolasburk))
 
 #### Authors: 4
 
@@ -4866,7 +4866,7 @@ Thank you, Alfredo José ([@fredojbg](https://github.com/fredojbg)), for all you
 
 #### 🐛 Bug Fix
 
-- feat: add repo/env to app [#188](https://github.com/haydenbleasel/next-ship/pull/188) ([@fredojbg](https://github.com/fredojbg) [@haydenbleasel](https://github.com/haydenbleasel))
+- feat: add repo/env to app [#188](https://github.com/haydenbleasel/drift/pull/188) ([@fredojbg](https://github.com/fredojbg) [@haydenbleasel](https://github.com/haydenbleasel))
 
 #### ⚠️ Pushed to `main`
 
@@ -4883,7 +4883,7 @@ Thank you, Alfredo José ([@fredojbg](https://github.com/fredojbg)), for all you
 
 #### 🐛 Bug Fix
 
-- Misc enhancements [#181](https://github.com/haydenbleasel/next-ship/pull/181) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Misc enhancements [#181](https://github.com/haydenbleasel/drift/pull/181) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -4907,7 +4907,7 @@ Thank you, Alfredo José ([@fredojbg](https://github.com/fredojbg)), for all you
 
 #### 🚀 Enhancement
 
-- 157 improve env var handling [#171](https://github.com/haydenbleasel/next-ship/pull/171) ([@haydenbleasel](https://github.com/haydenbleasel))
+- 157 improve env var handling [#171](https://github.com/haydenbleasel/drift/pull/171) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -4923,7 +4923,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🐛 Bug Fix
 
-- Add CodeRabbit AI Code Review Integration [#172](https://github.com/haydenbleasel/next-ship/pull/172) ([@tyaga001](https://github.com/tyaga001))
+- Add CodeRabbit AI Code Review Integration [#172](https://github.com/haydenbleasel/drift/pull/172) ([@tyaga001](https://github.com/tyaga001))
 
 #### Authors: 1
 
@@ -4972,7 +4972,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🚀 Enhancement
 
-- Create CLI [#166](https://github.com/haydenbleasel/next-ship/pull/166) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Create CLI [#166](https://github.com/haydenbleasel/drift/pull/166) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -4984,7 +4984,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🚀 Enhancement
 
-- Add Unit Tests [#165](https://github.com/haydenbleasel/next-ship/pull/165) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Add Unit Tests [#165](https://github.com/haydenbleasel/drift/pull/165) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -5046,7 +5046,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🚀 Enhancement
 
-- Debugging [#164](https://github.com/haydenbleasel/next-ship/pull/164) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Debugging [#164](https://github.com/haydenbleasel/drift/pull/164) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -5062,7 +5062,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🔩 Dependency Updates
 
-- Bump cmdk from 1.0.1 to 1.0.3 [#162](https://github.com/haydenbleasel/next-ship/pull/162) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump cmdk from 1.0.1 to 1.0.3 [#162](https://github.com/haydenbleasel/drift/pull/162) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 2
 
@@ -5091,7 +5091,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🔩 Dependency Updates
 
-- Bump ws from 7.5.9 to 8.18.0 [#160](https://github.com/haydenbleasel/next-ship/pull/160) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump ws from 7.5.9 to 8.18.0 [#160](https://github.com/haydenbleasel/drift/pull/160) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 
 #### Authors: 2
 
@@ -5140,7 +5140,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🚀 Enhancement
 
-- Improve Dark Mode support [#159](https://github.com/haydenbleasel/next-ship/pull/159) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Improve Dark Mode support [#159](https://github.com/haydenbleasel/drift/pull/159) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -5165,7 +5165,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🚀 Enhancement
 
-- Improve SEO [#158](https://github.com/haydenbleasel/next-ship/pull/158) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Improve SEO [#158](https://github.com/haydenbleasel/drift/pull/158) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -5310,7 +5310,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🚀 Enhancement
 
-- Add Vercel Feature Flags [#154](https://github.com/haydenbleasel/next-ship/pull/154) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Add Vercel Feature Flags [#154](https://github.com/haydenbleasel/drift/pull/154) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -5322,7 +5322,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🚀 Enhancement
 
-- Implement Posthog [#156](https://github.com/haydenbleasel/next-ship/pull/156) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Implement Posthog [#156](https://github.com/haydenbleasel/drift/pull/156) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -5371,7 +5371,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🐛 Bug Fix
 
-- Docs [#155](https://github.com/haydenbleasel/next-ship/pull/155) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Docs [#155](https://github.com/haydenbleasel/drift/pull/155) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### ⚠️ Pushed to `main`
 
@@ -5423,7 +5423,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🚀 Enhancement
 
-- 2.2 [#152](https://github.com/haydenbleasel/next-ship/pull/152) ([@haydenbleasel](https://github.com/haydenbleasel))
+- 2.2 [#152](https://github.com/haydenbleasel/drift/pull/152) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -5435,7 +5435,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🚀 Enhancement
 
-- 2.1 [#151](https://github.com/haydenbleasel/next-ship/pull/151) ([@haydenbleasel](https://github.com/haydenbleasel))
+- 2.1 [#151](https://github.com/haydenbleasel/drift/pull/151) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -5483,7 +5483,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🐛 Bug Fix
 
-- Demo fixes [#150](https://github.com/haydenbleasel/next-ship/pull/150) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Demo fixes [#150](https://github.com/haydenbleasel/drift/pull/150) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -5519,7 +5519,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 💥 Breaking Change
 
-- Version 2 [#149](https://github.com/haydenbleasel/next-ship/pull/149) ([@haydenbleasel](https://github.com/haydenbleasel))
+- Version 2 [#149](https://github.com/haydenbleasel/drift/pull/149) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 
@@ -5531,7 +5531,7 @@ Thank you, Ankur Tyagi ([@tyaga001](https://github.com/tyaga001)), for all your 
 
 #### 🚀 Enhancement
 
-- 1.2.0 [#144](https://github.com/haydenbleasel/next-ship/pull/144) ([@haydenbleasel](https://github.com/haydenbleasel))
+- 1.2.0 [#144](https://github.com/haydenbleasel/drift/pull/144) ([@haydenbleasel](https://github.com/haydenbleasel))
 
 #### Authors: 1
 

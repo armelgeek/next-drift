@@ -15,7 +15,7 @@ if [ -z "${DOPPLER_TOKEN:-}" ] && [ ! -f "$TOKEN_FILE" ]; then
   exit 1
 fi
 
-PROJECT="${DOPPLER_PROJECT:-next-ship}"
+PROJECT="${DOPPLER_PROJECT:-drift}"
 CONFIG="${DOPPLER_CONFIG_SHARED:-dev_shared}"
 
 if [ -z "${DOPPLER_TOKEN:-}" ]; then

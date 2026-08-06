@@ -1,6 +1,6 @@
 # Environment Variables Setup Guide
 
-This document provides a comprehensive reference for all API keys and services needed to run the next-ship project.
+This document provides a comprehensive reference for all API keys and services needed to run the drift project.
 
 ## Quick Setup Checklist
 

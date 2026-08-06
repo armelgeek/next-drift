@@ -212,7 +212,7 @@ export const initialize = async (options: {
   disableGit?: boolean;
 }) => {
   try {
-    intro("Let's start a next-ship project!");
+    intro("Let's start a drift project!");
 
     const cwd = process.cwd();
     const name = options.name || (await getName());
@@ -226,7 +226,7 @@ export const initialize = async (options: {
     const s = spinner();
     const projectDir = join(cwd, name);
 
-    s.start("Cloning next-ship...");
+    s.start("Cloning drift...");
     await cloneNextForge(name, packageManager);
 
     s.message("Moving into repository...");

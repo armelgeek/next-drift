@@ -49,8 +49,8 @@ Most Next.js starters are either too basic or too complex. Drift hits the sweet 
 
 ```bash
 # Clone the repository
-git clone https://github.com/oscardobsonbrown/next-ship.git
-cd next-ship
+git clone https://github.com/oscardobsonbrown/drift.git
+cd drift
 
 # Install dependencies
 pnpm install
@@ -281,7 +281,7 @@ Each app needs specific environment variables:
 
 ## Inspired By
 
-Built on lessons learned from next-ship, with simplifications for solo founders:
+Built on lessons learned from drift, with simplifications for solo founders:
 - Removed complex routing patterns
 - Consolidated observability tools
 - Updated to latest stack (Drizzle, Base UI, Polar.sh)

@@ -9,7 +9,7 @@ The documentation system treats docs as **first-class project assets** that ship
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    next-ship Template                        │
+│                    drift Template                        │
 ├─────────────────────────────────────────────────────────────┤
 │  apps/                                                       │
 │  ├── web/                    # Marketing site               │
@@ -58,7 +58,7 @@ The docs app is divided into three conceptual zones:
 // apps/docs/app/(content)/template/layout.tsx
 // This zone is protected - users can read but not edit
 export const templateZone = {
-  source: 'node_modules/@next-ship/docs/template',
+  source: 'node_modules/@drift/docs/template',
   editable: false,
   updateStrategy: 'npm-update',
   visualIndicator: 'template-badge'
@@ -299,11 +299,11 @@ class EvolutionTracker {
 
 ### Phase 1: Initial Scaffold (Day 1)
 
-When a developer clones next-ship:
+When a developer clones drift:
 
 ```bash
 # Clone template
-git clone https://github.com/next-ship/template my-app
+git clone https://github.com/drift/template my-app
 cd my-app
 
 # Install dependencies
@@ -462,7 +462,7 @@ apps/docs/content/project/
 
 ### Phase 4: Template Updates (Ongoing)
 
-When next-ship releases v2.0:
+When drift releases v2.0:
 
 ```bash
 # Check for template updates

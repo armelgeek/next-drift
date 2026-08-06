@@ -6,7 +6,7 @@ import { update } from "./update.js";
 
 program
   .command("init")
-  .description("Initialize a new next-ship project")
+  .description("Initialize a new drift project")
   .option("--name <name>", "Name of the project")
   .option(
     "--package-manager <manager>",
