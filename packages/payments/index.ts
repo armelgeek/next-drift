@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import { keys } from "./keys";
 
 export const stripe = new Stripe(keys().STRIPE_SECRET_KEY, {
-  apiVersion: "2024-06-20",
+  apiVersion: "2023-10-16",
 });
 
-export type Stripe = typeof stripe;
+export type StripeClient = typeof stripe;
