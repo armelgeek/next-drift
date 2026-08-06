@@ -48,9 +48,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build --filter=!@repo/database
-        env:
-          DATABASE_URL: 'postgresql://user:password@localhost:5432/drift'
+        run: npx tsup
 
       - name: Create Release
         env:
