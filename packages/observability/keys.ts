@@ -5,8 +5,8 @@ export const keys = () =>
   createEnv({
     server: {},
     client: {
-      NEXT_PUBLIC_POSTHOG_KEY: z.string().startsWith("phc_").optional(),
-      NEXT_PUBLIC_POSTHOG_HOST: z.url().optional(),
+      NEXT_PUBLIC_POSTHOG_KEY: z.union([z.literal(""), z.string().startsWith("phc_")]).default(""),
+      NEXT_PUBLIC_POSTHOG_HOST: z.union([z.literal(""), z.string().url()]).default(""),
     },
     runtimeEnv: {
       NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
