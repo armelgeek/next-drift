@@ -1,3 +1,18 @@
+# v0.1.6 (Thu Aug 06 2026)
+
+#### ⚠️ Pushed to `main`
+
+- feat: Integrate scope-cutter into ship-feature workflow ([@armelgeek](https://github.com/armelgeek))
+- Merge branch 'main' of https://github.com/armelgeek/next-drift ([@armelgeek](https://github.com/armelgeek))
+- chore: Add post-commit hook for auto-push feature branches ([@armelgeek](https://github.com/armelgeek))
+- chore: Configure git hooks for feature branch workflow ([@armelgeek](https://github.com/armelgeek))
+
+#### Authors: 1
+
+- [@armelgeek](https://github.com/armelgeek)
+
+---
+
 # v0.1.5 (Thu Aug 06 2026)
 
 #### ⚠️ Pushed to `main`
