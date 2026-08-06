@@ -1,4 +1,14 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+// Mock Next.js headers
+vi.mock("next/headers", () => ({
+  headers: vi.fn(() => ({
+    get: vi.fn((key) => {
+      if (key === "svix-id") return "test-id";
+      return null;
+    }),
+  })),
+}));
 
 // Mock Stripe
 vi.mock("@repo/payments", () => ({
