@@ -1,12 +1,14 @@
 #!/bin/sh
-# Pre-commit hook for next-ship
+# Pre-commit hook for Drift
 # 1. Lint staged files with Biome
 # 2. Check for large files
+# 3. Typecheck + lint all files
 
 echo "🔍 Running pre-commit checks..."
 
 # Run lint-staged for Biome linting/formatting
-npx lint-staged
+echo "📝 Linting staged files..."
+npx lint-staged || exit 1
 
 # Check for large files (>10MB)
 echo "📦 Checking for large files..."
@@ -31,4 +33,8 @@ if [ -n "$LARGE_FILES" ]; then
     exit 1
 fi
 
-echo "✅ Pre-commit checks passed!"
+# Typecheck + lint all files
+echo "✅ Typecheck + lint..."
+pnpm check || exit 1
+
+echo "✅ Pre-commit checks passed! (tests & build run in CI)"
