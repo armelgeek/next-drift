@@ -30,7 +30,7 @@ const initializeMetrics = (): MetricsRegistryState => {
   });
   const meterProvider = new MeterProvider({ readers: [prometheusReader] });
 
-  const meter = meterProvider.getMeter("next-ship-api");
+  const meter = meterProvider.getMeter("drift-api");
   const prometheusSerializer = new PrometheusSerializer(
     "",
     false,

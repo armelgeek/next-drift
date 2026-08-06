@@ -1,7 +1,7 @@
 import { createSwaggerSpec } from "next-swagger-doc";
 
 /**
- * OpenAPI specification for next-ship API
+ * OpenAPI specification for drift API
  * Auto-generated from JSDoc comments in route handlers
  */
 
@@ -11,12 +11,12 @@ export const getApiDocs = () => {
     definition: {
       openapi: "3.0.0",
       info: {
-        title: "next-ship API",
+        title: "drift API",
         version: "1.0.0",
-        description: "Production-grade API for next-ship application",
+        description: "Production-grade API for drift application",
         contact: {
           name: "API Support",
-          email: "api@next-ship.dev",
+          email: "api@drift.dev",
         },
       },
       servers: [
@@ -25,7 +25,7 @@ export const getApiDocs = () => {
           description: "Local development",
         },
         {
-          url: "https://api.next-ship.dev",
+          url: "https://api.drift.dev",
           description: "Production",
         },
       ],

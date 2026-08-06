@@ -12,8 +12,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/next-ship/next-ship.git
-cd next-ship
+git clone https://github.com/drift/drift.git
+cd drift
 
 # Install dependencies
 pnpm install

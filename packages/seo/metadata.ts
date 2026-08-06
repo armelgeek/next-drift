@@ -7,7 +7,7 @@ type MetadataGenerator = Omit<Metadata, "description" | "title"> & {
   image?: string;
 };
 
-const applicationName = "next-ship";
+const applicationName = "drift";
 const author: Metadata["authors"] = {
   name: "Vercel",
   url: "https://vercel.com/",

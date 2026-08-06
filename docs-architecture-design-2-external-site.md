@@ -12,7 +12,7 @@
 # Two distinct repositories (complete separation)
 
 ┌─────────────────────────────────────────────────────────────┐
-│  github.com/next-ship/template                              │
+│  github.com/drift/template                              │
 │  ─────────────────────────────────                          │
 │  The production-grade Turborepo starter template            │
 │  (What developers clone and use)                           │
@@ -28,17 +28,17 @@
 │    ├── auth/        # Authentication utilities            │
 │    └── ...                                                   │
 │  README.md          # Points to external docs               │
-│  docs-site-url      # Link: docs.next-ship.dev            │
+│  docs-site-url      # Link: docs.drift.dev            │
 └─────────────────────────────────────────────────────────────┘
                               │
                               │ independent
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  github.com/next-ship/docs-site                             │
+│  github.com/drift/docs-site                             │
 │  ─────────────────────────────────                          │
 │  Standalone documentation website (Next.js)                   │
-│  (Maintained by next-ship team, not cloned by users)         │
+│  (Maintained by drift team, not cloned by users)         │
 │                                                              │
 │  apps/web/                                                   │
 │    ├── pages/       # All documentation pages               │
@@ -61,7 +61,7 @@
 │                    Deployment Architecture                  │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│  Template Repo (github.com/next-ship/template)               │
+│  Template Repo (github.com/drift/template)               │
 │       │                                                     │
 │       │  Push to main                                      │
 │       ▼                                                     │
@@ -84,7 +84,7 @@
 │                           │  Auto-PR created                 │
 │                           ▼                                 │
 │  ┌────────────────────────────────────────────┐            │
-│  │      Docs Site Repo (next-ship/docs-site)    │            │
+│  │      Docs Site Repo (drift/docs-site)    │            │
 │  │  ─────────────────────────────────────       │            │
 │  │  • New version content in /content/v2.1      │            │
 │  │  • Updated "latest" alias                  │            │
@@ -96,7 +96,7 @@
 │                    ┌──────────────┐                         │
 │                    │  Vercel      │                         │
 │                    │  Deployment  │                         │
-│                    │  docs.next-ship.dev                  │
+│                    │  docs.drift.dev                  │
 │                    │              │                         │
 │                    │  ┌──────────┴──────────┐             │
 │                    │  │  Edge Network (CDN)   │             │
@@ -114,7 +114,7 @@
 ```
 Docs Site URL Structure:
 
-https://docs.next-ship.dev/
+https://docs.drift.dev/
 ├── /                    → Redirects to /latest/
 ├── /latest/             → Current stable version (v2.x)
 ├── /v2.1/               → Specific version
@@ -143,15 +143,15 @@ Version Selector UI:
 
 ```bash
 # 1. Clone the template (docs NOT included)
-git clone https://github.com/next-ship/template.git my-app
+git clone https://github.com/drift/template.git my-app
 cd my-app
 
 # 2. README points to external docs
 cat README.md
-# → "📚 Full documentation: https://docs.next-ship.dev"
+# → "📚 Full documentation: https://docs.drift.dev"
 
 # 3. Visit the docs site
-open https://docs.next-ship.dev
+open https://docs.drift.dev
 
 # 4. Select your template version
 #    UI shows: "Viewing docs for: v2.1 (latest)"
@@ -160,7 +160,7 @@ open https://docs.next-ship.dev
 **Developer Documentation Journey:**
 
 ```
-Developer arrives at docs.next-ship.dev
+Developer arrives at docs.drift.dev
          │
          ▼
 ┌─────────────────────────────────────┐
@@ -192,7 +192,7 @@ Developer arrives at docs.next-ship.dev
 ```
 User needs docs for v2.0 (older release):
 
-1. Visit: https://docs.next-ship.dev/v2.0/
+1. Visit: https://docs.drift.dev/v2.0/
    
 2. Banner shows: "You're viewing v2.0 docs. 
                   Latest is v2.1"
@@ -276,7 +276,7 @@ Behind the scenes:
 │  Maintainer reviews & merges                             │
 │       │                                                  │
 │       ▼                                                  │
-│  Vercel deploys docs.next-ship.dev                        │
+│  Vercel deploys docs.drift.dev                        │
 └─────────────────────────────────────────────────────────┘
 ```
 

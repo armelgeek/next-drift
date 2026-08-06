@@ -1,4 +1,4 @@
-# Testing Plan for next-ship
+# Testing Plan for drift
 
 A lightweight testing strategy for this SaaS boilerplate. Focus on critical paths and shared packages.
 
