@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock analytics
-vi.mock("@repo/analytics/server", () => ({
   analytics: {
     capture: vi.fn(),
     shutdown: vi.fn().mockResolvedValue(undefined),

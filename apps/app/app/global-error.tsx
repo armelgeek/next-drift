@@ -1,6 +1,5 @@
 "use client";
 
-import { captureError } from "@repo/analytics";
 import { Button } from "@repo/design-system/components/ui/button";
 import { fonts } from "@repo/design-system/lib/fonts";
 import type NextError from "next/error";
