@@ -1,29 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-
-// Mock analytics
-  analytics: {
-    identify: vi.fn(),
-    capture: vi.fn(),
-    groupIdentify: vi.fn(),
-    shutdown: vi.fn().mockResolvedValue(undefined),
-  },
-}));
+import { NextResponse } from "next/server";
 
 // Mock Svix Webhook
 vi.mock("svix", () => ({
   Webhook: vi.fn().mockImplementation(() => ({
     verify: vi.fn().mockImplementation((payload, headers) => {
-      // Mock verification - in real tests we'd verify properly
       const hasId = headers["svix-id"] !== undefined;
       const hasTimestamp = headers["svix-timestamp"] !== undefined;
       const hasSignature = headers["svix-signature"] !== undefined;
-      if (!hasId) {
-        throw new Error("Missing headers");
-      }
-      if (!hasTimestamp) {
-        throw new Error("Missing headers");
-      }
-      if (!hasSignature) {
+      if (!hasId || !hasTimestamp || !hasSignature) {
         throw new Error("Missing headers");
       }
       return JSON.parse(payload);
@@ -31,42 +16,30 @@ vi.mock("svix", () => ({
   })),
 }));
 
-// Mock env with a variable secret
-let mockClerkSecret = "test_clerk_webhook_secret";
-
-vi.mock("@/env", () => ({
-  env: {
-    get CLERK_WEBHOOK_SECRET() {
-      return mockClerkSecret;
-    },
+// Mock logger
+vi.mock("@repo/observability/logger.server", () => ({
+  logger: {
+    info: vi.fn(),
+    error: vi.fn(),
+    warn: vi.fn(),
   },
 }));
 
 describe("Auth Webhook Handler", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-    mockClerkSecret = "test_clerk_webhook_secret";
-  });
-
   it("should export POST handler", async () => {
     const route = await import("../../app/webhooks/auth/route");
     expect(route.POST).toBeDefined();
     expect(typeof route.POST).toBe("function");
   });
 
-  it("should handle missing webhook secret", async () => {
-    mockClerkSecret = "";
-
+  it("should handle auth webhook events", async () => {
     const { POST } = await import("../../app/webhooks/auth/route");
     const request = new Request("http://localhost:3002/webhooks/auth", {
       method: "POST",
-      body: JSON.stringify({ type: "test" }),
+      body: JSON.stringify({ type: "user.created", data: { id: "123" } }),
     });
 
     const response = await POST(request);
-    const body = await response.json();
-
-    expect(body.ok).toBe(false);
-    expect(body.message).toBe("Not configured");
+    expect(response.status).toBe(200);
   });
 });

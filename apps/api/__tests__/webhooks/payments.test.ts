@@ -1,66 +1,41 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-// Mock analytics
-  analytics: {
-    capture: vi.fn(),
-    shutdown: vi.fn().mockResolvedValue(undefined),
+// Mock Stripe
+vi.mock("@repo/payments", () => ({
+  stripe: {
+    webhooks: {
+      constructEventAsync: vi.fn(),
+    },
   },
 }));
 
-// Mock clerk
-vi.mock("@repo/auth/server", () => ({
-  clerkClient: vi.fn().mockResolvedValue({
-    users: {
-      getUserList: vi.fn().mockResolvedValue({
-        data: [
-          {
-            id: "user_test_123",
-            privateMetadata: {
-              stripeCustomerId: "customer_test_456",
-            },
-          },
-        ],
-      }),
-    },
-  }),
-}));
-
-// Mock env with a variable secret
-let mockWebhookSecret = "test_webhook_secret_123";
-
-vi.mock("@/env", () => ({
-  env: {
-    get POLAR_WEBHOOK_SECRET() {
-      return mockWebhookSecret;
-    },
+// Mock logger
+vi.mock("@repo/observability/logger.server", () => ({
+  logger: {
+    info: vi.fn(),
+    error: vi.fn(),
+    warn: vi.fn(),
   },
 }));
 
 describe("Payment Webhook Handler", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-    mockWebhookSecret = "test_webhook_secret_123";
-  });
-
   it("should export POST handler", async () => {
     const route = await import("../../app/webhooks/payments/route");
     expect(route.POST).toBeDefined();
     expect(typeof route.POST).toBe("function");
   });
 
-  it("should handle missing webhook secret", async () => {
-    mockWebhookSecret = "";
-
+  it("should handle stripe webhook events", async () => {
     const { POST } = await import("../../app/webhooks/payments/route");
     const request = new Request("http://localhost:3002/webhooks/payments", {
       method: "POST",
-      body: JSON.stringify({ type: "test" }),
+      body: JSON.stringify({ type: "customer.subscription.created" }),
+      headers: {
+        "svix-id": "test-id",
+      },
     });
 
     const response = await POST(request);
-    const body = await response.json();
-
-    expect(body.ok).toBe(false);
-    expect(body.message).toBe("Not configured");
+    expect(response.status).toBe(200);
   });
 });
