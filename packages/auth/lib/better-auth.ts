@@ -1,16 +1,12 @@
 import { betterAuth } from "better-auth";
-import { stripePlugin } from "better-auth/plugins/stripe";
-import { drizzleAdapter } from "@better-auth/drizzle";
-import Stripe from "stripe";
+import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import * as schema from "@repo/database/src/schema";
 
-// Import database client - adjust path based on actual export
+// Import database client
 let db: any;
 try {
-  // This will need to be updated based on actual @repo/database export
   db = require("@repo/database").default;
 } catch {
-  // Database client will be initialized at runtime
   console.warn("Database client not available during import");
 }
 
@@ -39,13 +35,6 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     },
   },
-  plugins: [
-    stripePlugin({
-      stripe: new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-        apiVersion: "2023-10-16",
-      }),
-    }),
-  ],
   secret: process.env.BETTER_AUTH_SECRET,
 });
 
