@@ -309,3 +309,7 @@ packages/database/generated
 # ✓ .claude/commands/
 # ✓ .claude/skills/
 # ✓ .claude/settings.json
+
+# .claude integrations
+.claude/integrations.env
+.claude/.env*
