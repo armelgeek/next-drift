@@ -126,7 +126,7 @@ jobs:
         run: NODE_ENV=test npx -y node@22 ./node_modules/vitest/vitest.mjs run --root apps/api --config vitest.config.mts --coverage.enabled true --coverage.provider v8 --coverage.reportsDirectory coverage
 
       - name: Upload coverage artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: api-coverage
           path: apps/api/coverage
