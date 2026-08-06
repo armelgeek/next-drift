@@ -45,9 +45,9 @@ git init
 git config user.email "armelgeek5@gmail.com"
 git config user.name "Armel Geek"
 
-# 3. Add Drift packages as submodule (shared, don't duplicate)
-echo "📦 Adding Drift as git submodule..."
-git submodule add "$DRIFT_PATH" drift
+# 3. Link to Drift (via symlink to the absolute path)
+echo "📦 Linking to Drift boilerplate..."
+ln -s "$DRIFT_PATH" drift
 
 # 4. Create symlinks for shared packages and skills
 echo "🔗 Linking shared packages..."
@@ -262,17 +262,17 @@ Never edit symlinked packages directly. If you improve something in packages, do
 
 EOF
 
-# 12. Create initial git commit with submodules
+# 12. Create initial git commit
 echo "💾 Creating initial commit..."
-git add .gitignore package.json pnpm-workspace.yaml turbo.json .env.example .env.local STATUS.md .gitmodules
+git add .gitignore package.json pnpm-workspace.yaml turbo.json .env.example .env.local STATUS.md drift
 git commit -m "chore: Initialize $PROJECT_NAME from Drift boilerplate
 
 Architecture:
-- Git submodule: drift/ (shared packages & skills)
+- Symlink: drift/ → $DRIFT_PATH (shared packages & skills)
 - Apps: Custom features for $PROJECT_NAME
 - Ports: $PORT_APP (app), $PORT_WEB (web), $PORT_API (api)
 
-Never edit submodule packages directly. Improvements → PR to Drift.
+Never edit symlinked packages directly. Improvements → PR to Drift.
 
 Next:
   pnpm install

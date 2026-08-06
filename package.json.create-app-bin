@@ -1,0 +1,5 @@
+{
+  "bin": {
+    "create-drift-app": "./scripts/create-app.sh"
+  }
+}
