@@ -1,3 +1,17 @@
+# v0.1.4 (Thu Aug 06 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Add Neon skills and Claude pre-push hook ([@armelgeek](https://github.com/armelgeek))
+- Merge branch 'main' of https://github.com/armelgeek/next-drift ([@armelgeek](https://github.com/armelgeek))
+- fix: Correct README paths and .gitignore for .claude setup ([@armelgeek](https://github.com/armelgeek))
+
+#### Authors: 1
+
+- [@armelgeek](https://github.com/armelgeek)
+
+---
+
 # v0.1.3 (Thu Aug 06 2026)
 
 #### ⚠️ Pushed to `main`
