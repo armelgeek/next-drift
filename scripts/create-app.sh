@@ -52,12 +52,12 @@ ln -s "$DRIFT_PATH" drift
 # 4. Create symlinks for shared packages and skills
 echo "🔗 Linking shared packages..."
 mkdir -p packages
-ln -s ../drift/packages/database packages/database
-ln -s ../drift/packages/auth packages/auth
-ln -s ../drift/packages/design-system packages/design-system
-ln -s ../drift/packages/payments packages/payments
-ln -s ../drift/packages/observability packages/observability
-ln -s ../drift/packages/security packages/security
+for pkg in "$DRIFT_PATH"/packages/*; do
+  if [ -d "$pkg" ]; then
+    pkg_name=$(basename "$pkg")
+    ln -s "../drift/packages/$pkg_name" "packages/$pkg_name"
+  fi
+done
 
 mkdir -p .claude
 ln -s ../drift/.claude/skills .claude/skills
