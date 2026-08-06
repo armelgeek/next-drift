@@ -8,7 +8,7 @@ import { keys } from "./keys";
 import * as schema from "./src/schema";
 
 neonConfig.webSocketConstructor = ws;
-
+neonConfig.poolQueryViaFetch = true;
 const pool = new Pool({ connectionString: keys().DATABASE_URL });
 
 export const database = drizzle(pool, { schema });
