@@ -12,7 +12,6 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@repo/analytics": "workspace:*",
     "@repo/auth": "workspace:*",
     "@repo/database": "workspace:*",
     "@repo/design-system": "workspace:*",
@@ -23,7 +22,6 @@
     "@repo/observability": "workspace:*",
     "@repo/security": "workspace:*",
     "@repo/seo": "workspace:*",
-    "@repo/webhooks": "workspace:*",
     "@t3-oss/env-nextjs": "^0.13.8",
     "fuse.js": "^7.1.0",
     "import-in-the-middle": "^2.0.0",

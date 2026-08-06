@@ -1,12 +1,12 @@
-# next-ship
+# Drift
 
 **Production-grade Next.js starter for modern SaaS applications.**
 
 Built for solo founders and small teams who want a fast, maintainable foundation without the enterprise complexity.
 
-## Why next-ship?
+## Why Drift?
 
-Most Next.js starters are either too basic or too complex. next-ship hits the sweet spot:
+Most Next.js starters are either too basic or too complex. Drift hits the sweet spot:
 
 - **Modern stack** — Latest stable tools that work well together
 - **Simplified** — Removed enterprise features you don't need as a solo founder
