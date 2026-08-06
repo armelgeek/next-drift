@@ -30,7 +30,7 @@ echo "   Ports: app=$PORT_APP, web=$PORT_WEB, api=$PORT_API"
 echo ""
 
 # 1. Create project directory
-PROJECT_DIR="../$PROJECT_SLUG"
+PROJECT_DIR="$(dirname "$DRIFT_PATH")/$PROJECT_SLUG"
 if [ -d "$PROJECT_DIR" ]; then
   echo "❌ Directory $PROJECT_DIR already exists"
   exit 1
@@ -111,7 +111,7 @@ echo "🏢 Creating pnpm workspace..."
 cat > pnpm-workspace.yaml << EOF
 packages:
   - 'apps/*'
-  - 'packages/*'
+  # packages/* are symlinks to drift/packages - only scanned by pnpm, not turbo
 allowBuilds:
   esbuild: true
   sharp: set this to true or false
@@ -122,9 +122,13 @@ EOF
 echo "⚙️  Creating turbo.json..."
 cat > turbo.json << EOF
 {
+  "\$schema": "https://turborepo.com/schema.json",
+  "workspaceLayout": {
+    "globs": ["apps/*", "packages/*"]
+  },
   "globalDependencies": [".env.local"],
   "globalEnv": ["PORT", "PORT_WEB", "PORT_API"],
-  "pipeline": {
+  "tasks": {
     "dev": {
       "cache": false,
       "env": ["PORT", "PORT_WEB", "PORT_API"],
