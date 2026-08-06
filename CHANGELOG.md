@@ -1,3 +1,15 @@
+# v0.1.12 (Thu Aug 06 2026)
+
+#### ⚠️ Pushed to `main`
+
+- feat: Add boilerplate templates for app creation ([@armelgeek](https://github.com/armelgeek))
+
+#### Authors: 1
+
+- [@armelgeek](https://github.com/armelgeek)
+
+---
+
 # v0.1.11 (Thu Aug 06 2026)
 
 #### ⚠️ Pushed to `main`
