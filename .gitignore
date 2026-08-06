@@ -295,3 +295,4 @@ packages/database/generated
 ~/.config/act/
 
 .worktrees
+.env.local
