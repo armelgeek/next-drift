@@ -49,6 +49,8 @@ jobs:
 
       - name: Build
         run: pnpm build
+        env:
+          DATABASE_URL: 'postgresql://user:password@localhost:5432/drift'
 
       - name: Create Release
         env:
