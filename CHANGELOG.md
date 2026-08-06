@@ -1,3 +1,17 @@
+# v0.1.7 (Thu Aug 06 2026)
+
+#### ⚠️ Pushed to `main`
+
+- feat: Add multi-project status tracking system ([@armelgeek](https://github.com/armelgeek))
+- Merge branch 'main' of https://github.com/armelgeek/next-drift ([@armelgeek](https://github.com/armelgeek))
+- feat: Add specialized skills for solo founder SaaS ([@armelgeek](https://github.com/armelgeek))
+
+#### Authors: 1
+
+- [@armelgeek](https://github.com/armelgeek)
+
+---
+
 # v0.1.6 (Thu Aug 06 2026)
 
 #### ⚠️ Pushed to `main`
