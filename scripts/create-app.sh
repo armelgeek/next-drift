@@ -84,12 +84,13 @@ cat > package.json << EOF
   "description": "$PROJECT_NAME SaaS",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@11.20.0",
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=9.0.0"
   },
   "scripts": {
-    "dev": "turbo dev",
+    "dev": "export \$(grep -v '^#' .env.local | xargs) && turbo dev",
     "build": "turbo build",
     "test": "turbo test",
     "check": "turbo check",
@@ -101,9 +102,6 @@ cat > package.json << EOF
   "dependencies": {},
   "devDependencies": {
     "turbo": "latest"
-  },
-  "pnpm": {
-    "overrides": {}
   }
 }
 EOF
@@ -114,6 +112,10 @@ cat > pnpm-workspace.yaml << EOF
 packages:
   - 'apps/*'
   - 'packages/*'
+allowBuilds:
+  esbuild: true
+  sharp: set this to true or false
+overrides: {}
 EOF
 
 # 8. Create turbo.json with port configuration

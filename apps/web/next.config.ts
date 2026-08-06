@@ -1,10 +1,9 @@
-import { config, withAnalyzer } from "@repo/next-config";
-import type { NextConfig } from "next";
+import { createNextConfig } from '@repo/next-config';
+import path from 'path';
 
-let nextConfig: NextConfig = config;
-
-if (process.env.ANALYZE === "true") {
-  nextConfig = withAnalyzer(nextConfig);
-}
-
-export default nextConfig;
+export default createNextConfig({
+  transpilePackages: [],
+  turbopack: {
+    root: path.join(__dirname, '../../'),
+  },
+});

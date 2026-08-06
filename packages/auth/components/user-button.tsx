@@ -1,12 +1,12 @@
 "use client";
 
-import { useSession } from "better-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@repo/design-system/components/ui/button";
 import { signOut } from "../actions";
+import { authClient } from "../client";
 
 export function UserButton() {
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
   const router = useRouter();
 
   if (!session) {
