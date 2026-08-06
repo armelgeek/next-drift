@@ -1,3 +1,16 @@
+# v0.1.9 (Thu Aug 06 2026)
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'main' of https://github.com/armelgeek/next-drift ([@armelgeek](https://github.com/armelgeek))
+- feat: Rework create-app with git submodules + auto ports ([@armelgeek](https://github.com/armelgeek))
+
+#### Authors: 1
+
+- [@armelgeek](https://github.com/armelgeek)
+
+---
+
 # v0.1.8 (Thu Aug 06 2026)
 
 #### ⚠️ Pushed to `main`
