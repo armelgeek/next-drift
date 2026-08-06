@@ -1,7 +1,7 @@
 {
   "plugins": ["git-tag"],
   "owner": "oscardobsonbrown",
-  "repo": "next-ship",
+  "repo": "drift",
   "name": "Oscar Dobson-Brown",
   "email": "git@oscardb.xyz",
   "onlyPublishWithReleaseLabel": false,
