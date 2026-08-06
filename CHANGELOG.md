@@ -2,11 +2,11 @@
 
 #### 🐛 Bug Fix
 
-- [codex] Fix parseError CodeQL alert [#8](https://github.com/oscardobsonbrown/drift/pull/8) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- [codex] Fix parseError CodeQL alert [#8](https://github.com/armelgeek/drift/pull/8) ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -14,11 +14,11 @@
 
 #### 🐛 Bug Fix
 
-- Fix skip-ci glob matching for CodeQL [#7](https://github.com/oscardobsonbrown/drift/pull/7) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Fix skip-ci glob matching for CodeQL [#7](https://github.com/armelgeek/drift/pull/7) ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -26,11 +26,11 @@
 
 #### 🐛 Bug Fix
 
-- Fix installer GitHub URL for create-next-app [#6](https://github.com/oscardobsonbrown/drift/pull/6) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Fix installer GitHub URL for create-next-app [#6](https://github.com/armelgeek/drift/pull/6) ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -38,11 +38,11 @@
 
 #### 🐛 Bug Fix
 
-- Fix drift CLI package publishing [#5](https://github.com/oscardobsonbrown/drift/pull/5) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Fix drift CLI package publishing [#5](https://github.com/armelgeek/drift/pull/5) ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -50,11 +50,11 @@
 
 #### 🐛 Bug Fix
 
-- feat(observability): add structured logging wrapper [#4](https://github.com/oscardobsonbrown/drift/pull/4) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- feat(observability): add structured logging wrapper [#4](https://github.com/armelgeek/drift/pull/4) ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -62,11 +62,11 @@
 
 #### ⚠️ Pushed to `main`
 
-- feat: add Doppler dev-container secret injection and standardize on Node 24 ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- feat: add Doppler dev-container secret injection and standardize on Node 24 ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -74,11 +74,11 @@
 
 #### ⚠️ Pushed to `main`
 
-- fix: remove || true mask and add required env vars for web build in CI ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- fix: remove || true mask and add required env vars for web build in CI ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -86,11 +86,11 @@
 
 #### ⚠️ Pushed to `main`
 
-- fix: resolve CodeQL duplicate upload error and update to v4 ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- fix: resolve CodeQL duplicate upload error and update to v4 ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -98,14 +98,14 @@
 
 #### ⚠️ Pushed to `main`
 
-- Merge branch 'main' of https://github.com/oscardobsonbrown/drift ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- docs: update AGENTS.md with ultracite formatting guidelines ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- chore: standardize formatting with ultracite across IDE and pre-commit hooks ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- test fixes ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Merge branch 'main' of https://github.com/armelgeek/drift ([@armelgeek](https://github.com/armelgeek))
+- docs: update AGENTS.md with ultracite formatting guidelines ([@armelgeek](https://github.com/armelgeek))
+- chore: standardize formatting with ultracite across IDE and pre-commit hooks ([@armelgeek](https://github.com/armelgeek))
+- test fixes ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -113,11 +113,11 @@
 
 #### ⚠️ Pushed to `main`
 
-- Rename code-quality-metrics.yml to code-quality.yml ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Rename code-quality-metrics.yml to code-quality.yml ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -125,11 +125,11 @@
 
 #### ⚠️ Pushed to `main`
 
-- Split code-quality-metrics into independent jobs for better visibility ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Split code-quality-metrics into independent jobs for better visibility ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -137,11 +137,11 @@
 
 #### ⚠️ Pushed to `main`
 
-- Remove redundant workflow jobs to streamline CI ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Remove redundant workflow jobs to streamline CI ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -149,12 +149,12 @@
 
 #### ⚠️ Pushed to `main`
 
-- Merge branch 'main' of https://github.com/oscardobsonbrown/drift ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: Add all required environment variables to E2E workflow ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Merge branch 'main' of https://github.com/armelgeek/drift ([@armelgeek](https://github.com/armelgeek))
+- fix: Add all required environment variables to E2E workflow ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -162,11 +162,11 @@
 
 #### ⚠️ Pushed to `main`
 
-- chore: bump all versions to 0.4.2 ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- chore: bump all versions to 0.4.2 ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -174,11 +174,11 @@
 
 #### ⚠️ Pushed to `main`
 
-- fix: resolve Build System Checks workflow issues ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- fix: resolve Build System Checks workflow issues ([@armelgeek](https://github.com/armelgeek))
 
 #### Authors: 1
 
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
@@ -186,74 +186,74 @@
 
 #### 🐛 Bug Fix
 
-- Add CODEOWNERS file defining code review ownership [#2](https://github.com/oscardobsonbrown/drift/pull/2) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Add activity feed API [#1](https://github.com/oscardobsonbrown/drift/pull/1) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Add CODEOWNERS file defining code review ownership [#2](https://github.com/armelgeek/drift/pull/2) ([@armelgeek](https://github.com/armelgeek))
+- Add activity feed API [#1](https://github.com/armelgeek/drift/pull/1) ([@armelgeek](https://github.com/armelgeek))
 
 #### ⚠️ Pushed to `main`
 
-- fix(workflows): resolve knip YAML parsing errors in GitHub Actions ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix(bundle-size): replace bc with awk, fix debug secrets step, add proper env vars ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: improve bundle size extraction with debug output and better pattern matching ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: bundle size workflow - replace bc with awk and add error handling ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: use git-tag plugin to avoid API rate limits ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: remove npm plugin to avoid API rate limits ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- chore: force rimraf@6.1.3 via pnpm override to eliminate deprecated rimraf@3 warnings ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- chore: remove @auto-it/first-time-contributor to eliminate deprecated dependency warnings ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- chore: test release workflow ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: correct .autorc config - use releaseType not type, remove noChangelog ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: replace deprecated skipReleaseLabels with new labels config format ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: remove duplicate closing brace in .autorc ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- debug: remove --quiet flag to see actual error output ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: restore correct email address in .autorc ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: remove first-time-contributor plugin to reduce API calls ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: further reduce Auto GitHub API calls and add PAT support ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: disable Auto 'released' plugin to prevent GitHub API rate limit errors ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: resolve basehub type inference issues and lint warnings ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- feat: add documentation, homepage redesign, and npm package metadata ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: ensure database schema is pushed before tests run ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- chore: add tsx dependency lock file ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- feat: add database seed script ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: add dist/** to build outputs for Turborepo caching ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: skip database tests in CI/VERCEL environments ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: add ^build dependency to test task to fix Vercel build ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- feat(boundaries): implement Turbo boundaries for monorepo governance ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix(web): add type assertion for BaseHub CMS data in hero component ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix(turbo): remove experimental boundaries to fix build compatibility ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: update turbo to v2.9.3 to support experimental boundaries feature ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- feat: improve readiness analyzer detection for custom implementations ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- revert: remove circuit breaker implementation ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- feat: add circuit breaker pattern for external API resilience ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- feat: add N+1 query detection and code modularization infrastructure ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- revert: remove vercel deployment tracking (handled by vercel natively) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- feat: add Vercel deployment tracking and alerting infrastructure ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- feat: add L4 observability, compliance, and runbook infrastructure ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- feat: add L4 readiness capabilities - CodeQL, testing, and monitoring infrastructure ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Update owner and contributor details in .autorc ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Add biome.json symlink for tool compatibility ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Add .cursorrules and AGENTS.md with complete tech stack documentation ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Align large file detection thresholds: 500 lines, 10MB across local and CI ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Add CI workflow with large file detection and update pre-commit hooks ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Add pre-commit hooks (husky + lint-staged + ultracite) ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Refine Knip configuration for better accuracy ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Remove unused files and dependencies based on Knip analysis ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Add Knip for detecting unused dependencies and files ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Add comprehensive testing infrastructure with shared @repo/testing package ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- chore: update pnpm-lock.yaml with react-email update and Next.js patch ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: update react-email to 5.2.10 and patch Next.js for email preview compatibility ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Fix studio dev script to use pnpm exec for drizzle-kit ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- Fix variable shadowing in sitemap.ts ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- fix: remove Status import from footer after BetterStack removal ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- refactor: remove Arcjet and all references ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- refactor: remove BetterStack observability service ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- refactor: remove Liveblocks collaboration features ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- docs: add comprehensive environment variables setup guide ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- config: replace all previous payment provider references with Polar.sh in .env.example files ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- docs: remove all language references from README ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- docs: remove English-speaking markets emphasis ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- docs: rewrite README as primary product, not a fork ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- docs: remove Vercel logo from README title ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- docs: update README with modernized stack ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
-- feat: major modernization sweep - Drizzle, Base UI, Polar.sh, PostHog consolidation ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- fix(workflows): resolve knip YAML parsing errors in GitHub Actions ([@armelgeek](https://github.com/armelgeek))
+- fix(bundle-size): replace bc with awk, fix debug secrets step, add proper env vars ([@armelgeek](https://github.com/armelgeek))
+- fix: improve bundle size extraction with debug output and better pattern matching ([@armelgeek](https://github.com/armelgeek))
+- fix: bundle size workflow - replace bc with awk and add error handling ([@armelgeek](https://github.com/armelgeek))
+- fix: use git-tag plugin to avoid API rate limits ([@armelgeek](https://github.com/armelgeek))
+- fix: remove npm plugin to avoid API rate limits ([@armelgeek](https://github.com/armelgeek))
+- chore: force rimraf@6.1.3 via pnpm override to eliminate deprecated rimraf@3 warnings ([@armelgeek](https://github.com/armelgeek))
+- chore: remove @auto-it/first-time-contributor to eliminate deprecated dependency warnings ([@armelgeek](https://github.com/armelgeek))
+- chore: test release workflow ([@armelgeek](https://github.com/armelgeek))
+- fix: correct .autorc config - use releaseType not type, remove noChangelog ([@armelgeek](https://github.com/armelgeek))
+- fix: replace deprecated skipReleaseLabels with new labels config format ([@armelgeek](https://github.com/armelgeek))
+- fix: remove duplicate closing brace in .autorc ([@armelgeek](https://github.com/armelgeek))
+- debug: remove --quiet flag to see actual error output ([@armelgeek](https://github.com/armelgeek))
+- fix: restore correct email address in .autorc ([@armelgeek](https://github.com/armelgeek))
+- fix: remove first-time-contributor plugin to reduce API calls ([@armelgeek](https://github.com/armelgeek))
+- fix: further reduce Auto GitHub API calls and add PAT support ([@armelgeek](https://github.com/armelgeek))
+- fix: disable Auto 'released' plugin to prevent GitHub API rate limit errors ([@armelgeek](https://github.com/armelgeek))
+- fix: resolve basehub type inference issues and lint warnings ([@armelgeek](https://github.com/armelgeek))
+- feat: add documentation, homepage redesign, and npm package metadata ([@armelgeek](https://github.com/armelgeek))
+- fix: ensure database schema is pushed before tests run ([@armelgeek](https://github.com/armelgeek))
+- chore: add tsx dependency lock file ([@armelgeek](https://github.com/armelgeek))
+- feat: add database seed script ([@armelgeek](https://github.com/armelgeek))
+- fix: add dist/** to build outputs for Turborepo caching ([@armelgeek](https://github.com/armelgeek))
+- fix: skip database tests in CI/VERCEL environments ([@armelgeek](https://github.com/armelgeek))
+- fix: add ^build dependency to test task to fix Vercel build ([@armelgeek](https://github.com/armelgeek))
+- feat(boundaries): implement Turbo boundaries for monorepo governance ([@armelgeek](https://github.com/armelgeek))
+- fix(web): add type assertion for BaseHub CMS data in hero component ([@armelgeek](https://github.com/armelgeek))
+- fix(turbo): remove experimental boundaries to fix build compatibility ([@armelgeek](https://github.com/armelgeek))
+- fix: update turbo to v2.9.3 to support experimental boundaries feature ([@armelgeek](https://github.com/armelgeek))
+- feat: improve readiness analyzer detection for custom implementations ([@armelgeek](https://github.com/armelgeek))
+- revert: remove circuit breaker implementation ([@armelgeek](https://github.com/armelgeek))
+- feat: add circuit breaker pattern for external API resilience ([@armelgeek](https://github.com/armelgeek))
+- feat: add N+1 query detection and code modularization infrastructure ([@armelgeek](https://github.com/armelgeek))
+- revert: remove vercel deployment tracking (handled by vercel natively) ([@armelgeek](https://github.com/armelgeek))
+- feat: add Vercel deployment tracking and alerting infrastructure ([@armelgeek](https://github.com/armelgeek))
+- feat: add L4 observability, compliance, and runbook infrastructure ([@armelgeek](https://github.com/armelgeek))
+- feat: add L4 readiness capabilities - CodeQL, testing, and monitoring infrastructure ([@armelgeek](https://github.com/armelgeek))
+- Update owner and contributor details in .autorc ([@armelgeek](https://github.com/armelgeek))
+- Add biome.json symlink for tool compatibility ([@armelgeek](https://github.com/armelgeek))
+- Add .cursorrules and AGENTS.md with complete tech stack documentation ([@armelgeek](https://github.com/armelgeek))
+- Align large file detection thresholds: 500 lines, 10MB across local and CI ([@armelgeek](https://github.com/armelgeek))
+- Add CI workflow with large file detection and update pre-commit hooks ([@armelgeek](https://github.com/armelgeek))
+- Add pre-commit hooks (husky + lint-staged + ultracite) ([@armelgeek](https://github.com/armelgeek))
+- Refine Knip configuration for better accuracy ([@armelgeek](https://github.com/armelgeek))
+- Remove unused files and dependencies based on Knip analysis ([@armelgeek](https://github.com/armelgeek))
+- Add Knip for detecting unused dependencies and files ([@armelgeek](https://github.com/armelgeek))
+- Add comprehensive testing infrastructure with shared @repo/testing package ([@armelgeek](https://github.com/armelgeek))
+- chore: update pnpm-lock.yaml with react-email update and Next.js patch ([@armelgeek](https://github.com/armelgeek))
+- fix: update react-email to 5.2.10 and patch Next.js for email preview compatibility ([@armelgeek](https://github.com/armelgeek))
+- Fix studio dev script to use pnpm exec for drizzle-kit ([@armelgeek](https://github.com/armelgeek))
+- Fix variable shadowing in sitemap.ts ([@armelgeek](https://github.com/armelgeek))
+- fix: remove Status import from footer after BetterStack removal ([@armelgeek](https://github.com/armelgeek))
+- refactor: remove Arcjet and all references ([@armelgeek](https://github.com/armelgeek))
+- refactor: remove BetterStack observability service ([@armelgeek](https://github.com/armelgeek))
+- refactor: remove Liveblocks collaboration features ([@armelgeek](https://github.com/armelgeek))
+- docs: add comprehensive environment variables setup guide ([@armelgeek](https://github.com/armelgeek))
+- config: replace all previous payment provider references with Polar.sh in .env.example files ([@armelgeek](https://github.com/armelgeek))
+- docs: remove all language references from README ([@armelgeek](https://github.com/armelgeek))
+- docs: remove English-speaking markets emphasis ([@armelgeek](https://github.com/armelgeek))
+- docs: rewrite README as primary product, not a fork ([@armelgeek](https://github.com/armelgeek))
+- docs: remove Vercel logo from README title ([@armelgeek](https://github.com/armelgeek))
+- docs: update README with modernized stack ([@armelgeek](https://github.com/armelgeek))
+- feat: major modernization sweep - Drizzle, Base UI, Polar.sh, PostHog consolidation ([@armelgeek](https://github.com/armelgeek))
 - Update page.tsx ([@haydenbleasel](https://github.com/haydenbleasel))
 - Migrate from React-Markdown to Streamdown ([@haydenbleasel](https://github.com/haydenbleasel))
 - Update meta.json ([@haydenbleasel](https://github.com/haydenbleasel))
@@ -617,7 +617,7 @@
 #### Authors: 2
 
 - Hayden Bleasel ([@haydenbleasel](https://github.com/haydenbleasel))
-- Oscar Dobson-Brown ([@oscardobsonbrown](https://github.com/oscardobsonbrown))
+- Oscar Dobson-Brown ([@armelgeek](https://github.com/armelgeek))
 
 ---
 
