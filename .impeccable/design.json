@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-06T00:00:00Z",
+  "title": "Design System: Drift",
+  "extensions": {
+    "colorMeta": {
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "oklch(1 0 0)",
+        "tonalRamp": ["oklch(0.15 0 0)", "oklch(0.25 0 0)", "oklch(0.4 0 0)", "oklch(0.6 0 0)", "oklch(0.75 0 0)", "oklch(0.85 0 0)", "oklch(0.95 0 0)", "oklch(1 0 0)"]
+      },
+      "black": {
+        "role": "neutral",
+        "displayName": "Black",
+        "canonical": "oklch(0.145 0 0)",
+        "tonalRamp": ["oklch(0.145 0 0)", "oklch(0.2 0 0)", "oklch(0.3 0 0)", "oklch(0.45 0 0)", "oklch(0.6 0 0)", "oklch(0.75 0 0)", "oklch(0.9 0 0)", "oklch(1 0 0)"]
+      },
+      "primary": {
+        "role": "primary",
+        "displayName": "Primary Dark",
+        "canonical": "oklch(0.205 0 0)",
+        "tonalRamp": ["oklch(0.1 0 0)", "oklch(0.15 0 0)", "oklch(0.205 0 0)", "oklch(0.35 0 0)", "oklch(0.5 0 0)", "oklch(0.7 0 0)", "oklch(0.85 0 0)", "oklch(0.98 0 0)"]
+      },
+      "primary-foreground": {
+        "role": "primary",
+        "displayName": "Primary Foreground",
+        "canonical": "oklch(0.985 0 0)"
+      },
+      "destructive": {
+        "role": "destructive",
+        "displayName": "Destructive Red",
+        "canonical": "oklch(0.577 0.245 27.325)",
+        "tonalRamp": ["oklch(0.2 0.1 27)", "oklch(0.3 0.15 27)", "oklch(0.4 0.2 27)", "oklch(0.5 0.23 27)", "oklch(0.577 0.245 27.325)", "oklch(0.65 0.22 27)", "oklch(0.75 0.18 27)", "oklch(0.9 0.1 27)"]
+      },
+      "success": {
+        "role": "success",
+        "displayName": "Success Green",
+        "canonical": "oklch(50.8% 0.118 165.612)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headlines, page titles. Rare; use when the screen demands a focal point."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles, modal headers. Establishes area context."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card titles, form labels, prominent metadata."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default reading text. Max line length 65–75 characters."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Form labels, metadata, breadcrumbs. Compact."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "transition-standard",
+        "value": "transition-all",
+        "purpose": "Default transition for state changes (color, opacity, transform). 200ms baseline."
+      }
+    ],
+    "breakpoints": [
+      {"name": "sm", "value": "640px", "purpose": "Tablet breakpoint; single-column → two-column layouts"},
+      {"name": "md", "value": "768px", "purpose": "Desktop breakpoint; refined spacing and layouts"},
+      {"name": "lg", "value": "1024px", "purpose": "Large screens; maximum content width"}
+    ]
+  },
+  "components": [
+    {
+      "name": "Button Primary",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary call-to-action button. Dark background, white text. Hover reduces opacity.",
+      "html": "<button class=\"ds-btn-primary\">Save Changes</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 8px 20px; border-radius: 8px; border: 1px solid transparent; background: oklch(0.205 0 0); color: oklch(0.985 0 0); font-size: 0.875rem; font-weight: 500; font-family: 'Geist Sans', sans-serif; transition: background-color 200ms ease-out; cursor: pointer; } .ds-btn-primary:hover { background: oklch(0.205 0 0 / 0.8); } .ds-btn-primary:focus-visible { outline: 3px solid; outline-color: oklch(0.708 0 0 / 0.5); outline-offset: 2px; }"
+    },
+    {
+      "name": "Button Outline",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action button. Transparent background with border. Hover adds muted background.",
+      "html": "<button class=\"ds-btn-outline\">Cancel</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 8px 20px; border-radius: 8px; border: 1px solid oklch(0.922 0 0); background: transparent; color: oklch(0.145 0 0); font-size: 0.875rem; font-weight: 500; font-family: 'Geist Sans', sans-serif; transition: background-color 200ms ease-out; cursor: pointer; } .ds-btn-outline:hover { background: oklch(0.97 0 0); } .ds-btn-outline:focus-visible { outline: 3px solid; outline-color: oklch(0.708 0 0 / 0.5); outline-offset: 2px; }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Text input. 36px height, transparent background, light border. Focus adds ring.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Enter text...\">",
+      "css": ".ds-input { display: block; width: 100%; height: 36px; padding: 8px 10px; border-radius: 8px; border: 1px solid oklch(0.922 0 0); background: transparent; color: oklch(0.145 0 0); font-size: 0.875rem; font-family: 'Geist Sans', sans-serif; transition: border-color 200ms ease-out, box-shadow 200ms ease-out; } .ds-input::placeholder { color: oklch(0.556 0 0); } .ds-input:focus { outline: none; border-color: oklch(0.708 0 0); box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.5); }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "Content container. White background, subtle border, lg radius (10px), 16px padding.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Card Title</h3><p class=\"ds-card-body\">Card content goes here.</p></div>",
+      "css": ".ds-card { display: block; border-radius: 10px; border: 1px solid oklch(0.922 0 0); background: oklch(1 0 0); color: oklch(0.145 0 0); padding: 16px; } .ds-card-title { font-size: 1.125rem; font-weight: 600; font-family: 'Geist Sans', sans-serif; margin: 0 0 8px 0; } .ds-card-body { font-size: 0.875rem; line-height: 1.6; margin: 0; }"
+    },
+    {
+      "name": "Badge / Chip",
+      "kind": "chip",
+      "refersTo": "badge-default",
+      "description": "Small label or tag. Secondary background, 6px radius.",
+      "html": "<span class=\"ds-badge\">Active</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; justify-content: center; height: 24px; padding: 4px 8px; border-radius: 6px; background: oklch(0.97 0 0); color: oklch(0.145 0 0); font-size: 0.75rem; font-weight: 500; font-family: 'Geist Sans', sans-serif; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-default",
+      "description": "Navigation link. Transparent by default; active state uses primary color.",
+      "html": "<a class=\"ds-nav-link ds-nav-link--active\" href=\"#\">Dashboard</a>",
+      "css": ".ds-nav-link { display: inline-block; padding: 8px 12px; color: oklch(0.145 0 0); font-size: 0.875rem; font-weight: 500; font-family: 'Geist Sans', sans-serif; text-decoration: none; transition: background-color 200ms ease-out; } .ds-nav-link:hover { background: oklch(0.97 0 0); } .ds-nav-link--active { color: oklch(0.205 0 0); font-weight: 600; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Production Console",
+    "overview": "Drift's design system is built for professionals building SaaS applications. It embodies clarity through constraint: refined visual forms that disappear when you're working, reappearing only when they need to communicate. The system uses a neutral OKLCH-based palette with semantic color roles (primary, secondary, destructive, success) and typography with clear hierarchy. Every spacing, radius, and visual treatment is earned—nothing decorative, nothing accidental. Dark mode is first-class: colors are carefully calibrated for both light and dark contexts. The system prioritizes accessibility (focus rings with precise opacity, semantic HTML structure) and developer clarity (Tailwind utilities, Base UI primitives, no custom CSS needed).",
+    "keyCharacteristics": [
+      "Neutral, purposeful. Restraint shapes every decision; the interface recedes so the user's work stands forward.",
+      "OKLCH color space. Perceptually uniform colors that adapt predictably to light and dark modes.",
+      "Flat, shadow-free. Depth is conveyed through color, layering, and contrast—not box shadows or excessive elevation.",
+      "Accessible by default. Focus rings, semantic states (aria-invalid, aria-expanded), and adequate contrast built in.",
+      "Composable primitives. Base UI v2 components + Tailwind utilities = flexible, performant systems without custom CSS."
+    ],
+    "rules": [
+      {
+        "name": "The Neutral North Rule",
+        "body": "The neutral palette is the visual foundation; primary color is sparse and intentional. Use primary to draw attention to one critical action per screen. Overuse diminishes impact.",
+        "section": "colors"
+      },
+      {
+        "name": "The Clarity Rule",
+        "body": "No font-weight outside the specified scale (400, 500, 600). Bold does not mean impact; hierarchy does. Let spacing and size carry weight.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Drift uses no box shadows. Depth is conveyed through layering (z-index), color (tonal shifts), and contrast. Borders mark container boundaries; interactive elements signal state via color and opacity shifts—not shadows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use primary color for the single most important action per screen. Overuse dilutes signal.",
+      "Do maintain minimum 44×44px touch targets on interactive elements.",
+      "Do support dark mode. Test all components in both light and dark contexts.",
+      "Do let spacing and hierarchy communicate importance—don't rely on weight or color alone.",
+      "Do use semantic colors (destructive, success) for state and feedback. Never use red casually.",
+      "Do keep text readable: 65–75 characters per line for body text.",
+      "Do respect the focus ring treatment. Never remove it; it's accessibility, not decoration.",
+      "Do use Tailwind utilities and Base UI components. No custom CSS for visual styling."
+    ],
+    "donts": [
+      "Don't add box shadows. Elevation is color and layering.",
+      "Don't invent new color roles. Stick to primary, secondary, destructive, success.",
+      "Don't use primary color for secondary actions. One accent per screen.",
+      "Don't customize border radius. Use the scale (sm, md, lg, xl).",
+      "Don't override focus styles or remove outlines for aesthetics.",
+      "Don't add decoration or gradients. Restraint is the design.",
+      "Don't hard-code colors in components. Use CSS custom properties (--color-primary, etc.).",
+      "Don't break the 16px spacing rhythm casually. One-off values weaken the system."
+    ]
+  }
+}
