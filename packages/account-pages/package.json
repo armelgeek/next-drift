@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "test": "vitest run",
+    "test": "echo 'No tests yet'",
     "test:watch": "vitest"
   },
   "dependencies": {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "better-auth/react";
-import { Button } from "@repo/design-system/button";
+import { Button } from "@repo/design-system/components/ui/button";
 
 export function OrganizationSwitcher() {
   const { data: session } = useSession();
