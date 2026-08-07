@@ -38,4 +38,4 @@ jobs:
         run: |
           npm install -g vercel
           cd apps/app
-          vercel --prod
+          vercel --prod --prebuilt
