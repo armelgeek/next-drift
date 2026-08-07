@@ -49,19 +49,20 @@ git config user.name "Armel Geek"
 echo "📦 Linking to Drift boilerplate..."
 ln -s "$DRIFT_PATH" drift
 
-# 4. Create symlinks for shared packages and skills
-echo "🔗 Linking shared packages..."
+# 4. Copy packages locally (independent projects, not symlinks)
+echo "📋 Copying shared packages..."
 mkdir -p packages
 for pkg in "$DRIFT_PATH"/packages/*; do
   if [ -d "$pkg" ]; then
     pkg_name=$(basename "$pkg")
-    ln -s "../drift/packages/$pkg_name" "packages/$pkg_name"
+    cp -r "$pkg" "packages/$pkg_name"
+    echo "  ✓ $pkg_name"
   fi
 done
 
 mkdir -p .claude
-ln -s ../drift/.claude/skills .claude/skills
-ln -s ../drift/.claude/templates .claude/templates
+cp -r "$DRIFT_PATH/.claude/skills" .claude/skills
+cp -r "$DRIFT_PATH/.claude/templates" .claude/templates
 
 # 5. Create apps directory and populate from templates
 echo "📁 Creating apps structure..."
@@ -111,10 +112,10 @@ echo "🏢 Creating pnpm workspace..."
 cat > pnpm-workspace.yaml << EOF
 packages:
   - 'apps/*'
-  # packages/* are symlinks to drift/packages - only scanned by pnpm, not turbo
+  - 'packages/*'
 allowBuilds:
   esbuild: true
-  sharp: set this to true or false
+  sharp: true
 overrides: {}
 EOF
 
@@ -260,12 +261,12 @@ cat > STATUS.md << EOF
 
 ## Notes for next self
 
-This project was bootstrapped from Drift via git submodules:
-- **packages/\*** → linked to drift/packages/ (shared)
-- **.claude/skills** → linked to drift/.claude/skills (shared)
-- **apps/** → your custom features
+This project was bootstrapped from Drift:
+- **packages/\*** → local copies (independent, can be customized)
+- **apps/** → your custom features (web, app, api)
+- **.claude/** → local copies (skills, templates)
 
-Never edit symlinked packages directly. If you improve something in packages, do it in Drift and create a PR there.
+To contribute improvements back to Drift, sync changes manually or create a PR to the Drift repository.
 
 ### Architecture
 
