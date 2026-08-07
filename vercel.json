@@ -1,21 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/vercel.json",
-  "packageManager": "pnpm@11.20.0",
   "buildCommand": "pnpm build",
-  "installCommand": "pnpm install",
-  "regions": ["cdg1", "iad1"],
-  "functions": {
-    "api/**/*.ts": {
-      "runtime": "nodejs20.x",
-      "maxDuration": 30
-    }
-  },
-  "env": {
-    "DATABASE_URL": "@database_url",
-    "ANTHROPIC_API_KEY": "@anthropic_api_key",
-    "SERPAPI_KEY": "@serpapi_key",
-    "STRIPE_SECRET_KEY": "@stripe_secret_key",
-    "STRIPE_WEBHOOK_SECRET": "@stripe_webhook_secret",
-    "BETTER_AUTH_SECRET": "@better_auth_secret"
-  }
+  "installCommand": "pnpm install"
 }
