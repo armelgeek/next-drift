@@ -1,9 +1,9 @@
-import { createNextConfig } from '@repo/next-config';
-import path from 'path';
+import { config } from '@repo/next-config';
+import type { NextConfig } from 'next';
 
-export default createNextConfig({
+const nextConfig: NextConfig = {
+  ...config,
   transpilePackages: ['@repo/database', '@repo/auth'],
-  turbopack: {
-    root: path.join(__dirname, '../../'),
-  },
-});
+};
+
+export default nextConfig;
