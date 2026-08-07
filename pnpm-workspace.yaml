@@ -1,7 +1,7 @@
 packages:
-  - 'apps/*'
+  - 'apps/app'
   - 'packages/*'
 allowBuilds:
   esbuild: true
-  sharp: set this to true or false
+  sharp: true
 overrides: {}
