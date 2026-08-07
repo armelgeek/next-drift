@@ -8,7 +8,7 @@
     "build": "drizzle-kit generate",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:push": "drizzle-kit push",
+    "db:push": "bash db-push-safe.sh",
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx src/seed.ts",
     "test": "vitest run",
