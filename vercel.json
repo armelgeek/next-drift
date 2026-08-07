@@ -1,5 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/vercel.json",
+  "packageManager": "pnpm@11.20.0",
   "buildCommand": "pnpm build",
   "installCommand": "pnpm install",
   "regions": ["cdg1", "iad1"],
