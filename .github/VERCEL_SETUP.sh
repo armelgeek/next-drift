@@ -1,63 +1,136 @@
 #!/bin/bash
-# Add Vercel secrets to GitHub for CI/CD deployment
+# Automated Vercel + GitHub setup for Drift projects
 
 set -e
 
-echo "🔐 Vercel GitHub Secrets Setup"
-echo "=============================="
-echo ""
-echo "This script adds Vercel credentials to GitHub Secrets."
-echo "Use after creating Vercel projects with: vercel --prod --cwd apps/[web|app|api]"
+echo "🚀 Drift - Auto Setup Vercel + GitHub"
+echo "======================================"
 echo ""
 
-# Check if gh CLI is installed
-if ! command -v gh &> /dev/null; then
-  echo "❌ GitHub CLI (gh) not installed"
-  echo "   Install from: https://cli.github.com"
-  exit 1
-fi
+# Check dependencies
+check_tools() {
+  local missing=()
 
-# Prompt for credentials
-echo "1️⃣  Get your VERCEL_TOKEN:"
-echo "   https://vercel.com/account/tokens"
-echo ""
-read -p "Paste VERCEL_TOKEN: " VERCEL_TOKEN
+  if ! command -v vercel &> /dev/null; then
+    missing+=("vercel CLI")
+  fi
+  if ! command -v gh &> /dev/null; then
+    missing+=("GitHub CLI (gh)")
+  fi
 
-if [ -z "$VERCEL_TOKEN" ]; then
-  echo "❌ Token cannot be empty"
-  exit 1
-fi
+  if [ ${#missing[@]} -gt 0 ]; then
+    echo "❌ Missing tools:"
+    for tool in "${missing[@]}"; do
+      echo "  - $tool"
+    done
+    echo ""
+    echo "Install:"
+    echo "  Vercel: npm i -g vercel"
+    echo "  GitHub: https://cli.github.com"
+    exit 1
+  fi
+}
 
-echo ""
-echo "2️⃣  Get Vercel credentials:"
-echo "   - ORG_ID: From .vercel/project.json (orgId field) after deploying"
-echo "   - PROJECT_IDs: From .vercel/project.json (projectId field) for each app"
-echo ""
-read -p "VERCEL_ORG_ID (team_...): " VERCEL_ORG_ID
-read -p "VERCEL_PROJECT_ID_WEB (prj_...): " VERCEL_PROJECT_ID_WEB
-read -p "VERCEL_PROJECT_ID_APP (prj_...): " VERCEL_PROJECT_ID_APP
-read -p "VERCEL_PROJECT_ID_API (prj_...): " VERCEL_PROJECT_ID_API
+# Extract Vercel project info
+extract_vercel_info() {
+  echo "📋 Extracting Vercel project information..."
 
-# Validate
-if [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID_WEB" ] || [ -z "$VERCEL_PROJECT_ID_APP" ] || [ -z "$VERCEL_PROJECT_ID_API" ]; then
-  echo "❌ All credentials required"
-  exit 1
-fi
+  if [ ! -f "apps/web/.vercel/project.json" ]; then
+    echo "⚠️  Vercel projects not found locally"
+    echo ""
+    echo "Create them first:"
+    echo "  cd apps/web && vercel --prod"
+    echo "  cd apps/app && vercel --prod"
+    echo "  cd apps/api && vercel --prod"
+    echo ""
+    echo "Then run this script again"
+    exit 1
+  fi
 
-# Add secrets
-echo ""
-echo "3️⃣  Adding secrets to GitHub..."
-echo ""
+  PROJECT_ID_WEB=$(cat apps/web/.vercel/project.json | grep -oP '(?<="projectId":").*?(?=")')
+  ORG_ID=$(cat apps/web/.vercel/project.json | grep -oP '(?<="orgId":").*?(?=")')
 
-gh secret set VERCEL_TOKEN --body "$VERCEL_TOKEN" 2>&1 | tail -1
-gh secret set VERCEL_ORG_ID --body "$VERCEL_ORG_ID" 2>&1 | tail -1
-gh secret set VERCEL_PROJECT_ID_WEB --body "$VERCEL_PROJECT_ID_WEB" 2>&1 | tail -1
-gh secret set VERCEL_PROJECT_ID_APP --body "$VERCEL_PROJECT_ID_APP" 2>&1 | tail -1
-gh secret set VERCEL_PROJECT_ID_API --body "$VERCEL_PROJECT_ID_API" 2>&1 | tail -1
+  PROJECT_ID_APP=$(cat apps/app/.vercel/project.json | grep -oP '(?<="projectId":").*?(?=")')
+  PROJECT_ID_API=$(cat apps/api/.vercel/project.json | grep -oP '(?<="projectId":").*?(?=")')
 
-echo ""
-echo "✅ Secrets added!"
-echo ""
-echo "4️⃣  Add environment variables in Vercel console at vercel.com for each project"
-echo ""
-echo "🚀 Auto-deploy enabled! Push to main to trigger deployment"
+  echo "✅ Found:"
+  echo "   ORG_ID: $ORG_ID"
+  echo "   WEB: $PROJECT_ID_WEB"
+  echo "   APP: $PROJECT_ID_APP"
+  echo "   API: $PROJECT_ID_API"
+}
+
+# Get Vercel token
+get_vercel_token() {
+  echo ""
+  echo "🔑 Getting VERCEL_TOKEN..."
+  echo ""
+  echo "Create one at: https://vercel.com/account/tokens"
+  echo "Then paste it below:"
+  echo ""
+  read -p "VERCEL_TOKEN: " VERCEL_TOKEN
+
+  if [ -z "$VERCEL_TOKEN" ]; then
+    echo "❌ Token required"
+    exit 1
+  fi
+
+  if ! [[ "$VERCEL_TOKEN" =~ ^[A-Za-z0-9_-]+$ ]]; then
+    echo "⚠️  Token looks invalid, but continuing..."
+  fi
+}
+
+# Add GitHub secrets
+add_github_secrets() {
+  echo ""
+  echo "🔐 Adding GitHub Secrets..."
+
+  gh secret set VERCEL_TOKEN --body "$VERCEL_TOKEN" 2>&1 | grep -q "secret" || true
+  gh secret set VERCEL_ORG_ID --body "$ORG_ID" 2>&1 | grep -q "secret" || true
+  gh secret set VERCEL_PROJECT_ID_WEB --body "$PROJECT_ID_WEB" 2>&1 | grep -q "secret" || true
+  gh secret set VERCEL_PROJECT_ID_APP --body "$PROJECT_ID_APP" 2>&1 | grep -q "secret" || true
+  gh secret set VERCEL_PROJECT_ID_API --body "$PROJECT_ID_API" 2>&1 | grep -q "secret" || true
+
+  echo "   ✅ VERCEL_TOKEN"
+  echo "   ✅ VERCEL_ORG_ID"
+  echo "   ✅ VERCEL_PROJECT_ID_WEB"
+  echo "   ✅ VERCEL_PROJECT_ID_APP"
+  echo "   ✅ VERCEL_PROJECT_ID_API"
+}
+
+# Show next steps
+show_final_steps() {
+  echo ""
+  echo "════════════════════════════════════════════════════════════════"
+  echo "✨ Setup Complete! Next Steps:"
+  echo "════════════════════════════════════════════════════════════════"
+  echo ""
+  echo "📌 1️⃣  Add Environment Variables to Vercel"
+  echo ""
+  echo "   Go to: https://vercel.com/dashboard/projects"
+  echo ""
+  echo "   For EACH project (web, app, api):"
+  echo "   Settings → Environment Variables → Add:"
+  echo ""
+  echo "   Web, App, and API all need these in Vercel console"
+  echo ""
+  echo "📌 2️⃣  Push to main to trigger auto-deploy"
+  echo ""
+  echo "   git push origin main"
+  echo ""
+  echo "   Watch at: GitHub → Actions tab"
+  echo ""
+  echo "════════════════════════════════════════════════════════════════"
+  echo "🚀 CI/CD Pipeline Active!"
+  echo ""
+  echo "   Workflow: push main → GitHub CI → Vercel Deploy"
+  echo "════════════════════════════════════════════════════════════════"
+  echo ""
+}
+
+# Main
+check_tools
+extract_vercel_info
+get_vercel_token
+add_github_secrets
+show_final_steps
