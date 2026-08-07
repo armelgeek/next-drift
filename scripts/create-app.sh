@@ -287,6 +287,10 @@ Architecture:
 - Apps: Custom features for $PROJECT_NAME
 - Ports: $PORT_APP (app), $PORT_WEB (web), $PORT_API (api)
 
+Database:
+- Neon PostgreSQL: pnpm db:push auto-detects and uses psql fallback if needed
+- Local PostgreSQL: pnpm db:push works normally via drizzle-kit
+
 Never edit symlinked packages directly. Improvements → PR to Drift.
 
 Next:
