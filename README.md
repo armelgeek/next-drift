@@ -13,6 +13,7 @@ Most Next.js starters are either too basic or too complex. Drift hits the sweet 
 - **Fast to ship** — Pre-configured auth, payments, database, and analytics
 - **Easy to maintain** — Consolidated tooling, flat URLs
 - **Production-ready** — Type-safe, secure, and scalable
+- **AI-powered workflows** — 21 invocable Claude Code skills for automated development (feature shipping, bug fixes, code review, incident response)
 
 ## Stack
 
@@ -247,6 +248,61 @@ pnpm bump-deps
 # Update all shadcn components
 pnpm bump-ui
 ```
+
+### Claude Code Automation
+
+Drift includes 21 **invocable workflows** for automated development, integrated with Claude Code:
+
+#### Core Workflows
+| Command | Purpose | Time |
+|---------|---------|------|
+| `/ship` | Full delivery: strategy → PRD → epic → code → test → deploy | 1-3 days |
+| `/ship-feature` | Fast feature: scope → PRD → epic → code → deploy | 1-2 days |
+| `/ship-bug` | Bug fix: RCA → fix → test → deploy | 30min-2h |
+| `/postmortem` | Incident response: RCA → hotfix → postmortem | 2-6h |
+| `/standup` | Daily status: done ✅ / in progress 🔨 / blocked 🚧 | 5min |
+
+#### Development Workflows
+- `/feature` — New feature planning and implementation
+- `/fix` — Bug diagnosis and repair with regression tests
+- `/refactor` — Code cleanup without changing behavior
+- `/test` — Run full test suite
+- `/learn` — Extract patterns from codebase
+- `/research` — Investigate technical questions
+- `/lint` — Run all linters
+- `/init` — Initialize CLAUDE.md project config
+- `/setup` — Configure GitHub Discussions + Wiki
+- `/api-route` — Create API endpoints with proper auth/validation
+
+#### Specialized Workflows
+- `/security-review` — Audit code for vulnerabilities
+- `/onboard` — Session onboarding (light or deep)
+- `/reset` — End session and start fresh
+- `/wrap-up` — Structured handoff to next session
+- `/retrospective` — Analyze mistakes and create gotcha rules
+- `/metrics` — Show session metrics and trends
+
+#### Specialized Agents
+Available within workflows:
+- **accessibility-reviewer** — WCAG 2.1 AA compliance audits
+- **security-reviewer** — Security vulnerability detection
+- **test-runner** — Test execution and failure fixes
+- **researcher** — Technical research and codebase exploration
+
+#### Auto-Executing Hooks
+Run automatically on events:
+- **capture-signal** — Save context on interruption
+- **session-primer** — Load context at session start
+- **verify-gate** — Pre-commit quality checks
+- **habits-coach** — Development habit coaching
+
+**Setup:**
+```bash
+.claude/setup-github.sh  # Enable GitHub Discussions + Wiki
+/setup                   # Configure workflow
+```
+
+See `.claude/README.md` and `.claude/WORKFLOW.md` for full documentation.
 
 ### Database Changes
 
