@@ -89,5 +89,6 @@
     "turbo.json": "turbo.png",
     "drizzle.config.ts": "drizzle.config.*.ts",
     ".gitignore": ".gitattributes, .gitkeep"
-  }
+  },
+  "model": "haiku"
 }
