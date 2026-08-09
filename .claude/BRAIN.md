@@ -118,7 +118,7 @@ Brain snapshots are automatically saved:
 ## Troubleshooting
 
 ### Brain not creating on first run?
-1. Check that `better-sqlite3` is installed: `npm list better-sqlite3`
+1. Check that `better-sqlite3` is installed: `pnpm list better-sqlite3`
 2. Run `node .claude/brain-init.js` manually
 3. Verify `.drift-brain.db` exists
 
