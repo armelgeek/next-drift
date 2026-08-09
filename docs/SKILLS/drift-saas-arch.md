@@ -183,7 +183,7 @@ docs/architecture/deployment-plan.md
 Development:
 - Local PostgreSQL (docker-compose)
 - Local Stripe test API keys
-- npm run dev
+- pnpm dev
 
 Staging:
 - Deploy to Vercel preview
