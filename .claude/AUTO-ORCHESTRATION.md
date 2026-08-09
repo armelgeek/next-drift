@@ -174,6 +174,8 @@ User: /ship feature "add Stripe"
 → Auto-detects: domain = infra (payment keyword)
 → Auto-invokes: /drift-clarify (asks payment-specific questions)
 → Records: decisions locked
+→ Auto-invokes: /drift-scenarios (find all paths, failures, edges)
+→ Records: test matrix (26 test cases)
 → Auto-invokes: /drift-scout (finds Stripe-related files)
 → Auto-invokes: /drift-architect (creates tasks with consumers)
 → Auto-runs: tests after each task
