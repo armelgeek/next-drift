@@ -25,7 +25,7 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@rolldown/plugin-babel": "^0.1.8",
+    "@rolldown/plugin-babel": "^0.2.3",
     "babel-plugin-react-compiler": "^1.0.0",
     "vitest": "^4.1.10"
   },
