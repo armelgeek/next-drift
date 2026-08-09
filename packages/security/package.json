@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@nosecone/next": "1.0.0-beta.15",
-    "@t3-oss/env-nextjs": "^0.13.8",
-    "zod": "^4.1.13"
+    "@t3-oss/env-nextjs": "^0.13.11",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
