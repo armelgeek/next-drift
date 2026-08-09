@@ -57,7 +57,8 @@ cd drift
 pnpm install
 
 # Set up environment variables
-# Copy .env.example files to .env in each app/package and fill in your API keys
+cp apps/app/.env.example apps/app/.env
+# Fill in your API keys in .env
 
 # Run database migrations
 pnpm --filter @repo/database db:push
@@ -68,41 +69,24 @@ pnpm dev
 
 ### Environment Variables
 
-**Minimal setup** (required):
-- `DATABASE_URL` — PostgreSQL connection string
+Copy `.env.example` to `.env` in `apps/app/`:
 
-**Optional** (enable/disable features):
-- `NEXT_PUBLIC_POSTHOG_KEY` — Enable analytics (optional)
-- `NEXT_PUBLIC_POSTHOG_HOST` — PostHog host (optional)
-- `BETTER_AUTH_SECRET` — Auth secret (required for auth)
-
-**Complete setup** — Copy `.env.example` files to `.env` in each app and fill in API keys:
-
-**apps/web/.env:**
-```
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_WEB_URL=http://localhost:3001
-NEXT_PUBLIC_POSTHOG_KEY=phc_...  # optional
+```bash
+cp apps/app/.env.example apps/app/.env
 ```
 
-**apps/app/.env:**
-```
-BETTER_AUTH_SECRET=your-super-secret-key-min-32-chars
-BETTER_AUTH_URL=http://localhost:3000
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-DATABASE_URL=postgresql://...
-```
+**Required:**
+- `DATABASE_URL` — PostgreSQL connection (e.g., Neon)
+- `BETTER_AUTH_SECRET` — Auth secret (min 32 chars)
 
-**apps/api/.env:**
-```
-DATABASE_URL=postgresql://...
-BETTER_AUTH_SECRET=your-super-secret-key-min-32-chars
-STRIPE_SECRET_KEY=sk_test_...  # optional
-STRIPE_WEBHOOK_SECRET=whsec_...  # optional
-RESEND_TOKEN=re_...  # optional
-```
+**Optional:**
+- `NEXT_PUBLIC_POSTHOG_KEY` — Enable analytics
+- `NEXT_PUBLIC_POSTHOG_HOST` — PostHog host
+- `STRIPE_SECRET_KEY` — Stripe payments
+- `STRIPE_WEBHOOK_SECRET` — Stripe webhooks
+- `RESEND_TOKEN` — Resend email
 
-See `.env.example` in each directory for complete lists.
+See `.env.example` for complete list.
 
 ## Architecture
 
@@ -110,24 +94,17 @@ See `.env.example` in each directory for complete lists.
 
 ```
 apps/
-├── web/           # Marketing site (port 3001)
-│   ├── /          # Homepage with hero section
-│   ├── /contact   # Contact form
-│   ├── /pricing   # Pricing page
-│   └── /blog      # Blog with CMS integration
 ├── app/           # Main application (port 3000)
-│   ├── /          # Professional landing page
+│   ├── /          # Professional landing page with hero section
+│   ├── /account   # User account settings
 │   ├── /sign-in   # Authentication
-│   ├── /sign-up
-│   └── /dashboard # Main app dashboard
-├── api/           # API server (port 3002)
-│   └── /webhooks  # Payment webhooks, auth callbacks
-├── docs/          # Documentation site
-├── email/         # Email preview server
-└── storybook/     # Component library
+│   └── /sign-up   # User signup
+├── email/         # Email templates (React Email)
+├── storybook/     # Component library & UI showcase
+└── studio/        # Drizzle Studio for database management
 ```
 
-All apps are independently deployable.
+The `app` directory is the main deployable. Other apps support development and local tools.
 
 ### Packages
 
@@ -235,6 +212,9 @@ Composition pattern (no `asChild`):
 ### Commands
 
 ```bash
+# Start development (all apps in parallel)
+pnpm dev
+
 # Type check all packages
 pnpm typecheck
 
@@ -248,11 +228,10 @@ pnpm build
 pnpm check
 pnpm fix
 
-# Update dependencies
-pnpm bump-deps
-
-# Update all shadcn components
-pnpm bump-ui
+# Database management
+pnpm --filter @repo/database db:generate  # Generate migrations
+pnpm --filter @repo/database db:push      # Apply migrations
+pnpm --filter @repo/database db:studio    # Open Drizzle Studio
 ```
 
 ### Claude Code Automation
@@ -329,17 +308,12 @@ After modifying schema:
 ### Vercel (Recommended)
 
 1. Connect your GitHub repository to Vercel
-2. Set environment variables in Vercel dashboard
-3. Deploy
-
-The monorepo is configured to deploy all apps independently via Turborepo.
-
-### Environment Variables by App
-
-Each app needs specific environment variables:
-- **Web**: `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `NEXT_PUBLIC_POSTHOG_KEY`, etc.
-- **App**: All Clerk variables, PostHog key
-- **API**: Database URL, all service API keys (Polar, Resend, etc.)
+2. Set environment variables in Vercel dashboard:
+   - `DATABASE_URL`
+   - `BETTER_AUTH_SECRET`
+   - `NEXT_PUBLIC_POSTHOG_KEY` (optional)
+   - Other optional API keys (Stripe, Resend, etc.)
+3. Deploy — Turborepo handles the rest
 
 ## What's Changed
 
