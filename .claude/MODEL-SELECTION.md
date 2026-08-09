@@ -45,37 +45,43 @@ UI Domain (1 task):
 
 ## Selection Logic
 
-```python
-# When selecting model for task in domain X:
+```typescript
+// When selecting model for task in domain X:
 
-def select_model(agent, domain):
-    haiku_rate = get_success_rate(agent, domain, "haiku")
-    sonnet_rate = get_success_rate(agent, domain, "sonnet")
-    opus_rate = get_success_rate(agent, domain, "opus")
+function selectModel(agent: string, domain: string): 'haiku' | 'sonnet' | 'opus' {
+  const haikuRate = getSuccessRate(agent, domain, 'haiku');
+  const sonnetRate = getSuccessRate(agent, domain, 'sonnet');
+  const opusRate = getSuccessRate(agent, domain, 'opus');
 
-    total_tasks = haiku_rate.count + sonnet_rate.count + opus_rate.count
+  const totalTasks = haikuRate.count + sonnetRate.count + opusRate.count;
 
-    # Unknown domain: use sonnet
-    if total_tasks == 0:
-        return "sonnet"
+  // Unknown domain: use sonnet
+  if (totalTasks === 0) {
+    return 'sonnet';
+  }
 
-    # Very confident with haiku: use haiku
-    if haiku_rate.success_pct >= 90 and haiku_rate.count >= 5:
-        return "haiku"
+  // Very confident with haiku: use haiku
+  if (haikuRate.successPct >= 90 && haikuRate.count >= 5) {
+    return 'haiku';
+  }
 
-    # Low confidence with haiku: avoid it
-    if haiku_rate.success_pct < 70:
-        return "sonnet"
+  // Low confidence with haiku: avoid it
+  if (haikuRate.successPct < 70) {
+    return 'sonnet';
+  }
 
-    # Standard: use sonnet
-    if sonnet_rate.success_pct >= 80:
-        return "sonnet"
+  // Standard: use sonnet
+  if (sonnetRate.successPct >= 80) {
+    return 'sonnet';
+  }
 
-    # Struggling with sonnet: escalate to opus
-    if sonnet_rate.success_pct < 70:
-        return "opus"
+  // Struggling with sonnet: escalate to opus
+  if (sonnetRate.successPct < 70) {
+    return 'opus';
+  }
 
-    return "sonnet"  # Default
+  return 'sonnet';  // Default
+}
 ```
 
 ## Tracking Success/Failure
