@@ -106,7 +106,7 @@ explicitly. A command-type Stop hook enforces this for turns that edit code.
 ## 9. Supply Chain
 
 - Pin exact versions in production (no `^`/`~`).
-- `npm audit` / `pnpm audit` in CI.
+- `pnpm audit` in CI.
 - Review `postinstall` scripts on new dependencies.
 - Verify library versions against live sources (context7 MCP, web search) —
   training data can be stale.
@@ -126,9 +126,9 @@ drift
 Node.js / TypeScript (pnpm workspaces monorepo — prefer workspace-scoped commands where possible)
 
 ### Build & Dev Commands
-- `npm run dev` — start dev server
-- `npm run build` — production build
-- `npm test` — run tests
+- `pnpm dev` — start dev server
+- `pnpm build` — production build
+- `pnpm test` — run tests
 
 ### Architecture
 <!-- Describe directory structure, module boundaries, data flow -->
