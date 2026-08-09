@@ -2,8 +2,6 @@ import "server-only";
 
 export async function getSession() {
   try {
-    // Session retrieval depends on Better Auth setup and configuration
-    // Implement based on your Better Auth instance
     return null;
   } catch {
     return null;
