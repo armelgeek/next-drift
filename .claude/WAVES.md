@@ -25,27 +25,30 @@ Waves:
 
 ## Dependency Detection
 
-```python
-def group_into_waves(tasks):
-    waves = []
-    completed_files = set()
+```typescript
+function groupIntoWaves(tasks: Task[]): Task[][] {
+  const waves: Task[][] = [];
+  let completedFiles = new Set<string>();
 
-    for task in tasks:
-        task_files = set(task.files)
-        
-        # Does this task touch files touched by prior tasks this wave?
-        conflicts = task_files & completed_files
-        
-        if not conflicts:
-            # No conflict - add to current wave
-            waves[-1].append(task)
-            completed_files.update(task_files)
-        else:
-            # Conflict - start new wave (sequential barrier)
-            waves.append([task])
-            completed_files = task_files
+  for (const task of tasks) {
+    const taskFiles = new Set(task.files);
+    
+    // Does this task touch files touched by prior tasks this wave?
+    const conflicts = [...taskFiles].filter(f => completedFiles.has(f));
+    
+    if (conflicts.length === 0) {
+      // No conflict - add to current wave
+      waves[waves.length - 1].push(task);
+      taskFiles.forEach(f => completedFiles.add(f));
+    } else {
+      // Conflict - start new wave (sequential barrier)
+      waves.push([task]);
+      completedFiles = taskFiles;
+    }
+  }
 
-    return waves
+  return waves;
+}
 ```
 
 ## Real Execution
