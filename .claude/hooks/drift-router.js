@@ -24,42 +24,111 @@ module.exports = {
     const autoRoutingEnabled = process.env.DRIFT_AUTO_ROUTING !== 'off';
     if (!autoRoutingEnabled) return message;
 
-    // Parse intent from first 3-5 words
-    const words = text.toLowerCase().split(/\s+/).slice(0, 5);
-    const intent = words.join(' ');
+    // Parse intent from full text (better pattern matching)
+    const textLower = text.toLowerCase();
 
     let skill = null;
+    let domain = null;
 
-    // Route by keyword
+    // Detect domain from keywords
+    const domainPatterns = {
+      database: [
+        'database', 'schema', 'migration', 'table', 'column', 'query',
+        'drizzle', 'prisma', 'orm', 'sql', 'postgres', 'sql query',
+        'data model', 'entity', 'index', 'constraint'
+      ],
+      api: [
+        'api', 'endpoint', 'route', 'rest', 'graphql', 'webhook',
+        'request', 'response', 'status code', 'error handling',
+        'http', 'post', 'get', 'put', 'delete'
+      ],
+      auth: [
+        'auth', 'login', 'signup', 'password', 'token', 'session',
+        'jwt', 'oauth', 'permissions', 'roles', 'access control',
+        'security', 'credential', 'mfa', '2fa'
+      ],
+      ui: [
+        'component', 'page', 'form', 'button', 'modal', 'layout',
+        'styling', 'tailwind', 'responsive', 'dark mode', 'theme',
+        'ui', 'ux', 'design', 'interface', 'display'
+      ],
+      infra: [
+        'deploy', 'ci/cd', 'github', 'vercel', 'docker', 'ci',
+        'pipeline', 'environment', 'config', 'monitoring', 'payment',
+        'stripe', 'billing', 'subscription', 'webhook', 'infrastructure'
+      ],
+      content: [
+        'markdown', 'rich text', 'cms', 'blog', 'content', 'i18n',
+        'translation', 'locale', 'language', 'documentation'
+      ]
+    };
+
+    // Check which domains match
+    for (const [d, keywords] of Object.entries(domainPatterns)) {
+      if (keywords.some(kw => textLower.includes(kw))) {
+        domain = d;
+        break; // First match wins
+      }
+    }
+
+    // Route by action verb
     if (
-      intent.includes('add ') ||
-      intent.includes('build ') ||
-      intent.includes('create ') ||
-      intent.includes('implement ')
+      textLower.includes('add ') ||
+      textLower.includes('build ') ||
+      textLower.includes('create ') ||
+      textLower.includes('implement ') ||
+      textLower.includes('build a ') ||
+      textLower.includes('add a ')
     ) {
+      // Feature creation: clarify if ambiguous, then scout → architect → ship
       skill = '/ship-feature';
-    } else if (intent.includes('fix ') || intent.includes('bug ')) {
+    } else if (
+      textLower.includes('fix ') ||
+      textLower.includes('bug ') ||
+      textLower.includes('broken ') ||
+      textLower.match(/^(fix|bug)/)
+    ) {
       skill = '/ship-bug';
     } else if (
-      intent.includes('refactor ') ||
-      intent.includes('improve ') ||
-      intent.includes('optimize ')
+      textLower.includes('refactor ') ||
+      textLower.includes('improve ') ||
+      textLower.includes('optimize ') ||
+      textLower.includes('rewrite ')
     ) {
+      // Refactor: plan only, don't build
       skill = '/drift-architect';
-    } else if (intent.includes('research ') || intent.includes('investigate ')) {
+    } else if (
+      textLower.includes('research ') ||
+      textLower.includes('investigate ') ||
+      textLower.includes('explore ') ||
+      textLower.includes('find ')
+    ) {
+      // Investigation: scout only
       skill = '/drift-scout';
-    } else if (intent.includes('learn ') || intent.includes('remember ')) {
+    } else if (
+      textLower.includes('learn ') ||
+      textLower.includes('remember ') ||
+      textLower.includes('remember ') ||
+      textLower.includes('pattern ')
+    ) {
       skill = '/learn';
-    } else if (intent.includes('explain ') || intent.includes('why ')) {
-      // Questions → no routing, keep as normal Claude query
+    } else if (
+      textLower.includes('status') ||
+      textLower.includes('stats') ||
+      textLower.includes('metrics')
+    ) {
+      skill = '/drift:status';
+    } else if (textLower.includes('explain ') || textLower.includes('why ')) {
+      // Questions → no routing
       return message;
     }
 
     // If routing detected, prepend skill invocation
     if (skill) {
-      // Inject brain snapshot if available (see drift-brain-snapshot.js)
+      // Inject brain snapshot if available
       const brainContext = context.brainSnapshot || '';
-      return `${brainContext}\n\n${skill} ${text}`;
+      const domainHint = domain ? ` [domain: ${domain}]` : '';
+      return `${brainContext}\n\n${skill}${domainHint} ${text}`;
     }
 
     return message;
