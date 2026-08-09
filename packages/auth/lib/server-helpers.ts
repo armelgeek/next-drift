@@ -1,11 +1,10 @@
 import "server-only";
-import { auth } from "./better-auth";
 
 export async function getSession() {
   try {
-    // Better Auth provides session via auth object
-    // In a server context, session is accessed through the auth instance
-    return null; // TODO: Implement session retrieval based on Better Auth setup
+    // Session retrieval depends on Better Auth setup and configuration
+    // Implement based on your Better Auth instance
+    return null;
   } catch {
     return null;
   }
@@ -13,5 +12,7 @@ export async function getSession() {
 
 export async function getCurrentUser() {
   const session = await getSession();
-  return session?.user || null;
+  return session && typeof session === "object" && "user" in session
+    ? (session as any).user
+    : null;
 }
