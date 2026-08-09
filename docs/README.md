@@ -1,17 +1,102 @@
-# Geistdocs
+# Drift Brain Documentation
 
-A modern documentation template built with Next.js and [Fumadocs](https://fumadocs.dev). Designed for spinning up Vercel documentation sites quickly and consistently with built-in AI chat, GitHub discussions integration, and a beautiful UI.
+Complete reference for all agents, skills, and concepts.
 
-## Features
+## Quick Navigation
 
-- 📝 **MDX-powered documentation** - Write docs in MDX with full component support
-- 🤖 **AI-powered chat** - Built-in AI assistant that understands your documentation
-- 💬 **GitHub Discussions integration** - Allow users to provide feedback directly to GitHub
-- 🎨 **Modern UI** - Beautiful, accessible components built with Radix UI
-- 🔍 **Advanced search** - Fast, fuzzy search through all documentation
-- 🌙 **Dark mode** - Built-in theme switching
-- 📱 **Responsive** - Mobile-first design that works everywhere
-- ⚡ **Fast** - Built on Next.js 16 with App Router for optimal performance
-- 📰 **RSS** - Built-in RSS feed for your documentation
+- **[AGENTS](AGENTS/)** — 11 specialized agents
+- **[SKILLS](SKILLS/)** — 21 user-facing skills
+- **[CONCEPTS](CONCEPTS/)** — Architecture, patterns, theories
+- **[GUIDES](GUIDES/)** — How-to's, workflows, examples
 
-[Read the docs](https://preview.geistdocs.com/docs) to get started.
+## Quick Start
+
+```bash
+# 1. Initialize brain
+sh .claude/init-brain.sh
+
+# 2. Ship your first feature
+/ship feature "add dark mode"
+
+# 3. Watch it execute (automatic, zero interruptions)
+```
+
+## What is Drift Brain?
+
+A self-learning AI development system:
+- Reads your code structure
+- Plans features step-by-step
+- Executes autonomously
+- Learns from every session
+- Ships end-to-end
+
+## Architecture
+
+```
+User: /ship feature "..."
+    ↓
+Auto-Router → detect intent
+    ↓
+Pipeline (auto-invoked):
+  clarify → scenarios → scout → architect → executor → scribe
+    ↓
+Brain learns + feature ships
+```
+
+## 11 Agents
+
+| Agent | Role |
+|-------|------|
+| **drift-scout** | Find all relevant files |
+| **drift-clarify** | Ask clarifying questions |
+| **drift-scenarios** | Analyze all paths |
+| **drift-architect** | Create task plan |
+| **drift-builder** | Implement tasks |
+| **drift-guide** | Validate commits |
+| **drift-designer** | Code architecture |
+| **drift-refactor** | Safe refactoring |
+| **drift-critic** | Code review |
+| **drift-scribe** | Extract learnings |
+| **drift-executor** | Loop until complete |
+
+[See AGENTS/ for details](AGENTS/)
+
+## 21 Skills
+
+**Primary**:
+- `/ship` — Feature, bug, chore, incident
+- `/ship-feature` — New feature
+- `/ship-bug` — Fix bug
+- `/drift-verify` — Verify coherence
+
+**Development**:
+- `/drift-clarify`, `/drift-guide`, `/drift-scenarios`, `/drift-refactor`, `/drift-designer`, `/drift-executor`
+
+**Quality**:
+- `/drift-test`, `/drift-security`, `/drift-docs`
+
+**Operations**:
+- `/drift-migrate`, `/drift-deploy`, `/drift-debug`
+
+[See SKILLS/ for details](SKILLS/)
+
+## Core Concepts
+
+- **[System Coherence](CONCEPTS/system-coherence.md)** — GitHub ↔ brain.db ↔ git
+- **[Task Architecture](CONCEPTS/task-architecture.md)** — Three-layer storage
+- **[Auto-Orchestration](CONCEPTS/auto-orchestration.md)** — Event-driven triggers
+- **[Learning-Loop](CONCEPTS/learning-loop.md)** — Capture + improve
+- **[Wave-Based Parallelism](CONCEPTS/waves.md)** — 2-3x speedup
+
+[See CONCEPTS/ for details](CONCEPTS/)
+
+## How to Use Docs
+
+1. **New?** → [GUIDES/getting-started.md](GUIDES/getting-started.md)
+2. **Learn skill?** → [SKILLS/](SKILLS/)
+3. **Understand architecture?** → [CONCEPTS/](CONCEPTS/)
+4. **Need help?** → [GUIDES/faq.md](GUIDES/faq.md)
+
+---
+
+**Ready?** → `sh .claude/init-brain.sh && /ship feature "your idea"`
