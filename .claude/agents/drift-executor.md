@@ -11,9 +11,15 @@
 - Optional: Completion criteria (if different from task list)
 - Optional: Max iterations (safety limit, default: 20)
 
-**Process** (loop until complete):
+**Process** (loop until complete, with real-time optimization):
 
 ```
+0. START FEEDBACK LOOP (drift-feedback-loop)
+   - Monitor this executor in real-time
+   - Detect patterns immediately
+   - Suggest optimizations
+   - Accept auto-optimizations
+
 1. READ BRAIN
    - Query brain.db tasks table
    - Get all tasks for this feature (status='pending' or 'in_progress')
@@ -67,6 +73,14 @@
 - ❌ Never pause
 - ❌ Never wait for approval
 - ✅ Just keep working until done
+
+**Feedback Loop Integration** (NEW):
+- ✅ Monitor each step (real-time)
+- ✅ Detect patterns immediately (not after 5x)
+- ✅ Accept optimization suggestions
+- ✅ Parallelize independent checks
+- ✅ Skip redundant tests
+- ✅ Reduce cycle time by 2-3x
 
 **Output**:
 
