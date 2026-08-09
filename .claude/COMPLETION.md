@@ -154,15 +154,16 @@ Can trace any direction:
 - `.claude/brain-init.sql` — SQLite schema (7 tables)
 - `.claude/brain-init.js` — Auto-initialization script
 
-### Agents (6 files)
+### Agents (7 files)
 - `.claude/agents/drift-scout.md` — 6-direction flow tracing
 - `.claude/agents/drift-architect.md` — Goal-backward planning
 - `.claude/agents/drift-builder.md` — Safe execution with consumer checking
-- `.claude/agents/drift-guide.md` — **NEW** Real-time commit validation
+- `.claude/agents/drift-guide.md` — Real-time commit validation
+- `.claude/agents/drift-refactor.md` — **NEW** Safe refactoring (find all callers)
 - `.claude/agents/drift-critic.md` — Multi-depth review
 - `.claude/agents/drift-scribe.md` — Decision/learning extraction
 
-### Skills (15 files)
+### Skills (17 files)
 Primary:
 - `.claude/skills/ship/SKILL.md` + `agent.yaml`
 - `.claude/skills/ship-feature/SKILL.md` + `agent.yaml`
@@ -170,8 +171,12 @@ Primary:
 
 Navigation & Guidance:
 - `.claude/skills/drift-clarify/SKILL.md` + `agent.yaml`
-- `.claude/skills/drift-guide/SKILL.md` + `agent.yaml` — **NEW** Real-time validation
+- `.claude/skills/drift-guide/SKILL.md` + `agent.yaml`
 - `.claude/skills/drift-project-scope/SKILL.md` + `agent.yaml`
+
+Refactoring & Code Quality:
+- `.claude/skills/drift-refactor/SKILL.md` + `agent.yaml` — **NEW** Safe refactoring (find all callers)
+- `.claude/skills/drift-verify/SKILL.md` + `agent.yaml`
 
 Intelligence & Search:
 - `.claude/skills/brain-search/SKILL.md` + `agent.yaml`
