@@ -1,10 +1,13 @@
 import "server-only";
+import { headers } from "next/headers";
 import { auth } from "./better-auth";
 
 export async function getSession() {
+  const headersList = await headers();
   try {
-    // Better Auth provides a toJSON method on the session
-    const session = auth.toJSON?.();
+    const session = await auth.api.getSession({
+      headers: headersList,
+    });
     return session || null;
   } catch {
     return null;
@@ -14,13 +17,4 @@ export async function getSession() {
 export async function getCurrentUser() {
   const session = await getSession();
   return session?.user || null;
-}
-
-export async function getAdminClient() {
-  // Better Auth admin functions for managing users/orgs
-  return {
-    createUser: auth.createUser,
-    deleteUser: auth.deleteUser,
-    updateUser: auth.updateUser,
-  };
 }

@@ -1,26 +1,10 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
-import * as schema from "@repo/database/src/schema";
-
-// Import database client
-let db: any;
-try {
-  db = require("@repo/database").default;
-} catch {
-  console.warn("Database client not available during import");
-}
+import { database } from "@repo/database";
 
 export const auth = betterAuth({
-  database: drizzleAdapter(db, {
+  database: drizzleAdapter(database, {
     provider: "pg",
-    schema: {
-      user: schema.betterAuthUsers,
-      session: schema.betterAuthSessions,
-      account: schema.betterAuthAccounts,
-      organization: schema.betterAuthOrganizations,
-      organizationMember: schema.betterAuthOrganizationMembers,
-      verification: schema.betterAuthVerifications,
-    },
   }),
   emailAndPassword: {
     enabled: true,
@@ -35,7 +19,7 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     },
   },
-  secret: process.env.BETTER_AUTH_SECRET,
+  secret: process.env.BETTER_AUTH_SECRET || "default-secret-change-me",
 });
 
 export type Session = typeof auth.$Infer.Session;
