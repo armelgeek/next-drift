@@ -1,7 +1,7 @@
 import withBundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
 
-export const config: NextConfig = {
+const baseConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
@@ -33,6 +33,15 @@ export const config: NextConfig = {
   // This is required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true,
 };
+
+export const config: NextConfig = baseConfig;
+
+export function createNextConfig(overrides: NextConfig): NextConfig {
+  return {
+    ...baseConfig,
+    ...overrides,
+  };
+}
 
 export const withAnalyzer = (sourceConfig: NextConfig): NextConfig =>
   withBundleAnalyzer()(sourceConfig);
