@@ -48,11 +48,26 @@ After each git commit (during task implementation):
 
 ### Post-Task Events
 ```
-After task completes:
+After each task completes:
   - Auto-run: pnpm typecheck (before committing)
   - Auto-run: pnpm test (ensure all pass)
   - Auto-invoke: /drift-critic (review changes)
-  - If all pass: auto-invoke: /drift-scribe (record learnings)
+  - Auto-invoke: /drift-scribe (scan task for learnings)
+    ├─ Extract decisions + learnings
+    ├─ Apply quality gates
+    ├─ Check watch-list for patterns
+    └─ Store to brain.db (verified)
+  - If all pass: continue to next task
+```
+
+### Post-Phase Events
+```
+After phase completes (all tasks done):
+  - Auto-invoke: /drift-scribe --phase (consolidate phase learnings)
+    ├─ Full phase scan (patterns across tasks)
+    ├─ Flag recurring failures (watch-list clusters)
+    ├─ Auto-draft plans if ≥5 incidents without plan
+    └─ User verifies before storing
 ```
 
 ### Error Events
