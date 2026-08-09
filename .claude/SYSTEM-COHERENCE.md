@@ -78,6 +78,20 @@ brain.db update:
   WHERE id='task_001_stripe_schema'
 ```
 
+### Skill: drift-guide
+**Input**: Current task plan (from brain.db) + latest commit  
+**Process**: Compare files touched vs plan  
+**Output**: Validation feedback (on-track, drift, off-course)  
+**Example**:
+```
+Commit touches: [webhook.ts, index.ts]
+Plan expects: [webhook.ts, index.ts, tests]
+
+Feedback: ⚠️ Drift detected
+  Missing: __tests__/webhook.test.ts
+  Action: Add tests or is this next commit?
+```
+
 ### Skill: drift-scribe
 **Input**: Completed tasks + session context  
 **Output**: Extracted decisions, learnings, conventions  

@@ -37,6 +37,15 @@ While implementing:
   - Auto-show: /drift:status (every 30 min, remind of learned patterns)
 ```
 
+### Post-Commit Events
+```
+After each git commit (during task implementation):
+  - Auto-invoke: /drift-guide (validate commit against plan)
+  - If on-track: continue
+  - If drift detected: ask (intentional? bug fix? wrong file?)
+  - If off-course: suggest (update plan, revert, or split)
+```
+
 ### Post-Task Events
 ```
 After task completes:
