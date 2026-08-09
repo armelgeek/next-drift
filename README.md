@@ -32,8 +32,6 @@ Most Next.js starters are either too basic or too complex. Drift hits the sweet 
 | **Stripe** | Payments — modern SaaS billing with advanced features |
 | **PostHog** | Analytics + Error tracking — *optional*, enable via environment variables |
 | **Resend** | Transactional email — simple API, great deliverability |
-| **BaseHub** | CMS — type-safe content management |
-| **Nosecone** | Security headers |
 
 ### UI Components
 - **Base UI** — shadcn's next-generation component library (replacement for Radix)
@@ -117,7 +115,6 @@ packages/
 ├── analytics/      # PostHog client/server (optional)
 ├── observability/  # Error handling, logging
 ├── security/       # Security headers configuration
-├── cms/            # BaseHub integration
 ├── email/          # React Email templates
 ├── ai/             # Vercel AI SDK utilities
 ├── seo/            # Metadata, sitemaps, JSON-LD
