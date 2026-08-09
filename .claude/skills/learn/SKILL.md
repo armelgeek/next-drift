@@ -107,9 +107,32 @@ Re-run /learn after significant changes to keep this current.
   - Any section with `<!-- manual -->` on the heading line must be preserved as-is
   - When in doubt, preserve existing content and append new findings
 
+## Brain.db Integration
+
+After extracting patterns to patterns.md, also save key learnings to `.drift-brain.db`:
+
+For each pattern:
+```
+LEARNING: pattern="[pattern-id]" problem="[what breaks]" solution="[what fixes it]" domain="[domain]" confidence=0.7
+```
+
+Examples:
+```
+LEARNING: pattern="drizzle-await-queries" problem="Queries not awaited cause undefined behavior" solution="Always await db.query results, wrap in try/catch" domain="database" confidence=0.9
+
+LEARNING: pattern="server-action-validation" problem="Mutations skip client-side validation causing silent failures" solution="Validate with Zod in Server Action before DB write" domain="api" confidence=0.85
+```
+
+High-confidence patterns (from 2+ consistent observations):
+- Start at confidence 0.7
+- Increase to 0.85–0.95 after 3+ successful uses
+- Decrease if contradicted (keep lowest confidence)
+
 ## After Writing
 
-Report what you found and what surprised you. Flag any inconsistencies
-or anti-patterns worth discussing.
+1. Update `patterns.md` with findings
+2. Save high-confidence patterns to brain.db (learnings table)
+3. Report what you found and what surprised you
+4. Flag any inconsistencies or anti-patterns worth discussing
 
 $ARGUMENTS

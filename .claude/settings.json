@@ -90,5 +90,24 @@
     "drizzle.config.ts": "drizzle.config.*.ts",
     ".gitignore": ".gitattributes, .gitkeep"
   },
-  "model": "haiku"
+  "model": "haiku",
+  "drift": {
+    "brain": {
+      "path": "./.drift-brain.db",
+      "auto_init": true,
+      "checkpoints_dir": "./.brain-checkpoints",
+      "max_checkpoints": 10
+    },
+    "auto_routing": {
+      "enabled": true,
+      "description": "Auto-invoke skills based on user intent (add/fix/refactor/research)"
+    },
+    "agents": {
+      "scout": "drift-scout",
+      "architect": "drift-architect",
+      "builder": "drift-builder",
+      "critic": "drift-critic",
+      "scribe": "drift-scribe"
+    }
+  }
 }
