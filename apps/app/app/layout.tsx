@@ -1,5 +1,6 @@
 import "./styles.css";
 import type { ReactNode } from "react";
+import { AnalyticsProvider } from "@repo/analytics/provider";
 import { Header } from "./components/header";
 
 type RootLayoutProperties = {
@@ -9,8 +10,10 @@ type RootLayoutProperties = {
 const RootLayout = ({ children }: RootLayoutProperties) => (
   <html lang="en">
     <body>
-      <Header />
-      {children}
+      <AnalyticsProvider>
+        <Header />
+        {children}
+      </AnalyticsProvider>
     </body>
   </html>
 );
