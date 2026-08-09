@@ -1,7 +1,4 @@
 import "server-only";
 
-export {
-  getSession as auth,
-  getCurrentUser as currentUser,
-  getAdminClient as clerkClient,
-} from "./lib/server-helpers";
+export { getSession as auth, getCurrentUser } from "./lib/server-helpers";
+export type { Session, User } from "./lib/better-auth";
