@@ -60,6 +60,19 @@ After each task completes:
   - If all pass: continue to next task
 ```
 
+### Auto-Executor Events
+```
+After architecture is ready (tasks inserted into brain.db):
+  - AUTO-INVOKE: /drift-executor (autonomous loop execution)
+    ├─ Read tasks from brain.db
+    ├─ Loop Task 1: execute until complete → brain updated
+    ├─ Loop Task 2: execute until complete → brain updated
+    ├─ Loop Task 3: execute until complete → brain updated
+    └─ NO PAUSES, NO ASKS, NO INTERRUPTIONS
+       (continues until all tasks in brain.db are complete)
+  - After completion: auto-invoke /drift-scribe
+```
+
 ### Post-Phase Events
 ```
 After phase completes (all tasks done):
@@ -183,7 +196,7 @@ Based on these → routes to right workflow automatically.
 
 ## Examples
 
-### Example 1: Feature Workflow
+### Example 1: Feature Workflow (with auto-executor)
 ```
 User: /ship feature "add Stripe"
 → Auto-detects: domain = infra (payment keyword)
@@ -193,9 +206,14 @@ User: /ship feature "add Stripe"
 → Records: test matrix (26 test cases)
 → Auto-invokes: /drift-scout (finds Stripe-related files)
 → Auto-invokes: /drift-architect (creates tasks with consumers)
-→ Auto-runs: tests after each task
-→ Auto-invokes: /drift-critic (reviews code)
-→ Auto-invokes: /drift-scribe (saves learnings)
+→ Tasks inserted into brain.db
+→ AUTO-INVOKES: /drift-executor ← AUTONOMOUS LOOP (NO PAUSES)
+   ├─ Reads brain.db: 3 tasks found
+   ├─ Task 1/3: Execute loop until done → brain updated
+   ├─ Task 2/3: Execute loop until done → brain updated
+   ├─ Task 3/3: Execute loop until done → brain updated
+   └─ ALL COMPLETE ✅ (0 interruptions)
+→ Auto-invokes: /drift-scribe (consolidate learnings)
 → Auto-proposes: /drift-deploy (ready?)
 ```
 
