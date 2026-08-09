@@ -154,24 +154,30 @@ Can trace any direction:
 - `.claude/brain-init.sql` — SQLite schema (7 tables)
 - `.claude/brain-init.js` — Auto-initialization script
 
-### Agents (5 files)
+### Agents (6 files)
 - `.claude/agents/drift-scout.md` — 6-direction flow tracing
 - `.claude/agents/drift-architect.md` — Goal-backward planning
 - `.claude/agents/drift-builder.md` — Safe execution with consumer checking
+- `.claude/agents/drift-guide.md` — **NEW** Real-time commit validation
 - `.claude/agents/drift-critic.md` — Multi-depth review
 - `.claude/agents/drift-scribe.md` — Decision/learning extraction
 
-### Skills (13 files)
+### Skills (15 files)
 Primary:
 - `.claude/skills/ship/SKILL.md` + `agent.yaml`
 - `.claude/skills/ship-feature/SKILL.md` + `agent.yaml`
 - `.claude/skills/ship-bug/SKILL.md` + `agent.yaml`
 
-Supporting:
+Navigation & Guidance:
 - `.claude/skills/drift-clarify/SKILL.md` + `agent.yaml`
+- `.claude/skills/drift-guide/SKILL.md` + `agent.yaml` — **NEW** Real-time validation
 - `.claude/skills/drift-project-scope/SKILL.md` + `agent.yaml`
+
+Intelligence & Search:
 - `.claude/skills/brain-search/SKILL.md` + `agent.yaml`
 - `.claude/skills/drift-status/SKILL.md` + `agent.yaml`
+
+Deployment & Quality:
 - `.claude/skills/drift-migrate/SKILL.md` + `agent.yaml`
 - `.claude/skills/drift-test/SKILL.md` + `agent.yaml`
 - `.claude/skills/drift-deploy/SKILL.md` + `agent.yaml`
@@ -197,10 +203,11 @@ Supporting:
 - `/diff` — **NEW** Smart diff by task
 - `learn` + `research` + others (existing)
 
-### Hooks (3 files)
+### Hooks (4 files)
 - `.claude/hooks/drift-router.js` — Auto-route based on intent + domain
 - `.claude/hooks/drift-brain-snapshot.js` — Cache brain.db snapshots (30s TTL)
 - `.claude/hooks/drift-signal-refresh.js` — Track project signals
+- `.claude/hooks/drift-post-commit.js` — **NEW** Trigger drift-guide after commits
 
 ### Configuration
 - `.claude/settings.json` — Drift brain config
