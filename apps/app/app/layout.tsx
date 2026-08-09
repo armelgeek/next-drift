@@ -1,5 +1,6 @@
 import "./styles.css";
 import type { ReactNode } from "react";
+import { Header } from "./components/header";
 
 type RootLayoutProperties = {
   readonly children: ReactNode;
@@ -7,7 +8,10 @@ type RootLayoutProperties = {
 
 const RootLayout = ({ children }: RootLayoutProperties) => (
   <html lang="en">
-    <body>{children}</body>
+    <body>
+      <Header />
+      {children}
+    </body>
   </html>
 );
 
