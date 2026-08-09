@@ -118,21 +118,30 @@ Next iteration:
 
 ## Cycle Optimization Strategies
 
-### Strategy 1: Skip Redundant Tests
+### Strategy 1: De-Sloppify (NEW)
+```
+After code complete, BEFORE tests:
+  Run /drift-sloppify cleanup pass
+  Remove: language tests, redundant guards, dead code
+  Keep: business logic tests
+  Result: Faster tests (50% reduction), cleaner code
+```
+
+### Strategy 2: Skip Redundant Tests
 ```
 If test always passes for this file type:
   "Skip database schema test, schema changes never fail"
   Save 30 seconds per iteration
 ```
 
-### Strategy 2: Parallelize Independent Checks
+### Strategy 3: Parallelize Independent Checks
 ```
 If tests don't depend on each other:
   Run type-check + test + lint in parallel (not sequential)
   Save 60+ seconds per iteration
 ```
 
-### Strategy 3: Suggest Proven Fixes
+### Strategy 4: Suggest Proven Fixes
 ```
 If error matches known pattern:
   "Same as incident #3, fix-Y worked 80% of time"
@@ -140,7 +149,7 @@ If error matches known pattern:
   Save multiple iterations
 ```
 
-### Strategy 4: Predict Next Step
+### Strategy 5: Predict Next Step
 ```
 If file A is edited, file B always follows:
   "After schema change, tests usually fail here"
@@ -149,7 +158,7 @@ If file A is edited, file B always follows:
   Save context switches
 ```
 
-### Strategy 5: Batch Co-Changes
+### Strategy 6: Batch Co-Changes
 ```
 If files always co-change:
   "A + B + C are linked"
