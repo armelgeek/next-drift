@@ -110,6 +110,68 @@ pnpm db:studio                    # Open Drizzle Studio
 - You are proficient with Drizzle ORM, PostgreSQL, and type-safe database patterns
 - You follow strict TypeScript practices with comprehensive type safety
 
+## Drift Brain (SQLite Knowledge Graph)
+
+Drift maintains a SQLite knowledge graph at `.drift-brain.db` that learns from every development session.
+
+### Components
+
+**Decisions Table**  
+Locked Q&A pairs (never ask the same question twice):
+- Domain: ui, api, database, auth, infra, content
+- Confidence: 0.0–1.0 (auto-adjusted on reuse)
+- Locked: Once decided, never asked again across sessions
+
+Example: `question: "Use Zustand or Context for theme state?" → answer: "Context (fewer dependencies)"` (domain: state, confidence: 0.9, locked: true)
+
+**Learnings Table**  
+Error→fix patterns with confidence scoring:
+- Pattern: "drizzle-migration-timing"
+- Problem: "Migrations run after deploy, schema not available"
+- Solution: "Run `pnpm migrate` before `pnpm build`"
+- Domains: database
+- Confidence: 0.8 (increases on reuse)
+
+**Hot Files Table**  
+Frequently co-changed files from git history:
+- Helps identify files that should be updated together
+- Prevents breaking changes to related modules
+- Example: `apps/app/src/app/feature/page.tsx` and `packages/database/services/feature.ts`
+
+**Model Performance Table**  
+Tracks which agent/model works best for each domain:
+- Haiku for well-known domains (cheap)
+- Sonnet for standard tasks (default)
+- Opus for complex multi-area work (expensive)
+
+### Auto-Routing
+
+Every prompt triggers intelligent routing (enabled by default):
+```
+User: "add authentication"
+→ /drift-clarifier (if ambiguous) → /drift-scout → /drift-architect → /ship-feature
+```
+
+Bypass rules (never routes):
+- Starts with `/` (slash command)
+- Starts with `!` (explicit escape)
+- Ends with `?` (question)
+- `<4 chars` (ack like "yes", "ok")
+
+**Toggle**: Set `DRIFT_AUTO_ROUTING=off` to disable, or use `/drift:auto-routing off/on`
+
+### Workflow Integration
+
+Every `/ship-feature` or `/ship-bug` invocation:
+1. **Clarify**: Ask domain-specific questions if ambiguous (0–10 questions, never repeated)
+2. **Scout**: Find all relevant files across apps/packages (6-direction flow tracing)
+3. **Architect**: Plan backward from goal → outcomes → tasks
+4. **Execute**: Build per task with fresh context
+5. **Review**: Critic agent checks for bugs/security/edge cases
+6. **Record**: Scribe agent saves decisions and learnings to brain.db
+
+Result: Faster execution, fewer tokens (70% cheaper on second occurrence), higher quality.
+
 ## Coding Style and Structure
 - Prefer React Server Components by default; use 'use client' only when necessary
 - Use Server Actions for mutations and form handling
