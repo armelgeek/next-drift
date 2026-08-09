@@ -21,6 +21,3 @@ export const auth = betterAuth({
   },
   secret: process.env.BETTER_AUTH_SECRET || "default-secret-change-me",
 });
-
-export type Session = typeof auth.$Infer.Session;
-export type User = Session["user"];
