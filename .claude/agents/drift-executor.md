@@ -5,38 +5,61 @@
 **Trigger**: `/drift-executor [task]` or as replacement for drift-builder in workflows
 
 **Input**:
-- Task description (clear goal)
-- Completion criteria (how to know when done)
-- Max iterations (safety limit, default: 20)
+- Either:
+  - Feature description (generates tasks, then executes)
+  - Feature ID (reads tasks from brain.db, then executes)
+- Optional: Completion criteria (if different from task list)
+- Optional: Max iterations (safety limit, default: 20)
 
 **Process** (loop until complete):
 
 ```
-iteration = 0
-while not complete && iteration < MAX:
-  iteration += 1
-  
-  1. Understand current state
-     - What's done?
-     - What's left?
-     - What's blocking?
-  
-  2. Take one step forward
-     - Code
-     - Test
-     - Verify
-     - Commit
-  
-  3. Check completion
-     - Run completion criteria
-     - If true → break (DONE)
-     - If false → continue loop
-  
-  4. Handle issues (if step 2 fails)
-     - Diagnose
-     - Fix root cause
-     - Re-attempt step 2
-     - Don't give up
+1. READ BRAIN
+   - Query brain.db tasks table
+   - Get all tasks for this feature (status='pending' or 'in_progress')
+   - If no tasks: ask for feature description, generate plan first
+   
+2. LOOP UNTIL ALL COMPLETE
+   iteration = 0
+   while tasks_remain && iteration < MAX:
+     iteration += 1
+     
+     a. Get next task (first pending or in_progress)
+        - Read task from brain.db
+        - Get: files, verify_command, description
+     
+     b. Understand current state
+        - What's done?
+        - What's left?
+        - What's blocking?
+     
+     c. Take one step forward
+        - Code (edit files from task)
+        - Test (run verify_command)
+        - Verify (manual check if needed)
+        - Commit (git commit)
+     
+     d. Update brain.db
+        - Mark task status = 'in_progress'
+        - Update commit_sha
+        - Update tokens_used
+     
+     e. Check completion
+        - All tests pass?
+        - All tasks done?
+        - If true → break (DONE)
+        - If false → continue to next task
+     
+     f. Handle issues
+        - If step c fails: diagnose, fix, re-attempt
+        - Don't give up
+        - Log to brain.db as deviation
+
+3. FINAL STATUS
+   - All tasks complete?
+   - Update brain.db: status = 'completed' for all
+   - Run final verification
+   - Mark feature DONE
 ```
 
 **No Interruptions**: 
@@ -48,23 +71,33 @@ while not complete && iteration < MAX:
 **Output**:
 
 ```
-Iteration 1/N
-  Step: Add Stripe schema
-  Status: ✓ Complete (tests pass)
+BRAIN: Found 3 tasks for feature "Add Stripe"
+  1. task_001_stripe_schema [pending]
+  2. task_002_payment_api [pending]
+  3. task_003_payment_ui [pending]
+
+Task 1/3: Add Stripe schema
+  Iteration 1/20
+    Step: Create schema.ts
+    Status: ✓ Complete (tests pass)
+  BRAIN: Updated task_001_stripe_schema → in_progress
   
-Iteration 2/N
-  Step: Create payment API
-  Status: ✓ Complete (tests pass)
+Task 2/3: Create payment API
+  Iteration 2/20
+    Step: Create payment routes
+    Status: ✓ Complete (tests pass)
+  BRAIN: Updated task_002_payment_api → in_progress
 
-Iteration 3/N
-  Step: Add UI form
-  Status: ✓ Complete (tests pass)
+Task 3/3: Add UI form
+  Iteration 3/20
+    Step: Create PaymentForm component
+    Status: ✓ Complete (tests pass)
+  BRAIN: Updated task_003_payment_ui → in_progress
 
-COMPLETION CRITERIA MET ✅
-  All tests pass
-  Zero type errors
-  Security audit clean
-  Task complete in 3 iterations
+ALL TASKS COMPLETE ✅
+  3 tasks completed in 3 iterations
+  BRAIN: All tasks → completed
+  Ready to ship
 ```
 
 **Completion Criteria** (examples):
