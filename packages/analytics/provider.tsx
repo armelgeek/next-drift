@@ -7,14 +7,16 @@ type AnalyticsProviderProps = {
   readonly children: ReactNode;
 };
 
-const { NEXT_PUBLIC_GA_MEASUREMENT_ID } = keys();
+export const AnalyticsProvider = ({ children }: AnalyticsProviderProps) => {
+  const { NEXT_PUBLIC_GA_MEASUREMENT_ID } = keys();
 
-export const AnalyticsProvider = ({ children }: AnalyticsProviderProps) => (
-  <>
-    {children}
-    <VercelAnalytics />
-    {NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-      <GoogleAnalytics gaId={NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-    )}
-  </>
-);
+  return (
+    <>
+      {children}
+      <VercelAnalytics />
+      {NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+        <GoogleAnalytics gaId={NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+      )}
+    </>
+  );
+};
