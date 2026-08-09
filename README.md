@@ -30,7 +30,7 @@ Most Next.js starters are either too basic or too complex. Drift hits the sweet 
 | **Drizzle ORM** | Database — type-safe, SQL-like, excellent performance |
 | **Neon PostgreSQL** | Database hosting — serverless, scales with you |
 | **Stripe** | Payments — modern SaaS billing with advanced features |
-| **PostHog** | Analytics + Error tracking — one tool instead of three |
+| **PostHog** | Analytics + Error tracking — *optional*, enable via environment variables |
 | **Resend** | Transactional email — simple API, great deliverability |
 | **BaseHub** | CMS — type-safe content management |
 | **Nosecone** | Security headers |
@@ -66,15 +66,23 @@ pnpm --filter @repo/database db:push
 pnpm dev
 ```
 
-### Required Environment Variables
+### Environment Variables
 
-Create `.env` files in each app directory:
+**Minimal setup** (required):
+- `DATABASE_URL` — PostgreSQL connection string
+
+**Optional** (enable/disable features):
+- `NEXT_PUBLIC_POSTHOG_KEY` — Enable analytics (optional)
+- `NEXT_PUBLIC_POSTHOG_HOST` — PostHog host (optional)
+- `BETTER_AUTH_SECRET` — Auth secret (required for auth)
+
+**Complete setup** — Copy `.env.example` files to `.env` in each app and fill in API keys:
 
 **apps/web/.env:**
 ```
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 NEXT_PUBLIC_WEB_URL=http://localhost:3001
-NEXT_PUBLIC_POSTHOG_KEY=phc_...
+NEXT_PUBLIC_POSTHOG_KEY=phc_...  # optional
 ```
 
 **apps/app/.env:**
@@ -82,22 +90,19 @@ NEXT_PUBLIC_POSTHOG_KEY=phc_...
 BETTER_AUTH_SECRET=your-super-secret-key-min-32-chars
 BETTER_AUTH_URL=http://localhost:3000
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_POSTHOG_KEY=phc_...
+DATABASE_URL=postgresql://...
 ```
 
 **apps/api/.env:**
 ```
 DATABASE_URL=postgresql://...
 BETTER_AUTH_SECRET=your-super-secret-key-min-32-chars
-STRIPE_SECRET_KEY=sk_test_...
-STRIPE_WEBHOOK_SECRET=whsec_...
-RESEND_TOKEN=re_...
-
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_WEB_URL=http://localhost:3001
+STRIPE_SECRET_KEY=sk_test_...  # optional
+STRIPE_WEBHOOK_SECRET=whsec_...  # optional
+RESEND_TOKEN=re_...  # optional
 ```
 
-See individual `.env.example` files for complete lists.
+See `.env.example` in each directory for complete lists.
 
 ## Architecture
 
@@ -106,11 +111,12 @@ See individual `.env.example` files for complete lists.
 ```
 apps/
 ├── web/           # Marketing site (port 3001)
-│   ├── /          # Homepage
+│   ├── /          # Homepage with hero section
 │   ├── /contact   # Contact form
 │   ├── /pricing   # Pricing page
 │   └── /blog      # Blog with CMS integration
 ├── app/           # Main application (port 3000)
+│   ├── /          # Professional landing page
 │   ├── /sign-in   # Authentication
 │   ├── /sign-up
 │   └── /dashboard # Main app dashboard
@@ -127,11 +133,11 @@ All apps are independently deployable.
 
 ```
 packages/
-├── auth/           # Clerk configuration
+├── auth/           # Better Auth configuration
 ├── database/       # Drizzle ORM, schema, migrations
 ├── design-system/  # Base UI components, Tailwind config
-├── payments/       # Polar.sh integration
-├── analytics/      # PostHog client/server
+├── payments/       # Stripe integration
+├── analytics/      # PostHog client/server (optional)
 ├── observability/  # Error handling, logging
 ├── security/       # Security headers configuration
 ├── cms/            # BaseHub integration
@@ -164,11 +170,11 @@ Drizzle ORM instead of Drizzle:
 
 ### Modern Payments
 
-Polar.sh for payments:
-- Better developer experience
-- Modern TypeScript SDK
-- Webhook handling included
-- Perfect for SaaS subscriptions
+Stripe for payments:
+- Comprehensive billing platform
+- Modern SDKs and webhooks
+- Advanced SaaS features (subscriptions, invoicing)
+- Production-tested and reliable
 
 ### Modern UI
 
@@ -335,14 +341,15 @@ Each app needs specific environment variables:
 - **App**: All Clerk variables, PostHog key
 - **API**: Database URL, all service API keys (Polar, Resend, etc.)
 
-## Inspired By
+## What's Changed
 
-Built on lessons learned from drift, with simplifications for solo founders:
-- Removed complex routing patterns
-- Consolidated observability tools
-- Updated to latest stack (Drizzle, Base UI, Polar.sh)
-- Flattened URL structure
-- Simplified codebase
+Recent improvements:
+- **Standardized on pnpm** — Single package manager across all apps and packages
+- **Analytics optional** — PostHog disabled by default, enable via environment variables
+- **Cleaned auth package** — Removed hallucinated Better Auth APIs, simplified implementation
+- **Professional landing page** — Hero section, features, tech stack showcase, CTA
+- **Sticky navigation header** — Theme toggle, sign-in button, responsive mobile menu
+- **Verified & tested** — All type checking, linting, and core functionality validated
 
 ## License
 
